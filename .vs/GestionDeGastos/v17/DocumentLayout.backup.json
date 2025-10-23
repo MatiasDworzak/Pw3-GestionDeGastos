@@ -3,28 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\gestiondegastos.accesoadatos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\gestiondegastos.accesoadatos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Entidades\\GestionDeGastosBdContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GestionDeGastos\\Entidades\\GestionDeGastosBdContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos\\gestiondegastos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\gestiondegastos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\entidades\\gestiondegastosbdcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\entidades\\gestiondegastosbdcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\gestiondegastos.accesoadatos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\gestiondegastos.accesoadatos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\entidades\\gasto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\entidades\\gasto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\entidades\\categorium.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\entidades\\categorium.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos.accesoadatos\\entidades\\categoriausuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\entidades\\categoriausuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\lucas\\desktop\\gestiondegastos\\gestiondegastos\\gestiondegastos\\gestiondegastos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\gestiondegastos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -43,19 +55,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GestionDeGastosBdContext.cs",
-              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Entidades\\GestionDeGastosBdContext.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Entidades\\GestionDeGastosBdContext.cs",
-              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Entidades\\GestionDeGastosBdContext.cs",
-              "RelativeToolTip": "GestionDeGastos\\Entidades\\GestionDeGastosBdContext.cs",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "GestionDeGastos\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T04:59:20.357Z",
+              "WhenOpened": "2025-10-23T05:42:32.977Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "Gasto.cs",
+              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Gasto.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\Gasto.cs",
+              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Gasto.cs",
+              "RelativeToolTip": "GestionDeGastos.AccesoADatos\\Entidades\\Gasto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T05:15:45.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Categorium.cs",
+              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Categorium.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\Categorium.cs",
+              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Categorium.cs",
+              "RelativeToolTip": "GestionDeGastos.AccesoADatos\\Entidades\\Categorium.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T05:15:41.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GestionDeGastosBdContext.cs",
+              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\GestionDeGastosBdContext.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\GestionDeGastosBdContext.cs",
+              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\GestionDeGastosBdContext.cs",
+              "RelativeToolTip": "GestionDeGastos.AccesoADatos\\Entidades\\GestionDeGastosBdContext.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAA/wCMAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T05:08:44.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "GestionDeGastos.AccesoADatos.csproj",
               "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
               "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
@@ -68,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "GestionDeGastos.csproj",
               "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
               "RelativeDocumentMoniker": "GestionDeGastos\\GestionDeGastos.csproj",
@@ -81,39 +132,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Class1.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Class1.cs",
-              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Class1.cs",
-              "RelativeToolTip": "GestionDeGastos.AccesoADatos\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T04:19:50.146Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\appsettings.json",
-              "RelativeDocumentMoniker": "GestionDeGastos\\appsettings.json",
-              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\appsettings.json",
-              "RelativeToolTip": "GestionDeGastos\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-23T04:17:33.444Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Program.cs",
               "RelativeDocumentMoniker": "GestionDeGastos\\Program.cs",
               "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\Program.cs",
               "RelativeToolTip": "GestionDeGastos\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T04:17:24.201Z"
+              "WhenOpened": "2025-10-23T04:17:24.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\appsettings.json",
+              "RelativeDocumentMoniker": "GestionDeGastos\\appsettings.json",
+              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\appsettings.json",
+              "RelativeToolTip": "GestionDeGastos\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-23T04:17:33.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CategoriaUsuario.cs",
+              "DocumentMoniker": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\CategoriaUsuario.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\CategoriaUsuario.cs",
+              "ToolTip": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\CategoriaUsuario.cs",
+              "RelativeToolTip": "GestionDeGastos.AccesoADatos\\Entidades\\CategoriaUsuario.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T05:15:34.076Z"
             }
           ]
         },
