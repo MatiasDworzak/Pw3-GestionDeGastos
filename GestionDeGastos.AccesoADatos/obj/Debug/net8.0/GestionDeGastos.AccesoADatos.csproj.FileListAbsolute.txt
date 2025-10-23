@@ -1,0 +1,15 @@
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.deps.json
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.runtimeconfig.json
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.dll
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.pdb
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.csproj.AssemblyReference.cache
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.AssemblyInfoInputs.cache
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.AssemblyInfo.cs
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.sourcelink.json
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.dll
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\refint\GestionDeGastos.AccesoADatos.dll
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.pdb
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.genruntimeconfig.cache
+C:\Users\Lucas\Desktop\GestionDeGastos\GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\ref\GestionDeGastos.AccesoADatos.dll
