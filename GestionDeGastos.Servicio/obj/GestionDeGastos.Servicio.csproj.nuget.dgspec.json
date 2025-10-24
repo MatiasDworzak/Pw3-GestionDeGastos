@@ -1,41 +1,23 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {}
   },
   "projects": {
-    "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {
+    "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
-        "projectName": "GestionDeGastos.Servicio",
-        "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
+        "projectUniqueName": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
+        "projectName": "GestionDeGastos.AccesoADatos",
+        "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\obj\\",
-=======
-    "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
-        "projectName": "GestionDeGastos.Servicio",
-        "projectPath": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
-        "packagesPath": "C:\\Users\\CarlaStramandinoli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\obj\\",
->>>>>>> Carli
+        "outputPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\CarlaStramandinoli\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Carli
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -67,6 +49,333 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.5.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj",
+        "projectName": "GestionDeGastos.Repositorio",
+        "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj": {
+                "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
+        "projectName": "GestionDeGastos.Servicio",
+        "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj": {
+                "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj"
+              },
+              "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj": {
+                "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj"
+              },
+              "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\Seguridad\\Seguridad.csproj": {
+                "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\Seguridad\\Seguridad.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
+        "projectName": "GestionDeGastos",
+        "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\Seguridad\\Seguridad.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\Seguridad\\Seguridad.csproj",
+        "projectName": "Seguridad",
+        "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\Seguridad\\Seguridad.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\Seguridad\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

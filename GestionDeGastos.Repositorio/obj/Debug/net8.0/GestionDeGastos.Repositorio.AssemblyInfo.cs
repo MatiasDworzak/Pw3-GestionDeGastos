@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("GestionDeGastos.AccesoADatos")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("GestionDeGastos.Repositorio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e17df1df50b6916913fb9d23a98f1f436da5693e")]
-[assembly: System.Reflection.AssemblyProductAttribute("GestionDeGastos.AccesoADatos")]
-[assembly: System.Reflection.AssemblyTitleAttribute("GestionDeGastos.AccesoADatos")]
+[assembly: System.Reflection.AssemblyProductAttribute("GestionDeGastos.Repositorio")]
+[assembly: System.Reflection.AssemblyTitleAttribute("GestionDeGastos.Repositorio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.
