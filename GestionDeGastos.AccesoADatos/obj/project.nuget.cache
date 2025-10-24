@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j1fOlIBFmO8=",
+  "dgSpecHash": "K+qGd70Bn/4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
+  "projectFilePath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lucas\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
