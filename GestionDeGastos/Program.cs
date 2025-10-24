@@ -3,6 +3,7 @@
 
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
+using GestionDeGastos.Servicio.Seguridad;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,15 +12,10 @@ builder.Services.AddControllersWithViews();
 
 
 
-//Inyeccion de dependencias
-//repositories
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-
-//services
-builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
-
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
-
+builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
+builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 
 //Habilitar sesiones
 builder.Services.AddSession(options =>
