@@ -21,9 +21,27 @@ namespace GestionDeGastos.Controllers
          }
 
          TempData["mensajeEXito"] = "Sesion iniciada con éxito";
-         return RedirectToAction("Login");
+         return RedirectToAction("Home");
       }
 
-     
+
+      public ActionResult Register()
+      {
+         return View();
+      }
+
+      [HttpPost]
+      [ValidateAntiForgeryToken]
+      public ActionResult Register(RegistroViewModel model)
+      {
+         if (!ModelState.IsValid) 
+         {
+            return View(model);
+         }
+
+         TempData["RegistroExito"] = $"{model.Nombre} registrado con éxito";
+         return View("Login");
+      }
+
    }
 }
