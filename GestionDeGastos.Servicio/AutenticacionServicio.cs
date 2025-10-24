@@ -15,7 +15,7 @@ namespace GestionDeGastos.Servicio
    }
 
 
-   internal class AutenticacionServicio : IAutenticacionServicio
+   public class AutenticacionServicio : IAutenticacionServicio
    {
       private readonly IUsuarioRepositorio _usuarioRepositorio;
 

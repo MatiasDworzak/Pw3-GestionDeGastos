@@ -12,6 +12,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
+
+	  <PackageReference Include="AutoMapper" Version="14.0.0" />
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
+    <ProjectReference Include="..\GestionDeGastos.Servicio\GestionDeGastos.Servicio.csproj" />
   </ItemGroup>
 
 </Project>

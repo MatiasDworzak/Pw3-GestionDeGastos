@@ -9,7 +9,7 @@ namespace GestionDeGastos.Servicio
       Task<IEnumerable<Usuario>> ObtenerTodosLosUsuariosAsync();
    }
 
-   internal class UsuarioServicio : IUsuarioService
+   public class UsuarioServicio : IUsuarioService
    {
       private readonly IUsuarioRepositorio _repositorio;
 

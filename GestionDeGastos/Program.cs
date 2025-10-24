@@ -1,4 +1,5 @@
 using GestionDeGastos.Repositorio;
+using GestionDeGastos.Servicio;
 
 
 
@@ -14,7 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
 //services
-builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 

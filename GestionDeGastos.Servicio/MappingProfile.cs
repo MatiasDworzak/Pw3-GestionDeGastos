@@ -12,8 +12,6 @@ namespace GestionDeGastos.Servicio
             .ForMember(dest => dest.Email,opt => opt.MapFrom(src => src.Correo))
             .ForMember(dest => dest.Contrasenia, opt => opt.Ignore())
             .ForMember(dest => dest.IdUsuario, opt => opt.Ignore());
-
-      
       }
    }
 }
