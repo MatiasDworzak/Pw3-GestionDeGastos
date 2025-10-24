@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CredencialViewModel
+
 @{
+    ViewData["Title"] = "Inicio de sesión";
+}
+<div class="alert alert-success">@TempData["RegistroExito"]</div>
+
+<h1 class="text-center">¡Bienvenido!</h1>
+
+
+<form asp-action="Login" asp-controller="Ingreso" method="POST">
+    <div>
+        <label asp-for="Correo"></label>
+        <input asp-for="Correo" class="form-control" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Contrasenia"></label>
+        <input asp-for="Contrasenia" class="form-control" type="password"/>
+        <span asp-validation-for="Contrasenia" class="text-danger"></span>
+    </div>
+   
+
+
+    <button type="submit" class="btn btn-primary">Ingresar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

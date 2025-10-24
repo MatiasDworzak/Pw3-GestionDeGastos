@@ -20,8 +20,8 @@ namespace GestionDeGastos.Controllers
             return View(model);
          }
 
-         TempData["mensajeEXito"] = "Sesion iniciada con éxito";
-         return RedirectToAction("Home");
+         TempData["LoginExito"] = "Sesion iniciada con éxito";
+         return RedirectToAction("Inicio", "Home");
       }
 
 
@@ -39,7 +39,7 @@ namespace GestionDeGastos.Controllers
             return View(model);
          }
 
-         TempData["RegistroExito"] = $"{model.Nombre} registrado con éxito";
+         TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
          return View("Login");
       }
 
