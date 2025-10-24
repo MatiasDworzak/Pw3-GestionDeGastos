@@ -1,8 +1,27 @@
+using GestionDeGastos.Repositorio;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
+//Inyeccion de dependencias
+//repositories
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+
+//services
+builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+
+builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
+
+
+
+//mappers
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //Habilitar sesiones
 builder.Services.AddSession(options =>

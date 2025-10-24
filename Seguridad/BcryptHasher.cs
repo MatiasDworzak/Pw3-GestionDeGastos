@@ -3,7 +3,7 @@
    public interface IPasswordHasher
    {
       string Hash(string password);
-      bool Verify(string input, string hash);
+      bool Verificar(string input, string hash);
    }
    public class BcryptHasher : IPasswordHasher
    {
@@ -11,7 +11,7 @@
          => BCrypt.Net.BCrypt.HashPassword(password);
       
 
-      public bool Verify(string input, string hash)
+      public bool Verificar(string input, string hash)
          => BCrypt.Net.BCrypt.Verify(input, hash);
       
    }

@@ -19,7 +19,7 @@ namespace GestionDeGastos.Models
       [DisplayName("Confirmar Contraseña")]
       [Required(ErrorMessage ="Por favor, confirmá tu contraseña")]
       [DataType(DataType.Password)]
-      [Compare("Contrasenia", ErrorMessage = "Las contraseñas no coinciden.")]
+      [Compare("Contrasenia", ErrorMessage = "Las caontraseñas no coinciden.")]
       public string ConfirmarContrasenia { get; set; }
 
    }
