@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h3 class="text-center">Agregar Gasto</h3>
+
+<form method="post" class="">
+    <h4>Detalles del gasto</h4>
+    <!-- Los inputs van a ser cambiados por los Atributos del ViewModel que se disenie -->
+    
+    <!--Parte principal del datos del gasto -->
+    <div class="row d-flex justify-content-evenly">
+        <div class="col-6 gap-2 d-flex flex-column">
+            <input class="form-control" type="text" placeholder="Nombre" />
+
+            <div>
+                <input class="form-check-input" type="radio" id="sin_ticket" name="opcion-ticket" value="sin_ticket">
+                <label class="form-check-label ms-1" for="sin_ticket">No agregar Ticket</label><br>
+
+                <input class="form-check-input" type="radio" id="ticket_manual" name="opcion-ticket" value="ticket_manual">
+                <label class="form-check-label ms-1" for="ticket_manual">Agregar Ticket Manual</label><br>
+
+                <input class="form-check-input" type="radio" id="ticket_foto" name="opcion-ticket" value="ticket_foto">
+                <label class="form-check-label ms-1" for="ticket_foto">Agregar Ticket con Foto</label><br>
+            </div>
+        </div>
+        <div class="col-6 d-flex flex-column gap-2">
+            <div class="row g-2">
+                <div class="col-6">
+                    <input class="w-100 form-control" type="date" placeholder="Fecha" value="Fecha"/>
+                </div>
+                <div class="col-6">
+                    <input class="w-100 form-control" type="number" placeholder="Monto" />
+                </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+                <select class="form-select text-center" id="categoria" name="categoria">
+                    <option selected>Seleccionar Categoria</option>
+                    <!-- Iterar categorias(del sistema generales y las generadas por usuario) de base de datos -->
+                    <option value="">Categoria 1</option>
+                    <option value="">Categoria 2</option>
+                    <option value="">Categoria 3</option>
+                    <option value="">Agregar Categoria</option>
+                </select>
+
+                <select class="form-select text-center" id="metodo-de-pago" name="metodo-de-pago">
+                    <option selected>Metodo de Pago</option>
+                    <!-- Iterar metodos de pago de base de datos -->
+                    <option value="">Metodo de pago 1</option>
+                    <option value="">Metodo de pago 2</option>
+                    <option value="">Metodo de pago 3</option>
+                    <option value="">Otra</option>
+                </select
+            </div>
+            <div class="d-flex justify-content-end">
+                <input class="btn btn-info" type="submit" value="Subir" />
+            </div>
+            
+        </div>
+    </div>    
+
+    <!-- Seccion que se abre con el radio button Agregar Ticket con Foto -->
+
+    <h4>Agregar ticket con foto</h4>
+    <div class="d-flex justify-content-between">
+        <input class="form-control w-50" type="file" id="formFile" placeholder="Adjuntar Archivo" />
+        <input class="btn btn-info" type="submit" value="Subir" />
+    </div>
+
+    <!-- Seccion que se abre con el radio button Agregar Ticket Manual -->
+
+    <h4 class="mt-2">Agregar ticket manual</h4>
+    <div class="row p-0">
+        <div class="col-4">
+            <input class="form-control" type="text" placeholder="Nombre Producto" />
+        </div>
+        <div class="col-4">
+            <input class="form-control"  type="number" placeholder="Cantidad" />
+        </div>
+        <div class="col-4">
+            <input class="form-control" type="number" placeholder="Precio x Unidad" />
+        </div>
+    </div>
+    <div class="mt-2 d-flex justify-content-between">
+        <div class="btn btn-primary w-auto" id="nuevo-item">+ Nuevo item</div>
+        <input class="btn btn-info" type="submit" value="Subir" />
+    </div>
+
+</form>
