@@ -20,10 +20,6 @@ builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 
 
-
-//mappers
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-
 //Habilitar sesiones
 builder.Services.AddSession(options =>
 {
@@ -48,6 +44,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
 
 app.UseAuthorization();
 
@@ -58,6 +56,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Ingreso}/{action=Register}/{id?}");
+    pattern: "{controller=Home}/{action=Inicio}/{id?}");
 
 app.Run();
