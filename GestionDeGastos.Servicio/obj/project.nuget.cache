@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "pjINlMmU9cE=",
   "success": true,
   "projectFilePath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
+=======
+  "dgSpecHash": "rl9n5DH4tNc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj",
+>>>>>>> Carli
   "expectedPackageFiles": [],
   "logs": []
 }
