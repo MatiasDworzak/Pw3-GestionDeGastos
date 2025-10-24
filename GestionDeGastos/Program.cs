@@ -31,8 +31,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
+//validar que el usuario no pueda acceder al Home si no esta registrado o con la sesion iniciada,
+//deberia ir a Home/Inicio
+//por ahora Ingreso/Register
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Inicio}/{id?}");
+    pattern: "{controller=Ingreso}/{action=Register}/{id?}");
 
 app.Run();
