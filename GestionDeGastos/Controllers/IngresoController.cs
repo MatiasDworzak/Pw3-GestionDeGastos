@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using GestionDeGastos.Models;
+﻿using GestionDeGastos.Models;
 using GestionDeGastos.Servicio;
-using GestionDeGastos.Servicio.DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeGastos.Controllers

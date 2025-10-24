@@ -1,7 +1,8 @@
+
+
+
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 

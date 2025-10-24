@@ -275,9 +275,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj": {
-                "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj"
-              },
               "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {
                 "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj"
               }
