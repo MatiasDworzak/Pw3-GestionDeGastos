@@ -5212,11 +5212,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
+      "projectUniqueName": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
       "projectName": "GestionDeGastos.AccesoADatos",
-      "projectPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
+      "projectPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj",
       "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.AccesoADatos\\obj\\",
+      "outputPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.AccesoADatos\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -4696,11 +4696,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
+      "projectUniqueName": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos\\GestionDeGastos.csproj",
       "projectName": "GestionDeGastos",
-      "projectPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
+      "projectPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos\\GestionDeGastos.csproj",
       "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastos\\GestionDeGastos\\GestionDeGastos\\obj\\",
+      "outputPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
