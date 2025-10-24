@@ -1,0 +1,6 @@
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.csproj.AssemblyReference.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.AssemblyInfoInputs.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.AssemblyInfo.cs
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.csproj.CoreCompileInputs.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.sourcelink.json

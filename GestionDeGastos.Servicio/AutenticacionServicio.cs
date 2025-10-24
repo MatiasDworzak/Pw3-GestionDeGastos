@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using AutoMapper;
-using GestionDeGastos.Models;
 using GestionDeGastos.Repositorio;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Seguridad;
+using GestionDeGastos.Servicio.DTOs;
+using GestionDeGastos.Servicio.Seguridad;
 using Validacion;
+
 
 namespace GestionDeGastos.Servicio
 {
    public interface IAutenticacionServicio
    {
-      Task<Usuario?> RegistrarUsuarioAsync(RegistroViewModel model);
-      Task<Usuario?> ValidarUsuarioAsync(CredencialViewModel model);
+      Task<Usuario?> RegistrarUsuarioAsync(RegistrarUsuarioDto dto);
+      Task<Usuario?> ValidarUsuarioAsync(ValidarUsuarioDto dto);
    }
 
 
@@ -24,12 +19,12 @@ namespace GestionDeGastos.Servicio
    {
       private readonly IUsuarioRepositorio _usuarioRepositorio;
 
-      private readonly IPasswordHasher _hasher;
+      private readonly IContraseniaHasher _hasher;
 
       private readonly IMapper _mapper;
 
       public AutenticacionServicio(IUsuarioRepositorio usuarioRepositorio,
-         IPasswordHasher hasher,
+         IContraseniaHasher hasher,
          IMapper maper)
       {
          _usuarioRepositorio = usuarioRepositorio;
@@ -37,33 +32,33 @@ namespace GestionDeGastos.Servicio
          _mapper = maper;
       }
 
-      public async Task<Usuario?> RegistrarUsuarioAsync(RegistroViewModel model)
+      public async Task<Usuario?> RegistrarUsuarioAsync(RegistrarUsuarioDto dto)
       {
-         ValidacionUsuario.Registro(model);
-         var usuarioExistente = await _usuarioRepositorio.GetByEmailAsync(model.Correo);
+         ValidacionUsuario.Registro(dto);
+         var usuarioExistente = await _usuarioRepositorio.GetByEmailAsync(dto.Correo);
          
          if(usuarioExistente == null)
          {
             return null;
          }
 
-         string contraseniaHash = _hasher.Hash(model.Contrasenia);
-         var nuevoUsuario = _mapper.Map<Usuario>(model);
+         string contraseniaHash = _hasher.Hash(dto.Contrasenia);
+         var nuevoUsuario = _mapper.Map<Usuario>(dto);
          nuevoUsuario.Contrasenia = contraseniaHash;
          await _usuarioRepositorio.AddAsync(nuevoUsuario);
          return nuevoUsuario;
 
       }
 
-      public async Task<Usuario?> ValidarUsuarioAsync(CredencialViewModel model)
+      public async Task<Usuario?> ValidarUsuarioAsync(ValidarUsuarioDto dto)
       {
-         ValidacionUsuario.Login(model);
-         var usuario = await _usuarioRepositorio.GetByEmailAsync(model.Correo);
+         ValidacionUsuario.Login(dto);
+         var usuario = await _usuarioRepositorio.GetByEmailAsync(dto.Correo);
          if( usuario == null)
          {
             return  null;
          }
-         bool contraseniaValidada = _hasher.Verificar(model.Contrasenia,usuario.Contrasenia);
+         bool contraseniaValidada = _hasher.Verificar(dto.Contrasenia, dto.Contrasenia);
 
          return contraseniaValidada ? usuario : null;
 

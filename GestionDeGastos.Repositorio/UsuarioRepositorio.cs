@@ -1,6 +1,4 @@
-﻿
-using System.Data.Entity;
-using System.Threading;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeGastos.Repositorio
 {

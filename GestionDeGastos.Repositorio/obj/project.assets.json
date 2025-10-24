@@ -3333,8 +3333,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "GestionDeGastos.AccesoADatos >= 1.0.0",
-      "Microsoft.EntityFrameworkCore >= 9.0.10"
+      "GestionDeGastos.AccesoADatos >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3390,12 +3389,6 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[9.0.10, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",

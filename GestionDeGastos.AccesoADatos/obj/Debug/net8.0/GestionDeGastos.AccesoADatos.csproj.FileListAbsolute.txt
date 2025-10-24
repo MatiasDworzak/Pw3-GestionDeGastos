@@ -1,0 +1,15 @@
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.deps.json
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.runtimeconfig.json
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.dll
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.pdb
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.csproj.AssemblyReference.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.AssemblyInfoInputs.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.AssemblyInfo.cs
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.csproj.CoreCompileInputs.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.sourcelink.json
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.dll
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\refint\GestionDeGastos.AccesoADatos.dll
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.pdb
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\GestionDeGastos.AccesoADatos.genruntimeconfig.cache
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.AccesoADatos\obj\Debug\net8.0\ref\GestionDeGastos.AccesoADatos.dll
