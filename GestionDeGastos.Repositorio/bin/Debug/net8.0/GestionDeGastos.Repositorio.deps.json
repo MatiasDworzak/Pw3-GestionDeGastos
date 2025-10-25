@@ -8,8 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "GestionDeGastos.Repositorio/1.0.0": {
         "dependencies": {
-          "GestionDeGastos.AccesoADatos": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "9.0.10"
+          "GestionDeGastos.AccesoADatos": "1.0.0"
         },
         "runtime": {
           "GestionDeGastos.Repositorio.dll": {}

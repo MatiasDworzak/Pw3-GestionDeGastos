@@ -1,5 +1,5 @@
 ﻿
-namespace GestionDeGastos.Servicio.Validacion
+namespace GestionDeGastos.Servicio.Validaciones
 {
    public static class ValidacionUsuario
    {
@@ -7,6 +7,8 @@ namespace GestionDeGastos.Servicio.Validacion
       {
          if (usuario is null)
          {
+            
+               
             throw new ArgumentNullException(nameof(usuario), "El usuario no puede ser nulo.");
          }
 
@@ -15,9 +17,8 @@ namespace GestionDeGastos.Servicio.Validacion
          ValidarCampoRequerido(usuario.Contrasenia, nameof(usuario.Contrasenia));
          ValidarFormatoEmail(usuario.Email);
       }
-
       public static void ValidarCredenciales(string correo, string contrasenia)
-      {
+      {                         
          ValidarCampoRequerido(correo, "Correo electrónico");
          ValidarCampoRequerido(contrasenia, "Contraseña");
          ValidarFormatoEmail(correo);
@@ -26,12 +27,15 @@ namespace GestionDeGastos.Servicio.Validacion
       private static void ValidarCampoRequerido(string valor, string nombreCampo)
       {
          if (valor is null)
+
+
          {
             throw new ArgumentNullException(nombreCampo, $"El campo '{nombreCampo}' no puede ser nulo.");
          }
 
          if (string.IsNullOrWhiteSpace(valor))
          {
+
             throw new ArgumentException($"El campo '{nombreCampo}' no puede estar vacío.", nombreCampo);
          }
       }

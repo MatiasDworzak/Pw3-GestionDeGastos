@@ -1,6 +1,6 @@
 ﻿using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio.Seguridad;
-using GestionDeGastos.Servicio.Validacion;
+using GestionDeGastos.Servicio.Validaciones;
 
 namespace GestionDeGastos.Servicio
 {

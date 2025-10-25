@@ -23,6 +23,7 @@ namespace GestionDeGastos.Servicio
       }
       public async Task<Usuario?> ObtenerUsuarioPorIdAsync(int id)
       {
+
          return await _repositorio.GetByIdAsync(id);
       }
    }

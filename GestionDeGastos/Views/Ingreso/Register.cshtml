@@ -3,17 +3,27 @@
     ViewData["Title"] = "Registro";
 }
 
+
 <div class="container-fluid vh-100">
+
+    <!--Columna izquierda de imagen-->
     <div class="row h-100">
-        <!-- Columna izquierda - Imagen -->
-        <div class="col-md-6 d-none d-md-block p-0">
-            <div class="h-100 d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
+        <div class="col-md-6 d-none d-md-block p-0"
+             style="background-image: url('@Url.Content("~/img/Ingreso/RegistroImagen.jpg")');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+       
+            <div class="h-100 d-flex align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.3);">
                 <div class="text-center text-white p-5">
-                    <i class="bi bi-journal-check" style="font-size: 120px; opacity: 0.9;"></i>
-                    <h2 class="mt-4 fw-bold">Únete a AhorrApp</h2>
+                    <h2 class="fw-bold">Únete a AhorrApp</h2>
                     <p class="lead">Comienza a ahorrar hoy mismo</p>
                 </div>
             </div>
+
         </div>
 
         <!-- Columna derecha - Formulario -->

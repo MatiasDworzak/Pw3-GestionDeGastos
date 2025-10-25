@@ -6,14 +6,20 @@
 <div class="container-fluid vh-100">
     <div class="row h-100">
         <!-- Columna izquierda - Imagen -->
-        <div class="col-md-6 d-none d-md-block p-0">
-            <div class="h-100 d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
+        <div class="col-md-6 d-none d-md-block p-0"
+             style="background-image: url('@Url.Content("~/img/Ingreso/LoginImagen.jpg")');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;">
+
+            <div class="h-100 d-flex align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.3);">
                 <div class="text-center text-white p-5">
                     <i class="bi bi-receipt-cutoff" style="font-size: 120px; opacity: 0.9;"></i>
                     <h2 class="mt-4 fw-bold">AhorrApp</h2>
                     <p class="lead">Controla tus gastos de manera inteligente</p>
                 </div>
             </div>
+
         </div>
 
         <!-- Columna derecha - Formulario -->

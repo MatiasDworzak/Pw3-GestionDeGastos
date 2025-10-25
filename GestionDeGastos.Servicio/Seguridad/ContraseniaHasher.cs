@@ -6,7 +6,7 @@ namespace GestionDeGastos.Servicio.Seguridad
       string Hash(string password);
       bool Verificar(string input, string hash);
    }
-   internal class ContraseniaHasher : IContraseniaHasher
+   public class ContraseniaHasher : IContraseniaHasher
    {
       public string Hash(string password)
       {

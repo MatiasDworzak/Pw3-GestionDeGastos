@@ -19,7 +19,7 @@ namespace GestionDeGastos.Controllers
         public IActionResult Inicio()
         {
          
-            return View();
+            return View();         
         }
 
        

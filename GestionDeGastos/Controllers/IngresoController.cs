@@ -35,7 +35,7 @@ namespace GestionDeGastos.Controllers
 
          if (usuarioRegistrado == null) {
             //si le saco el nameof no devuelve el mensaje de error
-            ModelState.AddModelError(nameof(model.Correo), "El correo electrónico ya está registrado.");
+            ModelState.AddModelError(nameof(model.Correo), "El correo es ya está registrado en el sistema");
             return View(model);
 
          }
