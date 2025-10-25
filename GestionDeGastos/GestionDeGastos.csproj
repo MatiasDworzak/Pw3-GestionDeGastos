@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GestionDeGastos.Filtros\GestionDeGastos.Filtros.csproj" />
     <ProjectReference Include="..\GestionDeGastos.Servicio\GestionDeGastos.Servicio.csproj" />
   </ItemGroup>
 

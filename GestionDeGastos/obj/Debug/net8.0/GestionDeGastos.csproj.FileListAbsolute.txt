@@ -189,3 +189,6 @@ E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\Ge
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos\obj\Debug\net8.0\GestionDeGastos.genruntimeconfig.cache
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos\obj\Debug\net8.0\ref\GestionDeGastos.dll
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos\bin\Debug\net8.0\GestionDeGastos.Filtros.dll
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos\bin\Debug\net8.0\GestionDeGastos.Filtros.pdb
+E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos\obj\Debug\net8.0\GestionDeGastos.MvcApplicationPartsAssemblyInfo.cs

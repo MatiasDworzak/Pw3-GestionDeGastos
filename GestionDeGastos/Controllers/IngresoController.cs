@@ -34,15 +34,16 @@ namespace GestionDeGastos.Controllers
          var usuarioRegistrado =   await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
 
          if (usuarioRegistrado == null) {
-            ModelState.AddModelError(model.Correo, "El correo electrónico ya está registrado.");
+            //si le saco el nameof no devuelve el mensaje de error
+            ModelState.AddModelError(nameof(model.Correo), "El correo electrónico ya está registrado.");
             return View(model);
 
          }
-         Console.WriteLine("MI ID",usuarioRegistrado.IdUsuario);
+         Console.WriteLine($"MI ID: {usuario.IdUsuario}");
          
 
          TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
-         return View("Login");
+         return RedirectToAction("Login");
       }
       public ActionResult Login()
       {

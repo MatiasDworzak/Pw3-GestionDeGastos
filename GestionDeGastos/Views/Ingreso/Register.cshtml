@@ -1,41 +1,53 @@
 ﻿@model RegistroViewModel
 
 @{
-    ViewData["Title"] = "Inicio de sesión";
+    ViewData["Title"] = "¡Registrate!";
 }
 
-<h1 class="text-center">¡Registrate!</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6">
 
+        <h1 class="text-center mt-4 mb-4">@ViewData["Title"]</h1>
 
-<form asp-action="Register" asp-controller="Ingreso" method="POST">
-    <div>
-        <label asp-for="Nombre"></label>
-        <input asp-for="Nombre" class="form-control" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+        <form asp-action="Register" method="post">
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label visually-hidden">Nombre</label> 
+                <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label visually-hidden">Correo Electrónico</label>
+                <input asp-for="Correo" class="form-control" placeholder="Correo Electrónico" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Contrasenia" class="form-label visually-hidden">Contraseña</label>
+                <input asp-for="Contrasenia" type="password" class="form-control" placeholder="Contraseña" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ConfirmarContrasenia" class="form-label visually-hidden">Confirmar Contraseña</label>
+                <input asp-for="ConfirmarContrasenia" type="password" class="form-control" placeholder="Confirmar Contraseña" />
+                <span asp-validation-for="ConfirmarContrasenia" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid gap-2 mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">Registrate</button>
+            </div>
+
+            <div class="text-center">
+                <p>¿Ya tienes una cuenta? <a asp-action="Login">Inicia Sesión</a></p>
+            </div>
+        </form>
     </div>
-    
-    <div>
-        <label asp-for="Correo"></label>
-        <input asp-for="Correo" class="form-control" />
-        <span asp-validation-for="Correo" class="text-danger"></span>
-    </div>
-
-    <div>
-        <label asp-for="Contrasenia"></label>
-        <input asp-for="Contrasenia" class="form-control" type="password" />
-        <span asp-validation-for="Contrasenia" class="text-danger"></span>
-    </div>
-
-    <div>
-        <label asp-for="ConfirmarContrasenia"></label>
-        <input asp-for="ConfirmarContrasenia" class="form-control" type="password" />
-        <span asp-validation-for="ConfirmarContrasenia" class="text-danger"></span>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary">Registrate</button>
-</form>
+</div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" /> 
 }

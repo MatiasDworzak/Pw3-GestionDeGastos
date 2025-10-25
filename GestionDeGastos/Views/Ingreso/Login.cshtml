@@ -1,30 +1,47 @@
 ﻿@model CredencialViewModel
 
 @{
-    ViewData["Title"] = "Inicio de sesión";
+    ViewData["Title"] = "Iniciar Sesión";
 }
-<div class="alert alert-success">@TempData["RegistroExito"]</div>
 
-<h1 class="text-center">¡Bienvenido!</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6">
 
+        <h1 class="text-center mt-4 mb-4">@ViewData["Title"]</h1>
 
-<form asp-action="Login" asp-controller="Ingreso" method="POST">
-    <div>
-        <label asp-for="Correo"></label>
-        <input asp-for="Correo" class="form-control" />
-        <span asp-validation-for="Correo" class="text-danger"></span>
+        @if (TempData["RegistroExito"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["RegistroExito"]
+            </div>
+        }
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+        <form asp-action="Login" method="post">
+
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label visually-hidden">Correo Electrónico</label>
+                <input asp-for="Correo" class="form-control" placeholder="Correo Electrónico" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Contrasenia" class="form-label visually-hidden">Contraseña</label>
+                <input asp-for="Contrasenia" type="password" class="form-control" placeholder="Contraseña" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid gap-2 mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+            </div>
+
+            <div class="text-center">
+                <p>¿No tienes cuenta? <a asp-action="Register">Registrate</a></p>
+            </div>
+        </form>
     </div>
-
-    <div>
-        <label asp-for="Contrasenia"></label>
-        <input asp-for="Contrasenia" class="form-control" type="password"/>
-        <span asp-validation-for="Contrasenia" class="text-danger"></span>
-    </div>
-   
-
-
-    <button type="submit" class="btn btn-primary">Ingresar</button>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

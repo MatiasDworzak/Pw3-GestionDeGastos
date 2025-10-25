@@ -1,9 +1,12 @@
 using System.Diagnostics;
+using GestionDeGastos.Filtros;
 using GestionDeGastos.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeGastos.Controllers
 {
+
+   [AutorizacionSession]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +18,7 @@ namespace GestionDeGastos.Controllers
 
         public IActionResult Inicio()
         {
+         
             return View();
         }
 

@@ -2121,6 +2121,19 @@
           "bin/placeholder/GestionDeGastos.AccesoADatos.dll": {}
         }
       },
+      "GestionDeGastos.Filtros/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.3.0"
+        },
+        "compile": {
+          "bin/placeholder/GestionDeGastos.Filtros.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GestionDeGastos.Filtros.dll": {}
+        }
+      },
       "GestionDeGastos.Repositorio/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -5787,6 +5800,11 @@
       "path": "../GestionDeGastos.AccesoADatos/GestionDeGastos.AccesoADatos.csproj",
       "msbuildProject": "../GestionDeGastos.AccesoADatos/GestionDeGastos.AccesoADatos.csproj"
     },
+    "GestionDeGastos.Filtros/1.0.0": {
+      "type": "project",
+      "path": "../GestionDeGastos.Filtros/GestionDeGastos.Filtros.csproj",
+      "msbuildProject": "../GestionDeGastos.Filtros/GestionDeGastos.Filtros.csproj"
+    },
     "GestionDeGastos.Repositorio/1.0.0": {
       "type": "project",
       "path": "../GestionDeGastos.Repositorio/GestionDeGastos.Repositorio.csproj",
@@ -5800,6 +5818,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "GestionDeGastos.Filtros >= 1.0.0",
       "GestionDeGastos.Servicio >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.10"
@@ -5837,6 +5856,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj": {
+              "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj"
+            },
             "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {
               "projectPath": "E:\\Development\\unlam\\prog-web-3\\prog-web-3-gestion-gastos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj"
             }
