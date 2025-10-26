@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using GestionDeGastos.Filtros;
 using GestionDeGastos.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +17,14 @@ namespace GestionDeGastos.Controllers
 
         public IActionResult Inicio()
         {
-         
-            return View();         
+
+         var model = new UsuarioViewModel
+         {
+            IdUsuario = HttpContext.Session.GetInt32("UsuarioId").Value,
+            Nombre = HttpContext.Session.GetString("UsuarioNombre"),
+            Email = HttpContext.Session.GetString("UsuarioEmail"),
+         };
+            return View(model);         
         }
 
        

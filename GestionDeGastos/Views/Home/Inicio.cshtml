@@ -1,7 +1,16 @@
-﻿@* @model UsuarioViewModel *@
+﻿@model UsuarioViewModel
 
-<div class="alert alert-success">@TempData["LoginExito"]</div>
+@await Html.PartialAsync("_Header", Model)
 
+@if (TempData["LoginExito"] != null)
+{
+    <div class="container mt-3">
+        <div class="alert alert-success">@TempData["LoginExito"]</div>
+    </div>
+}
 
-
-<h1>Bienvenido </h1>
+<div class="container mt-4">
+    <main role="main" class="pb-3">
+        <h1>Bienvenido</h1>
+    </main>
+</div>
