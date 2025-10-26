@@ -1,5 +1,4 @@
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\bin\Debug\net8.0\GestionDeGastos.Servicio.deps.json
-E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\bin\Debug\net8.0\GestionDeGastos.Servicio.runtimeconfig.json
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\bin\Debug\net8.0\GestionDeGastos.Servicio.dll
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\bin\Debug\net8.0\GestionDeGastos.Servicio.pdb
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\bin\Debug\net8.0\GestionDeGastos.AccesoADatos.dll
@@ -16,5 +15,4 @@ E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\Ge
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.dll
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\refint\GestionDeGastos.Servicio.dll
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.pdb
-E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\GestionDeGastos.Servicio.genruntimeconfig.cache
 E:\Development\unlam\prog-web-3\prog-web-3-gestion-gastos\Pw3-GestionDeGastos\GestionDeGastos.Servicio\obj\Debug\net8.0\ref\GestionDeGastos.Servicio.dll

@@ -2,6 +2,7 @@
 
 
 using GestionDeGastos;
+using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Seguridad;
