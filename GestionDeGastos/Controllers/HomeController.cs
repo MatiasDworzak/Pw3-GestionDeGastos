@@ -16,7 +16,7 @@ namespace GestionDeGastos.Controllers
             _logger = logger;
         }
 
-        public IActionResult Inicio()
+        public IActionResult Home()
         {
          
             return View();         

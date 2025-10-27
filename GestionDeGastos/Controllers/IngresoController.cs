@@ -69,7 +69,7 @@ namespace GestionDeGastos.Controllers
          HttpContext.Session.SetString("UsuarioEmail", usuarioValidado.Email);
 
          TempData["LoginExito"] = "Sesion iniciada con éxito";
-         return RedirectToAction("Inicio", "Home");
+         return RedirectToAction("Home", "Home");
       }
       [HttpPost]
       [ValidateAntiForgeryToken]
