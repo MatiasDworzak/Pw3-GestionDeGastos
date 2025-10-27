@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}|GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj|c:\\users\\carlastramandinoli\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.servicio\\presupuestoservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}|GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj|solutionrelative:gestiondegastos.servicio\\presupuestoservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\carlastramandinoli\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\controllers\\presupuestocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\controllers\\presupuestocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\carlastramandinoli\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\carlastramandinoli\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\views\\presupuesto\\presupuestoactual.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\presupuesto\\presupuestoactual.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\carlastramandinoli\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\models\\presupuestopaginaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\models\\presupuestopaginaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\carlastramandinoli\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\models\\presupuestoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\models\\presupuestoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -51,53 +51,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PresupuestoPaginaViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Models\\PresupuestoPaginaViewModel.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Models\\PresupuestoPaginaViewModel.cs",
-              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Models\\PresupuestoPaginaViewModel.cs",
-              "RelativeToolTip": "GestionDeGastos\\Models\\PresupuestoPaginaViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABJAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Program.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Program.cs",
+              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Program.cs",
+              "RelativeToolTip": "GestionDeGastos\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T08:05:03.383Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PresupuestoViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Models\\PresupuestoViewModel.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Models\\PresupuestoViewModel.cs",
-              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Models\\PresupuestoViewModel.cs",
-              "RelativeToolTip": "GestionDeGastos\\Models\\PresupuestoViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:20:17.057Z",
+              "WhenOpened": "2025-10-27T04:12:58.072Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PresupuestoActual.cshtml",
-              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
-              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
-              "RelativeToolTip": "GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
-              "ViewState": "AgIAADIAAACAmJmZmVkqwD4AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T05:35:05.041Z",
+              "Title": "PresupuestoController.cs",
+              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\PresupuestoController.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Controllers\\PresupuestoController.cs",
+              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\PresupuestoController.cs",
+              "RelativeToolTip": "GestionDeGastos\\Controllers\\PresupuestoController.cs",
+              "ViewState": "AgIAACUAAABA//////8owDEAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T05:33:21.283Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PresupuestoController.cs",
-              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\PresupuestoController.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Controllers\\PresupuestoController.cs",
-              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\PresupuestoController.cs*",
-              "RelativeToolTip": "GestionDeGastos\\Controllers\\PresupuestoController.cs*",
-              "ViewState": "AgIAAA4AAAAAAAAAAADyvxYAAAAcAAAAAAAAAA==",
+              "Title": "PresupuestoServicio.cs",
+              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\PresupuestoServicio.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.Servicio\\PresupuestoServicio.cs",
+              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\PresupuestoServicio.cs",
+              "RelativeToolTip": "GestionDeGastos.Servicio\\PresupuestoServicio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T05:33:21.283Z",
+              "WhenOpened": "2025-10-25T02:14:28.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PresupuestoActual.cshtml",
+              "DocumentMoniker": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
+              "ToolTip": "C:\\Users\\CarlaStramandinoli\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
+              "RelativeToolTip": "GestionDeGastos\\Views\\Presupuesto\\PresupuestoActual.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T05:35:05.041Z",
               "EditorCaption": ""
             }
           ]

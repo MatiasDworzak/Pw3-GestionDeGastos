@@ -1,7 +1,15 @@
+using GestionDeGastos;
+using GestionDeGastos.Repositorio;
+using GestionDeGastos.Servicios;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
+builder.Services.AddScoped<IPresupuestoServicio, PresupuestoServicio>();
 
 var app = builder.Build();
 
