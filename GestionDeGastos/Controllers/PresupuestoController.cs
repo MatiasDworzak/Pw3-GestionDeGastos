@@ -35,12 +35,17 @@ namespace GestionDeGastos.Controllers
         //    return View(modelo);
         //}
 
-        public IPresupuestoServicio presupuestoServicio;
+        public IPresupuestoServicio _presupuestoServicio;
 
-        public IActionResult PresupuestoActualBD()
+        public PresupuestoController(IPresupuestoServicio presupuestoServicio)
         {
-            var ultimoPresupuesto = presupuestoServicio.ObtenerPresupuestoActualAsync().Result;
-            IEnumerable<Presupuesto> listaPresupuestos = presupuestoServicio.ObtenerTodosLosPresupuestosAsync().Result;
+            _presupuestoServicio = presupuestoServicio;
+        }
+
+        public IActionResult PresupuestoActual()
+        {
+            var ultimoPresupuesto = _presupuestoServicio.ObtenerPresupuestoActualAsync().Result;
+            IEnumerable<Presupuesto> listaPresupuestos = _presupuestoServicio.ObtenerTodosLosPresupuestosAsync().Result;
 
             var modelo = new PresupuestoPaginaViewModel
             {
@@ -49,12 +54,12 @@ namespace GestionDeGastos.Controllers
                     MontoLimite = ultimoPresupuesto.MontoLimite,
                     MontoActualGastado = ultimoPresupuesto.MontoActualGastado,
                 },
-                ListaPresupuestos = listaPresupuestos.Select(p => new PresupuestoViewModel
+                ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
                 {
                     MontoLimite = p.MontoLimite,
                     MontoActualGastado = p.MontoActualGastado
                 }),
-                PorcentajeGastado = presupuestoServicio.ObtenerPresupuestoConPorcentaje()
+                PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje()
             };
 
             return View(modelo);

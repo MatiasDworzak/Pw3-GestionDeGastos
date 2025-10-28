@@ -1,5 +1,4 @@
-﻿using GestionDeGastos.AccesoADatos.Entidades;
-using GestionDeGastos.Repositorio;
+﻿using GestionDeGastos.Repositorio;
 
 namespace GestionDeGastos.Servicios
 {
@@ -8,14 +7,25 @@ namespace GestionDeGastos.Servicios
         Task<Presupuesto> ObtenerPresupuestoActualAsync();
         Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync();
         decimal ObtenerPresupuestoConPorcentaje();
+        Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int id);
     }
     public class PresupuestoServicio : IPresupuestoServicio
     {
         private readonly IPresupuestoRepositorio _repositorio;
 
+        public PresupuestoServicio(IPresupuestoRepositorio repositorio)
+        {
+            _repositorio = repositorio;
+        }
+
+        public async Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int id)
+        {
+            return await _repositorio.ObtenerPresupuestoPorId(id);
+        }
+
         public async Task<Presupuesto> ObtenerPresupuestoActualAsync()
         {
-           return await _repositorio.ObtenerUltimoPresupuestoAsync();
+           return await _repositorio.ObtenerPresupuestoPorId(1);
         }
 
         public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync()

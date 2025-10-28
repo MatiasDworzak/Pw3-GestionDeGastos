@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "pqDdsX7RPok=",
-  "success": false,
+  "dgSpecHash": "+nMTVWMd1Pw=",
+  "success": true,
   "projectFilePath": "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CarlaStramandinoli\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
@@ -91,17 +91,5 @@
     "C:\\Users\\CarlaStramandinoli\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\CarlaStramandinoli\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Ciclo detectado. \r\n  GestionDeGastos -> GestionDeGastos.Repositorio -> GestionDeGastos.",
-      "projectPath": "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
-      "filePath": "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
-      "libraryId": "GestionDeGastos",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

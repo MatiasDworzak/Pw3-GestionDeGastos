@@ -8,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//cadena de conexion del appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
+options.UseSqlServer(connectionString));
+
 builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IPresupuestoServicio, PresupuestoServicio>();
 

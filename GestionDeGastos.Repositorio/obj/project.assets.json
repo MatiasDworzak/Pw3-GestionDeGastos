@@ -1153,25 +1153,6 @@
           }
         }
       },
-      "GestionDeGastos/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "GestionDeGastos.AccesoADatos": "1.0.0",
-          "GestionDeGastos.Repositorio": "1.0.0",
-          "GestionDeGastos.Servicio": "1.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "9.0.10"
-        },
-        "compile": {
-          "bin/placeholder/GestionDeGastos.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GestionDeGastos.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
       "GestionDeGastos.AccesoADatos/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -1185,20 +1166,6 @@
         },
         "runtime": {
           "bin/placeholder/GestionDeGastos.AccesoADatos.dll": {}
-        }
-      },
-      "GestionDeGastos.Servicio/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "GestionDeGastos.AccesoADatos": "1.0.0",
-          "GestionDeGastos.Repositorio": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/GestionDeGastos.Servicio.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GestionDeGastos.Servicio.dll": {}
         }
       }
     }
@@ -3358,25 +3325,14 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "GestionDeGastos/1.0.0": {
-      "type": "project",
-      "path": "../GestionDeGastos/GestionDeGastos.csproj",
-      "msbuildProject": "../GestionDeGastos/GestionDeGastos.csproj"
-    },
     "GestionDeGastos.AccesoADatos/1.0.0": {
       "type": "project",
       "path": "../GestionDeGastos.AccesoADatos/GestionDeGastos.AccesoADatos.csproj",
       "msbuildProject": "../GestionDeGastos.AccesoADatos/GestionDeGastos.AccesoADatos.csproj"
-    },
-    "GestionDeGastos.Servicio/1.0.0": {
-      "type": "project",
-      "path": "../GestionDeGastos.Servicio/GestionDeGastos.Servicio.csproj",
-      "msbuildProject": "../GestionDeGastos.Servicio/GestionDeGastos.Servicio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "GestionDeGastos >= 1.0.0",
       "GestionDeGastos.AccesoADatos >= 1.0.0"
     ]
   },
@@ -3414,9 +3370,6 @@
           "projectReferences": {
             "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj": {
               "projectPath": "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj"
-            },
-            "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj": {
-              "projectPath": "C:\\Users\\CarlaStramandinoli\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj"
             }
           }
         }
@@ -3455,16 +3408,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Ciclo detectado. \r\n  GestionDeGastos.Repositorio -> GestionDeGastos -> GestionDeGastos.Repositorio.",
-      "libraryId": "GestionDeGastos.Repositorio",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }

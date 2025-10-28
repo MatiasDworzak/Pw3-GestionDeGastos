@@ -40,7 +40,7 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto)
         {
-           return await _context.Presupuestos.FirstOrDefaultAsync(p => p.IdPresupuesto == IdPresupuesto);
+           return await _context.Presupuestos.FindAsync(IdPresupuesto);
         }
 
         public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync()
