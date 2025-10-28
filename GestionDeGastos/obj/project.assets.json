@@ -1743,6 +1743,33 @@
         "runtime": {
           "bin/placeholder/GestionDeGastos.AccesoADatos.dll": {}
         }
+      },
+      "GestionDeGastos.Repositorio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "GestionDeGastos.AccesoADatos": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/GestionDeGastos.Repositorio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GestionDeGastos.Repositorio.dll": {}
+        }
+      },
+      "GestionDeGastos.Servicio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "GestionDeGastos.AccesoADatos": "1.0.0",
+          "GestionDeGastos.Repositorio": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/GestionDeGastos.Servicio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GestionDeGastos.Servicio.dll": {}
+        }
       }
     }
   },
@@ -5183,11 +5210,22 @@
       "type": "project",
       "path": "../GestionDeGastos.AccesoADatos/GestionDeGastos.AccesoADatos.csproj",
       "msbuildProject": "../GestionDeGastos.AccesoADatos/GestionDeGastos.AccesoADatos.csproj"
+    },
+    "GestionDeGastos.Repositorio/1.0.0": {
+      "type": "project",
+      "path": "../GestionDeGastos.Repositorio/GestionDeGastos.Repositorio.csproj",
+      "msbuildProject": "../GestionDeGastos.Repositorio/GestionDeGastos.Repositorio.csproj"
+    },
+    "GestionDeGastos.Servicio/1.0.0": {
+      "type": "project",
+      "path": "../GestionDeGastos.Servicio/GestionDeGastos.Servicio.csproj",
+      "msbuildProject": "../GestionDeGastos.Servicio/GestionDeGastos.Servicio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "GestionDeGastos.AccesoADatos >= 1.0.0",
+      "GestionDeGastos.Servicio >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.10"
     ]
@@ -5227,6 +5265,9 @@
           "projectReferences": {
             "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj": {
               "projectPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj"
+            },
+            "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj": {
+              "projectPath": "C:\\Users\\Lucas\\Desktop\\GestionDeGastosPrueba\\GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj"
             }
           }
         }

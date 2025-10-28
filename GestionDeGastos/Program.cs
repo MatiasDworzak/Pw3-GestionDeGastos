@@ -1,10 +1,14 @@
 using GestionDeGastos;
+using GestionDeGastos.Repositorio;
+using GestionDeGastos.Servicio;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 
 //cadena de conexion del appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

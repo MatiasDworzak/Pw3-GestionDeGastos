@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.AccesoADato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.Servicio", "GestionDeGastos.Servicio\GestionDeGastos.Servicio.csproj", "{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.Repositorio", "GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj", "{A97099A3-B39E-4B6D-BD65-45943562DC3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A97099A3-B39E-4B6D-BD65-45943562DC3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A97099A3-B39E-4B6D-BD65-45943562DC3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A97099A3-B39E-4B6D-BD65-45943562DC3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A97099A3-B39E-4B6D-BD65-45943562DC3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

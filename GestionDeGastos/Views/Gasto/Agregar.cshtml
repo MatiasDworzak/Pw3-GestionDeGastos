@@ -40,9 +40,9 @@
             <div class="d-flex flex-column gap-2">
                 <select asp-for="CategoriaSeleccionada" class="form-select text-center" id="categoria"
                         asp-items="Model.Categorias">
-                    <option value="" selected>Seleccionar Categoria</option>
+                    <option value="" selected disabled>Seleccionar Categoria</option>
                     <!-- Iterar categorias(del sistema generales y las generadas por usuario) de base de datos -->
-                    <option value="">Agregar Categoria</option>
+                    <!-- <option value="">Agregar Categoria</option> definir si esto hacerlo un boton -->
                 </select>
 
                 <select asp-for="MetodoDePagoSeleccionado" class="form-select text-center" id="metodo-de-pago"

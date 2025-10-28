@@ -34,7 +34,7 @@ namespace GestionDeGastos.Models.Gasto
         // Para que el usuario envie y reciba
         public List<AgregarGastoItemViewModel> Items { get; set; }
     }
-    
+
     public class AgregarGastoItemViewModel
     {
         public string Descripcion { get; set; }
