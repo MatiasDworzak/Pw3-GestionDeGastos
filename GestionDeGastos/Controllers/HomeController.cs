@@ -2,6 +2,9 @@ using System.Diagnostics;
 using GestionDeGastos.Filtros;
 using GestionDeGastos.Models;
 using Microsoft.AspNetCore.Mvc;
+using GestionDeGastos.Servicio;
+using System.Threading.Tasks;
+
 
 namespace GestionDeGastos.Controllers
 {
@@ -10,16 +13,21 @@ namespace GestionDeGastos.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
             _logger = logger;
+            _homeService = homeService; 
         }
 
-        public IActionResult Home()
+        public async Task<IActionResult> Home()
         {
-         
-            return View();         
+            var p = await _homeService.ObtenerPresupuestoPorIdAsync(1);
+            var modelo = new PresupuestoViewModel { MontoActualGastado = p.MontoActualGastado,
+                MontoLimite = p.MontoLimite};
+           
+            return View(modelo);         
         }
 
        

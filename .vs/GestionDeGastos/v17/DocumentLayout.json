@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\controllers\\ingresocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\controllers\\ingresocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}|GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.servicio\\homeservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}|GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj|solutionrelative:gestiondegastos.servicio\\homeservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55B5D06F-8800-456F-8BC2-1701C7427761}|GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.repositorio\\presupuestorepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55B5D06F-8800-456F-8BC2-1701C7427761}|GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj|solutionrelative:gestiondegastos.repositorio\\presupuestorepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,32 +23,40 @@
       "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\home\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\models\\presupuestoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\models\\presupuestoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.accesoadatos\\entidades\\presupuesto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\entidades\\presupuesto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\views\\ingreso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\ingreso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{55B5D06F-8800-456F-8BC2-1701C7427761}|GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.repositorio\\usuariorepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55B5D06F-8800-456F-8BC2-1701C7427761}|GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj|solutionrelative:gestiondegastos.repositorio\\usuariorepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\views\\ingreso\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\ingreso\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\controllers\\ingresocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\controllers\\ingresocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}|GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.servicio\\usuarioservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}|GestionDeGastos.Servicio\\GestionDeGastos.Servicio.csproj|solutionrelative:gestiondegastos.servicio\\usuarioservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55B5D06F-8800-456F-8BC2-1701C7427761}|GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.repositorio\\usuariorepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55B5D06F-8800-456F-8BC2-1701C7427761}|GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj|solutionrelative:gestiondegastos.repositorio\\usuariorepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0FC87D7F-795C-4556-85B5-67DA359B44C8}|GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.filtros\\gestiondegastos.filtros.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0FC87D7F-795C-4556-85B5-67DA359B44C8}|GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj|solutionrelative:gestiondegastos.filtros\\gestiondegastos.filtros.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\views\\ingreso\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\views\\ingreso\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0FC87D7F-795C-4556-85B5-67DA359B44C8}|GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.filtros\\autorizacionsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -61,10 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos.accesoadatos\\entidades\\categoriausuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A07E4ACE-0620-40AD-AD1B-65658D2FFE7E}|GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj|solutionrelative:gestiondegastos.accesoadatos\\entidades\\categoriausuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|c:\\users\\mati\\source\\repos\\pw3-gestiondegastos\\gestiondegastos\\gestiondegastos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}|GestionDeGastos\\GestionDeGastos.csproj|solutionrelative:gestiondegastos\\gestiondegastos.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -98,106 +110,163 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Home.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Home\\Home.cshtml",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Home\\Home.cshtml",
-              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Home\\Home.cshtml",
-              "RelativeToolTip": "GestionDeGastos\\Views\\Home\\Home.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-26T06:50:12.679Z",
+              "DocumentIndex": 6,
+              "Title": "Presupuesto.cs",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Presupuesto.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\Presupuesto.cs",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Presupuesto.cs",
+              "RelativeToolTip": "GestionDeGastos.AccesoADatos\\Entidades\\Presupuesto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T06:05:07.064Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "HomeServicio.cs",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\HomeServicio.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.Servicio\\HomeServicio.cs",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\HomeServicio.cs",
+              "RelativeToolTip": "GestionDeGastos.Servicio\\HomeServicio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T05:47:42.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsuarioRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
+              "RelativeToolTip": "GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwBoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T04:42:09.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "GestionDeGastos\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\HomeController.cs",
               "RelativeToolTip": "GestionDeGastos\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAqwBIAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAAB4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-26T06:30:40.439Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Ingreso\\Login.cshtml",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Ingreso\\Login.cshtml",
-              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Ingreso\\Login.cshtml",
-              "RelativeToolTip": "GestionDeGastos\\Views\\Ingreso\\Login.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-26T07:08:27.986Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Program.cs",
               "RelativeDocumentMoniker": "GestionDeGastos\\Program.cs",
               "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Program.cs",
               "RelativeToolTip": "GestionDeGastos\\Program.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAewDYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAEwBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:30:40.573Z"
+              "WhenOpened": "2025-10-26T06:30:40.573Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\appsettings.json",
-              "RelativeDocumentMoniker": "GestionDeGastos\\appsettings.json",
-              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\appsettings.json",
-              "RelativeToolTip": "GestionDeGastos\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-26T06:30:40.579Z"
+              "DocumentIndex": 4,
+              "Title": "Home.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Home\\Home.cshtml",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Home\\Home.cshtml",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Home\\Home.cshtml",
+              "RelativeToolTip": "GestionDeGastos\\Views\\Home\\Home.cshtml",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAEoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-28T06:28:36.156Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "IngresoController.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\IngresoController.cs",
               "RelativeDocumentMoniker": "GestionDeGastos\\Controllers\\IngresoController.cs",
               "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Controllers\\IngresoController.cs",
               "RelativeToolTip": "GestionDeGastos\\Controllers\\IngresoController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAEoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T07:09:33.881Z",
+              "WhenOpened": "2025-10-28T04:44:26.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PresupuestoRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\PresupuestoRepositorio.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.Repositorio\\PresupuestoRepositorio.cs",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\PresupuestoRepositorio.cs",
+              "RelativeToolTip": "GestionDeGastos.Repositorio\\PresupuestoRepositorio.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA7wA8AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T05:45:44.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PresupuestoViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Models\\PresupuestoViewModel.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Models\\PresupuestoViewModel.cs",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Models\\PresupuestoViewModel.cs",
+              "RelativeToolTip": "GestionDeGastos\\Models\\PresupuestoViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T06:16:05.381Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "UsuarioRepositorio.cs",
-              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
-              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
-              "RelativeToolTip": "GestionDeGastos.Repositorio\\UsuarioRepositorio.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAADwvyUAAAAHAAAAAAAAAA==",
+              "Title": "UsuarioServicio.cs",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\UsuarioServicio.cs",
+              "RelativeDocumentMoniker": "GestionDeGastos.Servicio\\UsuarioServicio.cs",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\UsuarioServicio.cs",
+              "RelativeToolTip": "GestionDeGastos.Servicio\\UsuarioServicio.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAowBcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:48:18.349Z"
+              "WhenOpened": "2025-10-26T06:49:29.753Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAABmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-26T06:51:49.629Z"
+              "DocumentIndex": 10,
+              "Title": "GestionDeGastos.Filtros",
+              "DocumentMoniker": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
+              "RelativeDocumentMoniker": "GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
+              "ToolTip": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
+              "RelativeToolTip": "GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-28T05:40:50.344Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\appsettings.json",
+              "RelativeDocumentMoniker": "GestionDeGastos\\appsettings.json",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\appsettings.json",
+              "RelativeToolTip": "GestionDeGastos\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-26T06:30:40.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Ingreso\\Register.cshtml",
               "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Ingreso\\Register.cshtml",
@@ -209,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "AutorizacionSession.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\AutorizacionSession.cs",
               "RelativeDocumentMoniker": "GestionDeGastos.Filtros\\AutorizacionSession.cs",
@@ -221,32 +290,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UsuarioServicio.cs",
-              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\UsuarioServicio.cs",
-              "RelativeDocumentMoniker": "GestionDeGastos.Servicio\\UsuarioServicio.cs",
-              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.Servicio\\UsuarioServicio.cs",
-              "RelativeToolTip": "GestionDeGastos.Servicio\\UsuarioServicio.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:49:29.753Z"
+              "DocumentIndex": 12,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "GestionDeGastos\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-26T06:51:49.629Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "GestionDeGastos.csproj",
-              "DocumentMoniker": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
-              "RelativeDocumentMoniker": "GestionDeGastos\\GestionDeGastos.csproj",
-              "ToolTip": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos\\GestionDeGastos.csproj",
-              "RelativeToolTip": "GestionDeGastos\\GestionDeGastos.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-26T06:30:40.563Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Gasto.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Gasto.cs",
               "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\Gasto.cs",
@@ -258,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "GestionDeGastos\\Properties\\launchSettings.json",
@@ -270,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "Categorium.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\Categorium.cs",
               "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\Categorium.cs",
@@ -282,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "CategoriaUsuario.cs",
               "DocumentMoniker": "C:\\Users\\Mati\\source\\repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\Entidades\\CategoriaUsuario.cs",
               "RelativeDocumentMoniker": "GestionDeGastos.AccesoADatos\\Entidades\\CategoriaUsuario.cs",

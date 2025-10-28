@@ -1,6 +1,3 @@
-
-
-
 using GestionDeGastos;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
@@ -20,8 +17,9 @@ options.UseSqlServer(connectionString));
 
 
 
-
+builder.Services.AddScoped<IHomeService, HomeServicio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();

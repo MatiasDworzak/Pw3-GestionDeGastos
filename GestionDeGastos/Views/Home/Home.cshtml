@@ -1,4 +1,7 @@
-﻿@* @model UsuarioViewModel *@
+﻿@* @model UsuarioViewModel
+    
+*@
+@model PresupuestoViewModel
 
 <div class="alert alert-success">@TempData["LoginExito"]</div>
 
@@ -66,10 +69,14 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h6 class="fw-bold mb-0">Presupuesto Actual</h6>
+
                 <a href="#" class="text-decoration-none text-end">Ver Presupuestos</a>
+                <p>Monto gastado: @Model.MontoActualGastado</p>
+                <p>Monto Presupuesto: @Model.MontoLimite</p>
             </div>
             <div class="progress mb-4" style="height: 25px;">
                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%;">25%</div>
+                
             </div>
 
 
