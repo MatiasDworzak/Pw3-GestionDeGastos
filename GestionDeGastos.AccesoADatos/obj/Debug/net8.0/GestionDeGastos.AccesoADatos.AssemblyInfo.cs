@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionDeGastos.AccesoADatos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef7ae1f8f4e4e261aa38cbe025e52962efad9225")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce68270132c94f721fb454be47677a1bd3e29e6f")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionDeGastos.AccesoADatos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionDeGastos.AccesoADatos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
