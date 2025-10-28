@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
+builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
+builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
 
 //cadena de conexion del appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
