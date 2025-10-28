@@ -1,0 +1,81 @@
+﻿@{
+
+}
+@model GastoEspecificoViewModel
+@*
+    Espacio para header
+*@
+
+<div> @*Contenedor general*@
+    <div class="container text-center"> @*Contenedor con datos genericos*@
+        <div class="row">
+            <div class="col-md-8 border border-danger"> @*Columna para datos escritos*@
+                <div class="row">
+                    <div class="col-md-6 bg-primary">
+                        @Model.Nombre
+                    </div>
+                    <div class="col-md-6 bg-secondary">
+                        @Model.Monto.ToString("C")
+                    </div>
+                    <div class="col-md-4 bg-danger">
+                        @Model.Categoria
+                    </div>
+                    <div class="col-md-4 bg-success">
+                        @Model.MetodoDePago
+                    </div>
+                    <div class="col-md-4 bg-warning">
+                        @Model.Fecha.ToShortDateString()
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 border border-primary"> @*Columna para foto*@
+                <img src="@Model.URLFoto" alt="Alternate Text"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="container"> @*Contenedor con items desplegados*@
+        @* @foreach (var item in Model.Items)
+        {
+            <div class="row">
+                <div class="col-md-1 bg-primary">
+                    @item.Cantidad
+                </div>
+                <div class="col-md-7 bg-danger">
+                    @item.Descripcion
+                </div>
+                <div class="col-md-2 bg-success">
+                    @item.PrecioUnitario.ToString("C")
+                </div>
+                <div class="col-md-2 bg-warning">
+                    @item.PrecioTotal.ToString("C")
+                </div>
+            </div>
+        } *@
+        @* <table class="table">
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Descripcion</th>
+                    <th>Precio Unitario</th>
+                    <th>Precio Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Cantidad</td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.PrecioUnitario.ToString("C")</td>
+                        <td>@item.PrecioTotal.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table> *@
+    </div>
+</div>
+
+@*
+    Espacio para footer
+*@

@@ -1,7 +1,17 @@
+using GestionDeGastos.AccesoADatos;
+using GestionDeGastos.Repositorio;
+using GestionDeGastos.Servicio.GastoEspecifico;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IGastoEspecificoRepositorio, GastoEspecificoRepositorio>();
+builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
 
 var app = builder.Build();
 
