@@ -24,6 +24,8 @@ options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
+builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 
