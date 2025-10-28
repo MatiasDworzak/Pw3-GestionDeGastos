@@ -42,23 +42,25 @@ namespace GestionDeGastos.Controllers
             _presupuestoServicio = presupuestoServicio;
         }
 
-        public IActionResult PresupuestoActual()
+        public async Task<IActionResult> PresupuestoActual()
         {
-            var ultimoPresupuesto = _presupuestoServicio.ObtenerPresupuestoActualAsync().Result;
-            IEnumerable<Presupuesto> listaPresupuestos = _presupuestoServicio.ObtenerTodosLosPresupuestosAsync().Result;
+            var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync();
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync();
 
             var modelo = new PresupuestoPaginaViewModel
             {
                 UltimoPresupuesto = new PresupuestoViewModel
                 {
                     MontoLimite = ultimoPresupuesto.MontoLimite,
-                    MontoActualGastado = ultimoPresupuesto.MontoActualGastado,
+                    MontoActualGastado = ultimoPresupuesto.MontoActualGastado
                 },
                 ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
                 {
                     MontoLimite = p.MontoLimite,
-                    MontoActualGastado = p.MontoActualGastado
-                }),
+                    MontoActualGastado = p.MontoActualGastado,
+                    Anio = p.Anio,
+                    Mes = p.Mes
+                }).ToList(),
                 PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje()
             };
 

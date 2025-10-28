@@ -18,14 +18,14 @@ namespace GestionDeGastos.Servicios
             _repositorio = repositorio;
         }
 
-        public async Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int id)
+        public async Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int IdPresupuesto)
         {
-            return await _repositorio.ObtenerPresupuestoPorId(id);
+            return await _repositorio.ObtenerPresupuestoPorId(IdPresupuesto);
         }
 
         public async Task<Presupuesto> ObtenerPresupuestoActualAsync()
         {
-           return await _repositorio.ObtenerPresupuestoPorId(1);
+           return await _repositorio.ObtenerUltimoPresupuestoAsync();
         }
 
         public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync()
