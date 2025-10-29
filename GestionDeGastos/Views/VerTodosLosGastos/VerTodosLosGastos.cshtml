@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Gastos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+
+        .left-panel {
+            flex: 1;
+            background-color: #1e2a47;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .right-panel {
+            flex: 1;
+            background-color: #f8f9fa;
+            color: black;
+            padding: 20px;
+            margin-left: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        .chart-container {
+            margin-bottom: 20px;
+        }
+
+        .pie-chart {
+            width: 100%;
+            height: 300px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .filters {
+            margin-top: 20px;
+        }
+
+        .filter {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .time-range {
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .time-range input {
+                width: 48%;
+            }
+
+        .expenses {
+            margin-top: 20px;
+        }
+
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            background-color: #c0c0c0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+            .expense-item span {
+                font-weight: bold;
+            }
+
+        .total-expenses {
+            margin-top: 30px;
+        }
+
+        .total-item {
+            display: flex;
+            justify-content: space-between;
+            background-color: #d0e6f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="chart-container">
+                <h2>TIEMPO ANALIZADO EN GRAFICO:</h2>
+                <p>dd/mm/aaaa - dd/mm/aaaa</p>
+                <div id="chart_div" class="pie-chart"></div> <!-- Aquí se dibuja el donut -->
+
+                <div class="filters">
+                    <div class="filter">
+                        <label for="month">Filtrar por Mes:</label>
+                        <select id="month">
+                            <option>Seleccionar Mes</option>
+                        </select>
+                    </div>
+                    <div class="filter">
+                        <label for="time-range">Filtrar por Tiempo:</label>
+                        <div class="time-range">
+                            <input type="date" id="start-date">
+                            <span>Hasta</span>
+                            <input type="date" id="end-date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2>TUS GASTOS</h2>
+            <!-- contenido de gastos -->
+        </div>
+    </div>
+
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawDonutChart);
+
+        function drawDonutChart() {
+            const data = google.visualization.arrayToDataTable([
+                ['Categoría', 'Monto'],
+                ['Comida', 4500],
+                ['Transporte', 2300],
+                ['Entretenimiento', 1800],
+                ['Ropa', 1000],
+                ['Otros', 700]
+            ]);
+
+            const options = {
+                pieHole: 0.5, // Esto hace que sea un donut
+                chartArea: { width: '90%', height: '90%' },
+                backgroundColor: 'transparent',
+                legend: { position: 'right', textStyle: { color: '#fff', fontSize: 12 } },
+                pieSliceText: 'label', // muestra las categorías en las porciones
+                colors: ['#ff6b6b', '#ffb84d', '#4da6ff', '#9b59b6', '#2ecc71']
+            };
+
+            const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

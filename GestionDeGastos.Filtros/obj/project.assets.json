@@ -4129,23 +4129,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mati\\.nuget\\packages\\": {},
+    "C:\\Users\\eze_t\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
+      "projectUniqueName": "C:\\Users\\eze_t\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
       "projectName": "GestionDeGastos.Filtros",
-      "projectPath": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
-      "packagesPath": "C:\\Users\\Mati\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\obj\\",
+      "projectPath": "C:\\Users\\eze_t\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\GestionDeGastos.Filtros.csproj",
+      "packagesPath": "C:\\Users\\eze_t\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\eze_t\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Filtros\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Mati\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\eze_t\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4154,7 +4154,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4200,7 +4199,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
