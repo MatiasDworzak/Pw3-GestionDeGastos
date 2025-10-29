@@ -44,10 +44,41 @@ namespace GestionDeGastos.Controllers
 
         public async Task<IActionResult> PresupuestoActual()
         {
-            var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync();
-            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync();
+             HttpContext.Session.SetInt32("UsuarioId", 1);
+            // prueba de session
 
-            var modelo = new PresupuestoPaginaViewModel
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            if (!idUsuarioLoguedo.HasValue)
+            {
+                return RedirectToAction("Login");
+            }
+
+            int idUsuario = idUsuarioLoguedo.Value;
+
+            var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
+
+            PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PresupuestoActual(Presupuesto presupuesto, decimal NuevoMonto)
+        {
+
+            Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(1);
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(1);
+
+            await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
+
+            PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+            return View(modelo);
+        }
+
+        private PresupuestoPaginaViewModel ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
+        {
+            return new PresupuestoPaginaViewModel
             {
                 UltimoPresupuesto = new PresupuestoViewModel
                 {
@@ -61,10 +92,8 @@ namespace GestionDeGastos.Controllers
                     Anio = p.Anio,
                     Mes = p.Mes
                 }).ToList(),
-                PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje()
+                PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje(1)
             };
-
-            return View(modelo);
         }
     }
 }

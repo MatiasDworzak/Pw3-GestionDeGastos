@@ -4,11 +4,11 @@ namespace GestionDeGastos.Repositorio
 {
     public interface IPresupuestoRepositorio
     {
-        Task<Presupuesto> ObtenerUltimoPresupuestoAsync();
-        Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync();
+        Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario);
+        Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario);
         Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto);
         Task CrearPresupuesto(Presupuesto presupuesto);
-        Task ActualizarPresupuesto(Presupuesto presupuesto);
+        Task ActualizarPresupuesto(Presupuesto presupuesto, decimal nuevoMonto);
 
     }
     public class PresupuestoRepositorio : IPresupuestoRepositorio
@@ -19,7 +19,7 @@ namespace GestionDeGastos.Repositorio
         {
             _context = context;
         }
-        public async Task ActualizarPresupuesto(Presupuesto presupuesto)
+        public async Task ActualizarPresupuesto(Presupuesto presupuesto, decimal nuevoMonto)
         {
             Presupuesto presupuestoEncontrado = await ObtenerPresupuestoPorId(presupuesto.IdPresupuesto);
 
@@ -27,6 +27,8 @@ namespace GestionDeGastos.Repositorio
             {
                 throw new Exception("Presupuesto no encontrado");
             }
+
+            presupuesto.MontoLimite = nuevoMonto;
 
             _context.Presupuestos.Update(presupuesto);
             await _context.SaveChangesAsync();
@@ -43,14 +45,20 @@ namespace GestionDeGastos.Repositorio
            return await _context.Presupuestos.FindAsync(IdPresupuesto);
         }
 
-        public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync()
+        public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario)
         {
-            return await _context.Presupuestos.ToListAsync();
+            //return await _context.Presupuestos.ToListAsync();
+            return await _context.Presupuestos
+                .Where(p => p.IdUsuario == idUsuario)
+                .OrderByDescending(p => p.Anio)
+                .ThenByDescending(p => p.Mes)
+                .ToListAsync();
         }
 
-        public async Task<Presupuesto> ObtenerUltimoPresupuestoAsync()
+        public async Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario)
         {
            return await _context.Presupuestos
+                .Where(p => p.IdUsuario == idUsuario)
                 .OrderByDescending(p => p.Anio)
                 .ThenByDescending(p => p.Mes)
                 .FirstOrDefaultAsync();
