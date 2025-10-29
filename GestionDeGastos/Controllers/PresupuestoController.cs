@@ -1,4 +1,5 @@
-﻿using GestionDeGastos.Models;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Models;
 using GestionDeGastos.Servicios;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,11 @@ namespace GestionDeGastos.Controllers
         public async Task<IActionResult> PresupuestoActual()
         {
             var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync();
+            if(ultimoPresupuesto == null)
+            //ver que onda 
+         {
+            return NotFound();
+         }
             IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync();
 
             var modelo = new PresupuestoPaginaViewModel

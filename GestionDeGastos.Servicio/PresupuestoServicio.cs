@@ -1,4 +1,5 @@
-﻿using GestionDeGastos.Repositorio;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Repositorio;
 
 namespace GestionDeGastos.Servicios
 {
