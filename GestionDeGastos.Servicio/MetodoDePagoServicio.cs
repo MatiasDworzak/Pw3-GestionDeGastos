@@ -1,4 +1,5 @@
-﻿using GestionDeGastos.Repositorio;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;

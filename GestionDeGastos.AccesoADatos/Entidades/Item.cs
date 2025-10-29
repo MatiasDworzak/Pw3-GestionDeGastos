@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GestionDeGastos;
+namespace GestionDeGastos.AccesoADatos.Entidades;
 
 public partial class Item
 {

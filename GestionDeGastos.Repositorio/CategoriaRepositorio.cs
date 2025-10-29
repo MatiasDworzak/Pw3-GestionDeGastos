@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeGastos.Repositorio
 {
@@ -19,7 +20,13 @@ namespace GestionDeGastos.Repositorio
         {
             // TODO: Luketo: Filtrar por idUsuario cuando la relacion este definida, por ahora solo esta devolviendo todas
 
-            return await _dbContext.Categoria.ToListAsync();
+            //return await _dbContext.Categoria.ToListAsync();
+
+
+            return await _dbContext.Categoria
+                                    .Where(c => !c.IdUsuarios.Any() ||
+                                                c.IdUsuarios.Any(u => u.IdUsuario == idUsuario))
+                                    .ToListAsync();
         }
     }
 }
