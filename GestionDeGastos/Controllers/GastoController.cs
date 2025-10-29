@@ -40,20 +40,7 @@ namespace GestionDeGastos.Controllers
                 OpcionTicketSeleccionada = "sin_ticket",
                 Fecha = DateOnly.FromDateTime(DateTime.Now), // analizar si es necesario
                 Categorias = categoriasSelect,
-                //new List<SelectListItem>
-                //{ // obtener de la db
-                //    new SelectListItem { Text = "Alimentos", Value = "1" },
-                //    new SelectListItem { Text = "Transporte", Value = "2" },
-                //    new SelectListItem { Text = "Entretenimiento", Value = "3" }
-                //},
                 MetodosDePago = metodosDePagoSelect,
-                //new List<SelectListItem>
-                //{ // obtener de la db
-                //    new SelectListItem { Text = "Efectivo", Value = "1" },
-                //    new SelectListItem { Text = "Tarjeta de Credito", Value = "2" },
-                //    new SelectListItem { Text = "Tarjeta de Debito", Value = "3" },
-                //    new SelectListItem { Text = "Otro", Value = "4" }
-                //},
                 Items = new List<AgregarGastoItemViewModel>() { new AgregarGastoItemViewModel() }
             };
 
