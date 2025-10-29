@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -6,6 +7,11 @@ using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Seguridad;
+=======
+using GestionDeGastos;
+using GestionDeGastos.Repositorio;
+using GestionDeGastos.Servicios;
+>>>>>>> Carli
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,12 +19,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Carli
 //cadena de conexion del appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
 options.UseSqlServer(connectionString));
 
+<<<<<<< HEAD
 
 
 
@@ -38,6 +48,10 @@ builder.Services.AddSession(options =>
 });
 
 
+=======
+builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
+builder.Services.AddScoped<IPresupuestoServicio, PresupuestoServicio>();
+>>>>>>> Carli
 
 var app = builder.Build();
 
