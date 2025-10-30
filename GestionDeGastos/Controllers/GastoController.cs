@@ -1,5 +1,6 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Models.Gasto;
+using GestionDeGastos.Models.Gasto.Enums;
 using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -25,7 +26,7 @@ namespace GestionDeGastos.Controllers
 
             AgregarGastoViewModel gastoVMDefault = new AgregarGastoViewModel
             {
-                OpcionTicketSeleccionada = "sin_ticket",
+                OpcionTicketSeleccionada = TipoTicket.SinTicket,
                 Fecha = DateOnly.FromDateTime(DateTime.Now),
                 Items = new List<AgregarGastoItemViewModel>() { new AgregarGastoItemViewModel() }
             };
@@ -53,14 +54,22 @@ namespace GestionDeGastos.Controllers
                     IdUsuario = 3, // valor hardcodeado, se tiene que sacar de la session
                     IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
                     IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
-                    // inserto mediante el objeto Navigation asi se generan al mismo tiempo en la BD
-                    IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido) // si no tiene items esto seria null y si los tiene subimos los items y la foto (que tambien si no tiene la foto sera null tambien)
+                    IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido)
                 };
 
-                
-                // await _gastoServicio.CrearGastoAsync(nuevoGasto, gastoVM.Items);
+                try
+                {
+                    gastoEntidad.IdTicketNavigation.RutaImagenBlob = "ruta_falsa_para_probar"; // await _servicioBlob.SubirFotoAsync(gastoVMRecibido.TicketFoto);
+                    //await _gastoServicio.AgregarGastoAsync(gastoEntidad, gastoVM.OpcionTicketSeleccionada);
 
-                return RedirectToAction("Index", "Home"); // O a donde quieras ir
+                    TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception ex) 
+                {
+                    TempData["ErrorEnSubida"] = ex.Message;
+                }
             }
 
             CargarCategoriasYMediosDePago(gastoVMRecibido);
@@ -71,7 +80,7 @@ namespace GestionDeGastos.Controllers
         // Metodos Helpers
         private void ProcesarValidacionesPorTipoDeTicket(AgregarGastoViewModel gastoVM)
         {
-            if (string.IsNullOrEmpty(gastoVM.OpcionTicketSeleccionada))
+            if (gastoVM.OpcionTicketSeleccionada == null)
             {
                 ModelState.AddModelError(nameof(gastoVM.OpcionTicketSeleccionada), "Debe seleccionar una opción de ticket.");
                 return;
@@ -79,16 +88,16 @@ namespace GestionDeGastos.Controllers
 
             switch (gastoVM.OpcionTicketSeleccionada)
             {
-                case "sin_ticket":
+                case TipoTicket.SinTicket:
                     BorrarDataAnnotationsDeAtributosDelModelState(["TicketFoto", "Items"]);
                     break;
 
-                case "ticket_manual":
+                case TipoTicket.TicketManual:
                     BorrarDataAnnotationsDeAtributosDelModelState(["TicketFoto"]);
                     ValidarMontoTotal(gastoVM);
                     break;
 
-                case "ticket_foto":
+                case TipoTicket.TicketFoto:
                     ValidarMontoTotal(gastoVM);
                     break;
 
@@ -136,14 +145,12 @@ namespace GestionDeGastos.Controllers
 
         private Ticket mapeoDeEntidadTicket(AgregarGastoViewModel gastoVM)
         {
-            if (gastoVM.OpcionTicketSeleccionada == "sin_ticket" 
+            if (gastoVM.OpcionTicketSeleccionada == TipoTicket.SinTicket 
                 || gastoVM.Items == null 
                 || gastoVM.Items.Count == 0) return null;
             
             return new Ticket
             {
-                // TODO: llamar al servicio blob para subir la foto y devolver el string de la ruta donde se guardo asi lo subimos a la base de datos
-                RutaImagenBlob = gastoVM.TicketFoto != null ? "LlamadoAlServicioBlob" : null,
                 Items = gastoVM.Items?.Select(i => new Item
                 {
                     Descripcion = i.Descripcion,

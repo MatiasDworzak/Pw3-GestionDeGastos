@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GestionDeGastos.Models.Gasto.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestionDeGastos.Models.Gasto
@@ -7,7 +8,7 @@ namespace GestionDeGastos.Models.Gasto
     {
         // Para recibir por parte del usuario
         [Required(ErrorMessage = "Debe seleccionar una opción de ticket.")]
-        public string OpcionTicketSeleccionada { get; set; }
+        public TipoTicket? OpcionTicketSeleccionada { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         public string Nombre { get; set; }
@@ -25,6 +26,7 @@ namespace GestionDeGastos.Models.Gasto
         [Required(ErrorMessage = "El método de pago es obligatorio.")]
         public int? MetodoDePagoSeleccionado { get; set;}
 
+        // faltaria validar el formato de la foto con un validador personalizado
         [Required(ErrorMessage = "La foto es obligatoria.")]
         public IFormFile? TicketFoto { get; set; }
 
