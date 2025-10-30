@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace GestionDeGastos.AccesoADatos;
+namespace GestionDeGastos;
 
 public partial class GestionDeGastosBdContext : DbContext
 {

@@ -1,4 +1,5 @@
-using GestionDeGastos.AccesoADatos;
+using GestionDeGastos;
+//using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio.GastoEspecifico;
 using Microsoft.EntityFrameworkCore;

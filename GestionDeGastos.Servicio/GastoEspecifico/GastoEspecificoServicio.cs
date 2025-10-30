@@ -1,4 +1,4 @@
-﻿using GestionDeGastos.AccesoADatos;
+﻿using GestionDeGastos;
 using GestionDeGastos.Repositorio;
 
 namespace GestionDeGastos.Servicio.GastoEspecifico
@@ -6,6 +6,10 @@ namespace GestionDeGastos.Servicio.GastoEspecifico
     public interface IGastoEspecificoServicio
     {
         Task<Gasto> ObtenerGastoPorID(int id);
+        Task<Categorium> ObtenerCategoriaDeUnGasto(Gasto gasto);
+        Task<MetodoDePago> ObtenerMetodoDePagoDeUnGasto(Gasto gasto);
+        Task<Ticket> ObtenerTicketDeUnGasto(Gasto gasto);
+        Task<List<Item>> ObtenerItemsDeUnGasto(Gasto gasto);
     }
 
     public class GastoEspecificoServicio : IGastoEspecificoServicio
@@ -20,6 +24,22 @@ namespace GestionDeGastos.Servicio.GastoEspecifico
         Task<Gasto> IGastoEspecificoServicio.ObtenerGastoPorID(int id)
         {
             return _repositorio.ObtenerGastoPorID(id);
+        }
+        Task<Categorium> IGastoEspecificoServicio.ObtenerCategoriaDeUnGasto(Gasto gasto)
+        {
+            return _repositorio.ObtenerCategoriaDeUnGasto(gasto);
+        }
+        Task<MetodoDePago> IGastoEspecificoServicio.ObtenerMetodoDePagoDeUnGasto(Gasto gasto)
+        {
+            return _repositorio.ObtenerMetodoDePagoDeUnGasto(gasto);
+        }
+        Task<Ticket> IGastoEspecificoServicio.ObtenerTicketDeUnGasto(Gasto gasto)
+        {
+            return _repositorio.ObtenerTicketDeUnGasto(gasto);
+        }
+        Task<List<Item>> IGastoEspecificoServicio.ObtenerItemsDeUnGasto(Gasto gasto)
+        {
+            return _repositorio.ObtenerItemsDeUnGasto(gasto);
         }
 
         //public GastoEspecificoViewModel ObtenerGastoPorID(int id)
