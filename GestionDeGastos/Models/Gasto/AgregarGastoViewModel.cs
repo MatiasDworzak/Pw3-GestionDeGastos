@@ -6,7 +6,7 @@ namespace GestionDeGastos.Models.Gasto
     public class AgregarGastoViewModel
     {
         // Para recibir por parte del usuario
-        [Required]
+        [Required(ErrorMessage = "Debe seleccionar una opción de ticket.")]
         public string OpcionTicketSeleccionada { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]

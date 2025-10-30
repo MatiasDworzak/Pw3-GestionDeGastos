@@ -20,89 +20,46 @@ namespace GestionDeGastos.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AgregarAsync()
+        public IActionResult Agregar()
         {
-
-            List<Categorium> categoriasEntidad = (await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(3)).ToList(); // valor hardcodeado, se tiene que sacar de la session 
-            List<SelectListItem> categoriasSelect = categoriasEntidad.Select(c => new SelectListItem
-            {
-                Text = c.Descripcion,
-                Value = c.IdCategoria.ToString()
-            }).ToList();
-
-            List<MetodoDePago> metodoDePagosEntidad = (await _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync()).ToList();
-            List<SelectListItem> metodosDePagoSelect = metodoDePagosEntidad.Select(m => new SelectListItem
-            {
-                Text = m.Descripcion,
-                Value = m.IdMetodoPago.ToString()
-            }).ToList();
 
             AgregarGastoViewModel gastoVMDefault = new AgregarGastoViewModel
             {
                 OpcionTicketSeleccionada = "sin_ticket",
-                Fecha = DateOnly.FromDateTime(DateTime.Now), // analizar si es necesario
-                Categorias = categoriasSelect,
-                MetodosDePago = metodosDePagoSelect,
+                Fecha = DateOnly.FromDateTime(DateTime.Now),
                 Items = new List<AgregarGastoItemViewModel>() { new AgregarGastoItemViewModel() }
             };
+
+            CargarCategoriasYMediosDePago(gastoVMDefault);
 
             return View(gastoVMDefault);
         }
 
         [HttpPost]
-        public IActionResult Agregar(AgregarGastoViewModel gastoVM)
+        public IActionResult Agregar(AgregarGastoViewModel gastoVMRecibido)
         {
-            // definir cuando evaluar el model state
+            ProcesarValidacionesPorTipoDeTicket(gastoVMRecibido);
 
-            // 2. si es sin ticket se deberian ignorar los data anottations de la lista de items del view model y disparar las del gasto, y pedirle al servicio hacer un subir un gasto sin ticket (ignoramos la lista si es que viene con una)
-
-            // 3. si es un ticket manual o ticket foto hay que disparar sus data anottations y tambien las de gasto, y se le deberia pedir al servicio realizar un item con ticket.
-            // el con o sin foto es indiferente, ambos van a poseer ticket y la foto se renderizara o no en el front si es que viene en null o no. 
-
-            // en el caso de que haya una falla se debe mostrar la vista de nuevo con lo que fallo y los datos que mando
-
-            //bool esConTicket = gastoVM.OpcionTicketSeleccionada == "ticket_manual" ||
-            //                   gastoVM.OpcionTicketSeleccionada == "ticket_foto";
-
-
-            // 1. LÓGICA DE VALIDACIÓN CONDICIONAL
-            if (gastoVM.OpcionTicketSeleccionada == "sin_ticket")
-            {
-                // Si no tiene ticket(ya sea manual o echo con foto, ignoramos las data anotattions de la foto y de los items)
-                var itemKeys = ModelState.Keys.Where(k => k.StartsWith("Items") || k.StartsWith("TicketFoto")).ToList();
-                foreach (var key in itemKeys) ModelState.Remove(key);
-            }
-            else
-            {
-                // Si tiene ticket ya sea por foto o manual, nos aseguramos de que el monto total
-                // coincida con la suma.
-                decimal montoCalculado = gastoVM.Items?.Sum(i => (i.Cantidad ?? 0) * (i.PrecioUnitario ?? 0)) ?? 0;
-                if (montoCalculado != gastoVM.MontoTotal) ModelState.AddModelError(nameof(gastoVM.MontoTotal), "El monto total debe ser igual a la sumatoria entre los precios de los items por su cantidad");
-
-                // Validación específica para "ticket_foto"
-                //if (gastoVM.OpcionTicketSeleccionada == "ticket_foto")
-                //{
-                //    if (gastoVM.TicketFoto == null || gastoVM.TicketFoto.Length == 0)
-                //    {
-                //        ModelState.AddModelError(nameof(gastoVM.TicketFoto), "Debes adjuntar una foto para la opción 'Ticket con Foto'.");
-                //    }
-                //}
-
-                if (gastoVM.OpcionTicketSeleccionada == "ticket_manual")
-                {
-                    // borramos solo las data anottations de la foto, porque en el manual no se necesita foto
-                    var itemKeys = ModelState.Keys.Where(k => k.StartsWith("TicketFoto")).ToList();
-                    foreach (var key in itemKeys) ModelState.Remove(key);
-                }
-            }
-            // 2. COMPROBACIÓN FINAL DEL MODELO: en este punto estan las data anotattions moldeadas al tipo de alta que se decidio en el formulario
             if (ModelState.IsValid)
             {
-                // ¡Validación exitosa!
                 // Aquí va tu lógica para:
                 // 1. Mapear 'gastoVM' a tus entidades de base de datos.
                 // 2. Si es 'ticket_foto', subir 'gastoVM.TicketFoto' al Blob Storage y guardar la URL.
                 // 3. Guardar el Gasto, el Ticket (si existe) y los Items (si existen) en la BD.
+
+                new Gasto()
+                {
+                    Nombre = gastoVMRecibido.Nombre,
+                    Fecha = gastoVMRecibido.Fecha,
+                    MontoTotal = gastoVMRecibido.MontoTotal.Value,
+                    // inserto mediante id porque ya existen en la BD
+                    IdUsuario = 3, // valor hardcodeado, se tiene que sacar de la session
+                    IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
+                    IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
+                    // inserto mediante el objeto Navigation asi se generan al mismo tiempo en la BD
+                    IdTicketNavigation = new Ticket()
+                    // falta terminar de mapear
+                };
 
                 // ej:
                 // var nuevoGasto = new Gasto { ... };
@@ -111,15 +68,75 @@ namespace GestionDeGastos.Controllers
                 return RedirectToAction("Index", "Home"); // O a donde quieras ir
             }
 
-            // 3. SI EL MODELO NO ES VÁLIDO
-            // Si llegamos aquí, algo falló. Volvemos a cargar la vista
-            // con los mensajes de error.
+            CargarCategoriasYMediosDePago(gastoVMRecibido);
 
-            // ¡Importante! Debemos recargar los DropDownLists.
-            
+            return View(gastoVMRecibido);
+        }
 
+        // Metodos Helpers
+        private void ProcesarValidacionesPorTipoDeTicket(AgregarGastoViewModel gastoVM)
+        {
+            if (string.IsNullOrEmpty(gastoVM.OpcionTicketSeleccionada))
+            {
+                ModelState.AddModelError(nameof(gastoVM.OpcionTicketSeleccionada), "Debe seleccionar una opción de ticket.");
+                return;
+            }
 
-            return View(gastoVM);
+            switch (gastoVM.OpcionTicketSeleccionada)
+            {
+                case "sin_ticket":
+                    BorrarDataAnnotationsDeAtributosDelModelState(["TicketFoto", "Items"]);
+                    break;
+
+                case "ticket_manual":
+                    BorrarDataAnnotationsDeAtributosDelModelState(["TicketFoto"]);
+                    ValidarMontoTotal(gastoVM);
+                    break;
+
+                case "ticket_foto":
+                    ValidarMontoTotal(gastoVM);
+                    break;
+
+                default:
+                    ModelState.AddModelError(nameof(gastoVM.OpcionTicketSeleccionada), "Opción de ticket no reconocida.");
+                    break;
+            }
+        }
+
+        private void ValidarMontoTotal(AgregarGastoViewModel gastoVM)
+        {
+            decimal montoCalculado = gastoVM.Items?.Sum(i => (i.Cantidad ?? 0) * (i.PrecioUnitario ?? 0)) ?? 0;
+
+            if (montoCalculado != gastoVM.MontoTotal)
+                ModelState.AddModelError(nameof(gastoVM.MontoTotal),
+                    "El monto total debe ser igual a la sumatoria entre los precios de los items por su cantidad.");
+        }
+
+        private void CargarCategoriasYMediosDePago(AgregarGastoViewModel gastoVM)
+        {
+            // TODO: Analizar si despues hacer view models de Categoria y Metodo de pago por si se agregan colores e iconos, recordar usar for en el front para mostrarlos
+            var categoriasEntidad = _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(3).Result; // valor hardcodeado, se tiene que sacar de la session 
+            gastoVM.Categorias = categoriasEntidad.Select(c => new SelectListItem
+            {
+                Text = c.Descripcion,
+                Value = c.IdCategoria.ToString()
+            }).ToList();
+
+            var metodosDePagoEntidad = _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync().Result;
+            gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new SelectListItem
+            {
+                Text = m.Descripcion,
+                Value = m.IdMetodoPago.ToString()
+            }).ToList();
+        }
+
+        private void BorrarDataAnnotationsDeAtributosDelModelState(string[] atributos)
+        {
+            foreach (var nombreDeAtributo in atributos)
+            {
+                var itemKeys = ModelState.Keys.Where(k => k.StartsWith(nombreDeAtributo)).ToList();
+                foreach (var key in itemKeys) ModelState.Remove(key);
+            }
         }
     }
 }

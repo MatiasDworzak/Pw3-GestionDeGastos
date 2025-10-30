@@ -23,6 +23,7 @@
 
                 <input class="form-check-input radio-con-section" type="radio" id="ticket-foto" asp-for="OpcionTicketSeleccionada" value="ticket_foto" />
                 <label class="form-check-label ms-1" for="ticket-foto">Agregar Ticket con Foto</label><br />
+                <span asp-validation-for="OpcionTicketSeleccionada" class="text-danger"></span>
             </div>
         </div>
         <div class="col-6 d-flex flex-column gap-2">
@@ -121,6 +122,6 @@
 </form>
 
 @section Scripts{
-    @* <partial name="_ValidationScriptsPartial" /> *@
+    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/GastoAgregar.js"></script>
 }
