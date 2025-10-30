@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionDeGastos.Servicio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a69b6f6e871c8da0558dc94c6b5dce4ad075852")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0730eba1068653500919ea1b97106f16ecf55cea")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionDeGastos.Servicio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionDeGastos.Servicio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

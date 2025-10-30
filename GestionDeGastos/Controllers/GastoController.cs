@@ -42,12 +42,9 @@ namespace GestionDeGastos.Controllers
 
             if (ModelState.IsValid)
             {
-                // Aquí va tu lógica para:
-                // 1. Mapear 'gastoVM' a tus entidades de base de datos.
-                // 2. Si es 'ticket_foto', subir 'gastoVM.TicketFoto' al Blob Storage y guardar la URL.
                 // 3. Guardar el Gasto, el Ticket (si existe) y los Items (si existen) en la BD.
 
-                new Gasto()
+                Gasto gastoEntidad = new Gasto()
                 {
                     Nombre = gastoVMRecibido.Nombre,
                     Fecha = gastoVMRecibido.Fecha,
@@ -57,12 +54,10 @@ namespace GestionDeGastos.Controllers
                     IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
                     IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
                     // inserto mediante el objeto Navigation asi se generan al mismo tiempo en la BD
-                    IdTicketNavigation = new Ticket()
-                    // falta terminar de mapear
+                    IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido) // si no tiene items esto seria null y si los tiene subimos los items y la foto (que tambien si no tiene la foto sera null tambien)
                 };
 
-                // ej:
-                // var nuevoGasto = new Gasto { ... };
+                
                 // await _gastoServicio.CrearGastoAsync(nuevoGasto, gastoVM.Items);
 
                 return RedirectToAction("Index", "Home"); // O a donde quieras ir
@@ -103,6 +98,15 @@ namespace GestionDeGastos.Controllers
             }
         }
 
+        private void BorrarDataAnnotationsDeAtributosDelModelState(string[] atributos)
+        {
+            foreach (var nombreDeAtributo in atributos)
+            {
+                var itemKeys = ModelState.Keys.Where(k => k.StartsWith(nombreDeAtributo)).ToList();
+                foreach (var key in itemKeys) ModelState.Remove(key);
+            }
+        }
+
         private void ValidarMontoTotal(AgregarGastoViewModel gastoVM)
         {
             decimal montoCalculado = gastoVM.Items?.Sum(i => (i.Cantidad ?? 0) * (i.PrecioUnitario ?? 0)) ?? 0;
@@ -130,13 +134,24 @@ namespace GestionDeGastos.Controllers
             }).ToList();
         }
 
-        private void BorrarDataAnnotationsDeAtributosDelModelState(string[] atributos)
+        private Ticket mapeoDeEntidadTicket(AgregarGastoViewModel gastoVM)
         {
-            foreach (var nombreDeAtributo in atributos)
+            if (gastoVM.OpcionTicketSeleccionada == "sin_ticket" 
+                || gastoVM.Items == null 
+                || gastoVM.Items.Count == 0) return null;
+            
+            return new Ticket
             {
-                var itemKeys = ModelState.Keys.Where(k => k.StartsWith(nombreDeAtributo)).ToList();
-                foreach (var key in itemKeys) ModelState.Remove(key);
-            }
+                // TODO: llamar al servicio blob para subir la foto y devolver el string de la ruta donde se guardo asi lo subimos a la base de datos
+                RutaImagenBlob = gastoVM.TicketFoto != null ? "LlamadoAlServicioBlob" : null,
+                Items = gastoVM.Items?.Select(i => new Item
+                {
+                    Descripcion = i.Descripcion,
+                    Cantidad = i.Cantidad.Value,
+                    PrecioUnitario = i.PrecioUnitario.Value,
+                    PrecioTotal = i.Cantidad.Value * i.PrecioUnitario.Value
+                }).ToList()
+            };
         }
     }
 }
