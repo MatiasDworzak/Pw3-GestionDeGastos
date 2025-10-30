@@ -9,40 +9,44 @@ namespace GestionDeGastos.Models.Gasto
         [Required]
         public string OpcionTicketSeleccionada { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El nombre es obligatorio.")]
         public string Nombre { get; set; }
 
-        [Required]
-        [Range(0.01, double.MaxValue)]
+        [Required(ErrorMessage = "El monto es obligatorio.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El monto debe ser mayor a 0.")]
         public decimal? MontoTotal { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La fecha es obligatoria.")]
         public DateOnly Fecha { get; set; }
 
-        [Required]
-        public int CategoriaSeleccionada { get; set; }
+        [Required(ErrorMessage = "La categoría es obligatoria.")]
+        public int? CategoriaSeleccionada { get; set; }
 
-        [Required]
-        public int MetodoDePagoSeleccionado { get; set;}
-        // necesitaria ver en que formato mandar la imagen al backend para que la guarde en el blob
-        // public IFormFile TicketFoto { get; set; }
+        [Required(ErrorMessage = "El método de pago es obligatorio.")]
+        public int? MetodoDePagoSeleccionado { get; set;}
+
+        [Required(ErrorMessage = "La foto es obligatoria.")]
+        public IFormFile? TicketFoto { get; set; }
 
         // Para enviar al usuario
-        public List<SelectListItem> Categorias { get; set; }
-        public List<SelectListItem> MetodosDePago { get; set; }
+        public List<SelectListItem>? Categorias { get; set; }
+        public List<SelectListItem>? MetodosDePago { get; set; }
 
         // Para que el usuario envie y reciba
-        public List<AgregarGastoItemViewModel> Items { get; set; }
+        public List<AgregarGastoItemViewModel>? Items { get; set; }
     }
 
     public class AgregarGastoItemViewModel
     {
-        public string Descripcion { get; set; }
+        [Required(ErrorMessage = "La descripción del item es obligatoria.")]
+        public string? Descripcion { get; set; }
 
-        [Range(1, int.MaxValue)]
-        public int Cantidad { get; set; }
+        [Required(ErrorMessage = "La cantidad es obligatoria.")]
+        [Range(1, int.MaxValue, ErrorMessage = "La cantidad debe ser al menos 1.")]
+        public int? Cantidad { get; set; }
 
-        [Range(0.01, double.MaxValue)]
-        public decimal PrecioUnitario { get; set; }
+        [Required(ErrorMessage = "El precio unitario es obligatorio.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor a 0.")]
+        public decimal? PrecioUnitario { get; set; }
     }
 }
