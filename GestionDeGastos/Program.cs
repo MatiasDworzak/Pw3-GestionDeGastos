@@ -19,6 +19,7 @@ options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IHomeService, HomeServicio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
 builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();

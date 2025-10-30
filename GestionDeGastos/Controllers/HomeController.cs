@@ -23,11 +23,11 @@ namespace GestionDeGastos.Controllers
 
         public async Task<IActionResult> Home()
         {
-            var p = await _homeService.ObtenerPresupuestoPorIdAsync(1);
-            var modelo = new PresupuestoViewModel { MontoActualGastado = p.MontoActualGastado,
-                MontoLimite = p.MontoLimite};
+            
+            var lista = await _homeService.ObtenerUltimosTresGastosPorIdDeUsuario(1);
+            var modelo = new GastoViewModel {Porcentaje = _homeService.ObtenerPresupuestoConPorcentaje(1), ListaUltimosTresGastos = lista};
            
-            return View(modelo);         
+            return  View(modelo);         
         }
 
        

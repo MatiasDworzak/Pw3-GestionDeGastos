@@ -1,16 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeGastos.Repositorio
 {
     public interface IPresupuestoRepositorio
     {
         //Task<Presupuesto> ObtenerUltimoPresupuestoAsync();
+
+
         Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync();
         Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto);
         Task CrearPresupuesto(Presupuesto presupuesto);
         Task ActualizarPresupuesto(Presupuesto presupuesto);
-
+        Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario);
         Task<Presupuesto?> GetByIdAsync(int id);
     }
     public class PresupuestoRepositorio : IPresupuestoRepositorio
@@ -34,6 +36,8 @@ namespace GestionDeGastos.Repositorio
             await _context.SaveChangesAsync();
         }
 
+        
+
         public async Task CrearPresupuesto(Presupuesto presupuesto)
         {
             _context.Presupuestos.Add(presupuesto);
@@ -54,13 +58,14 @@ namespace GestionDeGastos.Repositorio
             return await _context.Presupuestos.ToListAsync();
         }
 
-        //    public async Task<Presupuesto> ObtenerUltimoPresupuestoAsync()
-        //    {
-        //        return await _context.Presupuestos
-        //             .OrderByDescending(p => p.Anio)
-        //             .ThenByDescending(p => p.Mes)
-        //             .FirstOrDefaultAsync();
-        //    }
-        
+        public async Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario)
+        {
+            return await _context.Presupuestos
+                 .Where(p => p.IdUsuario == idUsuario)
+                 .OrderByDescending(p => p.Anio)
+                 .ThenByDescending(p => p.Mes)
+                 .FirstOrDefaultAsync();
+        }
+
     }
 }

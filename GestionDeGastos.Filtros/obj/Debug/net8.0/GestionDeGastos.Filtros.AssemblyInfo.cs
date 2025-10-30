@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionDeGastos.Filtros")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62aab2a50ebe5a5f010ea983ce5249e09b2f8f45")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73df20315fa295c8a0a65ec2682f03a42bf201b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionDeGastos.Filtros")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionDeGastos.Filtros")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
