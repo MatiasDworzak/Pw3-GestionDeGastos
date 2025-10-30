@@ -1,4 +1,4 @@
-﻿using GestionDeGastos.Models.Gasto.Enums;
+﻿using GestionDeGastos.Servicio.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 

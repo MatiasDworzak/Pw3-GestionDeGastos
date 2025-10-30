@@ -1,4 +1,4 @@
-﻿namespace GestionDeGastos.Models.Gasto.Enums
+﻿namespace GestionDeGastos.Servicio.Enums
 {
     // Analizar si mover a otro lado
     public enum TipoTicket

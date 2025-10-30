@@ -1,4 +1,5 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Servicio.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace GestionDeGastos.Servicio
 {
     public interface IGastoServicio
     {
-        void AgregarGastoAsync(Gasto gasto, string tipoDeGasto);
+        void AgregarGastoAsync(Gasto gasto, TipoTicket tipoDeGasto);
     }
     public class GastoServicio : IGastoServicio
     {
-        public void AgregarGastoAsync(Gasto gasto, string tipoDeGasto)
+        public void AgregarGastoAsync(Gasto gasto, TipoTicket tipoDeGasto)
         {
         }
     }

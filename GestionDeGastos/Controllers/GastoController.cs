@@ -1,7 +1,7 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Models.Gasto;
-using GestionDeGastos.Models.Gasto.Enums;
 using GestionDeGastos.Servicio;
+using GestionDeGastos.Servicio.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -59,7 +59,11 @@ namespace GestionDeGastos.Controllers
 
                 try
                 {
-                    gastoEntidad.IdTicketNavigation.RutaImagenBlob = "ruta_falsa_para_probar"; // await _servicioBlob.SubirFotoAsync(gastoVMRecibido.TicketFoto);
+                    if (gastoEntidad.IdTicketNavigation != null)
+                        // await _servicioBlob.SubirFotoAsync(gastoVMRecibido.TicketFoto);
+                        gastoEntidad.IdTicketNavigation.RutaImagenBlob = "ruta_falsa_para_probar"; 
+
+
                     //await _gastoServicio.AgregarGastoAsync(gastoEntidad, gastoVM.OpcionTicketSeleccionada);
 
                     TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
