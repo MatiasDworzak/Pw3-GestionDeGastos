@@ -1,6 +1,6 @@
 ﻿using GestionDeGastos.Repositorio;
 
-namespace GestionDeGastos.Servicios
+namespace GestionDeGastos.Servicio
 {
     public interface IPresupuestoServicio
     {

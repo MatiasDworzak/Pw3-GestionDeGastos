@@ -1,5 +1,5 @@
 ﻿using GestionDeGastos.Models;
-using GestionDeGastos.Servicios;
+using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeGastos.Controllers
@@ -70,7 +70,7 @@ namespace GestionDeGastos.Controllers
 
         private int ObtenerUsuarioLogueado()
         {
-            HttpContext.Session.SetInt32("UsuarioId", 1);
+            //HttpContext.Session.SetInt32("UsuarioId", 1);
             // Para prueba de session
 
             int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
@@ -80,6 +80,9 @@ namespace GestionDeGastos.Controllers
 
         private PresupuestoPaginaViewModel ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
         {
+
+            int idUsuario = ObtenerUsuarioLogueado();
+
             return new PresupuestoPaginaViewModel
             {
                 UltimoPresupuesto = new PresupuestoViewModel
@@ -94,7 +97,7 @@ namespace GestionDeGastos.Controllers
                     Anio = p.Anio,
                     Mes = p.Mes
                 }).ToList(),
-                PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje(1)
+                PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario)
             };
         }
 
