@@ -1,4 +1,7 @@
-﻿@* @model UsuarioViewModel *@
+﻿@* @model UsuarioViewModel
+    
+*@
+@model GastoViewModel
 
 <div class="alert alert-success">@TempData["LoginExito"]</div>
 
@@ -43,6 +46,7 @@
                 <!-- Contenedor para el top 3 (solo visible en gráfico de torta) -->
                 <div id="topCategorias" class="mt-3 text-center d-none">
                     <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                    
                     <div class="d-flex justify-content-around">
                         <div>
                             <div class="rounded-circle mx-auto mb-1" style="width:40px;height:40px;background:#ff6b6b;"></div>
@@ -66,10 +70,13 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h6 class="fw-bold mb-0">Presupuesto Actual</h6>
+
                 <a href="#" class="text-decoration-none text-end">Ver Presupuestos</a>
+                
             </div>
             <div class="progress mb-4" style="height: 25px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;">25%</div>
+                <div class="progress-bar bg-success" role="progressbar" style="width: 20%;">@Model.Porcentaje</div>
+                
             </div>
 
 
@@ -98,18 +105,15 @@
                 <a href="#" class="text-decoration-none text-end">Ver todos mis gastos</a>
             </div>
             <div class="list-group">
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Panadería <small class="text-muted">Hace 2 horas</small></span>
-                    <span class="text-danger fw-semibold">-$400.00</span>
-                </div>
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Carrefour <small class="text-muted">Hace 1 día</small></span>
-                    <span class="text-danger fw-semibold">-$7250.00</span>
-                </div>
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Chino barrio <small class="text-muted">Hace 1 semana</small></span>
-                    <span class="text-danger fw-semibold">-$3800.00</span>
-                </div>
+                @foreach (var gasto in Model.ListaUltimosTresGastos)
+                {
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <span> @gasto.Nombre <small class="text-muted">Hace 2 horas</small></span>
+                        <span class="text-danger fw-semibold">@gasto.MontoTotal</span>
+                    </div>
+
+                }
+             
             </div>
         </div>
 

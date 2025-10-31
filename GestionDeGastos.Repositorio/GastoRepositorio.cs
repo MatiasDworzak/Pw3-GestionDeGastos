@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 
+
+
 namespace GestionDeGastos.Repositorio
 {
-        public interface IGastoRepositorio
-        {
+    public interface IGastoRepositorio
+    {
+
 
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
         Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
