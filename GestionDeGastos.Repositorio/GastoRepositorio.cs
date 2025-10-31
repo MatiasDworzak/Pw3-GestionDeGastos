@@ -5,53 +5,58 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+
+
+
 namespace GestionDeGastos.Repositorio
 {
     public interface IGastoRepositorio
     {
-        //Task<Gasto> ObtenerUltimoGastoAsync();
+
 
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
         Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
         Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
 
-        Task<Gasto> ObtenerGastoPorId(int IdGasto);
-        Task CrearGasto(Gasto Gasto);
-        Task ActualizarGasto(Gasto Gasto);
+        Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
 
-    }
-    public class GastoRepositorio : IGastoRepositorio
-    {
-        private readonly GestionDeGastosBdContext _context;
+            Task<Gasto> ObtenerGastoPorId(int IdGasto);
+            Task CrearGasto(Gasto Gasto);
+            Task ActualizarGasto(Gasto Gasto);
 
-        public GastoRepositorio(GestionDeGastosBdContext context)
-        {
-            _context = context;
         }
-        public async Task ActualizarGasto(Gasto Gasto)
+        public class GastoRepositorio : IGastoRepositorio
         {
-            Gasto GastoEncontrado = await ObtenerGastoPorId(Gasto.IdGasto);
+            private readonly GestionDeGastosBdContext _context;
 
-            if (GastoEncontrado == null)
+            public GastoRepositorio(GestionDeGastosBdContext context)
             {
-                throw new Exception("Gasto no encontrado");
+                _context = context;
+            }
+            public async Task ActualizarGasto(Gasto Gasto)
+            {
+                Gasto GastoEncontrado = await ObtenerGastoPorId(Gasto.IdGasto);
+
+                if (GastoEncontrado == null)
+                {
+                    throw new Exception("Gasto no encontrado");
+                }
+
+                _context.Gastos.Update(Gasto);
+                await _context.SaveChangesAsync();
             }
 
-            _context.Gastos.Update(Gasto);
-            await _context.SaveChangesAsync();
-        }
+            public async Task CrearGasto(Gasto Gasto)
+            {
+                _context.Gastos.Add(Gasto);
+                await _context.SaveChangesAsync();
+            }
 
-        public async Task CrearGasto(Gasto Gasto)
-        {
-            _context.Gastos.Add(Gasto);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
-        {
-            return await _context.Gastos.FindAsync(IdGasto);
-        }
+            public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
+            {
+                return await _context.Gastos.FindAsync(IdGasto);
+            }
 
         public async Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario)
         {
@@ -78,6 +83,7 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
+
         public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin)
         {
             return await _context.Gastos
@@ -85,9 +91,42 @@ namespace GestionDeGastos.Repositorio
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }
+
+
+
+        public async Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario)
+        {
+            return await _context.Gastos
+                 .Where(g => g.IdUsuario == idUsuario)
+                .Include(g => g.IdCategoriaNavigation)
+                .GroupBy(g => new
+                {
+                    g.IdCategoria,
+                    g.IdCategoriaNavigation.Descripcion
+                })
+                .Select(grupo => new Gasto
+                {
+                    IdCategoria = grupo.Key.IdCategoria,
+                    IdCategoriaNavigation = new Categorium
+                    {
+                        IdCategoria = grupo.Key.IdCategoria,
+                        Descripcion = grupo.Key.Descripcion
+                    },
+                    MontoTotal = grupo.Sum(g => g.MontoTotal)
+                })
+                .OrderBy(g => g.IdCategoriaNavigation.Descripcion)
+                .ToListAsync();
+        }
+
+
     }
 
 
 
 
-}
+    }
+
+
+
+
+

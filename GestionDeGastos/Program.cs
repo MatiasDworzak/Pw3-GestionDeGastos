@@ -24,6 +24,8 @@ builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
+builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>();
+builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
 
 //Habilitar sesiones
 builder.Services.AddSession(options =>
