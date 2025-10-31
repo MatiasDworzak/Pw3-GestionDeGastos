@@ -81,7 +81,7 @@ namespace GestionDeGastos.Controllers
                     TempData["ErrorEnSubida"] = ex.Message;
                 }
             }
-
+                
             await CargarCategoriasYMediosDePago(gastoVMRecibido);
 
             return View(gastoVMRecibido);
