@@ -23,7 +23,7 @@ namespace GestionDeGastos.Controllers
         }
 
         [HttpGet]
-        public IActionResult Agregar()
+        public async Task<IActionResult> Agregar()
         {
 
             AgregarGastoViewModel gastoVMDefault = new AgregarGastoViewModel
@@ -33,13 +33,13 @@ namespace GestionDeGastos.Controllers
                 Items = new List<AgregarGastoItemViewModel>() { new AgregarGastoItemViewModel() }
             };
 
-            CargarCategoriasYMediosDePago(gastoVMDefault);
+            await CargarCategoriasYMediosDePago(gastoVMDefault);
 
             return View(gastoVMDefault);
         }
 
         [HttpPost]
-        public IActionResult Agregar(AgregarGastoViewModel gastoVMRecibido)
+        public async Task<IActionResult> Agregar(AgregarGastoViewModel gastoVMRecibido)
         {
             ProcesarValidacionesPorTipoDeTicket(gastoVMRecibido);
 
@@ -61,12 +61,13 @@ namespace GestionDeGastos.Controllers
 
                 try
                 {
-                    if (gastoEntidad.IdTicketNavigation != null)
+                    if (gastoEntidad.IdTicketNavigation != null 
+                        && gastoVMRecibido.OpcionTicketSeleccionada == TipoTicket.TicketFoto)
                         // await _servicioBlob.SubirFotoAsync(gastoVMRecibido.TicketFoto);
                         gastoEntidad.IdTicketNavigation.RutaImagenBlob = "ruta_falsa_para_probar"; 
 
 
-                    _gastoServicio.AgregarGastoAsync(gastoEntidad);
+                    await _gastoServicio.AgregarGastoAsync(gastoEntidad);
 
                     TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
 
@@ -81,7 +82,7 @@ namespace GestionDeGastos.Controllers
                 }
             }
 
-            CargarCategoriasYMediosDePago(gastoVMRecibido);
+            await CargarCategoriasYMediosDePago(gastoVMRecibido);
 
             return View(gastoVMRecibido);
         }

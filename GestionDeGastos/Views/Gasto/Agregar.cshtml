@@ -6,6 +6,15 @@
 
 
 <h3 class="text-center">Agregar Gasto</h3>
+@{
+    if (TempData["ErrorEnSubida"] != null)
+    {
+        <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorEnSubida"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+}
 
 <form id="form-agregar-gasto" asp-action="Agregar" method="post" enctype="multipart/form-data">
     <h4>Detalles del gasto</h4>
