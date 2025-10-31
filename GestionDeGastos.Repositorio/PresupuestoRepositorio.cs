@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeGastos.Repositorio
 {
@@ -9,6 +10,7 @@ namespace GestionDeGastos.Repositorio
         Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto);
         Task CrearPresupuesto(Presupuesto presupuesto);
         Task ActualizarPresupuesto(Presupuesto presupuesto, decimal nuevoMonto);
+        Task<Presupuesto?> GetByIdAsync(int id);
 
     }
     public class PresupuestoRepositorio : IPresupuestoRepositorio
@@ -42,7 +44,7 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto)
         {
-           return await _context.Presupuestos.FindAsync(IdPresupuesto);
+            return await _context.Presupuestos.FindAsync(IdPresupuesto);
         }
 
         public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario)
@@ -55,13 +57,17 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
+        public async Task<Presupuesto?> GetByIdAsync(int id)
+        => await _context.Presupuestos.FindAsync(id);
+
         public async Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario)
         {
-           return await _context.Presupuestos
-                .Where(p => p.IdUsuario == idUsuario)
-                .OrderByDescending(p => p.Anio)
-                .ThenByDescending(p => p.Mes)
-                .FirstOrDefaultAsync();
+            return await _context.Presupuestos
+                 .Where(p => p.IdUsuario == idUsuario)
+                 .OrderByDescending(p => p.Anio)
+                 .ThenByDescending(p => p.Mes)
+                 .FirstOrDefaultAsync();
         }
+
     }
 }

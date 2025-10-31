@@ -1,0 +1,86 @@
+﻿@model RegistroViewModel
+@{
+    ViewData["Title"] = "Registro";
+}
+
+
+<div class="container-fluid vh-100">
+
+    <!--Columna izquierda de imagen-->
+    <div class="row h-100">
+        <div class="col-md-6 d-none d-md-block p-0"
+             style="background-image: url('@Url.Content("~/img/Ingreso/RegistroImagen.jpg")');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+       
+            <div class="h-100 d-flex align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.3);">
+                <div class="text-center text-white p-5">
+                    <h2 class="fw-bold">Únete a AhorrApp</h2>
+                    <p class="lead">Comienza a ahorrar hoy mismo</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Columna derecha - Formulario -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
+            <div class="w-75" style="max-width: 400px;">
+                <h1 class="text-dark text-center mb-4 fw-bold">¡Regístrate!</h1>
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <form asp-action="Register" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label text-secondary">Nombre</label>
+                        <input asp-for="Nombre" class="form-control form-control-lg" placeholder="Juan Pérez" />
+                        <span asp-validation-for="Nombre" class="text-danger d-block mt-1 small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Correo" class="form-label text-secondary">Correo Electrónico</label>
+                        <input asp-for="Correo" class="form-control form-control-lg" placeholder="tu@email.com" />
+                        <span asp-validation-for="Correo" class="text-danger d-block mt-1 small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Contrasenia" class="form-label text-secondary">Contraseña</label>
+                        <input asp-for="Contrasenia" type="password" class="form-control form-control-lg" placeholder="••••••••" />
+                        <span asp-validation-for="Contrasenia" class="text-danger d-block mt-1 small"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ConfirmarContrasenia" class="form-label text-secondary">Confirmar Contraseña</label>
+                        <input asp-for="ConfirmarContrasenia" type="password" class="form-control form-control-lg" placeholder="••••••••" />
+                        <span asp-validation-for="ConfirmarContrasenia" class="text-danger d-block mt-1 small"></span>
+                    </div>
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #3498db; border: none;">
+                            Registrate
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-secondary">¿Ya tienes una cuenta? <a asp-action="Login" class="text-decoration-none fw-semibold" style="color: #3498db;">Inicia Sesión</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    }
+
+    .btn-primary:hover {
+        background-color: #2980b9 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
