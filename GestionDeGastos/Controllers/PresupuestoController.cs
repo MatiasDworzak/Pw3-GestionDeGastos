@@ -44,16 +44,7 @@ namespace GestionDeGastos.Controllers
 
         public async Task<IActionResult> PresupuestoActual()
         {
-             HttpContext.Session.SetInt32("UsuarioId", 1);
-            // prueba de session
-
-            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
-            if (!idUsuarioLoguedo.HasValue)
-            {
-                return RedirectToAction("Login");
-            }
-
-            int idUsuario = idUsuarioLoguedo.Value;
+            int idUsuario = ObtenerUsuarioLogueado();
 
             var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
             IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
@@ -66,14 +57,25 @@ namespace GestionDeGastos.Controllers
         [HttpPost]
         public async Task<IActionResult> PresupuestoActual(Presupuesto presupuesto, decimal NuevoMonto)
         {
+            int idUsuario = ObtenerUsuarioLogueado();
 
-            Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(1);
-            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(1);
+            Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
             await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
 
             PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
             return View(modelo);
+        }
+
+        private int ObtenerUsuarioLogueado()
+        {
+            HttpContext.Session.SetInt32("UsuarioId", 1);
+            // Para prueba de session
+
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            int idUsuario = idUsuarioLoguedo.Value;
+            return idUsuario;
         }
 
         private PresupuestoPaginaViewModel ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
@@ -95,5 +97,12 @@ namespace GestionDeGastos.Controllers
                 PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje(1)
             };
         }
+
+        //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
+        //{
+        //    var detalleGastos = _gastoServicio.ObtenerGastosPorMesYAnio(mes, anio);
+
+        //    return View("VerTodos");
+        //}
     }
 }

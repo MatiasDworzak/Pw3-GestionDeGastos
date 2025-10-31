@@ -64,8 +64,10 @@
                     <td>@presupuesto.Mes / @presupuesto.Anio</td>
                     <td>@($"{presupuesto.MontoLimite:C}")</td>
                     <td>@($"{presupuesto.MontoActualGastado:C}")</td>
-                    <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto">Ver gastos</a></td>
-                </tr>
+                    <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto" asp-route-mes="@presupuesto.Mes" asp-route-anio="@presupuesto.Anio">Ver gasto</a></td>
+
+@*                     <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto">Ver gastos</a></td>
+ *@                </tr>
             }
         </tbody>
     </table>
