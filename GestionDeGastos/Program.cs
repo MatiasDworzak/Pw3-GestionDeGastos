@@ -1,7 +1,39 @@
+using GestionDeGastos;
+using GestionDeGastos.Repositorio;
+using GestionDeGastos.Servicio;
+using GestionDeGastos.Servicio.Seguridad;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+//cadena de conexion del appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
+options.UseSqlServer(connectionString));
+
+
+
+builder.Services.AddScoped<IHomeService, HomeServicio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
+builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
+builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
+builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
+builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
+
+//Habilitar sesiones
+builder.Services.AddSession(options =>
+{
+   options.IdleTimeout = TimeSpan.FromMinutes(30);
+   options.Cookie.HttpOnly = true;
+   options.Cookie.IsEssential = true;
+});
+
+
 
 var app = builder.Build();
 
@@ -17,11 +49,18 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
 
 app.UseAuthorization();
 
+
+//validar que el usuario no pueda acceder al Home si no esta registrado o con la sesion iniciada,
+//deberia ir a Home/Inicio
+//por ahora Ingreso/Register
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Home}/{id?}");
 
 app.Run();
