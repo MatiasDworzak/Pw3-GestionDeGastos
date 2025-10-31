@@ -53,7 +53,7 @@ namespace GestionDeGastos.Controllers
                     Fecha = gastoVMRecibido.Fecha,
                     MontoTotal = gastoVMRecibido.MontoTotal.Value,
                     // inserto mediante id porque ya existen en la BD
-                    IdUsuario = 4, // valor hardcodeado, se tiene que sacar de la session
+                    IdUsuario = ObtenerUsuarioLogueado(),
                     IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
                     IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
                     IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido)
@@ -88,6 +88,13 @@ namespace GestionDeGastos.Controllers
         }
 
         // Metodos Helpers
+
+        private int ObtenerUsuarioLogueado()
+        {
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            int idUsuario = idUsuarioLoguedo.Value;
+            return idUsuario;
+        }
         private void ProcesarValidacionesPorTipoDeTicket(AgregarGastoViewModel gastoVM)
         {
             if (gastoVM.OpcionTicketSeleccionada == null)
@@ -138,7 +145,7 @@ namespace GestionDeGastos.Controllers
         private async Task CargarCategoriasYMediosDePago(AgregarGastoViewModel gastoVM)
         {
             // TODO: Analizar si despues hacer view models de Categoria y Metodo de pago por si se agregan colores e iconos, recordar usar for en el front para mostrarlos
-            var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(4); // valor hardcodeado, se tiene que sacar de la session 
+            var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(ObtenerUsuarioLogueado()); // valor hardcodeado, se tiene que sacar de la session 
             gastoVM.Categorias = categoriasEntidad.Select(c => new SelectListItem
             {
                 Text = c.Descripcion,
