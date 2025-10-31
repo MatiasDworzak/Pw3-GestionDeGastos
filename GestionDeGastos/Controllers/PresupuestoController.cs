@@ -1,4 +1,5 @@
-﻿using GestionDeGastos.Models;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Models;
 using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
 

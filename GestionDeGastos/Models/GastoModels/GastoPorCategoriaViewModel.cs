@@ -1,4 +1,7 @@
-﻿namespace GestionDeGastos.Models
+﻿
+using GestionDeGastos.AccesoADatos.Entidades;
+
+namespace GestionDeGastos.Models.GastoModels
 {
     public class GastoPorCategoriaViewModel
     {

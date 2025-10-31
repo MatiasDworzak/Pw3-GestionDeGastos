@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace GestionDeGastos.Models.Gasto
+namespace GestionDeGastos.Models.GastoModels
 {
     public class AgregarGastoViewModel
     {

@@ -1,5 +1,5 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
-using GestionDeGastos.Models.Gasto;
+using GestionDeGastos.Models.GastoModels;
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +53,7 @@ namespace GestionDeGastos.Controllers
                     Fecha = gastoVMRecibido.Fecha,
                     MontoTotal = gastoVMRecibido.MontoTotal.Value,
                     // inserto mediante id porque ya existen en la BD
-                    IdUsuario = 3, // valor hardcodeado, se tiene que sacar de la session
+                    IdUsuario = 4, // valor hardcodeado, se tiene que sacar de la session
                     IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
                     IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
                     IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido)
@@ -71,7 +71,7 @@ namespace GestionDeGastos.Controllers
 
                     TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Home", "Home");
                 }
                 catch (Exception ex) 
                 {
@@ -138,7 +138,7 @@ namespace GestionDeGastos.Controllers
         private async Task CargarCategoriasYMediosDePago(AgregarGastoViewModel gastoVM)
         {
             // TODO: Analizar si despues hacer view models de Categoria y Metodo de pago por si se agregan colores e iconos, recordar usar for en el front para mostrarlos
-            var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(3); // valor hardcodeado, se tiene que sacar de la session 
+            var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(4); // valor hardcodeado, se tiene que sacar de la session 
             gastoVM.Categorias = categoriasEntidad.Select(c => new SelectListItem
             {
                 Text = c.Descripcion,

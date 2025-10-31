@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionDeGastos.Repositorio
