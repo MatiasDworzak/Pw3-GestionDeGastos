@@ -1,33 +1,38 @@
-﻿using System;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+
+
+
 namespace GestionDeGastos.Repositorio
 {
     public interface IGastoRepositorio
     {
-        //Task<Gasto> ObtenerUltimoGastoAsync();
+
 
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
         Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
         Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
-
+        Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
         Task<Gasto> ObtenerGastoPorId(int IdGasto);
-        Task CrearGasto(Gasto Gasto);
+        Task AgregarGastoAsync(Gasto gasto);
+        // TODO: analizar
         Task ActualizarGasto(Gasto Gasto);
 
-    }
-    public class GastoRepositorio : IGastoRepositorio
-    {
-        private readonly GestionDeGastosBdContext _context;
-
-        public GastoRepositorio(GestionDeGastosBdContext context)
+        }
+        public class GastoRepositorio : IGastoRepositorio
         {
-            _context = context;
+            private readonly GestionDeGastosBdContext _context;
+
+            public GastoRepositorio(GestionDeGastosBdContext context)
+            {
+                _context = context;
         }
         public async Task ActualizarGasto(Gasto Gasto)
         {
@@ -42,16 +47,18 @@ namespace GestionDeGastos.Repositorio
             await _context.SaveChangesAsync();
         }
 
-        public async Task CrearGasto(Gasto Gasto)
+        public async Task AgregarGastoAsync(Gasto gasto)
         {
-            _context.Gastos.Add(Gasto);
+            if (gasto == null) throw new ArgumentNullException(nameof(gasto), "El gasto no puede ser null");
+
+            await _context.Gastos.AddAsync(gasto);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
-        {
-            return await _context.Gastos.FindAsync(IdGasto);
-        }
+            public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
+            {
+                return await _context.Gastos.FindAsync(IdGasto);
+            }
 
         public async Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario)
         {
@@ -78,6 +85,7 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
+
         public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin)
         {
             return await _context.Gastos
@@ -85,9 +93,43 @@ namespace GestionDeGastos.Repositorio
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }
+
+
+
+        public async Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario)
+        {
+            // TODO: analizar que pasa si el la cateogira en la que mas gasto es una categoria echa por el usuario
+            return await _context.Gastos
+                 .Where(g => g.IdUsuario == idUsuario)
+                .Include(g => g.IdCategoriaNavigation)
+                .GroupBy(g => new
+                {
+                    g.IdCategoria,
+                    g.IdCategoriaNavigation.Descripcion
+                })
+                .Select(grupo => new Gasto
+                {
+                    IdCategoria = grupo.Key.IdCategoria,
+                    IdCategoriaNavigation = new Categorium
+                    {
+                        IdCategoria = grupo.Key.IdCategoria,
+                        Descripcion = grupo.Key.Descripcion
+                    },
+                    MontoTotal = grupo.Sum(g => g.MontoTotal)
+                })
+                .OrderBy(g => g.IdCategoriaNavigation.Descripcion)
+                .ToListAsync();
+        }
+
+
     }
 
 
 
 
-}
+    }
+
+
+
+
+

@@ -4,6 +4,7 @@ using GestionDeGastos.Models;
 using Microsoft.AspNetCore.Mvc;
 using GestionDeGastos.Servicio;
 using System.Threading.Tasks;
+using GestionDeGastos.Models.GastoModels;
 
 
 namespace GestionDeGastos.Controllers

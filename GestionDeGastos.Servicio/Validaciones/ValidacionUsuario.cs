@@ -1,4 +1,6 @@
 ﻿
+using GestionDeGastos.AccesoADatos.Entidades;
+
 namespace GestionDeGastos.Servicio.Validaciones
 {
    public static class ValidacionUsuario

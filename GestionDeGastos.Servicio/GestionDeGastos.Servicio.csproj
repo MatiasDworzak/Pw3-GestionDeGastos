@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.1.0" />
@@ -13,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GestionDeGastos.AccesoADatos\GestionDeGastos.AccesoADatos.csproj" />
     <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
   </ItemGroup>
 

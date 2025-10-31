@@ -6730,6 +6730,7 @@
     "net8.0": [
       "AutoMapper >= 15.1.0",
       "BCrypt.Net-Next >= 4.0.3",
+      "GestionDeGastos.AccesoADatos >= 1.0.0",
       "GestionDeGastos.Repositorio >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Core >= 2.3.0"
     ]
@@ -6767,6 +6768,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj": {
+              "projectPath": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.AccesoADatos\\GestionDeGastos.AccesoADatos.csproj"
+            },
             "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj": {
               "projectPath": "C:\\Users\\Mati\\Source\\Repos\\Pw3-GestionDeGastos\\GestionDeGastos.Repositorio\\GestionDeGastos.Repositorio.csproj"
             }
