@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace GestionDeGastos.Repositorio
 {
         public interface IGastoRepositorio
         {
-        //Task<Gasto> ObtenerUltimoGastoAsync();
 
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
         Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
         Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
-            
+
+        Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
+
             Task<Gasto> ObtenerGastoPorId(int IdGasto);
             Task CrearGasto(Gasto Gasto);
             Task ActualizarGasto(Gasto Gasto);
@@ -87,6 +89,31 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
+
+
+        public async Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario)
+        {
+            return await _context.Gastos
+                 .Where(g => g.IdUsuario == idUsuario)
+                .Include(g => g.IdCategoriaNavigation)
+                .GroupBy(g => new
+                {
+                    g.IdCategoria,
+                    g.IdCategoriaNavigation.Descripcion
+                })
+                .Select(grupo => new Gasto
+                {
+                    IdCategoria = grupo.Key.IdCategoria,
+                    IdCategoriaNavigation = new Categorium
+                    {
+                        IdCategoria = grupo.Key.IdCategoria,
+                        Descripcion = grupo.Key.Descripcion
+                    },
+                    MontoTotal = grupo.Sum(g => g.MontoTotal)
+                })
+                .OrderBy(g => g.IdCategoriaNavigation.Descripcion)
+                .ToListAsync();
+        }
 
 
     }

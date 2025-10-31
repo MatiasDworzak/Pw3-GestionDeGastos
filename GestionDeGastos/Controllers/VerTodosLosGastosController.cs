@@ -1,12 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GestionDeGastos.Models;
+using GestionDeGastos.Servicio;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GestionDeGastos.Controllers
 {
     public class VerTodosLosGastosController : Controller
     {
-        public IActionResult VerTodosLosGastos()
+
+
+        private readonly IVerTodosLosGastos  _VerTodosLosGastosServicio;
+
+        public VerTodosLosGastosController ( IVerTodosLosGastos verGastos)
         {
-            return View();
+            _VerTodosLosGastosServicio = verGastos;
+        }
+
+        public async Task<IActionResult> VerTodosLosGastos()
+        {
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            int idUsuario = idUsuarioLoguedo.Value;
+
+          var categoriaConMontoTotal = await _VerTodosLosGastosServicio.ObtenerTodosLosGastosFiltradosPorCategoria(idUsuario);
+            var model = new GastoPorCategoriaViewModel
+            {
+
+                gasto = categoriaConMontoTotal
+
+            };
+          
+            return View(model);
         }
     }
 }
