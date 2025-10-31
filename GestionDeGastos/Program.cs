@@ -12,6 +12,8 @@ builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
 builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
+builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
+builder.Services.AddScoped<IGastoServicio, GastoServicio>();
 
 //cadena de conexion del appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

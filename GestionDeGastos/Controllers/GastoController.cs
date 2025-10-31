@@ -74,6 +74,9 @@ namespace GestionDeGastos.Controllers
                 }
                 catch (Exception ex) 
                 {
+                    // TODO: analizar si falla algo pedirle al repositorio blob que borre la imagen que se subio,
+                    // si no se llego a subir la imagen y fallo antes, no hace falta pedir que se borre la imagen
+
                     TempData["ErrorEnSubida"] = ex.Message;
                 }
             }
