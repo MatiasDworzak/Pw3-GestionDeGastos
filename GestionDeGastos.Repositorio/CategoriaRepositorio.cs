@@ -5,7 +5,7 @@ namespace GestionDeGastos.Repositorio
 {
     public interface ICategoriaRepositorio
     {
-        Task<IEnumerable<Categorium>> ObtenerTodasLasCategoriasPorUsuarioAsync(int idUsuario);
+        Task<IEnumerable<Categorium>> ObtenerTodasLasCategoriasDisponiblesParaUsuarioPorIdAsync(int idUsuario);
     }
     public class CategoriaRepositorio : ICategoriaRepositorio
     {
@@ -16,7 +16,7 @@ namespace GestionDeGastos.Repositorio
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Categorium>> ObtenerTodasLasCategoriasPorUsuarioAsync(int idUsuario)
+        public async Task<IEnumerable<Categorium>> ObtenerTodasLasCategoriasDisponiblesParaUsuarioPorIdAsync(int idUsuario)
         {
             return await _dbContext.Categoria
                                     .Where(c => !c.IdUsuarios.Any() ||

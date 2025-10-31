@@ -24,7 +24,7 @@ namespace GestionDeGastos.Servicio
         {
             if (idUsuario <= 0) throw new ArgumentException("El ID de usuario no es válido.", nameof(idUsuario));
             
-            return await _repositorio.ObtenerTodasLasCategoriasPorUsuarioAsync(idUsuario);
+            return await _repositorio.ObtenerTodasLasCategoriasDisponiblesParaUsuarioPorIdAsync(idUsuario);
         }
     }
 }

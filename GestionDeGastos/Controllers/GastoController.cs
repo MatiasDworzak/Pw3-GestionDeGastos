@@ -13,11 +13,13 @@ namespace GestionDeGastos.Controllers
     {
         private readonly ICategoriaServicio _categoriaServicio;
         private readonly IMetodoDePagoServicio _metodoDePagoServicio;
+        private readonly IGastoServicio _gastoServicio;
 
-        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio)
+        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio)
         {
             _categoriaServicio = categoriaServicio;
             _metodoDePagoServicio = metodoDePagoServicio;
+            _gastoServicio = gastoServicio;
         }
 
         [HttpGet]
@@ -43,7 +45,7 @@ namespace GestionDeGastos.Controllers
 
             if (ModelState.IsValid)
             {
-                // 3. Guardar el Gasto, el Ticket (si existe) y los Items (si existen) en la BD.
+                // Guardar el Gasto, el Ticket (si existe) y los Items (si existen) en la BD.
 
                 Gasto gastoEntidad = new Gasto()
                 {
@@ -64,7 +66,7 @@ namespace GestionDeGastos.Controllers
                         gastoEntidad.IdTicketNavigation.RutaImagenBlob = "ruta_falsa_para_probar"; 
 
 
-                    //await _gastoServicio.AgregarGastoAsync(gastoEntidad, gastoVM.OpcionTicketSeleccionada);
+                    _gastoServicio.AgregarGastoAsync(gastoEntidad);
 
                     TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
 
@@ -129,17 +131,17 @@ namespace GestionDeGastos.Controllers
                     "El monto total debe ser igual a la sumatoria entre los precios de los items por su cantidad.");
         }
 
-        private void CargarCategoriasYMediosDePago(AgregarGastoViewModel gastoVM)
+        private async Task CargarCategoriasYMediosDePago(AgregarGastoViewModel gastoVM)
         {
             // TODO: Analizar si despues hacer view models de Categoria y Metodo de pago por si se agregan colores e iconos, recordar usar for en el front para mostrarlos
-            var categoriasEntidad = _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(3).Result; // valor hardcodeado, se tiene que sacar de la session 
+            var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(3); // valor hardcodeado, se tiene que sacar de la session 
             gastoVM.Categorias = categoriasEntidad.Select(c => new SelectListItem
             {
                 Text = c.Descripcion,
                 Value = c.IdCategoria.ToString()
             }).ToList();
 
-            var metodosDePagoEntidad = _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync().Result;
+            var metodosDePagoEntidad = await _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync();
             gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new SelectListItem
             {
                 Text = m.Descripcion,
@@ -155,7 +157,7 @@ namespace GestionDeGastos.Controllers
             
             return new Ticket
             {
-                Items = gastoVM.Items?.Select(i => new Item
+                Items = gastoVM.Items.Select(i => new Item
                 {
                     Descripcion = i.Descripcion,
                     Cantidad = i.Cantidad.Value,
