@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GestionDeGastos;
+namespace GestionDeGastos.AccesoADatos.Entidades;
 
 public partial class Categorium
 {
@@ -9,7 +9,7 @@ public partial class Categorium
 
     public string Descripcion { get; set; } = null!;
 
-    public virtual CategoriaUsuario? CategoriaUsuario { get; set; }
-
     public virtual ICollection<Gasto> Gastos { get; set; } = new List<Gasto>();
+
+    public virtual ICollection<Usuario> IdUsuarios { get; set; } = new List<Usuario>();
 }

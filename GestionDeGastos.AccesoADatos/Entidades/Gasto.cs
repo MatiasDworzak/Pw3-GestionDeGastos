@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GestionDeGastos;
+namespace GestionDeGastos.AccesoADatos.Entidades;
 
 public partial class Gasto
 {
@@ -17,7 +17,7 @@ public partial class Gasto
 
     public string Nombre { get; set; } = null!;
 
-    public decimal MontoTotal { get; set; }
+    public decimal? MontoTotal { get; set; }
 
     public DateOnly Fecha { get; set; }
 

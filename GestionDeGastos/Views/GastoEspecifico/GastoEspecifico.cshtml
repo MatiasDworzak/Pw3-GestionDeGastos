@@ -37,7 +37,7 @@
 
         <!-- Imagen -->
         <div class="col-md-4 text-center">
-            @if (Model.Ticket != null && Model.Ticket.IdTicket != 0 && Model.Ticket.URLFoto != null)
+            @if (Model.Ticket != null && Model.Ticket.IdTicket != 0 && Model.Ticket.URLFoto != "")
             {
                 <img src="@Model.Ticket.URLFoto" alt="@Model.Ticket.URLFoto" class="img-fluid rounded border w-50 h-50"
                      style="cursor: pointer;"

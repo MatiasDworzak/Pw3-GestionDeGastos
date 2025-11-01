@@ -1,85 +1,89 @@
-﻿using GestionDeGastos.Models;
-using Microsoft.AspNetCore.Http;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Models;
+using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeGastos.Controllers
 {
    public class IngresoController : Controller
    {
+      private readonly IAutenticacionServicio _autenticacionServicio;
+     
+      public IngresoController(IAutenticacionServicio autenticacion) 
+      {
+         _autenticacionServicio = autenticacion;
+      }
+      public ActionResult Register()
+      {
+         return View();
+      }
+
+      [HttpPost]
+      [ValidateAntiForgeryToken]
+      public async Task<ActionResult> Register(RegistroViewModel model)
+      {
+         if (!ModelState.IsValid) 
+         {
+            return View(model);
+         }
+         var usuario = new Usuario
+         {
+            Nombre = model.Nombre,
+            Email = model.Correo,
+            Contrasenia = model.Contrasenia
+         };
+         var usuarioRegistrado =   await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
+
+         if (usuarioRegistrado == null) {
+            //si le saco el nameof no devuelve el mensaje de error
+            ModelState.AddModelError(nameof(model.Correo), "El correo es ya está registrado en el sistema");
+            return View(model);
+
+         }
+         Console.WriteLine($"MI ID: {usuario.IdUsuario}");
+         
+
+         TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
+         return RedirectToAction("Login");
+      }
       public ActionResult Login()
       {
          return View();
       }
-
-
+      
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public ActionResult Login(CredencialViewModel model)
+      public async Task<IActionResult> Login(CredencialViewModel model)
       {
-         return View();
-      }
+         if (!ModelState.IsValid) {
+            return View(model);
+         }
+         var usuarioValidado = await _autenticacionServicio.ValidarCredencialesAsync(model.Correo,model.Contrasenia);
+         if(usuarioValidado == null)
+         {
+            ModelState.AddModelError(string.Empty, "Correo o contraseña inválidos."); 
+            return View(model);
+         }
 
-      // GET: IngresoController/Create
-      public ActionResult Create()
-      {
-         return View();
-      }
+         HttpContext.Session.SetInt32("UsuarioId", usuarioValidado.IdUsuario);
+         HttpContext.Session.SetString("UsuarioNombre", usuarioValidado.Nombre);
+         HttpContext.Session.SetString("UsuarioEmail", usuarioValidado.Email);
 
-      // POST: IngresoController/Create
+         TempData["LoginExito"] = "Sesion iniciada con éxito";
+         return RedirectToAction("Home", "Home");
+      }
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public ActionResult Create(IFormCollection collection)
+      public IActionResult Logout()
       {
-         try
-         {
-            return RedirectToAction(nameof(Index));
-         }
-         catch
-         {
-            return View();
-         }
+         HttpContext.Session.Remove("UsuarioId");
+         HttpContext.Session.Remove("UsuarioNombre");
+         HttpContext.Session.Remove("UsuarioEmail");
+
+         return RedirectToAction("Login"); 
       }
 
-      // GET: IngresoController/Edit/5
-      public ActionResult Edit(int id)
-      {
-         return View();
-      }
+     
 
-      // POST: IngresoController/Edit/5
-      [HttpPost]
-      [ValidateAntiForgeryToken]
-      public ActionResult Edit(int id, IFormCollection collection)
-      {
-         try
-         {
-            return RedirectToAction(nameof(Index));
-         }
-         catch
-         {
-            return View();
-         }
-      }
-
-      // GET: IngresoController/Delete/5
-      public ActionResult Delete(int id)
-      {
-         return View();
-      }
-
-      // POST: IngresoController/Delete/5
-      [HttpPost]
-      [ValidateAntiForgeryToken]
-      public ActionResult Delete(int id, IFormCollection collection)
-      {
-         try
-         {
-            return RedirectToAction(nameof(Index));
-         }
-         catch
-         {
-            return View();
-         }
-      }
    }
 }
