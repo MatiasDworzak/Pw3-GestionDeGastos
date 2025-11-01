@@ -1,9 +1,6 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
-<<<<<<< HEAD
-using GestionDeGastos.Models.Gasto;
-=======
 using GestionDeGastos.Models.GastoModels;
->>>>>>> MainTest
+
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Enums;
 using Microsoft.AspNetCore.Mvc;
