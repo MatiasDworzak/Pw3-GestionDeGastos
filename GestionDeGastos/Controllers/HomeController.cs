@@ -23,24 +23,11 @@ namespace GestionDeGastos.Controllers
 
         public async Task<IActionResult> Home()
         {
-<<<<<<< HEAD
-
-         var model = new UsuarioViewModel
-         {
-            IdUsuario = HttpContext.Session.GetInt32("UsuarioId").Value,
-            Nombre = HttpContext.Session.GetString("UsuarioNombre"),
-            Email = HttpContext.Session.GetString("UsuarioEmail"),
-         };
-            return View(model);         
-=======
             
             var lista = await _homeService.ObtenerUltimosTresGastosPorIdDeUsuario(1);
             var modelo = new GastoViewModel {Porcentaje = _homeService.ObtenerPresupuestoConPorcentaje(1), ListaUltimosTresGastos = lista};
            
-            return  View(modelo);         
->>>>>>> MainTest
-        }
-
-       
-    }
+            return  View(modelo); 
+      }
+   }
 }

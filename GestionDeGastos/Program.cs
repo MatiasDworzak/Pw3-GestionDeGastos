@@ -1,29 +1,17 @@
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> MainTest
 using GestionDeGastos;
 using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Seguridad;
-<<<<<<< HEAD
 using GestionDeGastos.Servicios;
 
-=======
->>>>>>> MainTest
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-<<<<<<< HEAD
-=======
 
 
 builder.Services.AddScoped<IHomeService, HomeServicio>();
@@ -40,7 +28,6 @@ builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
 builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
->>>>>>> MainTest
 
 //cadena de conexion del appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -48,19 +35,12 @@ builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
 options.UseSqlServer(connectionString));
 
 
-
-
-<<<<<<< HEAD
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
-=======
-
-
->>>>>>> MainTest
 
 builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IPresupuestoServicio, PresupuestoServicio>();
