@@ -4,10 +4,14 @@ using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Seguridad;
+using GestionDeGastos.Servicio.GastoEspecifico;
 
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -23,6 +27,7 @@ builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
 builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // lo hizo huesos
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
+builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
 
 
 //repositorios
@@ -31,6 +36,7 @@ builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
+builder.Services.AddScoped<IGastoEspecificoRepositorio, GastoEspecificoRepositorio>();
 
 
 //cadena de conexion del appsettings.json

@@ -20,4 +20,8 @@
     <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	  <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
+  </ItemGroup>
+
 </Project>
