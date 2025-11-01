@@ -1,12 +1,22 @@
-﻿@using GestionDeGastos.Models.Gasto
+﻿@using GestionDeGastos.Models.GastoModels
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model AgregarGastoViewModel
 
-<h3 class="text-center">Agregar Gasto</h3>
 
-<form id="form-agregar-gasto" asp-action="Agregar" method="post">
+<h3 class="text-center">Agregar Gasto</h3>
+@{
+    if (TempData["ErrorEnSubida"] != null)
+    {
+        <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorEnSubida"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+}
+
+<form id="form-agregar-gasto" asp-action="Agregar" method="post" enctype="multipart/form-data">
     <h4>Detalles del gasto</h4>
     <!-- Los inputs van a ser cambiados por los Atributos del ViewModel que se disenie -->
     <!--Parte principal del datos del gasto -->
@@ -15,14 +25,15 @@
             <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
             <span asp-validation-for="Nombre" class="text-danger"></span>
             <div>
-                <input class="form-check-input" type="radio" id="sin-ticket" asp-for="OpcionTicketSeleccionada" value="sin_ticket"/>
+                <input class="form-check-input" type="radio" id="sin-ticket" asp-for="OpcionTicketSeleccionada" value="SinTicket" />
                 <label class="form-check-label ms-1" for="sin-ticket">No agregar Ticket</label><br />
 
-                <input class="form-check-input radio-con-section" type="radio" id="ticket-manual" asp-for="OpcionTicketSeleccionada" value="ticket_manual" />
+                <input class="form-check-input radio-con-section" type="radio" id="ticket-manual" asp-for="OpcionTicketSeleccionada" value="TicketManual" />
                 <label class="form-check-label ms-1" for="ticket-manual">Agregar Ticket Manual</label><br />
 
-                <input class="form-check-input radio-con-section" type="radio" id="ticket-foto" asp-for="OpcionTicketSeleccionada" value="ticket_foto" />
+                <input class="form-check-input radio-con-section" type="radio" id="ticket-foto" asp-for="OpcionTicketSeleccionada" value="TicketFoto" />
                 <label class="form-check-label ms-1" for="ticket-foto">Agregar Ticket con Foto</label><br />
+                <span asp-validation-for="OpcionTicketSeleccionada" class="text-danger"></span>
             </div>
         </div>
         <div class="col-6 d-flex flex-column gap-2">
@@ -44,12 +55,14 @@
                     <!-- Iterar categorias(del sistema generales y las generadas por usuario) de base de datos -->
                     <!-- <option value="">Agregar Categoria</option> definir si esto hacerlo un boton -->
                 </select>
+                <span asp-validation-for="CategoriaSeleccionada" class="text-danger"></span>
 
                 <select asp-for="MetodoDePagoSeleccionado" class="form-select text-center" id="metodo-de-pago"
                         asp-items="Model.MetodosDePago">
                     <option value="" selected disabled>Metodo de Pago</option>
                     <!-- Iterar metodos de pago de base de datos -->
                 </select>
+                <span asp-validation-for="MetodoDePagoSeleccionado" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -57,9 +70,14 @@
     <!-- Seccion que se abre con el radio button Agregar Ticket con Foto -->
     <section id="ticket-foto-section" class="d-none">
         <h4>Agregar ticket con foto</h4>
-        <div class="d-flex justify-content-between">
-            <input class="form-control w-50" id="formFile" placeholder="Adjuntar Archivo" type="file"/>
-            <input class="btn btn-info" type="submit" value="Escanear Ticket" />
+        <div class="d-flex justify-content-center gap-2">
+            <div>
+                <input asp-for="TicketFoto" class="form-control" id="formFile" type="file" />
+                <span asp-validation-for="TicketFoto" class="text-danger"></span>
+            </div>
+            <div>
+                <label class="btn btn-info" for="formFile">Escanear Ticket</label>
+            </div>
         </div>
     </section>
 

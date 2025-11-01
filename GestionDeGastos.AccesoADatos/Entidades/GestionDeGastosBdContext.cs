@@ -31,11 +31,19 @@ public partial class GestionDeGastosBdContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
+<<<<<<< HEAD
 protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Categorium>(entity =>
         {
             entity.HasKey(e => e.IdCategoria).HasName("PK__Categori__CD54BC5ADAA618DA");
+=======
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Categorium>(entity =>
+        {
+            entity.HasKey(e => e.IdCategoria).HasName("PK__Categori__CD54BC5A1D640E1B");
+>>>>>>> MainTest
 
             entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
             entity.Property(e => e.Descripcion)
@@ -46,7 +54,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<Gasto>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdGasto).HasName("PK__Gasto__ECB8FB80F5DDF0D6");
+=======
+            entity.HasKey(e => e.IdGasto).HasName("PK__Gasto__ECB8FB806E5BFF8E");
+>>>>>>> MainTest
 
             entity.ToTable("Gasto");
 
@@ -88,7 +100,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<Ingreso>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdIngreso).HasName("PK__Ingreso__8FF0F0DEE6758600");
+=======
+            entity.HasKey(e => e.IdIngreso).HasName("PK__Ingreso__8FF0F0DE47030A38");
+>>>>>>> MainTest
 
             entity.ToTable("Ingreso");
 
@@ -111,7 +127,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<Item>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdItem).HasName("PK__Item__87C9438B5D46EEFB");
+=======
+            entity.HasKey(e => e.IdItem).HasName("PK__Item__87C9438B90887294");
+>>>>>>> MainTest
 
             entity.ToTable("Item");
 
@@ -137,7 +157,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<MetodoDePago>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdMetodoPago).HasName("PK__MetodoDe__85BE0EBCA3D91AAD");
+=======
+            entity.HasKey(e => e.IdMetodoPago).HasName("PK__MetodoDe__85BE0EBCE25C8C59");
+>>>>>>> MainTest
 
             entity.ToTable("MetodoDePago");
 
@@ -150,7 +174,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<Presupuesto>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdPresupuesto).HasName("PK__Presupue__3E94B4E581C44251");
+=======
+            entity.HasKey(e => e.IdPresupuesto).HasName("PK__Presupue__3E94B4E5FA8A9A68");
+>>>>>>> MainTest
 
             entity.ToTable("Presupuesto");
 
@@ -173,7 +201,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<Ticket>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdTicket).HasName("PK__Ticket__48C6F52376904C6D");
+=======
+            entity.HasKey(e => e.IdTicket).HasName("PK__Ticket__48C6F523AD07785F");
+>>>>>>> MainTest
 
             entity.ToTable("Ticket");
 
@@ -187,11 +219,19 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
         modelBuilder.Entity<Usuario>(entity =>
         {
+<<<<<<< HEAD
             entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__4E3E04AD90483318");
 
             entity.ToTable("Usuario");
 
             entity.HasIndex(e => e.Email, "UQ__Usuario__AB6E61648041A3DD").IsUnique();
+=======
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__4E3E04AD557D40AE");
+
+            entity.ToTable("Usuario");
+
+            entity.HasIndex(e => e.Email, "UQ__Usuario__AB6E61646D9D76F1").IsUnique();
+>>>>>>> MainTest
 
             entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
             entity.Property(e => e.Contrasenia)
@@ -220,7 +260,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
                         .HasConstraintName("FK_CategoriaUsuario_Usuario"),
                     j =>
                     {
+<<<<<<< HEAD
                         j.HasKey("IdUsuario", "IdCategoria").HasName("PK__Categori__F2EB4F686AC41C2D");
+=======
+                        j.HasKey("IdUsuario", "IdCategoria").HasName("PK__Categori__F2EB4F68655CDC75");
+>>>>>>> MainTest
                         j.ToTable("CategoriaUsuario");
                         j.IndexerProperty<int>("IdUsuario").HasColumnName("id_usuario");
                         j.IndexerProperty<int>("IdCategoria").HasColumnName("id_categoria");

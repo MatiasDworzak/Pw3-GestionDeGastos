@@ -11,7 +11,7 @@
 
     <div class="d-flex justify-content-around">
         <p>Monto total: @($"{Model.UltimoPresupuesto.MontoLimite:C}")</p>
-        <p>Monto total: @($"{Model.UltimoPresupuesto.MontoActualGastado:C}")</p>
+        <p>Monto gastado: @($"{Model.UltimoPresupuesto.MontoActualGastado:C}")</p>
     </div>
 
     <div class="progress mb-4">
@@ -33,10 +33,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="ActualizarPresupuesto" method="post">
+                    <form action="PresupuestoActual" method="post">
                         <div class="d-flex flex-column gap-2">
                             <label>Ingrese el monto total para el nuevo presupuesto:</label>
-                            <input placeholder="Ejemplo: 1.000.000"></input>
+                            <input placeholder="Ejemplo: 1.000.000" name="NuevoMonto"></input>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-secondary mt-2 ">Confirmar presupuesto</button>
@@ -64,8 +64,10 @@
                     <td>@presupuesto.Mes / @presupuesto.Anio</td>
                     <td>@($"{presupuesto.MontoLimite:C}")</td>
                     <td>@($"{presupuesto.MontoActualGastado:C}")</td>
-                    <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto">Ver gastos</a></td>
-                </tr>
+                    <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto" asp-route-mes="@presupuesto.Mes" asp-route-anio="@presupuesto.Anio">Ver gasto</a></td>
+
+@*                     <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto">Ver gastos</a></td>
+ *@                </tr>
             }
         </tbody>
     </table>

@@ -1,14 +1,15 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 
-namespace GestionDeGastos.Servicios
+namespace GestionDeGastos.Servicio
 {
     public interface IPresupuestoServicio
     {
-        Task<Presupuesto> ObtenerPresupuestoActualAsync();
-        Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync();
-        decimal ObtenerPresupuestoConPorcentaje();
+        Task<Presupuesto> ObtenerPresupuestoActualAsync(int idUsuario);
+        Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario);
+        decimal ObtenerPresupuestoConPorcentaje(int idUsuario);
         Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int id);
+        Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto);
     }
     public class PresupuestoServicio : IPresupuestoServicio
     {
@@ -19,24 +20,24 @@ namespace GestionDeGastos.Servicios
             _repositorio = repositorio;
         }
 
-        public async Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int IdPresupuesto)
+        public async Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int idPresupuesto)
         {
-            return await _repositorio.ObtenerPresupuestoPorId(IdPresupuesto);
+            return await _repositorio.ObtenerPresupuestoPorId(idPresupuesto);
         }
 
-        public async Task<Presupuesto> ObtenerPresupuestoActualAsync()
+        public async Task<Presupuesto> ObtenerPresupuestoActualAsync(int idUsuario)
         {
-           return await _repositorio.ObtenerUltimoPresupuestoAsync();
+           return await _repositorio.ObtenerUltimoPresupuestoAsync(idUsuario);
         }
 
-        public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync()
+        public async Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario)
         {
-           return await _repositorio.ObtenerTodosLosPresupuestosAsync();
+           return await _repositorio.ObtenerTodosLosPresupuestosAsync(idUsuario);
         }
 
-        public decimal ObtenerPresupuestoConPorcentaje()
+        public decimal ObtenerPresupuestoConPorcentaje(int idUsuario)
         {
-            var presupuesto = _repositorio.ObtenerUltimoPresupuestoAsync().Result;
+            var presupuesto = _repositorio.ObtenerUltimoPresupuestoAsync(idUsuario).Result;
             if (presupuesto == null || presupuesto.MontoLimite == 0)
             {
                 return 0;
@@ -44,6 +45,11 @@ namespace GestionDeGastos.Servicios
 
             var porcentajeGastado = (presupuesto.MontoActualGastado / presupuesto.MontoLimite) * 100;
             return Math.Min((decimal)porcentajeGastado, 100);
+        }
+
+        public async Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto)
+        {
+            await _repositorio.ActualizarPresupuesto(presupuesto, nuevoMonto);
         }
     }
 }
