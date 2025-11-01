@@ -2,6 +2,7 @@
 using GestionDeGastos.Models;
 using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GestionDeGastos.Controllers
 {
@@ -23,7 +24,7 @@ namespace GestionDeGastos.Controllers
          var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
          IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
-         PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+         PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
 
          return View(modelo);
       }
@@ -38,7 +39,7 @@ namespace GestionDeGastos.Controllers
 
          await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
 
-         PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+         PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
          return View(modelo);
       }
 
@@ -49,17 +50,19 @@ namespace GestionDeGastos.Controllers
          return idUsuario;
       }
 
-      private PresupuestoPaginaViewModel ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
+      private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
       {
 
          int idUsuario = ObtenerUsuarioLogueado();
+            decimal montoActual = await _presupuestoServicio.CalcularMontoActualGastado(ultimoPresupuesto);
+            decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(ultimoPresupuesto);
 
          return new PresupuestoPaginaViewModel
          {
             UltimoPresupuesto = new PresupuestoViewModel
             {
                MontoLimite = ultimoPresupuesto.MontoLimite,
-               MontoActualGastado = ultimoPresupuesto.MontoActualGastado
+               MontoActualGastado = montoActual
             },
             ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
             {
@@ -68,7 +71,7 @@ namespace GestionDeGastos.Controllers
                Anio = p.Anio,
                Mes = p.Mes
             }).ToList(),
-            PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario)
+            PorcentajeGastado = porcentaje
          };
       }
 

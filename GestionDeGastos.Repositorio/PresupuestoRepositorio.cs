@@ -12,6 +12,7 @@ namespace GestionDeGastos.Repositorio
         Task ActualizarPresupuesto(Presupuesto presupuesto, decimal nuevoMonto);
         Task<Presupuesto?> GetByIdAsync(int id);
         Task CrearPresupuestoInicial(int idUsuario);
+        Task ActualizarMontonActualGastado(Presupuesto presupuesto, decimal montoActualGastado);
     }
     public class PresupuestoRepositorio : IPresupuestoRepositorio
     {
@@ -80,6 +81,21 @@ namespace GestionDeGastos.Repositorio
                 Anio = DateTime.Now.Year
             });
 
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task ActualizarMontonActualGastado(Presupuesto presupuesto, decimal montoActualGastado)
+        {
+            Presupuesto presupuestoEncontrado = await ObtenerPresupuestoPorId(presupuesto.IdPresupuesto);
+
+            if (presupuestoEncontrado == null)
+            {
+                throw new Exception("Presupuesto no encontrado");
+            }
+
+            presupuesto.MontoActualGastado = montoActualGastado;
+
+            _context.Presupuestos.Update(presupuesto);
             await _context.SaveChangesAsync();
         }
     }
