@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionDeGastos.AccesoADatos.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,11 @@ namespace GestionDeGastos.Repositorio
         Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
         Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
-
         Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
-
-            Task<Gasto> ObtenerGastoPorId(int IdGasto);
-            Task CrearGasto(Gasto Gasto);
-            Task ActualizarGasto(Gasto Gasto);
+        Task<Gasto> ObtenerGastoPorId(int IdGasto);
+        Task AgregarGastoAsync(Gasto gasto);
+        // TODO: analizar
+        Task ActualizarGasto(Gasto Gasto);
 
         }
         public class GastoRepositorio : IGastoRepositorio
@@ -33,25 +33,27 @@ namespace GestionDeGastos.Repositorio
             public GastoRepositorio(GestionDeGastosBdContext context)
             {
                 _context = context;
-            }
-            public async Task ActualizarGasto(Gasto Gasto)
+        }
+        public async Task ActualizarGasto(Gasto Gasto)
+        {
+            Gasto GastoEncontrado = await ObtenerGastoPorId(Gasto.IdGasto);
+
+            if (GastoEncontrado == null)
             {
-                Gasto GastoEncontrado = await ObtenerGastoPorId(Gasto.IdGasto);
-
-                if (GastoEncontrado == null)
-                {
-                    throw new Exception("Gasto no encontrado");
-                }
-
-                _context.Gastos.Update(Gasto);
-                await _context.SaveChangesAsync();
+                throw new Exception("Gasto no encontrado");
             }
 
-            public async Task CrearGasto(Gasto Gasto)
-            {
-                _context.Gastos.Add(Gasto);
-                await _context.SaveChangesAsync();
-            }
+            _context.Gastos.Update(Gasto);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AgregarGastoAsync(Gasto gasto)
+        {
+            if (gasto == null) throw new ArgumentNullException(nameof(gasto), "El gasto no puede ser null");
+
+            await _context.Gastos.AddAsync(gasto);
+            await _context.SaveChangesAsync();
+        }
 
             public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
             {
@@ -96,6 +98,7 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario)
         {
+            // TODO: analizar que pasa si el la cateogira en la que mas gasto es una categoria echa por el usuario
             return await _context.Gastos
                  .Where(g => g.IdUsuario == idUsuario)
                 .Include(g => g.IdCategoriaNavigation)

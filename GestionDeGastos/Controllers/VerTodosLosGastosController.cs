@@ -1,4 +1,5 @@
 ﻿using GestionDeGastos.Models;
+using GestionDeGastos.Models.GastoModels;
 using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

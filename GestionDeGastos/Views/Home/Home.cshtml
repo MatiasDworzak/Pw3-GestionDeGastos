@@ -1,7 +1,6 @@
-﻿@* @model UsuarioViewModel
-    
-*@
+﻿@using GestionDeGastos.Models.GastoModels
 @model GastoViewModel
+@await Html.PartialAsync("_Header", ViewBag.UsuarioHeader as UsuarioViewModel)
 
 <div class="alert alert-success">@TempData["LoginExito"]</div>
 
@@ -83,7 +82,7 @@
             <h6 class="fw-bold mb-3">Acciones Rápidas</h6>
             <div class="row mb-3">
                 <div class="col-6 mb-2">
-                    <a class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Gasto</a>
+                    <a asp-action="Agregar" asp-controller="Gasto" class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Gasto</a>
                 </div>
                 <div class="col-6 mb-2">
                     <a class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Ingreso</a>

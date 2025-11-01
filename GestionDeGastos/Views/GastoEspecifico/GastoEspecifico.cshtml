@@ -1,0 +1,114 @@
+﻿@{
+
+}
+@model GastoEspecificoViewModel
+@*
+    Espacio para header
+*@
+
+<div class="container my-4 p-4 bg-light rounded shadow-sm">
+
+    <!-- Datos del gasto -->
+    <div class="row g-3 align-items-center border-bottom pb-3 mb-3">
+        <div class="col-md-8">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-secondary small">Nombre del gasto</label>
+                    <div class="p-2 bg-white border rounded">@Model.Nombre</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-secondary small">Monto</label>
+                    <div class="p-2 bg-white border rounded">@Model.Monto.ToString("C")</div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small">Categoría</label>
+                    <div class="p-2 bg-white border rounded">@Model.Categoria.NombreCategoria</div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small">Método de pago</label>
+                    <div class="p-2 bg-white border rounded">@Model.MetodoDePago.NombreMetodoDePago</div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small">Fecha</label>
+                    <div class="p-2 bg-white border rounded">@Model.Fecha.ToShortDateString()</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Imagen -->
+        <div class="col-md-4 text-center">
+            @if (Model.Ticket != null && Model.Ticket.IdTicket != 0 && Model.Ticket.URLFoto != "")
+            {
+                <img src="@Model.Ticket.URLFoto" alt="@Model.Ticket.URLFoto" class="img-fluid rounded border w-50 h-50"
+                     style="cursor: pointer;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalImagen" />
+            }
+            else
+            {
+                <div class="p-4 bg-white border rounded text-muted">
+                    <small>Este gasto no contiene una imagen</small>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Ticket e Items -->
+    @if (Model.Ticket != null && Model.Ticket.IdTicket != 0)
+    {
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-semibold">Ticket asociado:</span>
+                <span class="text-secondary">#@Model.Ticket.IdTicket</span>
+            </div>
+
+            @if (Model.Items != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover align-middle mb-0">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th scope="col">Cant.</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Precio Unit.</th>
+                                <th scope="col">Precio Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>@item.Cantidad</td>
+                                    <td>@item.Descripcion</td>
+                                    <td>@item.PrecioUnitario.ToString("C")</td>
+                                    <td>@item.PrecioTotal.ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-light border text-center text-muted" role="alert">
+            Este gasto no contiene ticket
+        </div>
+    }
+</div>
+
+<!-- Modal con imagen ampliada -->
+<div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="modalImagenLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-transparent border-0 shadow-none">
+            <div class="modal-body text-center p-0">
+                <img src=@Model.Ticket.URLFoto" class="img-fluid rounded" alt="@Model.Ticket.URLFoto" style="max-height: 90vh; object-fit: contain;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    Espacio para footer
+*@

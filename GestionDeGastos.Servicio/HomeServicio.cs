@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace GestionDeGastos.Servicio
