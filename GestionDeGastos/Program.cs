@@ -16,7 +16,6 @@ builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
 //servicios
 builder.Services.AddScoped<IHomeService, HomeServicio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();

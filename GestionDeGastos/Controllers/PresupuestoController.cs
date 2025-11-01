@@ -54,7 +54,7 @@ namespace GestionDeGastos.Controllers
       {
 
          int idUsuario = ObtenerUsuarioLogueado();
-            decimal montoActual = await _presupuestoServicio.CalcularMontoActualGastado(ultimoPresupuesto);
+            await _presupuestoServicio.CalcularMontoActualGastado(ultimoPresupuesto);
             decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(ultimoPresupuesto);
 
          return new PresupuestoPaginaViewModel
@@ -62,7 +62,7 @@ namespace GestionDeGastos.Controllers
             UltimoPresupuesto = new PresupuestoViewModel
             {
                MontoLimite = ultimoPresupuesto.MontoLimite,
-               MontoActualGastado = montoActual
+               MontoActualGastado = ultimoPresupuesto.MontoActualGastado
             },
             ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
             {
