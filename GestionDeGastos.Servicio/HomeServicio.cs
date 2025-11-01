@@ -13,7 +13,11 @@ namespace GestionDeGastos.Servicio
         Task<Usuario?> ObtenerUsuarioPorIdAsync(int id);
         Task<List<Gasto?>> ObtenerUltimosTresGastosPorIdDeUsuario(int id);
         Task<Presupuesto?> ObtenerPresupuestoPorIdDeUsuarioAsync(int id);
+        Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año);
+        Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin);
+
         decimal ObtenerPresupuestoConPorcentaje(int idUsuario);
+        
     }
     public class HomeServicio : IHomeService
     {
@@ -52,6 +56,16 @@ namespace GestionDeGastos.Servicio
         public async Task<List<Gasto?>> ObtenerUltimosTresGastosPorIdDeUsuario(int id)
         {
             return await _gastoRepositorio.ObtenerUltimosTresGastosPorUsuarioAsync(id);
+        }
+
+        public async Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año)
+        {
+            return await _gastoRepositorio.ObtenerGastosPorMesAsync(idUsuario, mes, año);
+        }
+
+        public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin)
+        {
+            return await _gastoRepositorio.ObtenerGastosPorRangoDeFechasAsync(idUsuario, fechaInicio, fechaFin);
         }
     }
 }

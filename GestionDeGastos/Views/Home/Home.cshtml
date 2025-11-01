@@ -1,6 +1,6 @@
 ﻿@using GestionDeGastos.Models.GastoModels
 @model GastoViewModel
-@await Html.PartialAsync("_Header", ViewBag.UsuarioHeader as UsuarioViewModel)
+@await Html.PartialAsync("_Header")
 
 <div class="alert alert-success">@TempData["LoginExito"]</div>
 
@@ -11,21 +11,13 @@
             <div class="text-center mb-3">
                 <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
                 <p>dd/mm/aaaa - dd/mm/aaaa</p>
-            </div>
-
-            <div class="row text-center mb-3">
-                <div class="col">
-                    <p class="fw-semibold mb-1">Filtrar por Mes</p>
-                    <button class="btn btn-sm btn-danger w-75">Seleccionar Mes</button>
-                </div>
-                <div class="col">
-                    <p class="fw-semibold mb-1">Filtrar por Tiempo</p>
-                    <div class="d-flex justify-content-center gap-2">
-                        <button class="btn btn-sm btn-danger">Desde</button>
-                        <button class="btn btn-sm btn-danger">Hasta</button>
-                    </div>
-                </div>
-            </div>
+           
+            <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3">
+                <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
+                <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
+                <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
+                <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
+            </form>
 
 
             <!-- Contenedor de gráficos -->
@@ -70,7 +62,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h6 class="fw-bold mb-0">Presupuesto Actual</h6>
 
-                <a href="#" class="text-decoration-none text-end">Ver Presupuestos</a>
+                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none text-end">Ver Presupuestos</a>
                 
             </div>
             <div class="progress mb-4" style="height: 25px;">
@@ -91,7 +83,7 @@
                     <a class="btn w-100 text-white" style="background: #6a5acd;">Exportar</a>
                 </div>
                 <div class="col-4">
-                    <a class="btn w-100 text-white" style="background: #6a5acd;">Editar Presupuesto</a>
+                    <a asp-controller="Presupuesto" asp-action="PresupuestoActual"  class="btn w-100 text-white" style="background: #6a5acd;">Editar Presupuesto</a>
                 </div>
                 <div class="col-4">
                     <a class="btn w-100 text-white" style="background: #6a5acd;">Editar Perfil</a>
@@ -101,7 +93,7 @@
 
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h6 class="fw-bold mb-0">Gastos Recientes</h6>
-                <a href="#" class="text-decoration-none text-end">Ver todos mis gastos</a>
+                <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="text-decoration-none text-end">Ver todos mis gastos</a>
             </div>
             <div class="list-group">
                 @foreach (var gasto in Model.ListaUltimosTresGastos)
@@ -205,30 +197,56 @@
         document.getElementById("topCategorias").classList.add("d-none");
     }
 
-    function drawPieChart() {
-        const data = google.visualization.arrayToDataTable([
-            ['Categoría', 'Monto'],
-            ['Comida', 4500],
-            ['Transporte', 2300],
-            ['Entretenimiento', 1800],
-            ['Ropa', 1000],
-            ['Otros', 700]
-        ]);
+            function drawPieChart(dataFromServer = null) {
+            const dataArray = dataFromServer
+                ? [['Categoría', 'Monto'], ...dataFromServer.map(d => [d.categoria, d.monto])]
+                : [
+                    ['Categoría', 'Monto'],
+                    ['Comida', 4500],
+                    ['Transporte', 2300],
+                    ['Entretenimiento', 1800],
+                    ['Ropa', 1000],
+                    ['Otros', 700]
+                ];
 
-        const options = {
-            pieHole: 0.5,
-            chartArea: { width: '90%', height: '90%' },
-            backgroundColor: 'transparent',
-            legend: { position: 'right', textStyle: { color: '#000', fontSize: 12 } },
-            pieSliceText: 'label', // <--- MUESTRA LAS CATEGORÍAS EN LAS PORCIONES
-            colors: ['#ff6b6b', '#ffb84d', '#4da6ff', '#9b59b6', '#2ecc71']
-        };
+            const data = google.visualization.arrayToDataTable(dataArray);
 
-        const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+            const options = {
+                pieHole: 0.5,
+                chartArea: { width: '90%', height: '90%' },
+                backgroundColor: 'transparent',
+                legend: { position: 'right', textStyle: { color: '#000', fontSize: 12 } },
+                pieSliceText: 'label',
+                colors: ['#ff6b6b', '#ffb84d', '#4da6ff', '#9b59b6', '#2ecc71']
+            };
+
+            const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            document.getElementById("topCategorias").classList.remove("d-none");
+        
 
         document.getElementById("topCategorias").classList.remove("d-none");
     }
+
+            document.getElementById("filtroFechasForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const mes = document.getElementById("filtroMes").value;
+            const desde = document.getElementById("desde").value;
+            const hasta = document.getElementById("hasta").value;
+
+            // construís la query string (GET)
+            const query = new URLSearchParams({ mes, desde, hasta });
+
+            // hacés la petición al controlador
+            const response = await fetch(`/Home/Filtrar?${query.toString()}`);
+
+            const data = await response.json();
+            console.log(data);
+            // redibujás el gráfico circular con los datos que llegan del backend
+            drawPieChart(data);
+        });
 </script>
 
 

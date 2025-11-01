@@ -15,8 +15,8 @@ namespace GestionDeGastos.Repositorio
     {
 
 
-        Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
-        Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
+        Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin);
+        Task<List<Gasto>> ObtenerGastosPorMesAsync(int? idUsuario, int mes, int año);
         Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
@@ -77,19 +77,21 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();                       // devuelve la lista
         }
 
-        public async Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año)
+        public async Task<List<Gasto>> ObtenerGastosPorMesAsync(int? idUsuario, int mes, int año)
         {
-            return await _context.Gastos
-                .Where(g => g.Fecha.Month == mes && g.Fecha.Year == año)
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
+                .Where(g => g.IdUsuario == idUsuario &&  g.Fecha.Month == mes && g.Fecha.Year == año)
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }
 
+     
 
-        public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin)
+
+        public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin)
         {
-            return await _context.Gastos
-                .Where(g => g.Fecha >= fechaInicio && g.Fecha <= fechaFin)
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
+                .Where(g => g.IdUsuario == idUsuario && g.Fecha >= fechaInicio && g.Fecha <= fechaFin)
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }

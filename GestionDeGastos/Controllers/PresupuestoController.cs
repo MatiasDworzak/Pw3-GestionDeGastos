@@ -44,7 +44,7 @@ namespace GestionDeGastos.Controllers
       }
 
       public async Task<IActionResult> PresupuestoActual()
-      {
+      { 
          int idUsuario = ObtenerUsuarioLogueado();
 
          var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
