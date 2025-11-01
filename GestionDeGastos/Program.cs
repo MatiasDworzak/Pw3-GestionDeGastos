@@ -4,7 +4,6 @@ using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
 using GestionDeGastos.Servicio.Seguridad;
-using GestionDeGastos.Servicios;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -14,20 +13,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
+//servicios
 builder.Services.AddScoped<IHomeService, HomeServicio>();
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
-builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
 builder.Services.AddScoped<IPresupuestoServicio, PresupuestoServicio>();
 builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
-builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
-builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
 builder.Services.AddScoped<IGastoServicio, GastoServicio>();
-builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // lo hizo huesos
-builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
-builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
 builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
+builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // lo hizo huesos
+builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
+
+
+//repositorios
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
+builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
+
 
 //cadena de conexion del appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -35,15 +39,7 @@ builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
 options.UseSqlServer(connectionString));
 
 
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
-builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
-builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
-builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
-builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 
-builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
-builder.Services.AddScoped<IPresupuestoServicio, PresupuestoServicio>();
 
 //Habilitar sesiones
 builder.Services.AddSession(options =>
