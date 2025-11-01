@@ -14,9 +14,9 @@ namespace GestionDeGastos.Servicio
    {
       private readonly IUsuarioRepositorio _repositorio;
 
-      public UsuarioServicio(IUsuarioRepositorio repoitorio)
+      public UsuarioServicio(IUsuarioRepositorio repositorio)
       {
-         _repositorio = repoitorio;
+         _repositorio = repositorio;
       }
       public async Task<IEnumerable<Usuario>> ObtenerTodosLosUsuariosAsync()
       {

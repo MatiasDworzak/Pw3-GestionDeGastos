@@ -1,8 +1,6 @@
 ﻿@using GestionDeGastos.Models.GastoModels
-@* @model UsuarioViewModel
-    
-*@
 @model GastoViewModel
+@await Html.PartialAsync("_Header", ViewBag.UsuarioHeader as UsuarioViewModel)
 
 <div class="alert alert-success">@TempData["LoginExito"]</div>
 

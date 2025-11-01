@@ -20,9 +20,4 @@
     <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GestionDeGastos.AccesoADatos\GestionDeGastos.AccesoADatos.csproj" />
-    <ProjectReference Include="..\GestionDeGastos.Repositorio\GestionDeGastos.Repositorio.csproj" />
-  </ItemGroup>
-
 </Project>

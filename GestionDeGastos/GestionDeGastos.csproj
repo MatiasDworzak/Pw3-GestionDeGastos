@@ -26,11 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GestionDeGastos.AccesoADatos\GestionDeGastos.AccesoADatos.csproj" />
     <ProjectReference Include="..\GestionDeGastos.Servicio\GestionDeGastos.Servicio.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GestionDeGastos.AccesoADatos\GestionDeGastos.AccesoADatos.csproj" />
     <ProjectReference Include="..\GestionDeGastos.Servicio\GestionDeGastos.Servicio.csproj" />
   </ItemGroup>
 
