@@ -10,6 +10,7 @@ namespace GestionDeGastos.Servicio
         decimal ObtenerPresupuestoConPorcentaje(int idUsuario);
         Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int id);
         Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto);
+        Task CrearPresupuestoInicial(int idUsuario);
     }
     public class PresupuestoServicio : IPresupuestoServicio
     {
@@ -50,6 +51,11 @@ namespace GestionDeGastos.Servicio
         public async Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto)
         {
             await _repositorio.ActualizarPresupuesto(presupuesto, nuevoMonto);
+        }
+
+        public async Task CrearPresupuestoInicial(int idUsuario)
+        {
+            await _repositorio.CrearPresupuestoInicial(idUsuario);
         }
     }
 }

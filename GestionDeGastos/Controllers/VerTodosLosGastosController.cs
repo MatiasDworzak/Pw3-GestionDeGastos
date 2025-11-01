@@ -32,5 +32,14 @@ namespace GestionDeGastos.Controllers
           
             return View(model);
         }
+
+        public IActionResult MostrarGastosPresupuesto(int mes, int anio)
+        {
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            int idUsuario = idUsuarioLoguedo.Value;
+            var detalleGastos = _VerTodosLosGastosServicio.ObtenerLosGastosFiltradosPorMes(idUsuario, mes, anio);
+
+            return View("VerTodosLosGastos");
+        }
     }
 }

@@ -7,43 +7,16 @@ namespace GestionDeGastos.Controllers
 {
    public class PresupuestoController : Controller
    {
-      //public IActionResult PresupuestoActual()
-      //{
-      //    var listaPresupuestos = new List<PresupuestoViewModel>
-      //    {
-      //        new PresupuestoViewModel
-      //        {
-      //            MontoLimite = 1500.00m,
-      //            MontoActualGastado = 750.00m,
-      //            Anio = 2025,
-      //            Mes = 05
-      //        },
-      //        new PresupuestoViewModel
-      //        {
-      //            MontoLimite = 2000.00m,
-      //            MontoActualGastado = 1200.00m,
-      //            Anio = 2025,
-      //            Mes = 06
-      //        }
-      //    };
-
-      //    var modelo = new PresupuestoPaginaViewModel
-      //    {
-      //        ListaPresupuestos = listaPresupuestos,
-      //        UltimoPresupuesto = listaPresupuestos.LastOrDefault()
-      //    };
-
-      //    return View(modelo);
-      //}
-
       public IPresupuestoServicio _presupuestoServicio;
+      public IVerTodosLosGastos _verTodosLosGastosServicio;
 
-      public PresupuestoController(IPresupuestoServicio presupuestoServicio)
-      {
-         _presupuestoServicio = presupuestoServicio;
-      }
+        public PresupuestoController(IPresupuestoServicio presupuestoServicio, IVerTodosLosGastos gastoServicio)
+        {
+            _presupuestoServicio = presupuestoServicio;
+            _verTodosLosGastosServicio = gastoServicio;
+        }
 
-      public async Task<IActionResult> PresupuestoActual()
+        public async Task<IActionResult> PresupuestoActual()
       {
          int idUsuario = ObtenerUsuarioLogueado();
 
@@ -71,9 +44,6 @@ namespace GestionDeGastos.Controllers
 
       private int ObtenerUsuarioLogueado()
       {
-         //HttpContext.Session.SetInt32("UsuarioId", 1);
-         // Para prueba de session
-
          int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
          int idUsuario = idUsuarioLoguedo.Value;
          return idUsuario;
@@ -102,11 +72,12 @@ namespace GestionDeGastos.Controllers
          };
       }
 
-      //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
-      //{
-      //    var detalleGastos = _gastoServicio.ObtenerGastosPorMesYAnio(mes, anio);
+        //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
+        //{
+        //    int idUsuario = ObtenerUsuarioLogueado();
+        //    var detalleGastos = _verTodosLosGastosServicio.ObtenerLosGastosFiltradosPorMes(idUsuario, mes, anio);
 
-      //    return View("VerTodos");
-      //}
-   }
+        //    return View("VerTodosLosGastos");
+        //}
+    }
 }
