@@ -8,7 +8,7 @@ namespace GestionDeGastos.Repositorio
         Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario);
         Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario);
         Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto);
-        Task CrearPresupuesto(Presupuesto presupuesto);
+        Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto);
         Task ActualizarPresupuesto(Presupuesto presupuesto, decimal nuevoMonto);
         Task<Presupuesto?> GetByIdAsync(int id);
         Task CrearPresupuestoInicial(int idUsuario);
@@ -37,9 +37,9 @@ namespace GestionDeGastos.Repositorio
             await _context.SaveChangesAsync();
         }
 
-        public async Task CrearPresupuesto(Presupuesto presupuesto)
+        public async Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto)
         {
-            _context.Presupuestos.Add(presupuesto);
+            await _context.Presupuestos.AddAsync(presupuesto);
             await _context.SaveChangesAsync();
         }
 

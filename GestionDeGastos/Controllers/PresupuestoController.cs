@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace GestionDeGastos.Controllers
 {
-   public class PresupuestoController : Controller
-   {
-      public IPresupuestoServicio _presupuestoServicio;
-      public IVerTodosLosGastos _verTodosLosGastosServicio;
+    public class PresupuestoController : Controller
+    {
+        public IPresupuestoServicio _presupuestoServicio;
+        public IVerTodosLosGastos _verTodosLosGastosServicio;
 
         public PresupuestoController(IPresupuestoServicio presupuestoServicio, IVerTodosLosGastos gastoServicio)
         {
@@ -18,62 +18,64 @@ namespace GestionDeGastos.Controllers
         }
 
         public async Task<IActionResult> PresupuestoActual()
-      {
-         int idUsuario = ObtenerUsuarioLogueado();
+        {
+            int idUsuario = ObtenerUsuarioLogueado();
 
-         var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
-         IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
+            var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
 
-         PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+            await _presupuestoServicio.CrearPresupuesto(idUsuario, ultimoPresupuesto);
 
-         return View(modelo);
-      }
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
-      [HttpPost]
-      public async Task<IActionResult> PresupuestoActual(Presupuesto presupuesto, decimal NuevoMonto)
-      {
-         int idUsuario = ObtenerUsuarioLogueado();
+            PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+            return View(modelo);
+        }
 
-         Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
-         IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
+        [HttpPost]
+        public async Task<IActionResult> PresupuestoActual(Presupuesto presupuesto, decimal NuevoMonto)
+        {
+            int idUsuario = ObtenerUsuarioLogueado();
 
-         await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
+            Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
-         PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
-         return View(modelo);
-      }
+            await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
 
-      private int ObtenerUsuarioLogueado()
-      {
-         int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
-         int idUsuario = idUsuarioLoguedo.Value;
-         return idUsuario;
-      }
+            PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+            return View(modelo);
+        }
 
-      private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
-      {
+        private int ObtenerUsuarioLogueado()
+        {
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            int idUsuario = idUsuarioLoguedo.Value;
+            return idUsuario;
+        }
 
-         int idUsuario = ObtenerUsuarioLogueado();
+        private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
+        {
+
+            int idUsuario = ObtenerUsuarioLogueado();
             await _presupuestoServicio.CalcularMontoActualGastado(ultimoPresupuesto);
             decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(ultimoPresupuesto);
 
-         return new PresupuestoPaginaViewModel
-         {
-            UltimoPresupuesto = new PresupuestoViewModel
+            return new PresupuestoPaginaViewModel
             {
-               MontoLimite = ultimoPresupuesto.MontoLimite,
-               MontoActualGastado = ultimoPresupuesto.MontoActualGastado
-            },
-            ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
-            {
-               MontoLimite = p.MontoLimite,
-               MontoActualGastado = p.MontoActualGastado,
-               Anio = p.Anio,
-               Mes = p.Mes
-            }).ToList(),
-            PorcentajeGastado = porcentaje
-         };
-      }
+                UltimoPresupuesto = new PresupuestoViewModel
+                {
+                    MontoLimite = ultimoPresupuesto.MontoLimite,
+                    MontoActualGastado = ultimoPresupuesto.MontoActualGastado
+                },
+                ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
+                {
+                    MontoLimite = p.MontoLimite,
+                    MontoActualGastado = p.MontoActualGastado,
+                    Anio = p.Anio,
+                    Mes = p.Mes
+                }).ToList(),
+                PorcentajeGastado = porcentaje
+            };
+        }
 
         //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
         //{

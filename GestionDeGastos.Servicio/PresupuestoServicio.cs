@@ -13,6 +13,7 @@ namespace GestionDeGastos.Servicio
         Task<decimal> CalcularMontoActualGastado(Presupuesto presupuesto);
         Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto);
         Task CrearPresupuestoInicial(int idUsuario);
+        Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto);
     }
     public class PresupuestoServicio : IPresupuestoServicio
     {
@@ -48,7 +49,7 @@ namespace GestionDeGastos.Servicio
             }
 
             var porcentajeGastado = (presupuesto.MontoActualGastado / presupuesto.MontoLimite) * 100;
-            return Math.Min((decimal)porcentajeGastado, 100);
+            return (decimal)porcentajeGastado;
         }
 
         public async Task<decimal> CalcularMontoActualGastado(Presupuesto presupuesto)
@@ -78,6 +79,29 @@ namespace GestionDeGastos.Servicio
         public async Task CrearPresupuestoInicial(int idUsuario)
         {
             await _repositorioPresupuesto.CrearPresupuestoInicial(idUsuario);
+        }
+
+        public async Task CrearPresupuesto(int idUsuario,Presupuesto presupuesto)
+        {
+            if(DateTime.Now.Month != presupuesto.Mes || DateTime.Now.Year != presupuesto.Anio)
+            {
+                var presupuestosUsuario = await _repositorioPresupuesto.ObtenerTodosLosPresupuestosAsync(idUsuario);
+                bool presupuestoExistente = presupuestosUsuario.Any(p => p.Mes == DateTime.Now.Month && p.Anio == DateTime.Now.Year);
+
+                if(!presupuestoExistente)
+                {
+                    Presupuesto nuevoPresupuesto = new Presupuesto
+                    {
+                        IdUsuario = idUsuario,
+                        MontoLimite = presupuesto.MontoLimite,
+                        MontoActualGastado = 0,
+                        Mes = DateTime.Now.Month,
+                        Anio = DateTime.Now.Year
+                    };
+
+                    await _repositorioPresupuesto.CrearPresupuesto(idUsuario, nuevoPresupuesto);
+                }
+            }
         }
     }
 }
