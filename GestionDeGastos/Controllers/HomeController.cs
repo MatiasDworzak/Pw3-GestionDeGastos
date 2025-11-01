@@ -15,25 +15,29 @@ namespace GestionDeGastos.Controllers
     {
       private readonly IHomeService _homeService;
       private readonly IUsuarioRepositorio _usuarioService;
+      private readonly IUsuarioSession _usuarioSession;
 
-        public HomeController(IHomeService homeService, IUsuarioRepositorio usuarioService)
+        public HomeController(IHomeService homeService, IUsuarioRepositorio usuarioService,
+           IUsuarioSession usuarioSession)
         {
          _homeService = homeService; 
          _usuarioService = usuarioService;
+         _usuarioSession = usuarioSession;
         }
 
       public async Task<IActionResult> Home()
       {
-         var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
-       
+         var model = new UsuarioViewModel
+         {
+            IdUsuario = (int)_usuarioSession.ObtenerUsuarioId(),
+            Nombre = _usuarioSession.ObtenerNombre(),
+            Email = _usuarioSession.ObtenerEmail()
+         };
 
-         var usuarioEntidad = await _usuarioService.GetByIdAsync(idUsuario.Value);
-         var usuarioViewModel = new UsuarioViewModel { IdUsuario = usuarioEntidad.IdUsuario, Nombre = usuarioEntidad.Nombre, Email = usuarioEntidad.Email };
+         var lista = await _homeService.ObtenerUltimosTresGastosPorIdDeUsuario(model.IdUsuario);
+         var gastoModel = new GastoViewModel { Porcentaje = _homeService.ObtenerPresupuestoConPorcentaje(model.IdUsuario), ListaUltimosTresGastos = lista };
 
-         var lista = await _homeService.ObtenerUltimosTresGastosPorIdDeUsuario(idUsuario.Value);
-         var gastoModel = new GastoViewModel { Porcentaje = _homeService.ObtenerPresupuestoConPorcentaje(idUsuario.Value), ListaUltimosTresGastos = lista };
-
-         ViewBag.UsuarioHeader = usuarioViewModel;
+         ViewBag.UsuarioHeader = model;
          return View(gastoModel);
       }
    }
