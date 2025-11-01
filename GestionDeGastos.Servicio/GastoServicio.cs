@@ -18,18 +18,21 @@ namespace GestionDeGastos.Servicio
         private readonly IGastoRepositorio _gastoRepositorio;
         private readonly ICategoriaRepositorio _categoriaRepositorio;
         private readonly IMetodoDePagoRepositorio _metodoDePagoRepositorio;
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
 
-        public GastoServicio(IGastoRepositorio gastoRepositorio, ICategoriaRepositorio categoriaRepositorio, IMetodoDePagoRepositorio metodoDePagoRepositorio)
+        public GastoServicio(IGastoRepositorio gastoRepositorio, ICategoriaRepositorio categoriaRepositorio, IMetodoDePagoRepositorio metodoDePagoRepositorio, IUsuarioRepositorio usuarioRepositorio)
         {
             _gastoRepositorio = gastoRepositorio;
             _categoriaRepositorio = categoriaRepositorio;
             _metodoDePagoRepositorio = metodoDePagoRepositorio;
+            _usuarioRepositorio = usuarioRepositorio;
         }
         public async Task AgregarGastoAsync(Gasto gasto)
         {
-            // TODO: habria que validar que el usuario exista(usar repositorio de uri para traer al usuario con el id que viene en el gasto)
+            // que el usuario del gasto exista en la base de datos 
+            if(await _usuarioRepositorio.GetByIdAsync(gasto.IdUsuario) == null)
+                throw new ArgumentException("El usuario asociado al gasto no existe.");
 
-            
             // que el id de la categoria corresponda con opciones que si puede elegir el usuario
             IEnumerable<Categorium> categoriasDisponiblesParaElUsuario = await _categoriaRepositorio.ObtenerTodasLasCategoriasDisponiblesParaUsuarioPorIdAsync(gasto.IdUsuario);
             bool categoriaValidaParaElUsuario = categoriasDisponiblesParaElUsuario.Any(c => c.IdCategoria == gasto.IdCategoria);
@@ -43,8 +46,6 @@ namespace GestionDeGastos.Servicio
 
             if (!metodoDePagoValido)
                 throw new ArgumentException("El método de pago seleccionado no existe.");
-
-            // otras validaciones de negocio pueden ir aqui
 
             await _gastoRepositorio.AgregarGastoAsync(gasto);
         }
