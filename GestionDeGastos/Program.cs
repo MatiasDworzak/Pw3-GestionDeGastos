@@ -28,6 +28,9 @@ builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // 
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
 
+// Servicios Azure
+builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
+
 
 //repositorios
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
