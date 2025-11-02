@@ -36,7 +36,7 @@ namespace GestionDeGastos.Servicio
 
         public async Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int idUsuario, int mes, int anio)
         {
-            return await _gastoRepositorio.ObtenerGastosPorMesAsync(mes, anio);
+            return await _gastoRepositorio.ObtenerGastosPorMesAsync(idUsuario, mes, anio);
         }
 
         public async Task<List<Gasto>> ObtenerTodosLosGastos(int idUsuario)

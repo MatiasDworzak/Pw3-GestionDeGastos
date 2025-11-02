@@ -39,7 +39,7 @@ namespace GestionDeGastos.Controllers
             Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
             IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
-            await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
+            await _presupuestoServicio.ActualizarPresupuestoAsync(idUsuario, ultimoPresupuesto, NuevoMonto);
 
             PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
             return View(modelo);
@@ -56,8 +56,8 @@ namespace GestionDeGastos.Controllers
         {
 
             int idUsuario = ObtenerUsuarioLogueado();
-            await _presupuestoServicio.CalcularMontoActualGastado(ultimoPresupuesto);
-            decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(ultimoPresupuesto);
+            await _presupuestoServicio.CalcularMontoActualGastado(idUsuario, ultimoPresupuesto);
+            decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario, ultimoPresupuesto);
 
             return new PresupuestoPaginaViewModel
             {

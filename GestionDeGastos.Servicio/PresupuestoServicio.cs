@@ -8,10 +8,10 @@ namespace GestionDeGastos.Servicio
     {
         Task<Presupuesto> ObtenerPresupuestoActualAsync(int idUsuario);
         Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario);
-        Task<decimal> ObtenerPresupuestoConPorcentaje(Presupuesto presupuesto);
+        Task<decimal> ObtenerPresupuestoConPorcentaje(int idUsuario, Presupuesto presupuesto);
         Task<Presupuesto?> ObtenerPresupuestoPorIdAsync(int id);
-        Task<decimal> CalcularMontoActualGastado(Presupuesto presupuesto);
-        Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto);
+        Task<decimal> CalcularMontoActualGastado(int idUsuario,Presupuesto presupuesto);
+        Task ActualizarPresupuestoAsync(int idUsuario, Presupuesto presupuesto, decimal nuevoMonto);
         Task CrearPresupuestoInicial(int idUsuario);
         Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto);
     }
@@ -41,9 +41,9 @@ namespace GestionDeGastos.Servicio
            return await _repositorioPresupuesto.ObtenerTodosLosPresupuestosAsync(idUsuario);
         }
 
-        public async Task<decimal> ObtenerPresupuestoConPorcentaje(Presupuesto presupuesto)
+        public async Task<decimal> ObtenerPresupuestoConPorcentaje(int idUsuario, Presupuesto presupuesto)
         {
-            if (presupuesto == null || presupuesto.MontoLimite == 0)
+            if (presupuesto == null || presupuesto.MontoLimite == 0 || presupuesto.IdUsuario != idUsuario)
             {
                 return 0;
             }
@@ -52,14 +52,14 @@ namespace GestionDeGastos.Servicio
             return (decimal)porcentajeGastado;
         }
 
-        public async Task<decimal> CalcularMontoActualGastado(Presupuesto presupuesto)
+        public async Task<decimal> CalcularMontoActualGastado(int idUsuario, Presupuesto presupuesto)
         {
-            if (presupuesto == null || presupuesto.MontoLimite == 0)
+            if (presupuesto == null || presupuesto.MontoLimite == 0 || presupuesto.IdUsuario != idUsuario)
             {
                 return 0;
             }
 
-            List<Gasto> listaDeMontos = await _gastoRepositorio.ObtenerGastosPorMesAsync(presupuesto.Mes, presupuesto.Anio);
+            List<Gasto> listaDeMontos = await _gastoRepositorio.ObtenerGastosPorMesAsync(idUsuario, presupuesto.Mes, presupuesto.Anio);
 
             decimal montoActualGastado = 0;
             foreach (var gasto in listaDeMontos)
@@ -71,9 +71,12 @@ namespace GestionDeGastos.Servicio
             return montoActualGastado;
         }
 
-        public async Task ActualizarPresupuestoAsync(Presupuesto presupuesto, decimal nuevoMonto)
+        public async Task ActualizarPresupuestoAsync(int idUsuario, Presupuesto presupuesto, decimal nuevoMonto)
         {
-            await _repositorioPresupuesto.ActualizarPresupuesto(presupuesto, nuevoMonto);
+            if (presupuesto.IdUsuario == idUsuario)
+            {
+                await _repositorioPresupuesto.ActualizarPresupuesto(presupuesto, nuevoMonto);
+            }
         }
 
         public async Task CrearPresupuestoInicial(int idUsuario)

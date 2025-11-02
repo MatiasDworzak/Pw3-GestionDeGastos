@@ -16,7 +16,7 @@ namespace GestionDeGastos.Repositorio
 
 
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
-        Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año);
+        Task<List<Gasto>> ObtenerGastosPorMesAsync(int idUsuario, int mes, int anio);
         Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
@@ -25,14 +25,14 @@ namespace GestionDeGastos.Repositorio
         // TODO: analizar
         Task ActualizarGasto(Gasto Gasto);
 
-        }
-        public class GastoRepositorio : IGastoRepositorio
-        {
-            private readonly GestionDeGastosBdContext _context;
+    }
+    public class GastoRepositorio : IGastoRepositorio
+    {
+        private readonly GestionDeGastosBdContext _context;
 
-            public GastoRepositorio(GestionDeGastosBdContext context)
-            {
-                _context = context;
+        public GastoRepositorio(GestionDeGastosBdContext context)
+        {
+            _context = context;
         }
         public async Task ActualizarGasto(Gasto Gasto)
         {
@@ -55,10 +55,10 @@ namespace GestionDeGastos.Repositorio
             await _context.SaveChangesAsync();
         }
 
-            public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
-            {
-                return await _context.Gastos.FindAsync(IdGasto);
-            }
+        public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
+        {
+            return await _context.Gastos.FindAsync(IdGasto);
+        }
 
         public async Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario)
         {
@@ -77,10 +77,10 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();                       // devuelve la lista
         }
 
-        public async Task<List<Gasto>> ObtenerGastosPorMesAsync(int mes, int año)
+        public async Task<List<Gasto>> ObtenerGastosPorMesAsync(int idUsuario, int mes, int anio)
         {
             return await _context.Gastos
-                .Where(g => g.Fecha.Month == mes && g.Fecha.Year == año)
+                .Where(g => g.IdUsuario == idUsuario && g.Fecha.Month == mes && g.Fecha.Year == anio)
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }
@@ -127,7 +127,7 @@ namespace GestionDeGastos.Repositorio
 
 
 
-    }
+}
 
 
 
