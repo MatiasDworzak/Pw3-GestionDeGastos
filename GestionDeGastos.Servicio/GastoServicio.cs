@@ -12,6 +12,7 @@ namespace GestionDeGastos.Servicio
     public interface IGastoServicio
     {
         Task AgregarGastoAsync(Gasto gasto);
+        Task ActualizarGastoAsync(Gasto gasto);
     }
     public class GastoServicio : IGastoServicio
     {
@@ -27,10 +28,14 @@ namespace GestionDeGastos.Servicio
             _metodoDePagoRepositorio = metodoDePagoRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
         }
+       
         public async Task AgregarGastoAsync(Gasto gasto)
         {
+            // TODO: pasar validaciones para una clase ValidacionGasto para llamarla en cada metodo.
+            throw new Exception("Prueba");
+
             // que el usuario del gasto exista en la base de datos 
-            if(await _usuarioRepositorio.GetByIdAsync(gasto.IdUsuario) == null)
+            if (await _usuarioRepositorio.GetByIdAsync(gasto.IdUsuario) == null)
                 throw new ArgumentException("El usuario asociado al gasto no existe.");
 
             // que el id de la categoria corresponda con opciones que si puede elegir el usuario
@@ -48,6 +53,10 @@ namespace GestionDeGastos.Servicio
                 throw new ArgumentException("El método de pago seleccionado no existe.");
 
             await _gastoRepositorio.AgregarGastoAsync(gasto);
+        }
+        public async Task ActualizarGastoAsync(Gasto gasto)
+        {
+            await _gastoRepositorio.ActualizarGastoAsync(gasto);
         }
     }
 }
