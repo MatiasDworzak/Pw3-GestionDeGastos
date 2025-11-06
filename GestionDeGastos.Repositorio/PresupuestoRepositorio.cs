@@ -8,10 +8,11 @@ namespace GestionDeGastos.Repositorio
         Task<Presupuesto> ObtenerUltimoPresupuestoAsync(int idUsuario);
         Task<IEnumerable<Presupuesto>> ObtenerTodosLosPresupuestosAsync(int idUsuario);
         Task<Presupuesto> ObtenerPresupuestoPorId(int IdPresupuesto);
-        Task CrearPresupuesto(Presupuesto presupuesto);
+        Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto);
         Task ActualizarPresupuesto(Presupuesto presupuesto, decimal nuevoMonto);
         Task<Presupuesto?> GetByIdAsync(int id);
-
+        Task CrearPresupuestoInicial(int idUsuario);
+        Task ActualizarMontonActualGastado(Presupuesto presupuesto, decimal montoActualGastado);
     }
     public class PresupuestoRepositorio : IPresupuestoRepositorio
     {
@@ -36,9 +37,9 @@ namespace GestionDeGastos.Repositorio
             await _context.SaveChangesAsync();
         }
 
-        public async Task CrearPresupuesto(Presupuesto presupuesto)
+        public async Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto)
         {
-            _context.Presupuestos.Add(presupuesto);
+            await _context.Presupuestos.AddAsync(presupuesto);
             await _context.SaveChangesAsync();
         }
 
@@ -69,5 +70,33 @@ namespace GestionDeGastos.Repositorio
                  .FirstOrDefaultAsync();
         }
 
+        public async Task CrearPresupuestoInicial(int idUsuario)
+        {
+            await _context.Presupuestos.AddAsync(new Presupuesto
+            {
+                IdUsuario = idUsuario,
+                MontoLimite = 0,
+                MontoActualGastado = 0,
+                Mes = DateTime.Now.Month,
+                Anio = DateTime.Now.Year
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task ActualizarMontonActualGastado(Presupuesto presupuesto, decimal montoActualGastado)
+        {
+            Presupuesto presupuestoEncontrado = await ObtenerPresupuestoPorId(presupuesto.IdPresupuesto);
+
+            if (presupuestoEncontrado == null)
+            {
+                throw new Exception("Presupuesto no encontrado");
+            }
+
+            presupuesto.MontoActualGastado = montoActualGastado;
+
+            _context.Presupuestos.Update(presupuesto);
+            await _context.SaveChangesAsync();
+        }
     }
 }

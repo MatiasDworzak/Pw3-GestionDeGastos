@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos", "GestionDeGastos\GestionDeGastos.csproj", "{6F85FF98-32D0-4192-96DE-6D0EF0CD06AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91352CC4-9FC2-416F-A712-83B0E0FC26C0} = {91352CC4-9FC2-416F-A712-83B0E0FC26C0}
+		{55B5D06F-8800-456F-8BC2-1701C7427761} = {55B5D06F-8800-456F-8BC2-1701C7427761}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.Servicio", "GestionDeGastos.Servicio\GestionDeGastos.Servicio.csproj", "{68F3E45A-13CE-4B49-B206-7AD8C777CD0C}"
 EndProject
