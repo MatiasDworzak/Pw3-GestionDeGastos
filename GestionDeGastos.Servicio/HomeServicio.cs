@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace GestionDeGastos.Servicio
 {
     public interface IHomeService
     {
         Task<Usuario?> ObtenerUsuarioPorIdAsync(int id);
-        Task<List<Gasto?>> ObtenerUltimosTresGastosPorIdDeUsuario(int id);
+        Task<List<Gasto?>> ObtenerUltimosCincoGastosPorIdDeUsuario(int id);
         Task<Presupuesto?> ObtenerPresupuestoPorIdDeUsuarioAsync(int id);
         Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año);
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin);
@@ -53,9 +53,9 @@ namespace GestionDeGastos.Servicio
             return await _usuarioRepositorio.GetByIdAsync(id);
         }
 
-        public async Task<List<Gasto?>> ObtenerUltimosTresGastosPorIdDeUsuario(int id)
+        public async Task<List<Gasto?>> ObtenerUltimosCincoGastosPorIdDeUsuario(int id)
         {
-            return await _gastoRepositorio.ObtenerUltimosTresGastosPorUsuarioAsync(id);
+            return await _gastoRepositorio.ObtenerUltimosCincoGastosPorUsuarioAsync(id);
         }
 
         public async Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año)

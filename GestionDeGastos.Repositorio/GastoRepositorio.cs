@@ -17,7 +17,7 @@ namespace GestionDeGastos.Repositorio
 
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin);
         Task<List<Gasto>> ObtenerGastosPorMesAsync(int? idUsuario, int mes, int año);
-        Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
+        Task<List<Gasto>> ObtenerUltimosCincoGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
         Task<Gasto> ObtenerGastoPorId(int IdGasto);
@@ -68,12 +68,12 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
-        public async Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario)
+        public async Task<List<Gasto>> ObtenerUltimosCincoGastosPorUsuarioAsync(int idUsuario)
         {
             return await _context.Gastos
                 .Where(g => g.IdUsuario == idUsuario) // 🔹 filtra por el usuario
                 .OrderByDescending(g => g.Fecha)      // ordena del más nuevo al más viejo
-                .Take(3)                              // toma los últimos 3
+                .Take(5)                              // toma los últimos 3
                 .ToListAsync();                       // devuelve la lista
         }
 
