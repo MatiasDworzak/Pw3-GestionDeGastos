@@ -13,7 +13,7 @@ namespace GestionDeGastos.Servicio
     public interface IVerTodosLosGastos
     {
         Task<List<Gasto>> ObtenerTodosLosGastos (int idUsuario);
-        Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int idUsuario, int mes, int anio);
+        Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año);
         Task<List<Gasto>> ObtenerLosGastosFiltradosPorFechasEspecificas(int idUsuario);
         Task<List<Gasto>> ObtenerTodosLosGastosFiltradosPorCategoria(int idUsuario);
 
@@ -34,9 +34,9 @@ namespace GestionDeGastos.Servicio
             throw new NotImplementedException();
         }
 
-        public async Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int idUsuario, int mes, int anio)
+        public async Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año)
         {
-            return await _gastoRepositorio.ObtenerGastosPorMesAsync(idUsuario, mes, anio);
+            return await _gastoRepositorio.ObtenerGastosPorMesAsync(idUsuario, mes, año);
         }
 
         public async Task<List<Gasto>> ObtenerTodosLosGastos(int idUsuario)
