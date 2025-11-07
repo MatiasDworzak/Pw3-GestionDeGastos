@@ -22,19 +22,18 @@ namespace GestionDeGastos.Repositorio
         Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
         Task<Gasto> ObtenerGastoPorId(int IdGasto);
         Task AgregarGastoAsync(Gasto gasto);
-        // TODO: analizar
-        Task ActualizarGasto(Gasto Gasto);
+        Task ActualizarGastoAsync(Gasto Gasto);
 
-        }
-        public class GastoRepositorio : IGastoRepositorio
+    }
+    public class GastoRepositorio : IGastoRepositorio
+    {
+        private readonly GestionDeGastosBdContext _context;
+
+        public GastoRepositorio(GestionDeGastosBdContext context)
         {
-            private readonly GestionDeGastosBdContext _context;
-
-            public GastoRepositorio(GestionDeGastosBdContext context)
-            {
-                _context = context;
+            _context = context;
         }
-        public async Task ActualizarGasto(Gasto Gasto)
+        public async Task ActualizarGastoAsync(Gasto Gasto)
         {
             Gasto GastoEncontrado = await ObtenerGastoPorId(Gasto.IdGasto);
 
@@ -55,10 +54,10 @@ namespace GestionDeGastos.Repositorio
             await _context.SaveChangesAsync();
         }
 
-            public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
-            {
-                return await _context.Gastos.FindAsync(IdGasto);
-            }
+        public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
+        {
+            return await _context.Gastos.FindAsync(IdGasto);
+        }
 
         public async Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario)
         {
@@ -100,7 +99,6 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario)
         {
-            // TODO: analizar que pasa si el la cateogira en la que mas gasto es una categoria echa por el usuario
             return await _context.Gastos
                  .Where(g => g.IdUsuario == idUsuario)
                 .Include(g => g.IdCategoriaNavigation)
@@ -129,7 +127,7 @@ namespace GestionDeGastos.Repositorio
 
 
 
-    }
+}
 
 
 

@@ -15,12 +15,14 @@ namespace GestionDeGastos.Controllers
         private readonly ICategoriaServicio _categoriaServicio;
         private readonly IMetodoDePagoServicio _metodoDePagoServicio;
         private readonly IGastoServicio _gastoServicio;
+        private readonly IBlobAzureServicio _servicioBlob;
 
-        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio)
+        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob)
         {
             _categoriaServicio = categoriaServicio;
             _metodoDePagoServicio = metodoDePagoServicio;
             _gastoServicio = gastoServicio;
+            _servicioBlob = servicioBlob;
         }
 
         [HttpGet]
@@ -62,11 +64,10 @@ namespace GestionDeGastos.Controllers
 
                 try
                 {
-                    if (gastoEntidad.IdTicketNavigation != null 
+                    
+                    if (gastoEntidad.IdTicketNavigation != null
                         && gastoVMRecibido.OpcionTicketSeleccionada == TipoTicket.TicketFoto)
-                        // await _servicioBlob.SubirFotoAsync(gastoVMRecibido.TicketFoto);
-                        gastoEntidad.IdTicketNavigation.RutaImagenBlob = "ruta_falsa_para_probar"; 
-
+                        gastoEntidad.IdTicketNavigation.RutaImagenBlob = await _servicioBlob.SubirBlobAsync(gastoVMRecibido.TicketFoto, "tickets");
 
                     await _gastoServicio.AgregarGastoAsync(gastoEntidad);
 
@@ -76,8 +77,8 @@ namespace GestionDeGastos.Controllers
                 }
                 catch (Exception ex) 
                 {
-                    // TODO: analizar si falla algo pedirle al repositorio blob que borre la imagen que se subio,
-                    // si no se llego a subir la imagen y fallo antes, no hace falta pedir que se borre la imagen
+                    if(gastoEntidad.IdTicketNavigation?.RutaImagenBlob != null) 
+                        _servicioBlob.EliminarBlob(gastoEntidad.IdTicketNavigation.RutaImagenBlob, "tickets");
 
                     TempData["ErrorEnSubida"] = ex.Message;
                 }

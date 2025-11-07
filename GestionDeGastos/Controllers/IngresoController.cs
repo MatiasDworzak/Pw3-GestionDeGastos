@@ -5,85 +5,91 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestionDeGastos.Controllers
 {
-   public class IngresoController : Controller
-   {
-      private readonly IAutenticacionServicio _autenticacionServicio;
-     
-      public IngresoController(IAutenticacionServicio autenticacion) 
-      {
-         _autenticacionServicio = autenticacion;
-      }
-      public ActionResult Register()
-      {
-         return View();
-      }
+    public class IngresoController : Controller
+    {
+        private readonly IAutenticacionServicio _autenticacionServicio;
+        private readonly IPresupuestoServicio _presupuestoServicio;
 
-      [HttpPost]
-      [ValidateAntiForgeryToken]
-      public async Task<ActionResult> Register(RegistroViewModel model)
-      {
-         if (!ModelState.IsValid) 
-         {
-            return View(model);
-         }
-         var usuario = new Usuario
-         {
-            Nombre = model.Nombre,
-            Email = model.Correo,
-            Contrasenia = model.Contrasenia
-         };
-         var usuarioRegistrado =   await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
+        public IngresoController(IAutenticacionServicio autenticacion, IPresupuestoServicio presupuestoServicio)
+        {
+            _autenticacionServicio = autenticacion;
+            _presupuestoServicio = presupuestoServicio;
+        }
+        public ActionResult Register()
+        {
+            return View();
+        }
 
-         if (usuarioRegistrado == null) {
-            //si le saco el nameof no devuelve el mensaje de error
-            ModelState.AddModelError(nameof(model.Correo), "El correo es ya está registrado en el sistema");
-            return View(model);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegistroViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var usuario = new Usuario
+            {
+                Nombre = model.Nombre,
+                Email = model.Correo,
+                Contrasenia = model.Contrasenia
+            };
+            var usuarioRegistrado = await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
 
-         }
-         Console.WriteLine($"MI ID: {usuario.IdUsuario}");
-         
+            if (usuarioRegistrado == null)
+            {
+                //si le saco el nameof no devuelve el mensaje de error
+                ModelState.AddModelError(nameof(model.Correo), "El correo es ya está registrado en el sistema");
+                return View(model);
 
-         TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
-         return RedirectToAction("Login");
-      }
-      public ActionResult Login()
-      {
-         return View();
-      }
-      
-      [HttpPost]
-      [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Login(CredencialViewModel model)
-      {
-         if (!ModelState.IsValid) {
-            return View(model);
-         }
-         var usuarioValidado = await _autenticacionServicio.ValidarCredencialesAsync(model.Correo,model.Contrasenia);
-         if(usuarioValidado == null)
-         {
-            ModelState.AddModelError(string.Empty, "Correo o contraseña inválidos."); 
-            return View(model);
-         }
+            }
 
-         HttpContext.Session.SetInt32("UsuarioId", usuarioValidado.IdUsuario);
-         HttpContext.Session.SetString("UsuarioNombre", usuarioValidado.Nombre);
-         HttpContext.Session.SetString("UsuarioEmail", usuarioValidado.Email);
+            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
+            Console.WriteLine($"MI ID: {usuario.IdUsuario}");
 
-         TempData["LoginExito"] = "Sesion iniciada con éxito";
-         return RedirectToAction("Home", "Home");
-      }
-      [HttpPost]
-      [ValidateAntiForgeryToken]
-      public IActionResult Logout()
-      {
-         HttpContext.Session.Remove("UsuarioId");
-         HttpContext.Session.Remove("UsuarioNombre");
-         HttpContext.Session.Remove("UsuarioEmail");
 
-         return RedirectToAction("Login"); 
-      }
+            TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
+            return RedirectToAction("Login");
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
 
-     
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(CredencialViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var usuarioValidado = await _autenticacionServicio.ValidarCredencialesAsync(model.Correo, model.Contrasenia);
+            if (usuarioValidado == null)
+            {
+                ModelState.AddModelError(string.Empty, "Correo o contraseña inválidos.");
+                return View(model);
+            }
 
-   }
+            HttpContext.Session.SetInt32("UsuarioId", usuarioValidado.IdUsuario);
+            HttpContext.Session.SetString("UsuarioNombre", usuarioValidado.Nombre);
+            HttpContext.Session.SetString("UsuarioEmail", usuarioValidado.Email);
+
+            TempData["LoginExito"] = "Sesion iniciada con éxito";
+            return RedirectToAction("Home", "Home");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("UsuarioId");
+            HttpContext.Session.Remove("UsuarioNombre");
+            HttpContext.Session.Remove("UsuarioEmail");
+
+            return RedirectToAction("Login");
+        }
+
+
+
+    }
 }
