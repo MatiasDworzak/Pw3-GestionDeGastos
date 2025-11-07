@@ -8,15 +8,23 @@
         <h1>Presupuesto mensual</h1>
     </div>
 
-
     <div class="d-flex justify-content-around">
         <p>Monto total: @($"{Model.UltimoPresupuesto.MontoLimite:C}")</p>
         <p>Monto gastado: @($"{Model.UltimoPresupuesto.MontoActualGastado:C}")</p>
     </div>
 
+    @{
+        string progressColor = Model.PorcentajeGastado switch
+        {
+            var porcentaje when porcentaje < 50 => "bg-success",
+            var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
+            _ => "bg-danger",
+        };
+    }
+
     <div class="progress mb-4">
-        <div class="progress-bar" role="progressbar" aria-label="Example with label"
-             style="width: @(Model.PorcentajeGastado.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture))%;" aria-valuenow="@Model.PorcentajeGastado" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar @progressColor" role="progressbar"
+             style="width:@Model.PorcentajeGastado.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
             @Model.PorcentajeGastado.ToString("0.##")%
         </div>
     </div>
@@ -65,9 +73,7 @@
                     <td>@($"{presupuesto.MontoLimite:C}")</td>
                     <td>@($"{presupuesto.MontoActualGastado:C}")</td>
                     <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto" asp-route-mes="@presupuesto.Mes" asp-route-anio="@presupuesto.Anio">Ver gasto</a></td>
-
-@*                     <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto">Ver gastos</a></td>
- *@                </tr>
+                </tr>
             }
         </tbody>
     </table>

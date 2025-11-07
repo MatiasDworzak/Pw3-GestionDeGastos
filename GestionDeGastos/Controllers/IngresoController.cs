@@ -35,7 +35,6 @@ namespace GestionDeGastos.Controllers
                 Contrasenia = model.Contrasenia
             };
             var usuarioRegistrado = await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
-            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
 
             if (usuarioRegistrado == null)
             {
@@ -44,6 +43,8 @@ namespace GestionDeGastos.Controllers
                 return View(model);
 
             }
+
+            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
             Console.WriteLine($"MI ID: {usuario.IdUsuario}");
 
 
