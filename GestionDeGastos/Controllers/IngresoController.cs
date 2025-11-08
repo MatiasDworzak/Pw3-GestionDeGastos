@@ -35,9 +35,6 @@ namespace GestionDeGastos.Controllers
                 Contrasenia = model.Contrasenia
             };
             var usuarioRegistrado = await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
-            //await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
-            // hay que ponerlo despues del if usuarioRegistrado == null, porque en el caso de que el usuario no se pueda registrar,
-            // no deberia llegar a crear tampoco el presupuesto, ya que si lo hace, no existira el id en la base de datos porque fallo el register
 
             if (usuarioRegistrado == null)
             {
@@ -46,6 +43,8 @@ namespace GestionDeGastos.Controllers
                 return View(model);
 
             }
+
+            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
             Console.WriteLine($"MI ID: {usuario.IdUsuario}");
 
             await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
