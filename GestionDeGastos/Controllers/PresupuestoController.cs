@@ -131,7 +131,7 @@ namespace GestionDeGastos.Controllers
         //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
         //{
         //    int idUsuario = ObtenerUsuarioLogueado();
-        //    var detalleGastos = _verTodosLosGastosServicio.ObtenerLosGastosFiltradosPorMes(idUsuario, mes, anio);
+        //    var detalleGastos = _verTodosLosGastosServicio.ObtenerGastosPorMesAsync(idUsuario, mes, anio);
 
         //    return View("VerTodosLosGastos");
         //}

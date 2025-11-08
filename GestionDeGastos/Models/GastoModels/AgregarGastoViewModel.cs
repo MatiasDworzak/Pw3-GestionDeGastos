@@ -48,7 +48,6 @@ namespace GestionDeGastos.Models.GastoModels
         public int? Cantidad { get; set; }
 
         [Required(ErrorMessage = "El precio unitario es obligatorio.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor a 0.")]
         public decimal? PrecioUnitario { get; set; }
     }
 }

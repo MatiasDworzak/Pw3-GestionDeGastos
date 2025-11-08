@@ -47,6 +47,7 @@ namespace GestionDeGastos.Controllers
             await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
             Console.WriteLine($"MI ID: {usuario.IdUsuario}");
 
+            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
 
             TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
             return RedirectToAction("Login");
