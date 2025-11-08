@@ -30,6 +30,7 @@ builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
 
 // Servicios Azure
 builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
+builder.Services.AddScoped<IDocumentIntelligenceServicio, DocumentIntelligenceServicio>();
 
 
 //repositorios
