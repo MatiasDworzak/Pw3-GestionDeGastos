@@ -82,6 +82,12 @@ function obtenerUltimoItem() {
     return items.at(-1);
 } 
 
+function limpiarArchivoTicket() {
+    document.getElementById("formFile").value = "";
+    document.getElementById("preview-ticket").src = "";
+    document.getElementById("columna-items").classList.replace("col-9", "col-12");
+}
+
 // ======== EVENT LISTENERS ========
 
 // Radios con secciones
@@ -92,7 +98,7 @@ radioSinTicket.addEventListener('change', e => {
     sections.forEach(s => s.classList.add("d-none"));
     if (e.target.checked) {
         limpiarListaDeItems();
-        document.getElementById("MontoTotal").readOnly = false; 
+        limpiarArchivoTicket();
     }
 });
 
@@ -107,12 +113,7 @@ document.getElementById("ticket-manual").addEventListener('change', e => {
         document.getElementById("aviso-ticket-escaneado").classList.add("d-none");
         document.getElementById("titulo-ticket-manual-section").classList.remove("d-none");
 
-
-        document.getElementById("formFile").value = "";
-        document.getElementById("preview-ticket").src = "";
-
-        document.getElementById("columna-items").classList.replace("col-9", "col-12");
-
+        limpiarArchivoTicket();
     }
 });
 
