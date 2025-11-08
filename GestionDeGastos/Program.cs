@@ -31,6 +31,7 @@ builder.Services.AddScoped<ILimiteDePresupuestoServicio, LimiteDePresupuestoServ
 
 // Servicios Azure
 builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
+builder.Services.AddScoped<IDocumentIntelligenceServicio, DocumentIntelligenceServicio>();
 
 
 //repositorios

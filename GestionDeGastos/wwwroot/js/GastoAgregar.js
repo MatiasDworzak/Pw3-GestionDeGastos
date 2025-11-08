@@ -77,6 +77,11 @@ function calcularMontoTotal() {
     document.getElementById("MontoTotal").value = total;
 }
 
+function obtenerUltimoItem() {
+    const items = Array.from(document.querySelectorAll(".item-data-container"));
+    return items.at(-1);
+} 
+
 // ======== EVENT LISTENERS ========
 
 // Radios con secciones
@@ -96,10 +101,24 @@ document.getElementById("ticket-foto").addEventListener('change', e => {
     if (e.target.checked) limpiarListaDeItems();
 });
 
+// Radio ticket manual
+document.getElementById("ticket-manual").addEventListener('change', e => {
+    if (e.target.checked) {
+        document.getElementById("aviso-ticket-escaneado").classList.add("d-none");
+        document.getElementById("titulo-ticket-manual-section").classList.remove("d-none");
+
+
+        document.getElementById("formFile").value = "";
+        document.getElementById("preview-ticket").src = "";
+
+        document.getElementById("columna-items").classList.replace("col-9", "col-12");
+
+    }
+});
+
 // Agregar nuevo item
 btnAgregarItem.addEventListener('click', () => {
-    const items = Array.from(document.querySelectorAll(".item-data-container"));
-    const ultimo = items.at(-1);
+    const ultimo = obtenerUltimoItem();
     const clone = ultimo.cloneNode(true);
     limpiarItem(clone);
     ultimo.after(clone);
@@ -135,4 +154,109 @@ window.addEventListener('DOMContentLoaded', () => {
     //if (seleccionado) seleccionado.dispatchEvent(new Event('change'));
     if (Array.from(radiosConSection).includes(seleccionado)) mostrarSeccion(seleccionado.id, { limpiarMonto: false, bloquearMonto: true });
     else if (radioSinTicket.checked) limpiarListaDeItems();
+});
+
+// ======== SECCION DE ESCANEO DE TICKET ========
+const btnEscanear = document.getElementById("btn-escanear-ticket"); 
+const inputFile = document.getElementById("formFile"); 
+
+btnEscanear.addEventListener('click', async (e) => {
+
+    const file = inputFile.files[0];
+    if (!file) {
+        alert("Por favor, selecciona un archivo primero.");
+        return;
+    }
+
+    // Mostrar un spinner/loading
+    btnEscanear.disabled = true;
+    btnEscanear.innerText = "Escaneando...";
+
+    const formData = new FormData();
+    formData.append("ticketFoto", file); // "ticketFoto" debe coincidir con el parámetro del Action
+
+    try {
+        const response = await fetch('/Gasto/EscanearTicket', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || "Error al escanear");
+        }
+
+        const data = await response.json(); // data = TicketEscaneado
+
+        // agrego imagen
+        const preview = document.getElementById("preview-ticket");
+        preview.src = URL.createObjectURL(file);
+        preview.classList.remove("d-none");
+
+        // ajusto columnas
+        document.getElementById("columna-items").classList.replace("col-12", "col-9");
+
+        // --- ¡AQUÍ POBLAMOS EL FORMULARIO! ---
+
+        // Poblar la Fecha
+        if (data.fechaEscaneada) {
+            // Formatear fecha para el input type="date" (YYYY-MM-DD)
+            const fechaParts = data.fechaEscaneada.split('-'); // Asumiendo que .NET la manda como YYYY-MM-DD
+            document.getElementById("Fecha").value = `${fechaParts[0]}-${fechaParts[1]}-${fechaParts[2]}`;
+        }
+
+        // Poblar los items
+        limpiarListaDeItems();
+
+        console.log(data);
+
+        data.itemsEscaneados.forEach((item, index) => {
+            if (index > 0) {
+                // Si hay más de un item, clonamos el anterior
+                btnAgregarItem.click(); 
+            }
+
+            // Rellenar el item (el último que se haya agregado)
+            const ultimoItem = obtenerUltimoItem();
+
+            if (ultimoItem) {
+                ultimoItem.querySelector("input[name$='.Descripcion']").value = item.descripcion;
+                ultimoItem.querySelector("input[name$='.Cantidad']").value = item.cantidad;
+                ultimoItem.querySelector("input[name$='.PrecioUnitario']").value = item.precioUnitario.toFixed(2);
+            }
+        });
+
+        if (data.descuento) {
+            btnAgregarItem.click(); 
+            const ultimoItem = obtenerUltimoItem();
+            if (ultimoItem) {
+                ultimoItem.querySelector("input[name$='.Descripcion']").value = "Descuento";
+                ultimoItem.querySelector("input[name$='.Cantidad']").value = 1;
+                ultimoItem.querySelector("input[name$='.PrecioUnitario']").value = data.descuento;
+            }
+        }
+
+        if (data.iva) {
+            btnAgregarItem.click();
+            const ultimoItem = obtenerUltimoItem();
+            if (ultimoItem) {
+                ultimoItem.querySelector("input[name$='.Descripcion']").value = "Impuesto";
+                ultimoItem.querySelector("input[name$='.Cantidad']").value = 1;
+                ultimoItem.querySelector("input[name$='.PrecioUnitario']").value = data.iva;
+            }
+        }
+
+        calcularMontoTotal();
+
+        // aca necesitaria hacer la logica para que se muestren solo los items sin el titulo de la seccion
+        document.getElementById("ticket-manual-section").classList.remove("d-none");
+        document.getElementById("aviso-ticket-escaneado").classList.remove("d-none");
+        document.getElementById("titulo-ticket-manual-section").classList.add("d-none");
+
+    } catch (error) {
+        alert(error.message);
+    } finally {
+        btnEscanear.disabled = false;
+        btnEscanear.innerText = "Escanear Ticket";
+    }
 });

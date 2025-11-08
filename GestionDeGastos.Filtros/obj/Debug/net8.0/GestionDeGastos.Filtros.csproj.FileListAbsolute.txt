@@ -1,0 +1,13 @@
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\bin\Debug\net8.0\GestionDeGastos.Filtros.deps.json
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\bin\Debug\net8.0\GestionDeGastos.Filtros.dll
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\bin\Debug\net8.0\GestionDeGastos.Filtros.pdb
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.csproj.AssemblyReference.cache
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.AssemblyInfoInputs.cache
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.AssemblyInfo.cs
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.sourcelink.json
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.dll
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\refint\GestionDeGastos.Filtros.dll
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\GestionDeGastos.Filtros.pdb
+C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos.Filtros\obj\Debug\net8.0\ref\GestionDeGastos.Filtros.dll
