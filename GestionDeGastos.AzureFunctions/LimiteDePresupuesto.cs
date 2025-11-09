@@ -35,7 +35,7 @@ namespace GestionDeGastos.AzureFunctions
     {
         private readonly ILogger<LimiteDePresupuesto> _logger;
         private const decimal ALERT_THRESHOLD = 0.85m; // cuando llegue al 85%
-        private const int COOLDOWN_HOURS = 12;         // no reenviar dentro de 12h
+        private const int COOLDOWN_HOURS = 1;         // no reenviar dentro de 1h
 
         public LimiteDePresupuesto(ILogger<LimiteDePresupuesto> logger)
         {

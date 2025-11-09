@@ -7,6 +7,7 @@ using GestionDeGastos.Servicio.Seguridad;
 using GestionDeGastos.Servicio.GastoEspecifico;
 
 using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,10 @@ builder.Services.AddScoped<ILimiteDePresupuestoServicio, LimiteDePresupuestoServ
 builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
 builder.Services.AddScoped<IDocumentIntelligenceServicio, DocumentIntelligenceServicio>();
 
+//builder = WebApplication.CreateBuilder(args);
+
+var keyVaultUrl = new Uri("https://el-llavero.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential());
 
 //repositorios
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
