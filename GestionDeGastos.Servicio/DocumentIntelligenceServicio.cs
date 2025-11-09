@@ -37,14 +37,11 @@ namespace GestionDeGastos.Servicio
             await ticketArchivo.CopyToAsync(stream);
             stream.Position = 0;
 
-            // Usamos el modelo pre-entrenado de recibos ("prebuilt-receipt")
-            var content = new AnalyzeDocumentContent
-            {
-                Base64Source = BinaryData.FromStream(stream)
-            };
+            var binary = BinaryData.FromStream(stream);
 
+            // Usamos el modelo pre-entrenado de recibos ("prebuilt-receipt")
             Operation<AnalyzeResult> operation = 
-                await _cliente.AnalyzeDocumentAsync(WaitUntil.Completed, "prebuilt-receipt", content);
+                await _cliente.AnalyzeDocumentAsync(WaitUntil.Completed, "prebuilt-receipt", binary);
 
             AnalyzeResult result = operation.Value;
 
@@ -57,7 +54,7 @@ namespace GestionDeGastos.Servicio
             var ticket = new TicketEscaneadoDTO();
 
             var doc = result.Documents.FirstOrDefault();
-            if (doc == null || !doc.DocType.Contains("receipt", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(doc?.DocumentType) || !doc.DocumentType.Contains("receipt", StringComparison.OrdinalIgnoreCase))
                 return ticket;
 
             // Total analizar si hace falta
