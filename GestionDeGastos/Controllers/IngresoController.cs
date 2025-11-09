@@ -44,7 +44,6 @@ namespace GestionDeGastos.Controllers
 
             }
 
-            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
             Console.WriteLine($"MI ID: {usuario.IdUsuario}");
 
             await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
