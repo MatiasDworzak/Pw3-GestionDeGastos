@@ -2,6 +2,7 @@
 using GestionDeGastos.Models.GastoModels;
 
 using GestionDeGastos.Servicio;
+using GestionDeGastos.Servicio.DTO;
 using GestionDeGastos.Servicio.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -15,14 +16,17 @@ namespace GestionDeGastos.Controllers
         private readonly ICategoriaServicio _categoriaServicio;
         private readonly IMetodoDePagoServicio _metodoDePagoServicio;
         private readonly IGastoServicio _gastoServicio;
-        private readonly IBlobAzureServicio _servicioBlob;
+        private readonly IBlobAzureServicio _blobServicio;
+        private readonly IDocumentIntelligenceServicio _documentIntelligenceServicio;
 
-        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob)
+        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence)
         {
             _categoriaServicio = categoriaServicio;
             _metodoDePagoServicio = metodoDePagoServicio;
             _gastoServicio = gastoServicio;
-            _servicioBlob = servicioBlob;
+            _blobServicio = servicioBlob;
+            _documentIntelligenceServicio = documentIntelligence;
+
         }
 
         [HttpGet]
@@ -67,7 +71,7 @@ namespace GestionDeGastos.Controllers
                     
                     if (gastoEntidad.IdTicketNavigation != null
                         && gastoVMRecibido.OpcionTicketSeleccionada == TipoTicket.TicketFoto)
-                        gastoEntidad.IdTicketNavigation.RutaImagenBlob = await _servicioBlob.SubirBlobAsync(gastoVMRecibido.TicketFoto, "tickets");
+                        gastoEntidad.IdTicketNavigation.RutaImagenBlob = await _blobServicio.SubirBlobAsync(gastoVMRecibido.TicketFoto, "tickets");
 
                     await _gastoServicio.AgregarGastoAsync(gastoEntidad);
 
@@ -78,7 +82,7 @@ namespace GestionDeGastos.Controllers
                 catch (Exception ex) 
                 {
                     if(gastoEntidad.IdTicketNavigation?.RutaImagenBlob != null) 
-                        _servicioBlob.EliminarBlob(gastoEntidad.IdTicketNavigation.RutaImagenBlob, "tickets");
+                        _blobServicio.EliminarBlob(gastoEntidad.IdTicketNavigation.RutaImagenBlob, "tickets");
 
                     TempData["ErrorEnSubida"] = ex.Message;
                 }
@@ -87,6 +91,31 @@ namespace GestionDeGastos.Controllers
             await CargarCategoriasYMediosDePago(gastoVMRecibido);
 
             return View(gastoVMRecibido);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EscanearTicket(IFormFile ticketFoto)
+        {
+            if (ticketFoto == null || ticketFoto.Length == 0)
+            {
+                return BadRequest(new { message = "No se envió ningún archivo." });
+            }
+
+            try
+            {
+                // Llamamos a nuestro servicio
+                TicketEscaneadoDTO resultado = await _documentIntelligenceServicio.EscanearTicketAsync(ticketFoto);
+
+                if (resultado.ItemsEscaneados.Count == 0)
+                    return BadRequest(new { message = "No se pudo reconocer items en la imagen." });
+
+                // Devolvemos los datos como JSON
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Ocurrió un error en el servidor al analizar la imagen." });
+            }
         }
 
         // Metodos Helpers
@@ -139,9 +168,14 @@ namespace GestionDeGastos.Controllers
         {
             decimal montoCalculado = gastoVM.Items?.Sum(i => (i.Cantidad ?? 0) * (i.PrecioUnitario ?? 0)) ?? 0;
 
+            if (montoCalculado < 0)
+                ModelState.AddModelError(nameof(gastoVM.MontoTotal),
+                    "Los items no pueden dar un monto negativo.");
+
             if (montoCalculado != gastoVM.MontoTotal)
                 ModelState.AddModelError(nameof(gastoVM.MontoTotal),
                     "El monto total debe ser igual a la sumatoria entre los precios de los items por su cantidad.");
+
         }
 
         private async Task CargarCategoriasYMediosDePago(AgregarGastoViewModel gastoVM)
@@ -152,14 +186,15 @@ namespace GestionDeGastos.Controllers
             {
                 Text = c.Descripcion,
                 Value = c.IdCategoria.ToString()
-            }).ToList();
+            }
+            ).OrderBy(c => c.Text).ToList();
 
             var metodosDePagoEntidad = await _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync();
             gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new SelectListItem
             {
                 Text = m.Descripcion,
                 Value = m.IdMetodoPago.ToString()
-            }).ToList();
+            }).OrderBy(m => m.Text).ToList();
         }
 
         private Ticket mapeoDeEntidadTicket(AgregarGastoViewModel gastoVM)

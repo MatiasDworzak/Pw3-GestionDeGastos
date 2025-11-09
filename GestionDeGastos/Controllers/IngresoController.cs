@@ -35,7 +35,6 @@ namespace GestionDeGastos.Controllers
                 Contrasenia = model.Contrasenia
             };
             var usuarioRegistrado = await _autenticacionServicio.RegistrarUsuarioAsync(usuario);
-            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
 
             if (usuarioRegistrado == null)
             {
@@ -44,8 +43,10 @@ namespace GestionDeGastos.Controllers
                 return View(model);
 
             }
+
             Console.WriteLine($"MI ID: {usuario.IdUsuario}");
 
+            await _presupuestoServicio.CrearPresupuestoInicial(usuario.IdUsuario);
 
             TempData["RegistroExito"] = $"Hola! {model.Nombre}, registrado con éxito\nIniciá sesión";
             return RedirectToAction("Login");

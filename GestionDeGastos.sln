@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.Filtros", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.AccesoADatos", "GestionDeGastos.AccesoADatos\GestionDeGastos.AccesoADatos.csproj", "{91352CC4-9FC2-416F-A712-83B0E0FC26C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionDeGastos.AzureFunctions", "GestionDeGastos.AzureFunctions\GestionDeGastos.AzureFunctions.csproj", "{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,18 @@ Global
 		{91352CC4-9FC2-416F-A712-83B0E0FC26C0}.Release|x64.Build.0 = Release|Any CPU
 		{91352CC4-9FC2-416F-A712-83B0E0FC26C0}.Release|x86.ActiveCfg = Release|Any CPU
 		{91352CC4-9FC2-416F-A712-83B0E0FC26C0}.Release|x86.Build.0 = Release|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Release|x64.Build.0 = Release|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{2FC44E53-6C2F-4DB0-9A0E-F89B7178E1FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,7 +30,7 @@ namespace GestionDeGastos.Controllers
             var model = new GastoEspecificoViewModel
             {
                 Nombre = gastoObtenido.Nombre,
-                Monto = gastoObtenido.MontoTotal.Value,
+                Monto = gastoObtenido.MontoTotal,
                 Categoria = new CategoriaGastoEspecificoViewModel
                 {
                     IdCategoria = categoriaObtenida.IdCategoria,

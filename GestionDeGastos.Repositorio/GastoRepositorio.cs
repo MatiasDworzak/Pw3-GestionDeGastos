@@ -15,9 +15,9 @@ namespace GestionDeGastos.Repositorio
     {
 
 
-        Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin);
-        Task<List<Gasto>> ObtenerGastosPorMesAsync(int idUsuario, int mes, int anio);
-        Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario);
+        Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin);
+        Task<List<Gasto>> ObtenerGastosPorMesAsync(int? idUsuario, int mes, int año);
+        Task<List<Gasto>> ObtenerUltimosCincoGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario);
         Task<List<Gasto>> ObtenerGastosTotalesPorCategoriaAsync(int idUsuario);
         Task<Gasto> ObtenerGastoPorId(int IdGasto);
@@ -67,28 +67,30 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
-        public async Task<List<Gasto>> ObtenerUltimosTresGastosPorUsuarioAsync(int idUsuario)
+        public async Task<List<Gasto>> ObtenerUltimosCincoGastosPorUsuarioAsync(int idUsuario)
         {
-            return await _context.Gastos
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
                 .Where(g => g.IdUsuario == idUsuario) // 🔹 filtra por el usuario
                 .OrderByDescending(g => g.Fecha)      // ordena del más nuevo al más viejo
-                .Take(3)                              // toma los últimos 3
+                .Take(5)                              // toma los últimos 3
                 .ToListAsync();                       // devuelve la lista
         }
 
-        public async Task<List<Gasto>> ObtenerGastosPorMesAsync(int idUsuario, int mes, int anio)
+        public async Task<List<Gasto>> ObtenerGastosPorMesAsync(int? idUsuario, int mes, int año)
         {
-            return await _context.Gastos
-                .Where(g => g.IdUsuario == idUsuario && g.Fecha.Month == mes && g.Fecha.Year == anio)
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
+                .Where(g => g.IdUsuario == idUsuario &&  g.Fecha.Month == mes && g.Fecha.Year == año)
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }
 
+     
 
-        public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(DateOnly fechaInicio, DateOnly fechaFin)
+
+        public async Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin)
         {
-            return await _context.Gastos
-                .Where(g => g.Fecha >= fechaInicio && g.Fecha <= fechaFin)
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
+                .Where(g => g.IdUsuario == idUsuario && g.Fecha >= fechaInicio && g.Fecha <= fechaFin)
                 .OrderBy(g => g.Fecha)
                 .ToListAsync();
         }
