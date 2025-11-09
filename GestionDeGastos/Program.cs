@@ -7,11 +7,17 @@ using GestionDeGastos.Servicio.Seguridad;
 using GestionDeGastos.Servicio.GastoEspecifico;
 
 using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Key vaults azure
+var keyVaultUrl = new Uri("https://el-llavero.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential());
+
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,14 +30,14 @@ builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 builder.Services.AddScoped<IGastoServicio, GastoServicio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
-builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // lo hizo huesos
+builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>();
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
 builder.Services.AddScoped<ILimiteDePresupuestoServicio, LimiteDePresupuestoServicio>();
 
 // Servicios Azure
 builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
-
+builder.Services.AddScoped<IDocumentIntelligenceServicio, DocumentIntelligenceServicio>();
 
 //repositorios
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();

@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Presupuesto actual";
 }
+@await Html.PartialAsync("_Header")
 
 <div>
     <div class="d-flex justify-content-center mb-4">
@@ -72,7 +73,7 @@
                     <td>@presupuesto.Mes / @presupuesto.Anio</td>
                     <td>@($"{presupuesto.MontoLimite:C}")</td>
                     <td>@($"{presupuesto.MontoActualGastado:C}")</td>
-                    <td><a class="btn btn-dark" asp-action="MostrarGastosPresupuesto" asp-route-mes="@presupuesto.Mes" asp-route-anio="@presupuesto.Anio">Ver gasto</a></td>
+                    <td><a class="btn btn-dark" asp-controller="VerTodosLosGastos" asp-action="MostrarGastosPresupuesto" asp-route-mes="@presupuesto.Mes" asp-route-anio="@presupuesto.Anio">Ver gasto</a></td>
                 </tr>
             }
         </tbody>

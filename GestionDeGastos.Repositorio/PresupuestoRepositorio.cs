@@ -33,7 +33,7 @@ namespace GestionDeGastos.Repositorio
 
             presupuesto.MontoLimite = nuevoMonto;
 
-            _context.Presupuestos.Update(presupuesto);
+            //_context.Presupuestos.Update(presupuesto);
             await _context.SaveChangesAsync();
         }
 

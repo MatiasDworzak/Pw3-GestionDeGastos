@@ -3,6 +3,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model AgregarGastoViewModel
+@await Html.PartialAsync("_Header")
+
 
 <div class="container">
     <h3 class="text-center">Agregar Gasto</h3>
@@ -39,7 +41,7 @@
             <div class="col-6 d-flex flex-column gap-2">
                 <div class="row g-2">
                     <div class="col-6" id="fecha-container">
-                        <input asp-for="Fecha" type="date" class="w-100 form-control" placeholder="Fecha" />
+                        <input id="Fecha" asp-for="Fecha" type="date" class="w-100 form-control" placeholder="Fecha" />
                         <span asp-validation-for="Fecha" class="text-danger"></span>
                     </div>
                     <div class="col-6" id="monto-inical-container">
@@ -76,34 +78,56 @@
                     <span asp-validation-for="TicketFoto" class="text-danger"></span>
                 </div>
                 <div>
-                    <label class="btn btn-info" for="formFile">Escanear Ticket</label>
+                    <button id="btn-escanear-ticket" type="button" class="btn btn-info">Escanear Ticket</button>
                 </div>
             </div>
         </section>
 
         <!-- Seccion que se abre con el radio button Agregar Ticket Manual -->
         <section id="ticket-manual-section" class="d-none">
-            <h4 class="mt-2">Agregar ticket manual</h4>
-            @for (int i = 0; i < Model.Items.Count; i++)
-            {
-                <div class="row p-0 mt-2 item-data-container">
-                    <div class="col-3">
-                        <input asp-for="Items[@i].Descripcion" class="form-control input-original-item" type="text" placeholder="Nombre Producto" />
-                        <span asp-validation-for="Items[@i].Descripcion" class="text-danger"></span>
-                    </div>
-                    <div class="col-3">
-                        <input asp-for="Items[@i].Cantidad" class="form-control input-original-item" type="number" placeholder="Cantidad" />
-                        <span asp-validation-for="Items[@i].Cantidad" class="text-danger"></span>
-                    </div>
-                    <div class="col-3">
-                        <input asp-for="Items[@i].PrecioUnitario" class="form-control input-original-item" type="number" placeholder="Precio x Unidad" />
-                        <span asp-validation-for="Items[@i].PrecioUnitario" class="text-danger"></span>
-                    </div>
-                    <div class="col-3">
-                        <button type="button" class="btn btn-danger w-100 eliminar-item">Eliminar</button>
-                    </div>
-                </div>
-            }
+            <h4 id="titulo-ticket-manual-section" class="mt-2">Agregar ticket manual</h4>
+            <div id="aviso-ticket-escaneado" class="d-none alert alert-warning my-2" role="alert">
+                Los datos fueron obtenidos automáticamente del ticket.
+                Por favor, verificá y corregí cualquier valor antes de confirmar el gasto.
+            </div>
+            <div class="row">
+                 <div id="columna-items" class="col-9">
+                     <div class="row">
+                         <div class="col-3">
+                             <h5>Nombre producto:</h5>
+                         </div>
+                        <div class="col-3">
+                            <h5>Cantidad:</h5>
+                        </div>
+                        <div class="col-3">
+                            <h5>Precio x unidad:</h5>
+                        </div>
+                     </div>
+                    @for (int i = 0; i < Model.Items.Count; i++)
+                    {
+                        <div class="row p-0 mt-2 item-data-container">
+                            <div class="col-3">
+                                <input asp-for="Items[@i].Descripcion" class="form-control input-original-item" type="text" placeholder="Nombre Producto" />
+                                <span asp-validation-for="Items[@i].Descripcion" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <input asp-for="Items[@i].Cantidad" class="form-control input-original-item" type="number" placeholder="Cantidad" />
+                                <span asp-validation-for="Items[@i].Cantidad" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <input asp-for="Items[@i].PrecioUnitario" class="form-control input-original-item" type="number" placeholder="Precio x Unidad" />
+                                <span asp-validation-for="Items[@i].PrecioUnitario" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-danger w-100 eliminar-item">Eliminar</button>
+                            </div>
+                        </div>
+                    }
+                 </div>
+                <div id="columna-imagen" class="col-3">
+                    <img id="preview-ticket" class="mt-2 img-thumbnail d-none" style="max-width: 300px;">
+                 </div>
+            </div>
             <div class="mt-2 d-flex justify-content-start">
                 <div class="btn btn-primary w-auto" id="nuevo-item">+ Nuevo item</div>
             </div>
