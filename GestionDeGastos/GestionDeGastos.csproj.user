@@ -14,5 +14,6 @@
     <WebStackScaffolding_DbContextTypeFullName>GestionDeGastos.GestionDeGastosBdContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\Lucas\Desktop\GestionDeGastosPrueba\GestionDeGastos\Properties\PublishProfiles\GestionDeGastos - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
