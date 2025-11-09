@@ -39,10 +39,22 @@
                 <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none text-end">Ver Presupuestos</a>
             </div>
 
-            <div class="progress mb-4" style="height: 25px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 20%;">@Model.Porcentaje</div>
-            </div>
+         
+            @{
+                string progressColor = Model.Porcentaje switch
+                {
+                    var porcentaje when porcentaje < 50 => "bg-success",
+                    var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
+                    _ => "bg-danger",
+                };
+            }
 
+            <div class="progress mb-4">
+                <div class="progress-bar @progressColor" role="progressbar"
+                     style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
+                    @Model.Porcentaje.ToString("0.##")%
+                </div>
+            </div>
             <h6 class="fw-bold mb-3">Acciones Rápidas</h6>
             <div class="row mb-3">
                 <div class="col-6 mb-2">
@@ -77,14 +89,18 @@
                            style="text-decoration:none; color:inherit;">
 
                             <div class="d-flex align-items-center">
-                                <i class="@gasto.IdCategoriaNavigation.Icono"
-                                   style="color:@gasto.IdCategoriaNavigation.Color; font-size:1.8rem; margin-right:10px;"></i>
+                                <span class="material-icons"
+                                      style="color:@gasto.IdCategoriaNavigation.Color; font-size:1.8rem; margin-right:10px;">
+                                    @gasto.IdCategoriaNavigation.Icono
+                                </span>
 
                                 <div>
                                     <div class="fw-semibold" style="font-size:1.1rem;">@gasto.Nombre</div>
-                                    <small class="text-muted">Hace 2 horas</small>
+                                    <small class="text-muted">@gasto.Fecha</small>
                                 </div>
                             </div>
+
+                                
 
                             <span class="text-secondary fw-bold" style="font-size:1.1rem;">
                                 @gasto.MontoTotal.ToString("C2")

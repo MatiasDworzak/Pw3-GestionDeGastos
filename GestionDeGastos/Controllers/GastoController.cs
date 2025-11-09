@@ -152,14 +152,15 @@ namespace GestionDeGastos.Controllers
             {
                 Text = c.Descripcion,
                 Value = c.IdCategoria.ToString()
-            }).ToList();
+            }
+            ).OrderBy(c => c.Text).ToList();
 
             var metodosDePagoEntidad = await _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync();
             gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new SelectListItem
             {
                 Text = m.Descripcion,
                 Value = m.IdMetodoPago.ToString()
-            }).ToList();
+            }).OrderBy(m => m.Text).ToList();
         }
 
         private Ticket mapeoDeEntidadTicket(AgregarGastoViewModel gastoVM)
