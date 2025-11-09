@@ -64,7 +64,7 @@ namespace GestionDeGastos.Servicio
             decimal montoActualGastado = 0;
             foreach (var gasto in listaDeMontos)
             {
-                montoActualGastado += gasto.MontoTotal.Value;
+                montoActualGastado += gasto.MontoTotal;
             }
 
             await _repositorioPresupuesto.ActualizarMontonActualGastado(presupuesto,montoActualGastado);
