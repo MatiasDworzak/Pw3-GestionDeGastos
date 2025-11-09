@@ -65,10 +65,14 @@ namespace GestionDeGastos.Controllers
                 .GroupBy(g => new
                 {
                     g.IdCategoriaNavigation.Descripcion,
+                    g.IdCategoriaNavigation.Icono,
+                    g.IdCategoriaNavigation.Color
                 })
                 .Select(g => new
                 {
                     Categoria = g.Key.Descripcion,
+                    Icono = g.Key.Icono,
+                    Color = g.Key.Color,
                     Total = g.Sum(x => x.MontoTotal)
                 })
                 .OrderByDescending(x => x.Total)
@@ -79,10 +83,17 @@ namespace GestionDeGastos.Controllers
 
             // Ahora devolvemos los gastos individuales con su categoría y color
             var gastosDetallados = query
-      .GroupBy(g => g.IdCategoriaNavigation.Descripcion)
+      .GroupBy(g => new
+      {
+          g.IdCategoriaNavigation.Descripcion,
+          g.IdCategoriaNavigation.Icono,
+          g.IdCategoriaNavigation.Color
+      })
       .Select(g => new
       {
-          Categoria = g.Key,
+          Categoria = g.Key.Descripcion,
+          Icono = g.Key.Icono,
+          Color = g.Key.Color,
           Gastos = g.Select(x => new
           {
               x.Nombre,
