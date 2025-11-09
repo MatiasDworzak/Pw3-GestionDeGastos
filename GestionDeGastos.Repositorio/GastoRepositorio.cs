@@ -69,7 +69,7 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<List<Gasto>> ObtenerUltimosCincoGastosPorUsuarioAsync(int idUsuario)
         {
-            return await _context.Gastos
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
                 .Where(g => g.IdUsuario == idUsuario) // 🔹 filtra por el usuario
                 .OrderByDescending(g => g.Fecha)      // ordena del más nuevo al más viejo
                 .Take(5)                              // toma los últimos 3

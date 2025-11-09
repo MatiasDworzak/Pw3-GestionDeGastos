@@ -16,7 +16,6 @@ namespace GestionDeGastos.Servicio
         Task<List<Gasto>> ObtenerLosGastosFiltradosPorMes(int? idUsuario, int mes, int año);
         Task<List<Gasto>> ObtenerGastosPorRangoDeFechasAsync(int? idUsuario, DateOnly? fechaInicio, DateOnly? fechaFin);
 
-        decimal ObtenerPresupuestoConPorcentaje(int idUsuario);
         
     }
     public class HomeServicio : IHomeService
@@ -37,17 +36,7 @@ namespace GestionDeGastos.Servicio
             return await _presupuestoRepositorio.GetByIdAsync(id);
             
         }
-        public  decimal  ObtenerPresupuestoConPorcentaje(int idUsuario)
-        {
-            var presupuesto =  _presupuestoRepositorio.ObtenerUltimoPresupuestoAsync(idUsuario).Result;
-            if (presupuesto == null || presupuesto.MontoLimite == 0)
-            {
-                return 0;
-            }
-
-            var porcentajeGastado = (presupuesto.MontoActualGastado / presupuesto.MontoLimite) * 100;
-            return Math.Min((decimal)porcentajeGastado, 100);
-        }
+    
         public async Task<Usuario?> ObtenerUsuarioPorIdAsync(int id)
         {
             return await _usuarioRepositorio.GetByIdAsync(id);
@@ -67,5 +56,7 @@ namespace GestionDeGastos.Servicio
         {
             return await _gastoRepositorio.ObtenerGastosPorRangoDeFechasAsync(idUsuario, fechaInicio, fechaFin);
         }
+
+
     }
 }
