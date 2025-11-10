@@ -16,7 +16,7 @@ var keyVaultUrl = new Uri("https://el-llavero.vault.azure.net/");
 builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential());
 
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionLocal")));
 
 
 // Add services to the container.
@@ -46,15 +46,6 @@ builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
 builder.Services.AddScoped<IGastoEspecificoRepositorio, GastoEspecificoRepositorio>();
-
-
-//cadena de conexion del appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-options.UseSqlServer(connectionString));
-
-
-
 
 //Habilitar sesiones
 builder.Services.AddSession(options =>

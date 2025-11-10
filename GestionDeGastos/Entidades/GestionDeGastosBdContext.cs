@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace GestionDeGastos.AccesoADatos.Entidades;
+namespace GestionDeGastos.Entidades;
 
 public partial class GestionDeGastosBdContext : DbContext
 {
@@ -35,7 +35,7 @@ public partial class GestionDeGastosBdContext : DbContext
     {
         modelBuilder.Entity<Categorium>(entity =>
         {
-            entity.HasKey(e => e.IdCategoria).HasName("PK__Categori__CD54BC5A6FEE4DC5");
+            entity.HasKey(e => e.IdCategoria).HasName("PK__Categori__CD54BC5A96CC5038");
 
             entity.Property(e => e.IdCategoria).HasColumnName("id_categoria");
             entity.Property(e => e.Color)
@@ -54,7 +54,7 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<Gasto>(entity =>
         {
-            entity.HasKey(e => e.IdGasto).HasName("PK__Gasto__ECB8FB8005516386");
+            entity.HasKey(e => e.IdGasto).HasName("PK__Gasto__ECB8FB80A87E781B");
 
             entity.ToTable("Gasto");
 
@@ -96,7 +96,7 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<Ingreso>(entity =>
         {
-            entity.HasKey(e => e.IdIngreso).HasName("PK__Ingreso__8FF0F0DEFAA75E96");
+            entity.HasKey(e => e.IdIngreso).HasName("PK__Ingreso__8FF0F0DEC95F336A");
 
             entity.ToTable("Ingreso");
 
@@ -119,7 +119,7 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<Item>(entity =>
         {
-            entity.HasKey(e => e.IdItem).HasName("PK__Item__87C9438B685D299D");
+            entity.HasKey(e => e.IdItem).HasName("PK__Item__87C9438BCAFA96E7");
 
             entity.ToTable("Item");
 
@@ -145,7 +145,7 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<MetodoDePago>(entity =>
         {
-            entity.HasKey(e => e.IdMetodoPago).HasName("PK__MetodoDe__85BE0EBCE713BE25");
+            entity.HasKey(e => e.IdMetodoPago).HasName("PK__MetodoDe__85BE0EBC3C373F02");
 
             entity.ToTable("MetodoDePago");
 
@@ -166,7 +166,7 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<Presupuesto>(entity =>
         {
-            entity.HasKey(e => e.IdPresupuesto).HasName("PK__Presupue__3E94B4E5EDCB71F8");
+            entity.HasKey(e => e.IdPresupuesto).HasName("PK__Presupue__3E94B4E5C55C5D2E");
 
             entity.ToTable("Presupuesto");
 
@@ -189,7 +189,7 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.IdTicket).HasName("PK__Ticket__48C6F523C3EC3854");
+            entity.HasKey(e => e.IdTicket).HasName("PK__Ticket__48C6F5239F1DF4A7");
 
             entity.ToTable("Ticket");
 
@@ -203,11 +203,11 @@ public partial class GestionDeGastosBdContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__4E3E04AD767D972E");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__4E3E04AD69D826CC");
 
             entity.ToTable("Usuario");
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__AB6E616438C9F053").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__AB6E6164AA9E6718").IsUnique();
 
             entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
             entity.Property(e => e.Contrasenia)
@@ -236,7 +236,7 @@ public partial class GestionDeGastosBdContext : DbContext
                         .HasConstraintName("FK_CategoriaUsuario_Usuario"),
                     j =>
                     {
-                        j.HasKey("IdUsuario", "IdCategoria").HasName("PK__Categori__F2EB4F68BC8112BA");
+                        j.HasKey("IdUsuario", "IdCategoria").HasName("PK__Categori__F2EB4F683B0FD06F");
                         j.ToTable("CategoriaUsuario");
                         j.IndexerProperty<int>("IdUsuario").HasColumnName("id_usuario");
                         j.IndexerProperty<int>("IdCategoria").HasColumnName("id_categoria");
