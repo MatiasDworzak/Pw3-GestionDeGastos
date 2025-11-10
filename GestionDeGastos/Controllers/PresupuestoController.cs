@@ -2,111 +2,138 @@
 using GestionDeGastos.Models;
 using GestionDeGastos.Servicio;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GestionDeGastos.Controllers
 {
-   public class PresupuestoController : Controller
-   {
-      //public IActionResult PresupuestoActual()
-      //{
-      //    var listaPresupuestos = new List<PresupuestoViewModel>
-      //    {
-      //        new PresupuestoViewModel
-      //        {
-      //            MontoLimite = 1500.00m,
-      //            MontoActualGastado = 750.00m,
-      //            Anio = 2025,
-      //            Mes = 05
-      //        },
-      //        new PresupuestoViewModel
-      //        {
-      //            MontoLimite = 2000.00m,
-      //            MontoActualGastado = 1200.00m,
-      //            Anio = 2025,
-      //            Mes = 06
-      //        }
-      //    };
+    public class PresupuestoController : Controller
+    {
+        public readonly IPresupuestoServicio _presupuestoServicio;
+        public readonly IVerTodosLosGastos _verTodosLosGastosServicio;
+        public readonly ILimiteDePresupuestoServicio _limiteDePresupuestoServicio;
 
-      //    var modelo = new PresupuestoPaginaViewModel
-      //    {
-      //        ListaPresupuestos = listaPresupuestos,
-      //        UltimoPresupuesto = listaPresupuestos.LastOrDefault()
-      //    };
+        public PresupuestoController(IPresupuestoServicio presupuestoServicio,
+                                    IVerTodosLosGastos gastoServicio,
+                                    ILimiteDePresupuestoServicio limiteDePresupuestoServicio)
+        {
+            _presupuestoServicio = presupuestoServicio;
+            _verTodosLosGastosServicio = gastoServicio;
+            _limiteDePresupuestoServicio = limiteDePresupuestoServicio;
+        }
 
-      //    return View(modelo);
-      //}
+        public async Task<IActionResult> PresupuestoActual()
+        {
+            int idUsuario = ObtenerUsuarioLogueado();
 
-      public IPresupuestoServicio _presupuestoServicio;
+            var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
 
-      public PresupuestoController(IPresupuestoServicio presupuestoServicio)
-      {
-         _presupuestoServicio = presupuestoServicio;
-      }
+            await _presupuestoServicio.CrearPresupuesto(idUsuario, ultimoPresupuesto);
 
-      public async Task<IActionResult> PresupuestoActual()
-      {
-         int idUsuario = ObtenerUsuarioLogueado();
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
-         var ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
-         IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
+            PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+            return View(modelo);
+        }
 
-         PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+        [HttpPost]
+        public async Task<IActionResult> PresupuestoActual(Presupuesto presupuesto, decimal NuevoMonto)
+        {
+            int idUsuario = ObtenerUsuarioLogueado();
 
-         return View(modelo);
-      }
+            Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
+            IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
 
-      [HttpPost]
-      public async Task<IActionResult> PresupuestoActual(Presupuesto presupuesto, decimal NuevoMonto)
-      {
-         int idUsuario = ObtenerUsuarioLogueado();
+            await _presupuestoServicio.ActualizarPresupuestoAsync(idUsuario, ultimoPresupuesto, NuevoMonto);
 
-         Presupuesto ultimoPresupuesto = await _presupuestoServicio.ObtenerPresupuestoActualAsync(idUsuario);
-         IEnumerable<Presupuesto> listaPresupuestos = await _presupuestoServicio.ObtenerTodosLosPresupuestosAsync(idUsuario);
+            PresupuestoPaginaViewModel modelo = await ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
+            return View(modelo);
+        }
 
-         await _presupuestoServicio.ActualizarPresupuestoAsync(ultimoPresupuesto, NuevoMonto);
+        private int ObtenerUsuarioLogueado()
+        {
+            int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
+            int idUsuario = idUsuarioLoguedo.Value;
+            return idUsuario;
+        }
 
-         PresupuestoPaginaViewModel modelo = ContenidoPresupuestoViewModel(ultimoPresupuesto, listaPresupuestos);
-         return View(modelo);
-      }
+        //private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
+        //{
 
-      private int ObtenerUsuarioLogueado()
-      {
-         //HttpContext.Session.SetInt32("UsuarioId", 1);
-         // Para prueba de session
+        //    int idUsuario = ObtenerUsuarioLogueado();
+        //    await _presupuestoServicio.CalcularMontoActualGastado(idUsuario, ultimoPresupuesto);
+        //    decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario, ultimoPresupuesto);
 
-         int? idUsuarioLoguedo = HttpContext.Session.GetInt32("UsuarioId");
-         int idUsuario = idUsuarioLoguedo.Value;
-         return idUsuario;
-      }
+        //    return new PresupuestoPaginaViewModel
+        //    {
+        //        UltimoPresupuesto = new PresupuestoViewModel
+        //        {
+        //            MontoLimite = ultimoPresupuesto.MontoLimite,
+        //            MontoActualGastado = ultimoPresupuesto.MontoActualGastado
+        //        },
+        //        ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
+        //        {
+        //            MontoLimite = p.MontoLimite,
+        //            MontoActualGastado = p.MontoActualGastado,
+        //            Anio = p.Anio,
+        //            Mes = p.Mes
+        //        }).ToList(),
+        //        PorcentajeGastado = porcentaje
+        //    };
+        //}
 
-      private PresupuestoPaginaViewModel ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
-      {
+        private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(
+                                                        Presupuesto ultimoPresupuesto,
+                                                        IEnumerable<Presupuesto> listaPresupuestos)
+        {
+            int idUsuario = ObtenerUsuarioLogueado();
 
-         int idUsuario = ObtenerUsuarioLogueado();
+            await _presupuestoServicio.CalcularMontoActualGastado(idUsuario, ultimoPresupuesto);
+            decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario, ultimoPresupuesto);
 
-         return new PresupuestoPaginaViewModel
-         {
-            UltimoPresupuesto = new PresupuestoViewModel
+            string userEmail = HttpContext.Session.GetString("UsuarioEmail");
+            //llamar a la Azure Function para enviar alerta si corresponde
+            try
             {
-               MontoLimite = ultimoPresupuesto.MontoLimite,
-               MontoActualGastado = ultimoPresupuesto.MontoActualGastado
-            },
-            ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
+                if (ultimoPresupuesto.MontoLimite.HasValue && ultimoPresupuesto.MontoActualGastado.HasValue)
+                {
+                    await _limiteDePresupuestoServicio.EnviarAlertaSiCorrespondeAsync(
+                        ultimoPresupuesto.IdPresupuesto,
+                        idUsuario,
+                        userEmail,
+                        ultimoPresupuesto.MontoLimite.Value,
+                        ultimoPresupuesto.MontoActualGastado.Value
+                    );
+                }
+            }
+            catch (Exception ex)
             {
-               MontoLimite = p.MontoLimite,
-               MontoActualGastado = p.MontoActualGastado,
-               Anio = p.Anio,
-               Mes = p.Mes
-            }).ToList(),
-            PorcentajeGastado = _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario)
-         };
-      }
+                Console.WriteLine($"Error Azure Function: {ex.Message}");
+            }
 
-      //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
-      //{
-      //    var detalleGastos = _gastoServicio.ObtenerGastosPorMesYAnio(mes, anio);
+            return new PresupuestoPaginaViewModel
+            {
+                UltimoPresupuesto = new PresupuestoViewModel
+                {
+                    MontoLimite = ultimoPresupuesto.MontoLimite,
+                    MontoActualGastado = ultimoPresupuesto.MontoActualGastado
+                },
+                ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
+                {
+                    MontoLimite = p.MontoLimite,
+                    MontoActualGastado = p.MontoActualGastado,
+                    Anio = p.Anio,
+                    Mes = p.Mes
+                }).ToList(),
+                PorcentajeGastado = porcentaje
+            };
+        }
 
-      //    return View("VerTodos");
-      //}
-   }
+        //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
+        //{
+        //    int idUsuario = ObtenerUsuarioLogueado();
+        //    var detalleGastos = _verTodosLosGastosServicio.ObtenerLosGastosFiltradosPorMes(idUsuario, mes, anio);
+
+        //    return View("VerTodosLosGastos");
+        //}
+    }
 }

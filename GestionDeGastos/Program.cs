@@ -16,7 +16,6 @@ builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
 //servicios
 builder.Services.AddScoped<IHomeService, HomeServicio>();
 builder.Services.AddScoped<IUsuarioService, UsuarioServicio>();
@@ -28,6 +27,11 @@ builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
 builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // lo hizo huesos
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
+builder.Services.AddScoped<ILimiteDePresupuestoServicio, LimiteDePresupuestoServicio>();
+
+// Servicios Azure
+builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
+builder.Services.AddScoped<IDocumentIntelligenceServicio, DocumentIntelligenceServicio>();
 
 
 //repositorios
@@ -55,7 +59,11 @@ builder.Services.AddSession(options =>
    options.Cookie.IsEssential = true;
 });
 
-
+//Azure functions
+builder.Services.AddHttpClient("Functions", client =>
+{
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
 
 var app = builder.Build();
 
