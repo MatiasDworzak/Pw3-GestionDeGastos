@@ -135,251 +135,46 @@
     <div class="main-container">
         <!-- Sección Izquierda -->
         <div class="left-section">
-            <div class="time-filter">
-                <h3>TIEMPO ANALIZADO EN GRÁFICO:</h3>
-                <p>
-                    @(Model.FechaInicio.HasValue && Model.FechaFin.HasValue
-                                        ? $"{Model.FechaInicio.Value:dd/MM/yyyy} - {Model.FechaFin.Value:dd/MM/yyyy}"
-                                        : "Todo el tiempo")
-                </p>
-            </div>
+            <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
+                <div class="text-center mb-3">
+                    <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                    <p id="rango-fechas">dd/mm/aaaa - dd/mm/aaaa</p>
 
-            <div class="chart-wrapper">
-                <div id="chart_div"></div>
-            </div>
+                    <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3">
+                        <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
+                        <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
+                        <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
+                        <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
+                    </form>
 
-            <!-- Filtro por mes -->
-            <div class="filter-buttons">
-                <form method="get" asp-action="FiltrarPorMes">
-                    <select name="mes">
-                        @for (int i = 1; i <= 12; i++)
-                        {
-                            // Hola luketo
-                            <option value="@i" selected="@(Model.MesSeleccionado == i ? "selected" : null)">@i</option>
-                        }
-                    </select>
-                    <select name="año">
-                        @for (int y = DateTime.Now.Year; y >= DateTime.Now.Year - 5; y--)
-                        {
-                            <option value="@y" selected="@(Model.AñoSeleccionado == y ? "selected" : null)">@y</option>
-                        }
-                    </select>
-                    <button type="submit" class="filter-btn">Filtrar por Mes</button>
-                </form>
-            </div>
-
-            <!-- Filtro por rango de fechas -->
-            <div class="time-range-section">
-                <form method="get" asp-action="FiltrarPorFechas">
-                    <div class="time-range-title">Filtrar por Tiempo</div>
-                    <div class="date-inputs">
-                        <input type="date" name="inicio" value="@(Model.FechaInicio?.ToString("yyyy-MM-dd") ?? "")" />
-                        <input type="date" name="fin" value="@(Model.FechaFin?.ToString("yyyy-MM-dd") ?? "")" />
+                    <!-- Contenedor de gráfico -->
+                    <div class="position-relative text-center">
+                        <div id="chart_div" style="width: 100%; height: 300px;"></div>
                     </div>
-                    <button type="submit" class="date-btn">Aplicar Fechas</button>
-                </form>
+
+                    <!-- Contenedor para el top 3 -->
+                    <div id="topCategorias" class="mt-3 text-center d-none">
+                        <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                        <div id="topCategoriasContenido" class="d-flex justify-content-around"></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Totales por Categoría -->
-            <div class="totals-section">
-                @if (Model.TotalesPorCategoria != null && Model.TotalesPorCategoria.Any())
-                {
-                    @foreach (var categoria in Model.TotalesPorCategoria)
-                    {
-                        <div class="total-item">
-                            <div class="total-label">Gasto Total @categoria.IdCategoriaNavigation?.Descripcion</div>
-                            <div class="total-amount">@categoria.MontoTotal.ToString("C")</div>
-                        </div>
-                    }
-                }
-            </div>
         </div>
-
         <!-- Sección Derecha -->
         <div class="right-section">
             <h2>TUS GASTOS</h2>
-            <div class="gastos-list">
-                @if (Model.UltimosGastos != null && Model.UltimosGastos.Any())
-                {
-                    @foreach (var gasto in Model.UltimosGastos)
-                    {
-                        <div class="gasto-item">
-                            <div class="gasto-descripcion">@gasto.IdCategoriaNavigation?.Descripcion - @gasto.Nombre</div>
-                            <div class="gasto-monto">@gasto.MontoTotal.ToString("C")</div>
-                        </div>
-                    }
-                }
-                else
-                {
-                    <div class="no-data">No hay gastos registrados</div>
-                }
+            <div id="gastos-list" class="gastos-list">
+                <div class="no-data">Cargando gastos...</div>
             </div>
             <button class="ver-mas-btn">VER MAS</button>
         </div>
-    </div>
 
     <!-- Google Charts -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <script>
-        google.charts.load('current', { packages: ['corechart'] });
-        google.charts.setOnLoadCallback(drawChartInit);
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
 
-        /* ------------------------------------------------------------
-           PALETA Y COLORES POR CATEGORÍA
-        ------------------------------------------------------------ */
-        const colorPorCategoria = {};
-        const paletaColores = [
-            "#6BAED6", "#FD8D3C", "#74C476", "#9E9AC8", "#FFA07A",
-            "#FDD0A2", "#A1D99B", "#C6DBEF", "#E377C2", "#BCBD22"
-        ];
-        let indiceColor = 0;
-
-        function obtenerColorCategoria(categoria) {
-            if (!colorPorCategoria[categoria]) {
-                colorPorCategoria[categoria] = paletaColores[indiceColor % paletaColores.length];
-                indiceColor++;
-            }
-            return colorPorCategoria[categoria];
-        }
-
-        /* ------------------------------------------------------------
-           ELEMENTOS DE FILTRO (aseguramos que existan)
-        ------------------------------------------------------------ */
-        const filtroMesInput = document.getElementById("filtroMes");
-        const desdeInput = document.getElementById("desde");
-        const hastaInput = document.getElementById("hasta");
-
-        if (filtroMesInput) {
-            filtroMesInput.addEventListener("change", () => {
-                if (filtroMesInput.value) {
-                    desdeInput.value = "";
-                    hastaInput.value = "";
-                }
-            });
-        }
-        if (desdeInput) {
-            desdeInput.addEventListener("change", () => {
-                filtroMesInput.value = "";
-            });
-        }
-        if (hastaInput) {
-            hastaInput.addEventListener("change", () => {
-                filtroMesInput.value = "";
-            });
-        }
-
-        /* ------------------------------------------------------------
-           INICIALIZAR GRÁFICO (mes actual)
-        ------------------------------------------------------------ */
-        async function drawChartInit() {
-            try {
-                const fechaActual = new Date();
-                const mesActual = fechaActual.getMonth() + 1;
-                const anioActual = fechaActual.getFullYear();
-
-                const query = new URLSearchParams({ mes: `${anioActual}-${mesActual}` });
-                const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-                const result = await response.json();
-
-                drawPieChart(result.gastosDetallados);
-                mostrarTopCategorias(result.top3);
-            } catch (err) {
-                console.error("Error inicial:", err);
-            }
-        }
-
-        /* ------------------------------------------------------------
-           DIBUJAR GRÁFICO
-        ------------------------------------------------------------ */
-        function drawPieChart(gastos) {
-            const contenedor = document.getElementById("chart_div");
-
-            if (!gastos || gastos.length === 0) {
-                contenedor.innerHTML = '<p class="text-muted">No hay gastos para mostrar.</p>';
-                return;
-            }
-
-            const dataArray = [['Categoría', 'Monto']];
-            const colores = [];
-
-            gastos.forEach(g => {
-                dataArray.push([g.categoria, g.totalCategoria]);
-                colores.push(obtenerColorCategoria(g.categoria));
-            });
-
-            const data = google.visualization.arrayToDataTable(dataArray);
-
-            const options = {
-                pieHole: 0.5,
-                chartArea: { width: '90%', height: '90%' },
-                backgroundColor: 'transparent',
-                legend: { position: 'right', textStyle: { color: '#333' } },
-                pieSliceText: 'label',
-                colors: colores
-            };
-
-            const chart = new google.visualization.PieChart(contenedor);
-            chart.draw(data, options);
-        }
-
-        /* ------------------------------------------------------------
-           TOP 3
-        ------------------------------------------------------------ */
-        function mostrarTopCategorias(top3) {
-            const contenedor = document.getElementById("topCategoriasContenido");
-
-            if (!contenedor) return;
-
-            if (!top3 || top3.length === 0) {
-                contenedor.innerHTML = '<small class="text-muted">No hay categorías para mostrar.</small>';
-                return;
-            }
-
-            contenedor.innerHTML = top3.map(cat => {
-                const color = obtenerColorCategoria(cat.categoria);
-                return `
-                    <div class="text-center">
-                        <div class="rounded-circle mx-auto mb-1"
-                            style="width:40px;height:40px;background:${color};"></div>
-                        <small>${cat.categoria} ($${cat.total.toFixed(2)})</small>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        /* ------------------------------------------------------------
-           SUBMIT DE FORMULARIO DE FILTRO
-        ------------------------------------------------------------ */
-        const filtroForm = document.getElementById("filtroFechasForm");
-
-        if (filtroForm) {
-            filtroForm.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                const mes = filtroMesInput.value;
-                const desde = desdeInput.value;
-                const hasta = hastaInput.value;
-
-                const query = new URLSearchParams();
-
-                if (desde && hasta) {
-                    query.set("desde", desde);
-                    query.set("hasta", hasta);
-                } else if (mes) {
-                    query.set("mes", mes);
-                }
-
-                const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-                const result = await response.json();
-
-                drawPieChart(result.gastosDetallados);
-                mostrarTopCategorias(result.top3);
-            });
-        }
-
-        /* Redibujo responsivo */
-        window.addEventListener('resize', drawChartInit);
     </script>
 </body>
 </html>
