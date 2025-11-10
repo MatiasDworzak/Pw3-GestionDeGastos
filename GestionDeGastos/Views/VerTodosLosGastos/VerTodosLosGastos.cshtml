@@ -1,50 +1,54 @@
 ﻿@model GestionDeGastos.Models.GastoModels.GastoPorCategoriaViewModel
 @await Html.PartialAsync("_Header")
 
-@section Css{
-    <link rel="stylesheet" href="/css/vertodoslosgastos.css">
+@section Css {
+    <link rel="stylesheet" href="~/css/custom-styles.css">
 }
-    <div class="main-container">
-        <!-- Sección Izquierda -->
-        <div class="left-section">
-            <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
-                <div class="text-center mb-3">
-                    <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
-                    <p id="rango-fechas">dd/mm/aaaa - dd/mm/aaaa</p>
 
-                    <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3">
-                        <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
-                        <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
-                        <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
-                        <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
-                    </form>
+<div class="container-fluid p-4" style="background: #e3e9ff; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <!-- Sección Izquierda: Gráfico -->
+        <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
+            <div class="text-center mb-3">
+                <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                <p id="rango-fechas" class="text-muted">dd/mm/aaaa - dd/mm/aaaa</p>
 
-                    <!-- Contenedor de gráfico -->
-                    <div class="position-relative text-center">
-                        <div id="chart_div" style="width: 100%; height: 300px;"></div>
-                    </div>
+                <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3 flex-wrap">
+                    <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
+                    <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
+                    <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
+                    <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
+                </form>
 
-                    <!-- Contenedor para el top 3 -->
-                    <div id="topCategorias" class="mt-3 text-center d-none">
-                        <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
-                        <div id="topCategoriasContenido" class="d-flex justify-content-around"></div>
-                    </div>
+                <!-- Contenedor de gráfico -->
+                <div class="position-relative text-center bg-white rounded-3 p-3 shadow-sm">
+                    <div id="chart_div" style="width: 100%; height: 300px;"></div>
+                </div>
+
+                <!-- Contenedor para el top 3 -->
+                <div id="topCategorias" class="mt-3 text-center d-none">
+                    <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                    <div id="topCategoriasContenido" class="d-flex justify-content-around flex-wrap"></div>
                 </div>
             </div>
-
         </div>
-        <!-- Sección Derecha -->
-        <div class="right-section">
-            <h2>TUS GASTOS</h2>
-            <div id="gastos-list" class="gastos-list">
-                <div class="no-data">Cargando gastos...</div>
+
+        <!-- Sección Derecha: Lista de Gastos -->
+        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #a7c9f5;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0">Todos tus Gastos</h6>
             </div>
-            <button class="ver-mas-btn">VER MAS</button>
+            
+            <div id="gastos-list" class="list-group" style="max-height: 650px; overflow-y: auto; overflow-x: hidden;">
+                <div class="text-center text-muted py-4">Cargando gastos...</div>
+            </div>
         </div>
+    </div>
+</div>
 
-    <!-- Google Charts -->
-    @section Scripts{
-        <script src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
-    }
+<!-- Google Charts -->
+@section Scripts{
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+}
         

@@ -121,7 +121,7 @@ function mostrarTopCategorias(top3) {
                 ${cat.icono}
             </span>
         </div>
-        <small>${cat.categoria} ($${cat.total.toFixed(2)})</small>
+        <small>${cat.categoria} (${cat.total.toFixed(2)})</small>
     </div>
 `).join('');
 }
@@ -131,17 +131,31 @@ function mostrarListaDeGastos(listaDeGastos) {
     const contenedorVerGastos = document.getElementById("gastos-list");
 
     if (!listaDeGastos || listaDeGastos.length === 0) {
-        contenedorVerGastos.innerHTML = '<div class="no-data">No hay gastos registrados</div>';
+        contenedorVerGastos.innerHTML = '<div class="text-center text-muted py-4">No hay gastos registrados</div>';
         return;
     }
     console.log(listaDeGastos);
 
     contenedorVerGastos.innerHTML = listaDeGastos.map(g => `
-        <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}" class="gasto-item text-decoration-none">
-            <div class="gasto-descripcion">${g.nombre}</div>
-            <div class="gasto-monto">$${g.montoTotal.toFixed(2)}</div>
-            <div class="gasto-fecha">${new Date(g.fecha).toLocaleDateString()}</div>
-        </a>
+        <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+            <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}" 
+               class="d-flex justify-content-between align-items-center w-100"
+               style="text-decoration:none; color:inherit;">
+                <div class="d-flex align-items-center">
+                    <span class="material-icons"
+                          style="color:${g.color || '#6a5acd'}; font-size:1.8rem; margin-right:10px;">
+                        ${g.icono || 'shopping_cart'}
+                    </span>
+                    <div>
+                        <div class="fw-semibold" style="font-size:1.1rem;">${g.nombre}</div>
+                        <small class="text-muted">${new Date(g.fecha).toLocaleDateString()}</small>
+                    </div>
+                </div>
+                <span class="text-secondary fw-bold" style="font-size:1.1rem;">
+                    $${g.montoTotal.toFixed(2)}
+                </span>
+            </a>
+        </div>
     `).join('');
 }
 
