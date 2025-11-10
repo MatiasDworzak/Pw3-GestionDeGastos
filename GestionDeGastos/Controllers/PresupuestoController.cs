@@ -56,30 +56,6 @@ namespace GestionDeGastos.Controllers
             return idUsuario;
         }
 
-        //private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(Presupuesto ultimoPresupuesto, IEnumerable<Presupuesto> listaPresupuestos)
-        //{
-
-        //    int idUsuario = ObtenerUsuarioLogueado();
-        //    await _presupuestoServicio.CalcularMontoActualGastado(idUsuario, ultimoPresupuesto);
-        //    decimal porcentaje = await _presupuestoServicio.ObtenerPresupuestoConPorcentaje(idUsuario, ultimoPresupuesto);
-
-        //    return new PresupuestoPaginaViewModel
-        //    {
-        //        UltimoPresupuesto = new PresupuestoViewModel
-        //        {
-        //            MontoLimite = ultimoPresupuesto.MontoLimite,
-        //            MontoActualGastado = ultimoPresupuesto.MontoActualGastado
-        //        },
-        //        ListaPresupuestos = (List<PresupuestoViewModel>)listaPresupuestos.Select(p => new PresupuestoViewModel
-        //        {
-        //            MontoLimite = p.MontoLimite,
-        //            MontoActualGastado = p.MontoActualGastado,
-        //            Anio = p.Anio,
-        //            Mes = p.Mes
-        //        }).ToList(),
-        //        PorcentajeGastado = porcentaje
-        //    };
-        //}
 
         private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(
                                                         Presupuesto ultimoPresupuesto,
@@ -131,7 +107,7 @@ namespace GestionDeGastos.Controllers
         //public IActionResult MostrarGastosPresupuesto(int mes, int anio)
         //{
         //    int idUsuario = ObtenerUsuarioLogueado();
-        //    var detalleGastos = _verTodosLosGastosServicio.ObtenerLosGastosFiltradosPorMes(idUsuario, mes, anio);
+        //    var detalleGastos = _verTodosLosGastosServicio.ObtenerGastosPorMesAsync(idUsuario, mes, anio);
 
         //    return View("VerTodosLosGastos");
         //}

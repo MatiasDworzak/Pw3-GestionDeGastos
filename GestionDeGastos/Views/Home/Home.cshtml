@@ -2,233 +2,128 @@
 @model GastoViewModel
 @await Html.PartialAsync("_Header")
 
-<div class="alert alert-success">@TempData["LoginExito"]</div>
+@section Css {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
 
-<div class="container-fluid p-4" style="background: #e3e9ff; min-height: 100vh;">
+@if (TempData["Exito"] != null)
+{
+    <div class="alert alert-success">@TempData["Exito"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="container-fluid home-container">
     <div class="row justify-content-center">
 
-        <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
-            <div class="text-center mb-3">
-                <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
-                <p id="rango-fechas">dd/mm/aaaa - dd/mm/aaaa</p>
+        <!-- COLUMNA IZQUIERDA (Gráfico) -->
+        <div class="col-md-5 chart-section">
+            <div class="chart-header">
+                <p class="chart-title">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                <p id="rango-fechas" class="chart-date-range">dd/mm/aaaa - dd/mm/aaaa</p>
+            </div>
 
-                <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3">
-                    <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
-                    <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
-                    <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
-                    <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
-                </form>
+            <form id="filtroFechasForm" class="filter-form">
+                <input type="month" id="filtroMes" name="mes" class="filter-input form-control">
+                <input type="date" id="desde" name="desde" class="filter-input form-control">
+                <input type="date" id="hasta" name="hasta" class="filter-input form-control">
+                <button type="submit" class="filter-btn">Filtrar</button>
+            </form>
 
-                <!-- Contenedor de gráfico -->
-                <div class="position-relative text-center">
-                    <div id="chart_div" style="width: 100%; height: 300px;"></div>
-                </div>
+            <!-- Contenedor de gráfico -->
+            <div class="chart-container">
+                <div id="chart_div"></div>
+            </div>
 
-                <!-- Contenedor para el top 3 -->
-                <div id="topCategorias" class="mt-3 text-center d-none">
-                    <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
-                    <div id="topCategoriasContenido" class="d-flex justify-content-around"></div>
-                </div>
+            <!-- Contenedor para el top 3 -->
+            <div id="topCategorias" class="top-categories d-none">
+                <p class="top-categories-title">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                <div id="topCategoriasContenido" class="top-categories-content"></div>
             </div>
         </div>
 
         <!-- COLUMNA DERECHA (Presupuesto, Acciones rápidas, etc) -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #a7c9f5;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0">Presupuesto Actual</h6>
-                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none text-end">Ver Presupuestos</a>
+        <div class="col-md-5 budget-section ms-md-3 mt-3 mt-md-0">
+            <div class="budget-header">
+                <h6 class="budget-title">
+                    Presupuesto Actual
+                    @if (Model.LimitePresupuesto == 0)
+                    {
+                        <span class="bi bi-exclamation-triangle-fill text-warning"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Tu presupuesto está en $0. Agregá un monto para empezar a planificar.">
+                        </span>
+                    }
+                </h6>
+                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="budget-link">Ver Presupuestos</a>
             </div>
 
-            <div class="progress mb-4" style="height: 25px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 20%;">@Model.Porcentaje</div>
-            </div>
-
-            <h6 class="fw-bold mb-3">Acciones Rápidas</h6>
-            <div class="row mb-3">
-                <div class="col-6 mb-2">
-                    <a asp-action="Agregar" asp-controller="Gasto" class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Gasto</a>
-                </div>
-                <div class="col-6 mb-2">
-                    <a class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Ingreso</a>
-                </div>
-                <div class="col-4">
-                    <a class="btn w-100 text-white" style="background: #6a5acd;">Exportar</a>
-                </div>
-                <div class="col-4">
-                    <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="btn w-100 text-white" style="background: #6a5acd;">Editar Presupuesto</a>
-                </div>
-                <div class="col-4">
-                    <a class="btn w-100 text-white" style="background: #6a5acd;">Editar Perfil</a>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <h6 class="fw-bold mb-0">Gastos Recientes</h6>
-                <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="text-decoration-none text-end">Ver todos mis gastos</a>
-            </div>
-
-            <div class="list-group">
-                @foreach (var gasto in Model.ListaUltimosTresGastos)
+            @{
+                string progressColor = Model.Porcentaje switch
                 {
-                    <div class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>@gasto.Nombre <small class="text-muted">Hace 2 horas</small></span>
-                        <span class="text-danger fw-semibold">@gasto.MontoTotal</span>
+                    var porcentaje when porcentaje < 50 => "bg-success",
+                    var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
+                    _ => "bg-danger",
+                };
+            }
+
+            <div class="progress-container">
+                <div class="progress">
+                    <div class="progress-bar @progressColor" role="progressbar"
+                         style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
+                        @Model.Porcentaje.ToString("0.##")%
                     </div>
-                }
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h6 class="quick-actions-title">Acciones Rápidas</h6>
+                <div class="quick-actions-grid">
+                    <a asp-action="Agregar" asp-controller="Gasto" class="quick-action-btn">+ Agregar Gasto</a>
+                </div>
+            </div>
+
+            <div class="recent-expenses">
+                <div class="recent-expenses-header">
+                    <h6 class="recent-expenses-title">Gastos Recientes</h6>
+                    <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="recent-expenses-link">Ver todos mis gastos</a>
+                </div>
+                <div class="expense-list">
+                    @foreach (var gasto in Model.ListaUltimosTresGastos)
+                    {
+                        <a asp-controller="GastoEspecifico"
+                           asp-action="GastoEspecifico"
+                           asp-route-id="@gasto.IdGasto"
+                           class="expense-item">
+                            <div class="expense-item-content">
+                                <span class="material-icons expense-icon"
+                                      style="color:@gasto.IdCategoriaNavigation.Color;">
+                                    @gasto.IdCategoriaNavigation.Icono
+                                </span>
+                                <div class="expense-details">
+                                    <div class="expense-name">@gasto.Nombre</div>
+                                    <div class="expense-date">@gasto.Fecha</div>
+                                </div>
+                            </div>
+                            <span class="expense-amount">
+                                @gasto.MontoTotal.ToString("C2")
+                            </span>
+                        </a>
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChartInit);
-
-    // 🔹 Diccionario global para mantener colores consistentes
-    const colorPorCategoria = {};
-
-    // 🔹 Función para generar colores (más lindos)
-    const paletaColores = [
-        "#6BAED6", "#FD8D3C", "#74C476", "#9E9AC8", "#FFA07A",
-        "#FDD0A2", "#A1D99B", "#C6DBEF", "#E377C2", "#BCBD22"
-    ];
-    let indiceColor = 0;
-
-    function obtenerColorCategoria(categoria) {
-        if (!colorPorCategoria[categoria]) {
-            colorPorCategoria[categoria] = paletaColores[indiceColor % paletaColores.length];
-            indiceColor++;
-        }
-        return colorPorCategoria[categoria];
-    }
-
-    // --- 🔹 LISTENERS para evitar conflicto entre mes y rango ---
-    const filtroMesInput = document.getElementById("filtroMes");
-    const desdeInput = document.getElementById("desde");
-    const hastaInput = document.getElementById("hasta");
-
-    filtroMesInput.addEventListener("change", () => {
-        if (filtroMesInput.value) {
-            desdeInput.value = "";
-            hastaInput.value = "";
-        }
-    });
-
-    desdeInput.addEventListener("change", () => {
-        if (desdeInput.value) {
-            filtroMesInput.value = "";
-        }
-    });
-    hastaInput.addEventListener("change", () => {
-        if (hastaInput.value) {
-            filtroMesInput.value = "";
-        }
-    });
-
-    // --- 🔹 FUNCIÓN PRINCIPAL ---
-    async function drawChartInit() {
-        const fechaActual = new Date();
-        const mesActual = fechaActual.getMonth() + 1;
-        const anioActual = fechaActual.getFullYear();
-
-        const primerDia = new Date(anioActual, mesActual - 1, 1);
-        const ultimoDia = new Date(anioActual, mesActual, 0);
-        const nombreMes = primerDia.toLocaleString("es-ES", { month: "long" });
-
-        document.getElementById("rango-fechas").textContent =
-            `${nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1)}: ${primerDia.toLocaleDateString()} al ${ultimoDia.toLocaleDateString()}`;
-
-        const query = new URLSearchParams({ mes: `${anioActual}-${mesActual}` });
-        const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-        const result = await response.json();
-
-        drawPieChart(result.gastosDetallados); mostrarTopCategorias(result.top3);
-    }
-
-       function drawPieChart(gastos) {
-        if (!gastos || gastos.length === 0) {
-            document.getElementById('chart_div').innerHTML = '<p class="text-muted">No hay gastos para mostrar.</p>';
-            return;
-        }
-
-        const dataArray = [['Categoría', 'Monto']];
-        const colores = [];
-
-        gastos.forEach(g => {
-            dataArray.push([g.categoria, g.totalCategoria]); 
-            colores.push(obtenerColorCategoria(g.categoria));
-        });
-
-        const data = google.visualization.arrayToDataTable(dataArray);
-
-        const options = {
-            pieHole: 0.5,
-            chartArea: { width: '90%', height: '90%' },
-            backgroundColor: 'transparent',
-            legend: { position: 'right', textStyle: { color: '#000', fontSize: 12 } },
-            pieSliceText: 'label',
-            colors: colores
-        };
-
-        const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-        document.getElementById("topCategorias").classList.remove("d-none");
-    }
-
-    function mostrarTopCategorias(top3) {
-        const contenedor = document.getElementById("topCategoriasContenido");
-
-        if (!top3 || top3.length === 0) {
-            contenedor.innerHTML = '<small class="text-muted">No hay categorías para mostrar.</small>';
-            return;
-        }
-
-        contenedor.innerHTML = top3.map(cat => {
-            const color = obtenerColorCategoria(cat.categoria);
-            return `
-                <div class="text-center">
-                    <div class="rounded-circle mx-auto mb-1" style="width:40px;height:40px;background:${color};"></div>
-                    <small>${cat.categoria} ($${cat.total.toFixed(2)})</small> <!-- ✅ corregido -->
-                </div>
-            `;
-        }).join('');
-    }
-
-    // --- 🔹 Submit del filtro ---
-    document.getElementById("filtroFechasForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const mes = filtroMesInput.value;
-        const desde = desdeInput.value;
-        const hasta = hastaInput.value;
-        // if (hasta.value = ""){
-        //    const fechaActualDia = new Date()
-        //     hasta.value = fechaActualDia.getDate()
-        // }
-        const query = new URLSearchParams();
-
-        if (desde && hasta) {
-            query.set("desde", desde);
-            query.set("hasta", hasta);
-        } else if (mes) {
-            query.set("mes", mes);
-        }
-
-        const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-        const result = await response.json();
-
-        drawPieChart(result.gastosDetallados);
-        mostrarTopCategorias(result.top3);
-
-        if (desde && hasta) {
-            document.getElementById("rango-fechas").textContent = `${desde} al ${hasta}`;
-        } else if (mes) {
-            const [anio, mesNum] = mes.split("-");
-            const primerDia = new Date(anio, mesNum - 1, 1);
-            const ultimoDia = new Date(anio, mesNum, 0);
-            const nombreMes = primerDia.toLocaleString("es-ES", { month: "long" });
-            document.getElementById("rango-fechas").textContent =
-                `${nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1)}: ${primerDia.toLocaleDateString()} al ${ultimoDia.toLocaleDateString()}`;
-        }
-    });
-</script>
+<script type="text/javascript" src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+@section Scripts {
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+    </script>
+}

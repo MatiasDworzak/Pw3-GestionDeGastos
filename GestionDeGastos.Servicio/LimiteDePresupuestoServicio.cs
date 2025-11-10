@@ -27,8 +27,18 @@ namespace GestionDeGastos.Servicio
         {
             var client = _httpClientFactory.CreateClient("Functions");
 
-            var urlFunction = _configuration["AzureFunction:Url"]; 
-           // var keyFunction = _configuration["AzureFunction:Key"];
+            var urlFunction = _configuration["AzureFunction:Url"];
+            /*
+            Cuando este deployado usar
+            var urlFunction = Environment.GetEnvironmentVariable("LimiteDePresupuestoAzureFunction");
+            */
+            /*
+            o tmb
+            var urlFunction =
+            Environment.GetEnvironmentVariable("LimiteDePresupuestoAzureFunction")
+            ?? _configuration["AzureFunction:Url"];
+            */
+            // var keyFunction = _configuration["AzureFunction:Key"];
 
             //Datos que se envían a la function
             var payload = new

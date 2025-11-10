@@ -1,20 +1,29 @@
-
-using GestionDeGastos;
+﻿using Azure.Identity;
 using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
-using GestionDeGastos.Servicio.Seguridad;
 using GestionDeGastos.Servicio.GastoEspecifico;
-
+using GestionDeGastos.Servicio.Seguridad;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Key vaults azure
+var keyVaultUrl = new Uri("https://el-llavero.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential());
+
+
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionLocal")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+//Registra el servicio de la sesion
+builder.Services.AddScoped<IUsuarioSession, UsuarioSession>();
 
 //servicios
 builder.Services.AddScoped<IHomeService, HomeServicio>();
@@ -24,7 +33,7 @@ builder.Services.AddScoped<IAutenticacionServicio, AutenticacionServicio>();
 builder.Services.AddScoped<IGastoServicio, GastoServicio>();
 builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
 builder.Services.AddScoped<IMetodoDePagoServicio, MetodoDePagoServicio>();
-builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>(); // lo hizo huesos
+builder.Services.AddScoped<IVerTodosLosGastos, VerTodosLosGastosServicio>();
 builder.Services.AddScoped<IContraseniaHasher, ContraseniaHasher>();
 builder.Services.AddScoped<IGastoEspecificoServicio, GastoEspecificoServicio>();
 builder.Services.AddScoped<ILimiteDePresupuestoServicio, LimiteDePresupuestoServicio>();
@@ -33,7 +42,6 @@ builder.Services.AddScoped<ILimiteDePresupuestoServicio, LimiteDePresupuestoServ
 builder.Services.AddScoped<IBlobAzureServicio, BlobAzureServicio>();
 builder.Services.AddScoped<IDocumentIntelligenceServicio, DocumentIntelligenceServicio>();
 
-
 //repositorios
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IPresupuestoRepositorio, PresupuestoRepositorio>();
@@ -41,12 +49,6 @@ builder.Services.AddScoped<IGastoRepositorio, GastoRepositorio>();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 builder.Services.AddScoped<IMetodoDePagoRepositorio, MetodoDePagoRepositorio>();
 builder.Services.AddScoped<IGastoEspecificoRepositorio, GastoEspecificoRepositorio>();
-
-
-//cadena de conexion del appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-options.UseSqlServer(connectionString));
 
 
 
@@ -66,6 +68,14 @@ builder.Services.AddHttpClient("Functions", client =>
 });
 
 var app = builder.Build();
+
+// --- 🌐 Configuración de cultura (aquí va tu código) ---
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+cultureInfo.NumberFormat.NumberGroupSeparator = ",";
+
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

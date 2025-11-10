@@ -28,11 +28,16 @@
     {
         public int IdCategoria { get; set; }
         public string NombreCategoria { get; set; }
+        public string Color { get; set; }
+        public string Icono { get; set; }
     }
     public class MetodoDePagoGastoEspecificoViewModel
     {
         public int IdMetodoDePago { get; set; }
         public string NombreMetodoDePago { get; set; }
+        public string Color { get; set; }
+        public string Icono { get; set; }
+
     }
     public class TicketGastoEspecificoViewModel
     {

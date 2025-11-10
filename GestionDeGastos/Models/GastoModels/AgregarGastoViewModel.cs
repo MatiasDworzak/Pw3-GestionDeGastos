@@ -31,8 +31,8 @@ namespace GestionDeGastos.Models.GastoModels
         public IFormFile? TicketFoto { get; set; }
 
         // Para enviar al usuario
-        public List<SelectListItem>? Categorias { get; set; }
-        public List<SelectListItem>? MetodosDePago { get; set; }
+        public List<CategoriaViewModel>? Categorias { get; set; }
+        public List<MetodoDePagoViewModel>? MetodosDePago { get; set; }
 
         // Para que el usuario envie y reciba
         public List<AgregarGastoItemViewModel>? Items { get; set; }

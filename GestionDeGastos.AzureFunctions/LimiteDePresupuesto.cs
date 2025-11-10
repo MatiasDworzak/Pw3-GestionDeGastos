@@ -22,7 +22,7 @@ namespace GestionDeGastos.AzureFunctions
         public decimal MontoActualGastado { get; set; }
     }
 
-    public class AlertaEntity : ITableEntity //modelo para mandar al storage
+    public class AlertaEntity : ITableEntity //modelo para mandar al storage de azure
     {
         public string PartitionKey { get; set; } = "Presupuestos";
         public string RowKey { get; set; } // combinación de UsuarioId+PresupuestoId
@@ -35,7 +35,7 @@ namespace GestionDeGastos.AzureFunctions
     {
         private readonly ILogger<LimiteDePresupuesto> _logger;
         private const decimal ALERT_THRESHOLD = 0.85m; // cuando llegue al 85%
-        private const int COOLDOWN_HOURS = 12;         // no reenviar dentro de 12h
+        private const int COOLDOWN_HOURS = 1;         // no reenviar dentro de 1h
 
         public LimiteDePresupuesto(ILogger<LimiteDePresupuesto> logger)
         {
@@ -51,7 +51,7 @@ namespace GestionDeGastos.AzureFunctions
             {
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 _logger.LogInformation($"Request body: {requestBody}");
-
+                //lee el cuerpo del post
                 var data = JsonSerializer.Deserialize<PresupuestoData>(requestBody);
                 if (data == null)
                 {
@@ -60,12 +60,14 @@ namespace GestionDeGastos.AzureFunctions
                 }
 
                 _logger.LogInformation($"Email: {data.Email}, MontoLimite: {data.MontoLimite}, Gastado: {data.MontoActualGastado}");
-
+                
+                //validacion de que existe email y MontoLimite
                 if (data.MontoLimite <= 0 || string.IsNullOrWhiteSpace(data.Email))
                 {
                     return new BadRequestObjectResult("Datos inválidos o incompletos.");
                 }
 
+                //calculo de porcentaje gastado, menor a 85 no manda msj
                 decimal ratio = data.MontoActualGastado / data.MontoLimite;
                 if (ratio < ALERT_THRESHOLD)
                 {
@@ -73,6 +75,7 @@ namespace GestionDeGastos.AzureFunctions
                     return new OkObjectResult(new { sent = false, message = "Sin alerta" });
                 }
 
+                //coneion al storage y la tabla
                 string storageConn = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
                 _logger.LogInformation($"Usando Storage: {(string.IsNullOrEmpty(storageConn) ? "NULO" : "OK")}");
 
@@ -89,6 +92,7 @@ namespace GestionDeGastos.AzureFunctions
                     return new OkObjectResult(new { sent = false, message = "Alerta ya enviada recientemente." });
                 }
 
+                //lee la apiKey de sendGrid que esta en azure (variables de entorno)
                 string sendGridKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
                 if (string.IsNullOrEmpty(sendGridKey))
                 {
@@ -96,6 +100,7 @@ namespace GestionDeGastos.AzureFunctions
                     return new BadRequestObjectResult("Falta configuración SENDGRID_API_KEY.");
                 }
 
+                //preparacion y envio de mail con sendGrid
                 _logger.LogInformation("Preparando envío de correo...");
                 var client = new SendGridClient(sendGridKey);
                 var from = new EmailAddress("carla.stram@gmail.com", "Gestión de Gastos");
@@ -114,6 +119,7 @@ namespace GestionDeGastos.AzureFunctions
                     return new BadRequestObjectResult("Error al enviar el correo.");
                 }
 
+                //guarda en el storage de azure
                 var entity = new AlertaEntity
                 {
                     RowKey = rowKey,

@@ -23,7 +23,7 @@ namespace GestionDeGastos.Repositorio
         Task<Gasto> ObtenerGastoPorId(int IdGasto);
         Task AgregarGastoAsync(Gasto gasto);
         Task ActualizarGastoAsync(Gasto Gasto);
-
+        Task EliminarGastoAsync(Gasto gastoAEliminar);
     }
     public class GastoRepositorio : IGastoRepositorio
     {
@@ -36,12 +36,6 @@ namespace GestionDeGastos.Repositorio
         public async Task ActualizarGastoAsync(Gasto Gasto)
         {
             Gasto GastoEncontrado = await ObtenerGastoPorId(Gasto.IdGasto);
-
-            if (GastoEncontrado == null)
-            {
-                throw new Exception("Gasto no encontrado");
-            }
-
             _context.Gastos.Update(Gasto);
             await _context.SaveChangesAsync();
         }
@@ -56,7 +50,9 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<Gasto> ObtenerGastoPorId(int IdGasto)
         {
-            return await _context.Gastos.FindAsync(IdGasto);
+            Gasto gasto = await _context.Gastos.FindAsync(IdGasto);
+            if (gasto == null) throw new NullReferenceException("No se pudo encontrar el gasto");
+            return gasto;
         }
 
         public async Task<List<Gasto>> ObtenerGastosPorUsuarioAsync(int idUsuario)
@@ -69,7 +65,7 @@ namespace GestionDeGastos.Repositorio
 
         public async Task<List<Gasto>> ObtenerUltimosCincoGastosPorUsuarioAsync(int idUsuario)
         {
-            return await _context.Gastos
+            return await _context.Gastos.Include(g => g.IdCategoriaNavigation)
                 .Where(g => g.IdUsuario == idUsuario) // 🔹 filtra por el usuario
                 .OrderByDescending(g => g.Fecha)      // ordena del más nuevo al más viejo
                 .Take(5)                              // toma los últimos 3
@@ -121,7 +117,12 @@ namespace GestionDeGastos.Repositorio
                 .ToListAsync();
         }
 
-
+        public async Task EliminarGastoAsync(Gasto gastoAEliminar)
+        {
+            Gasto gasto = await ObtenerGastoPorId(gastoAEliminar.IdGasto);
+            _context.Gastos.Remove(gasto);
+            await _context.SaveChangesAsync();
+        }
     }
 
 
