@@ -13,6 +13,7 @@ namespace GestionDeGastos.Repositorio
         Task<Presupuesto?> GetByIdAsync(int id);
         Task CrearPresupuestoInicial(int idUsuario);
         Task ActualizarMontonActualGastado(Presupuesto presupuesto, decimal montoActualGastado);
+        Task<Presupuesto> ObtenerPresupuestoPorIdMesYAnio(int idUsuario, int month, int year);
     }
     public class PresupuestoRepositorio : IPresupuestoRepositorio
     {
@@ -97,6 +98,14 @@ namespace GestionDeGastos.Repositorio
 
             _context.Presupuestos.Update(presupuesto);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Presupuesto> ObtenerPresupuestoPorIdMesYAnio(int idUsuario, int month, int year)
+        {
+            return await _context.Presupuestos.Where(p => p.IdUsuario == idUsuario 
+                                                        && p.Mes == month
+                                                        && p.Anio == year)
+                .FirstOrDefaultAsync();
         }
     }
 }

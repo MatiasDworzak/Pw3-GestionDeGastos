@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace GestionDeGastos.AccesoADatos.Entidades;
-
 public partial class Presupuesto
 {
     public int IdPresupuesto { get; set; }

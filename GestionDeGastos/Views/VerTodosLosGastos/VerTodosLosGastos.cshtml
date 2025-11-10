@@ -1,264 +1,50 @@
 ﻿@model GestionDeGastos.Models.GastoModels.GastoPorCategoriaViewModel
 @await Html.PartialAsync("_Header")
 
-<link rel="stylesheet" href="~/css/ver-todos-los-gastos.css" />
+@section Css{
+    <link rel="stylesheet" href="/css/vertodoslosgastos.css">
+}
+    <div class="main-container">
+        <!-- Sección Izquierda -->
+        <div class="left-section">
+            <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
+                <div class="text-center mb-3">
+                    <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                    <p id="rango-fechas">dd/mm/aaaa - dd/mm/aaaa</p>
 
-<div class="page-container">
-        <!-- Header -->
-        <div class="page-header">
-            <h1>📊 Análisis de Gastos</h1>
-            <p class="subtitle">Visualiza y analiza todos tus gastos por categoría</p>
-        </div>
+                    <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3">
+                        <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
+                        <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
+                        <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
+                        <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
+                    </form>
 
-        <!-- Contenido Principal -->
-        <div class="main-content">
-            <!-- Sección Izquierda - Gráfico -->
-            <div class="chart-card">
-                <div class="chart-card-header">
-                    <h2>Distribución por Categoría</h2>
-                    <p class="date-range">
-                        @(Model.FechaInicio.HasValue && Model.FechaFin.HasValue
-                            ? $"{Model.FechaInicio.Value:dd/MM/yyyy} - {Model.FechaFin.Value:dd/MM/yyyy}"
-                            : "Todo el tiempo")
-                    </p>
-                </div>
-                
-                <!-- Filtro arriba del gráfico -->
-                <form id="filtroFechasForm" class="filters-form" method="get" asp-action="FiltrarPorFechas">
-                    <input type="month" id="filtroMes" name="mes" placeholder="Mes" />
-                    <input type="date" id="desde" name="inicio" placeholder="Desde" value="@(Model.FechaInicio?.ToString("yyyy-MM-dd") ?? "")" />
-                    <input type="date" id="hasta" name="fin" placeholder="Hasta" value="@(Model.FechaFin?.ToString("yyyy-MM-dd") ?? "")" />
-                    <button type="submit">🔍 Filtrar</button>
-                </form>
-                
-                <div id="chart_div"></div>
-
-                <!-- Totales por Categoría -->
-                @if (Model.TotalesPorCategoria != null && Model.TotalesPorCategoria.Any())
-                {
-                    <div class="totals-section">
-                        <h4>💰 Totales por Categoría</h4>
-                        @foreach (var categoria in Model.TotalesPorCategoria)
-                        {
-                            <div class="total-item">
-                                <span class="total-label">@categoria.IdCategoriaNavigation?.Descripcion</span>
-                                <span class="total-amount">@categoria.MontoTotal?.ToString("C")</span>
-                            </div>
-                        }
+                    <!-- Contenedor de gráfico -->
+                    <div class="position-relative text-center">
+                        <div id="chart_div" style="width: 100%; height: 300px;"></div>
                     </div>
-                }
+
+                    <!-- Contenedor para el top 3 -->
+                    <div id="topCategorias" class="mt-3 text-center d-none">
+                        <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                        <div id="topCategoriasContenido" class="d-flex justify-content-around"></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Sección Derecha - Lista de Gastos -->
-            <div class="gastos-card">
-                <div class="gastos-card-header">
-                    <h2>📋 Tus Gastos</h2>
-                    <p class="subtitle">Lista de gastos recientes</p>
-                </div>
-                <div class="gastos-list">
-                    @if (Model.UltimosGastos != null && Model.UltimosGastos.Any())
-                    {
-                        @foreach (var gasto in Model.UltimosGastos)
-                        {
-                            <div class="gasto-item">
-                                <div class="gasto-info">
-                                    <div class="gasto-categoria">@gasto.IdCategoriaNavigation?.Descripcion</div>
-                                    <div class="gasto-nombre">@gasto.Nombre</div>
-                                </div>
-                                <div class="gasto-monto">@gasto.MontoTotal?.ToString("C")</div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class="no-data">
-                            <div class="no-data-icon">📭</div>
-                            <div class="no-data-text">No hay gastos registrados</div>
-                        </div>
-                    }
-                </div>
-                <button class="ver-mas-btn">Ver Más Gastos</button>
-            </div>
         </div>
-    </div>
+        <!-- Sección Derecha -->
+        <div class="right-section">
+            <h2>TUS GASTOS</h2>
+            <div id="gastos-list" class="gastos-list">
+                <div class="no-data">Cargando gastos...</div>
+            </div>
+            <button class="ver-mas-btn">VER MAS</button>
+        </div>
 
     <!-- Google Charts -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script>
-        google.charts.load('current', { packages: ['corechart'] });
-        google.charts.setOnLoadCallback(drawChartInit);
-
-        /* ------------------------------------------------------------
-           PALETA Y COLORES POR CATEGORÍA
-        ------------------------------------------------------------ */
-        const colorPorCategoria = {};
-        const paletaColores = [
-            "#4ABDAC", "#FC4A1A", "#F78733", "#6bcdbd", "#9dddd2",
-            "#FD8D3C", "#74C476", "#9E9AC8", "#E377C2", "#BCBD22"
-        ];
-        let indiceColor = 0;
-
-        function obtenerColorCategoria(categoria) {
-            if (!colorPorCategoria[categoria]) {
-                colorPorCategoria[categoria] = paletaColores[indiceColor % paletaColores.length];
-                indiceColor++;
-            }
-            return colorPorCategoria[categoria];
-        }
-
-        /* ------------------------------------------------------------
-           ELEMENTOS DE FILTRO
-        ------------------------------------------------------------ */
-        const filtroMesInput = document.getElementById("filtroMes");
-        const desdeInput = document.getElementById("desde");
-        const hastaInput = document.getElementById("hasta");
-
-        if (filtroMesInput) {
-            filtroMesInput.addEventListener("change", () => {
-                if (filtroMesInput.value) {
-                    if (desdeInput) desdeInput.value = "";
-                    if (hastaInput) hastaInput.value = "";
-                }
-            });
-        }
-        if (desdeInput) {
-            desdeInput.addEventListener("change", () => {
-                if (filtroMesInput) filtroMesInput.value = "";
-            });
-        }
-        if (hastaInput) {
-            hastaInput.addEventListener("change", () => {
-                if (filtroMesInput) filtroMesInput.value = "";
-            });
-        }
-
-        /* ------------------------------------------------------------
-           SUBMIT DE FORMULARIO DE FILTRO
-        ------------------------------------------------------------ */
-        const filtroForm = document.getElementById("filtroFechasForm");
-
-        if (filtroForm) {
-            filtroForm.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                const mes = filtroMesInput ? filtroMesInput.value : "";
-                const desde = desdeInput ? desdeInput.value : "";
-                const hasta = hastaInput ? hastaInput.value : "";
-
-                if (desde && hasta) {
-                    // Filtrar por rango de fechas
-                    window.location.href = `/VerTodosLosGastos/FiltrarPorFechas?inicio=${desde}&fin=${hasta}`;
-                } else if (mes) {
-                    // Filtrar por mes
-                    const [anio, mesNum] = mes.split("-");
-                    window.location.href = `/VerTodosLosGastos/FiltrarPorMes?mes=${mesNum}&año=${anio}`;
-                }
-            });
-        }
-
-        /* ------------------------------------------------------------
-           INICIALIZAR GRÁFICO (mes actual)
-        ------------------------------------------------------------ */
-        async function drawChartInit() {
-            try {
-                const fechaActual = new Date();
-                const mesActual = fechaActual.getMonth() + 1;
-                const anioActual = fechaActual.getFullYear();
-
-                const query = new URLSearchParams({ mes: `${anioActual}-${mesActual}` });
-                const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-                const result = await response.json();
-
-                drawPieChart(result.gastosDetallados);
-                mostrarTopCategorias(result.top3);
-            } catch (err) {
-                console.error("Error inicial:", err);
-            }
-        }
-
-        /* ------------------------------------------------------------
-           DIBUJAR GRÁFICO
-        ------------------------------------------------------------ */
-        function drawPieChart(gastos) {
-            const contenedor = document.getElementById("chart_div");
-
-            if (!gastos || gastos.length === 0) {
-                contenedor.innerHTML = '<div style="text-align: center; padding: 40px; color: #6c6a75;"><div style="font-size: 48px; margin-bottom: 10px; opacity: 0.5;">📊</div><div>No hay gastos para mostrar</div></div>';
-                return;
-            }
-
-            const dataArray = [['Categoría', 'Monto']];
-            const colores = [];
-
-            gastos.forEach(g => {
-                dataArray.push([g.categoria, g.totalCategoria]);
-                colores.push(obtenerColorCategoria(g.categoria));
-            });
-
-            const data = google.visualization.arrayToDataTable(dataArray);
-
-            const options = {
-                pieHole: 0.5,
-                chartArea: { width: '85%', height: '85%', left: '5%', top: '5%' },
-                backgroundColor: 'transparent',
-                legend: { 
-                    position: 'right', 
-                    textStyle: { 
-                        color: '#363531', 
-                        fontSize: 13,
-                        fontName: 'Segoe UI'
-                    },
-                    alignment: 'center'
-                },
-                pieSliceText: 'percentage',
-                pieSliceTextStyle: {
-                    color: 'white',
-                    fontSize: 13,
-                    fontName: 'Segoe UI',
-                    bold: true
-                },
-                colors: colores,
-                tooltip: {
-                    textStyle: {
-                        fontSize: 13,
-                        fontName: 'Segoe UI'
-                    }
-                }
-            };
-
-            const chart = new google.visualization.PieChart(contenedor);
-            chart.draw(data, options);
-        }
-
-        /* ------------------------------------------------------------
-           TOP 3
-        ------------------------------------------------------------ */
-        function mostrarTopCategorias(top3) {
-            const contenedor = document.getElementById("topCategoriasContenido");
-
-            if (!contenedor) return;
-
-            if (!top3 || top3.length === 0) {
-                contenedor.innerHTML = '<div style="text-align: center; color: #6c6a75; width: 100%;">No hay categorías para mostrar.</div>';
-                return;
-            }
-
-            contenedor.innerHTML = top3.map(cat => {
-                const color = obtenerColorCategoria(cat.categoria);
-                return `
-                    <div class="top-categoria-item">
-                        <div class="top-categoria-circle" style="background: ${color};"></div>
-                        <div class="top-categoria-label">${cat.categoria}<br>$${cat.total.toFixed(2)}</div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        /* Redibujo responsivo */
-        window.addEventListener('resize', () => {
-            if (typeof drawChartInit === 'function') {
-                drawChartInit();
-            }
-        });
-    </script>
+    @section Scripts{
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+    }
+        

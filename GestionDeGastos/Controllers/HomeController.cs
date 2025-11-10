@@ -16,29 +16,38 @@ namespace GestionDeGastos.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
+        private readonly IPresupuestoServicio _presupuestoService;
         private readonly IUsuarioRepositorio _usuarioService;
 
-        public HomeController(IHomeService homeService, IUsuarioRepositorio usuarioService)
+        public HomeController(IHomeService homeService, IUsuarioRepositorio usuarioService, IPresupuestoServicio presupuestoServicio
+            )
         {
             _homeService = homeService;
+            _presupuestoService = presupuestoServicio;
             _usuarioService = usuarioService;
         }
 
         public async Task<IActionResult> Home()
         {
             var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
+            Presupuesto presupuesto = await _presupuestoService.ObtenerPresupuestoActualAsync(idUsuario.Value);
 
-
+            await _presupuestoService.CalcularMontoActualGastado(idUsuario.Value, presupuesto);
             var usuarioEntidad = await _usuarioService.GetByIdAsync(idUsuario.Value);
             var usuarioViewModel = new UsuarioViewModel { IdUsuario = usuarioEntidad.IdUsuario, Nombre = usuarioEntidad.Nombre, Email = usuarioEntidad.Email };
 
             var lista = await _homeService.ObtenerUltimosCincoGastosPorIdDeUsuario(idUsuario.Value);
-            var gastoModel = new GastoViewModel { Porcentaje = _homeService.ObtenerPresupuestoConPorcentaje(idUsuario.Value), ListaUltimosTresGastos = lista };
+            var gastoModel = new GastoViewModel
+            {
+                Porcentaje = await _presupuestoService.ObtenerPresupuestoConPorcentaje(idUsuario.Value, presupuesto),
+                ListaUltimosTresGastos = lista,
+                LimitePresupuesto = presupuesto.MontoLimite.Value
+            };
 
             ViewBag.UsuarioHeader = usuarioViewModel;
             return View(gastoModel);
         }
-
+  
         [HttpGet]
         public async Task<IActionResult> Filtrar(string mes, DateOnly? desde, DateOnly? hasta)
         {
@@ -65,10 +74,14 @@ namespace GestionDeGastos.Controllers
                 .GroupBy(g => new
                 {
                     g.IdCategoriaNavigation.Descripcion,
+                    g.IdCategoriaNavigation.Icono,
+                    g.IdCategoriaNavigation.Color
                 })
                 .Select(g => new
                 {
                     Categoria = g.Key.Descripcion,
+                    Icono = g.Key.Icono,
+                    Color = g.Key.Color,
                     Total = g.Sum(x => x.MontoTotal)
                 })
                 .OrderByDescending(x => x.Total)
@@ -77,14 +90,37 @@ namespace GestionDeGastos.Controllers
             // Obtenemos el top 3
             var top3 = categoriasConTotales.Take(3).ToList();
 
+
+
+            var listaDeGastos = query
+                .Select(g => new
+                {
+                    IdGasto = g.IdGasto,
+                    Nombre = g.Nombre,
+                    Fecha = g.Fecha,
+                    MontoTotal = g.MontoTotal
+
+
+                }).OrderByDescending(g => g.Fecha)
+                .ToList();
+
+
             // Ahora devolvemos los gastos individuales con su categoría y color
             var gastosDetallados = query
-      .GroupBy(g => g.IdCategoriaNavigation.Descripcion)
+      .GroupBy(g => new
+      {
+          g.IdCategoriaNavigation.Descripcion,
+          g.IdCategoriaNavigation.Icono,
+          g.IdCategoriaNavigation.Color
+      })
       .Select(g => new
       {
-          Categoria = g.Key,
+          Categoria = g.Key.Descripcion,
+          Icono = g.Key.Icono,
+          Color = g.Key.Color,
           Gastos = g.Select(x => new
           {
+              x.IdGasto,
               x.Nombre,
               x.MontoTotal,
               Fecha = x.Fecha
@@ -94,8 +130,13 @@ namespace GestionDeGastos.Controllers
       .OrderByDescending(g => g.TotalCategoria)
       .ToList();
 
-            return Json(new { gastosDetallados, top3 });
+            return Json(new { gastosDetallados, top3, listaDeGastos });
         }
+
+
+
+
+
 
     }
 }

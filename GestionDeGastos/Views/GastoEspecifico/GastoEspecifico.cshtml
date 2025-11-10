@@ -3,38 +3,45 @@
 
 <link rel="stylesheet" href="~/css/gasto-especifico.css" />
 
-<div class="page-container">
-    <div class="page-header">
-        <h1>📄 Detalle del Gasto</h1>
-        <p class="subtitle">Información completa del gasto seleccionado</p>
-    </div>
-
-    <div class="detail-card">
-        <div class="detail-section">
-            <h3>📋 Información General</h3>
-            <div class="detail-content-wrapper">
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <span class="detail-label">Nombre del Gasto</span>
-                        <div class="detail-value">@Model.Nombre</div>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Monto</span>
-                        <div class="detail-value monto">@Model.Monto.ToString("C")</div>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Categoría</span>
-                        <div class="detail-value">@Model.Categoria.NombreCategoria</div>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Método de Pago</span>
-                        <div class="detail-value">@Model.MetodoDePago.NombreMetodoDePago</div>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Fecha</span>
-                        <div class="detail-value">@Model.Fecha.ToShortDateString()</div>
-                    </div>
+    <!-- Datos del gasto -->
+    <div class="row g-3 align-items-center border-bottom pb-3 mb-3">
+        <div class="col-md-8">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-secondary small">Nombre del gasto</label>
+                    <div class="p-2 bg-white border rounded">@Model.Nombre</div>
                 </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold text-secondary small">Monto</label>
+                    <div class="p-2 bg-white border rounded">@Model.Monto.ToString("C")</div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small">Categoría</label>
+                    <div class="p-2 bg-white border rounded d-flex align-items-center">
+                        <span class="material-icons"
+                              style="color:@Model.Categoria.Color; margin-right:10px;">
+                            @Model.Categoria.Icono
+                        </span>
+                        @Model.Categoria.NombreCategoria
+                        </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small">Método de pago</label>
+
+                    <div class="p-2 bg-white border rounded d-flex align-items-center">
+                        <span class="material-icons"
+                              style="color:@Model.MetodoDePago.Color; font-size:1.8rem; margin-right:10px;">
+                            @Model.MetodoDePago.Icono
+                        </span>
+                        @Model.MetodoDePago.NombreMetodoDePago
+                        </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small">Fecha</label>
+                    <div class="p-2 bg-white border rounded">@Model.Fecha.ToShortDateString()</div>
+                </div>
+            </div>
+        </div>
 
                 @if (Model.Ticket != null && Model.Ticket.IdTicket != 0 && Model.Ticket.URLFoto != "")
                 {
@@ -80,19 +87,17 @@
                             }
                         </tbody>
                     </table>
-                }
-            </div>
-        }
-        else
-        {
-            <div class="ticket-section">
-                <div class="no-ticket">
-                    <div class="no-ticket-icon">🧾</div>
-                    <div>Este gasto no contiene ticket</div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-light border text-center text-muted" role="alert">
+            Este gasto no contiene ticket
+        </div>
+    }
+    <a class="btn btn-danger" asp-controller="Gasto" asp-action="Eliminar" asp-route-id="@Model.IdGasto">Eliminar Gasto</a>
 </div>
 
 <!-- Modal con imagen ampliada -->

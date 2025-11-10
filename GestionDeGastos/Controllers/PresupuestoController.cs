@@ -56,6 +56,7 @@ namespace GestionDeGastos.Controllers
             return idUsuario;
         }
 
+
         private async Task<PresupuestoPaginaViewModel> ContenidoPresupuestoViewModel(
                                                         Presupuesto ultimoPresupuesto,
                                                         IEnumerable<Presupuesto> listaPresupuestos)

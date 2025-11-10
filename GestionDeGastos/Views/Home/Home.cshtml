@@ -2,22 +2,18 @@
 @model GastoViewModel
 @await Html.PartialAsync("_Header")
 
-<link rel="stylesheet" href="~/css/home.css" />
+@if (TempData["Exito"] != null)
+{
+    <div class="alert alert-success">@TempData["Exito"]</div>
+}
 
-<div class="page-container">
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
 
-    @if (TempData["LoginExito"] != null)
-    {
-        <div class="alert alert-success">@TempData["LoginExito"]</div>
-    }
-
-    <div class="main-content">
-        <!-- Columna Izquierda - Gráfico -->
-        <div class="card">
-            <div class="card-header">
-                <h2>📊 Análisis de Gastos</h2>
-                <p class="subtitle">Distribución por categoría</p>
-            </div>
+<div class="container-fluid p-4" style="background: #e3e9ff; min-height: 100vh;">
+    <div class="row justify-content-center">
 
             <div class="date-range" id="rango-fechas">Cargando...</div>
 
@@ -49,213 +45,104 @@
                 </div>
             </div>
 
-            <!-- Acciones Rápidas -->
-            <div class="acciones-rapidas">
-                <h3>⚡ Acciones Rápidas</h3>
-                <div class="acciones-grid">
-                    <a asp-action="Agregar" asp-controller="Gasto" class="accion-btn">+ Agregar Gasto</a>
-                </div>
+        <!-- COLUMNA DERECHA (Presupuesto, Acciones rápidas, etc) -->
+        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #a7c9f5;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              
+                    <h6 class="fw-bold mb-0 d-flex align-items-center">Presupuesto Actual
+                    @if (Model.LimitePresupuesto == 0)
+                    {
+                        <span class="bi bi-exclamation-triangle-fill text-warning ms-2"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Tu presupuesto está en $0. Agregá un monto para empezar a planificar.">
+                        </span>
+
+                    }
+                    </h6>
+                
+                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none text-end">Ver Presupuestos</a>
             </div>
 
-            <!-- Gastos Recientes -->
-            <div class="gastos-recientes">
-                <div class="gastos-recientes-header">
-                    <h3>📋 Gastos Recientes</h3>
-                    <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos">Ver todos</a>
-                </div>
-                <div class="gastos-list">
-                    @if (Model.ListaUltimosTresGastos != null && Model.ListaUltimosTresGastos.Any())
-                    {
-                        @foreach (var gasto in Model.ListaUltimosTresGastos)
-                        {
-                            <div class="gasto-item">
-                                <div class="gasto-info">
-                                    <div class="gasto-nombre">@gasto.Nombre</div>
-                                    <div class="gasto-tiempo">Hace 2 horas</div>
-                                </div>
-                                <div class="gasto-monto">@gasto.MontoTotal</div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div style="text-align: center; padding: 40px; color: #6c6a75;">
-                            <div style="font-size: 48px; margin-bottom: 10px; opacity: 0.5;">📭</div>
-                            <div>No hay gastos recientes</div>
-                        </div>
-                    }
+         
+            @{
+                string progressColor = Model.Porcentaje switch
+                {
+                    var porcentaje when porcentaje < 50 => "bg-success",
+                    var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
+                    _ => "bg-danger",
+                };
+            }
+
+            <div class="progress mb-4">
+                <div class="progress-bar @progressColor" role="progressbar"
+                     style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
+                    @Model.Porcentaje.ToString("0.##")%
                 </div>
             </div>
+            <h6 class="fw-bold mb-3">Acciones Rápidas</h6>
+            <div class="row mb-3">
+                <div class="col-6 mb-2">
+                    <a asp-action="Agregar" asp-controller="Gasto" class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Gasto</a>
+                </div>
+@*                 <div class="col-6 mb-2">
+                    <a class="btn w-100 text-white" style="background: #6a5acd;">+ Agregar Ingreso</a>
+                </div>
+                <div class="col-4">
+                    <a class="btn w-100 text-white" style="background: #6a5acd;">Exportar</a>
+                </div> *@
+              @*   <div class="col-6">
+                    <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="btn w-100 text-white" style="background: #6a5acd;">Editar Presupuesto</a>
+                </div> *@
+@*                 <div class="col-4">
+                    <a class="btn w-100 text-white" style="background: #6a5acd;">Editar Perfil</a>
+                </div> *@
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold mb-0">Gastos Recientes</h6>
+                <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="text-decoration-none text-end">Ver todos mis gastos</a>
+            </div>
+            <div class="list-group">
+                @foreach (var gasto in Model.ListaUltimosTresGastos)
+                {
+                    <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <a asp-controller="GastoEspecifico"
+                           asp-action="GastoEspecifico"
+                           asp-route-id="@gasto.IdGasto"
+                           class="d-flex justify-content-between align-items-center w-100"
+                           style="text-decoration:none; color:inherit;">
+
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons"
+                                      style="color:@gasto.IdCategoriaNavigation.Color; font-size:1.8rem; margin-right:10px;">
+                                    @gasto.IdCategoriaNavigation.Icono
+                                </span>
+
+                                <div>
+                                    <div class="fw-semibold" style="font-size:1.1rem;">@gasto.Nombre</div>
+                                    <small class="text-muted">@gasto.Fecha</small>
+                                </div>
+                            </div>
+
+                                
+
+                            <span class="text-secondary fw-bold" style="font-size:1.1rem;">
+                                @gasto.MontoTotal.ToString("C2")
+                            </span>
+                        </a>
+                    </div>
+                }
+            </div>
+
         </div>
     </div>
 </div>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChartInit);
-
-    // 🔹 Diccionario global para mantener colores consistentes
-    const colorPorCategoria = {};
-
-    // 🔹 Función para generar colores (más lindos)
-    const paletaColores = [
-        "#4ABDAC", "#FC4A1A", "#F78733", "#6bcdbd", "#9dddd2",
-        "#FD8D3C", "#74C476", "#9E9AC8", "#E377C2", "#BCBD22"
-    ];
-    let indiceColor = 0;
-
-    function obtenerColorCategoria(categoria) {
-        if (!colorPorCategoria[categoria]) {
-            colorPorCategoria[categoria] = paletaColores[indiceColor % paletaColores.length];
-            indiceColor++;
-        }
-        return colorPorCategoria[categoria];
-    }
-
-    // --- 🔹 LISTENERS para evitar conflicto entre mes y rango ---
-    const filtroMesInput = document.getElementById("filtroMes");
-    const desdeInput = document.getElementById("desde");
-    const hastaInput = document.getElementById("hasta");
-
-    filtroMesInput.addEventListener("change", () => {
-        if (filtroMesInput.value) {
-            desdeInput.value = "";
-            hastaInput.value = "";
-        }
-    });
-
-    desdeInput.addEventListener("change", () => {
-        if (desdeInput.value) {
-            filtroMesInput.value = "";
-        }
-    });
-    hastaInput.addEventListener("change", () => {
-        if (hastaInput.value) {
-            filtroMesInput.value = "";
-        }
-    });
-
-    // --- 🔹 FUNCIÓN PRINCIPAL ---
-    async function drawChartInit() {
-        const fechaActual = new Date();
-        const mesActual = fechaActual.getMonth() + 1;
-        const anioActual = fechaActual.getFullYear();
-
-        const primerDia = new Date(anioActual, mesActual - 1, 1);
-        const ultimoDia = new Date(anioActual, mesActual, 0);
-        const nombreMes = primerDia.toLocaleString("es-ES", { month: "long" });
-
-        document.getElementById("rango-fechas").textContent =
-            `${nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1)}: ${primerDia.toLocaleDateString()} al ${ultimoDia.toLocaleDateString()}`;
-
-        const query = new URLSearchParams({ mes: `${anioActual}-${mesActual}` });
-        const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-        const result = await response.json();
-
-        drawPieChart(result.gastosDetallados);
-        mostrarTopCategorias(result.top3);
-    }
-
-    function drawPieChart(gastos) {
-        if (!gastos || gastos.length === 0) {
-            document.getElementById('chart_div').innerHTML = '<div style="text-align: center; padding: 40px; color: #6c6a75;"><div style="font-size: 48px; margin-bottom: 10px; opacity: 0.5;">📊</div><div>No hay gastos para mostrar</div></div>';
-            return;
-        }
-
-        const dataArray = [['Categoría', 'Monto']];
-        const colores = [];
-
-        gastos.forEach(g => {
-            dataArray.push([g.categoria, g.totalCategoria]);
-            colores.push(obtenerColorCategoria(g.categoria));
-        });
-
-        const data = google.visualization.arrayToDataTable(dataArray);
-
-        const options = {
-            pieHole: 0.5,
-            chartArea: { width: '85%', height: '85%', left: '5%', top: '5%' },
-            backgroundColor: 'transparent',
-            legend: { 
-                position: 'right', 
-                textStyle: { 
-                    color: '#363531', 
-                    fontSize: 13,
-                    fontName: 'Segoe UI'
-                }
-            },
-            pieSliceText: 'percentage',
-            pieSliceTextStyle: {
-                color: 'white',
-                fontSize: 13,
-                fontName: 'Segoe UI',
-                bold: true
-            },
-            colors: colores,
-            tooltip: {
-                textStyle: {
-                    fontSize: 13,
-                    fontName: 'Segoe UI'
-                }
-            }
-        };
-
-        const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-        document.getElementById("topCategorias").classList.remove("d-none");
-    }
-
-    function mostrarTopCategorias(top3) {
-        const contenedor = document.getElementById("topCategoriasContenido");
-
-        if (!top3 || top3.length === 0) {
-            contenedor.innerHTML = '<div style="text-align: center; color: #6c6a75; width: 100%;">No hay categorías para mostrar.</div>';
-            return;
-        }
-
-        contenedor.innerHTML = top3.map(cat => {
-            const color = obtenerColorCategoria(cat.categoria);
-            return `
-                <div class="top-categoria-item">
-                    <div class="top-categoria-circle" style="background: ${color};"></div>
-                    <div class="top-categoria-label">${cat.categoria}<br>$${cat.total.toFixed(2)}</div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    // --- 🔹 Submit del filtro ---
-    document.getElementById("filtroFechasForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const mes = filtroMesInput.value;
-        const desde = desdeInput.value;
-        const hasta = hastaInput.value;
-        const query = new URLSearchParams();
-
-        if (desde && hasta) {
-            query.set("desde", desde);
-            query.set("hasta", hasta);
-        } else if (mes) {
-            query.set("mes", mes);
-        }
-
-        const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-        const result = await response.json();
-
-        drawPieChart(result.gastosDetallados);
-        mostrarTopCategorias(result.top3);
-
-        if (desde && hasta) {
-            document.getElementById("rango-fechas").textContent = `${desde} al ${hasta}`;
-        } else if (mes) {
-            const [anio, mesNum] = mes.split("-");
-            const primerDia = new Date(anio, mesNum - 1, 1);
-            const ultimoDia = new Date(anio, mesNum, 0);
-            const nombreMes = primerDia.toLocaleString("es-ES", { month: "long" });
-            document.getElementById("rango-fechas").textContent =
-                `${nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1)}: ${primerDia.toLocaleDateString()} al ${ultimoDia.toLocaleDateString()}`;
-        }
-    });
-</script>
+<script type="text/javascript" src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+    </script>
+}

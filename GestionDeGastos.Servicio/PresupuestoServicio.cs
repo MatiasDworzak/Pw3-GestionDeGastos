@@ -14,6 +14,7 @@ namespace GestionDeGastos.Servicio
         Task ActualizarPresupuestoAsync(int idUsuario, Presupuesto presupuesto, decimal nuevoMonto);
         Task CrearPresupuestoInicial(int idUsuario);
         Task CrearPresupuesto(int idUsuario, Presupuesto presupuesto);
+        Task<Presupuesto> ObtenerPresupuestoAfectadoPorGasto(Gasto gastoEntidad);
     }
     public class PresupuestoServicio : IPresupuestoServicio
     {
@@ -64,7 +65,7 @@ namespace GestionDeGastos.Servicio
             decimal montoActualGastado = 0;
             foreach (var gasto in listaDeMontos)
             {
-                montoActualGastado += gasto.MontoTotal.Value;
+                montoActualGastado += gasto.MontoTotal;
             }
 
             await _repositorioPresupuesto.ActualizarMontonActualGastado(presupuesto,montoActualGastado);
@@ -105,6 +106,11 @@ namespace GestionDeGastos.Servicio
                     await _repositorioPresupuesto.CrearPresupuesto(idUsuario, nuevoPresupuesto);
                 }
             }
+        }
+
+        public async Task<Presupuesto> ObtenerPresupuestoAfectadoPorGasto(Gasto gastoEntidad)
+        {
+            return await _repositorioPresupuesto.ObtenerPresupuestoPorIdMesYAnio(gastoEntidad.IdUsuario, gastoEntidad.Fecha.Month, gastoEntidad.Fecha.Year);
         }
     }
 }
