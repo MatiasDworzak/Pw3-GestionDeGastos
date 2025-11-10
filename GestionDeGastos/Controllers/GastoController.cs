@@ -1,4 +1,5 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Models;
 using GestionDeGastos.Models.GastoModels;
 
 using GestionDeGastos.Servicio;
@@ -61,8 +62,8 @@ namespace GestionDeGastos.Controllers
                     MontoTotal = gastoVMRecibido.MontoTotal.Value,
                     // inserto mediante id porque ya existen en la BD
                     IdUsuario = ObtenerUsuarioLogueado(),
-                    IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
-                    IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
+                    IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, 
+                    IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, 
                     IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido)
                 };
 
@@ -182,19 +183,24 @@ namespace GestionDeGastos.Controllers
         {
             // TODO: Analizar si despues hacer view models de Categoria y Metodo de pago por si se agregan colores e iconos, recordar usar for en el front para mostrarlos
             var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(ObtenerUsuarioLogueado()); // valor hardcodeado, se tiene que sacar de la session 
-            gastoVM.Categorias = categoriasEntidad.Select(c => new SelectListItem
+            gastoVM.Categorias = categoriasEntidad.Select(c => new CategoriaViewModel
             {
-                Text = c.Descripcion,
-                Value = c.IdCategoria.ToString()
+                Id = c.IdCategoria,
+                Nombre = c.Descripcion,
+                Color = c.Color,
+                Icono = c.Icono
             }
-            ).OrderBy(c => c.Text).ToList();
+            ).OrderBy(c => c.Nombre).ToList();
 
             var metodosDePagoEntidad = await _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync();
-            gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new SelectListItem
+            gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new MetodoDePagoViewModel
             {
-                Text = m.Descripcion,
-                Value = m.IdMetodoPago.ToString()
-            }).OrderBy(m => m.Text).ToList();
+                Id = m.IdMetodoPago,
+                Nombre = m.Descripcion,
+                Color = m.Color,
+                Icono = m.Icono
+            }
+            ).OrderBy(m => m.Nombre).ToList();
         }
 
         private Ticket mapeoDeEntidadTicket(AgregarGastoViewModel gastoVM)
