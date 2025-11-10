@@ -95,6 +95,7 @@ namespace GestionDeGastos.Controllers
             var listaDeGastos = query
                 .Select(g => new
                 {
+                    IdGasto = g.IdGasto,
                     Nombre = g.Nombre,
                     Fecha = g.Fecha,
                     MontoTotal = g.MontoTotal
@@ -119,6 +120,7 @@ namespace GestionDeGastos.Controllers
           Color = g.Key.Color,
           Gastos = g.Select(x => new
           {
+              x.IdGasto,
               x.Nombre,
               x.MontoTotal,
               Fecha = x.Fecha

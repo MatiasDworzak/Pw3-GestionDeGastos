@@ -129,13 +129,14 @@ function mostrarListaDeGastos(listaDeGastos) {
         contenedorVerGastos.innerHTML = '<div class="no-data">No hay gastos registrados</div>';
         return;
     }
+    console.log(listaDeGastos);
 
     contenedorVerGastos.innerHTML = listaDeGastos.map(g => `
-        <div class="gasto-item">
+        <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}" class="gasto-item text-decoration-none">
             <div class="gasto-descripcion">${g.nombre}</div>
             <div class="gasto-monto">$${g.montoTotal.toFixed(2)}</div>
             <div class="gasto-fecha">${new Date(g.fecha).toLocaleDateString()}</div>
-        </div>
+        </a>
     `).join('');
 }
 
