@@ -100,6 +100,8 @@ radioSinTicket.addEventListener('change', e => {
     if (e.target.checked) {
         limpiarListaDeItems();
         limpiarArchivoTicket();
+        document.getElementById("MontoTotal").readOnly = false; 
+
     }
 });
 
