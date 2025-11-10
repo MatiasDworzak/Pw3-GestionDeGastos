@@ -143,8 +143,8 @@ function mostrarListaDeGastos(listaDeGastos) {
                style="text-decoration:none; color:inherit;">
                 <div class="d-flex align-items-center">
                     <span class="material-icons"
-                          style="color:${g.color || '#6a5acd'}; font-size:1.8rem; margin-right:10px;">
-                        ${g.icono || 'shopping_cart'}
+                          style="color:${g.color}; font-size:1.8rem; margin-right:10px;">
+                        ${g.icono}
                     </span>
                     <div>
                         <div class="fw-semibold" style="font-size:1.1rem;">${g.nombre}</div>

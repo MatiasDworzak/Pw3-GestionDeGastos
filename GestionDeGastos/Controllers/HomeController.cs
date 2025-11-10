@@ -98,7 +98,9 @@ namespace GestionDeGastos.Controllers
                     IdGasto = g.IdGasto,
                     Nombre = g.Nombre,
                     Fecha = g.Fecha,
-                    MontoTotal = g.MontoTotal
+                    MontoTotal = g.MontoTotal,
+                    Icono = g.IdCategoriaNavigation.Icono,
+                    Color = g.IdCategoriaNavigation.Color
 
 
                 }).OrderByDescending(g => g.Fecha)
