@@ -17,7 +17,7 @@ builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential()
 
 
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionLocal")));
 
 
 // Add services to the container.

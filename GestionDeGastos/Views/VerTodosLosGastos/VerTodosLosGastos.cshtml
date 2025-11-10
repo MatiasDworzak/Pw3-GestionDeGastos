@@ -188,7 +188,7 @@
                     {
                         <div class="total-item">
                             <div class="total-label">Gasto Total @categoria.IdCategoriaNavigation?.Descripcion</div>
-                            <div class="total-amount">@categoria.MontoTotal?.ToString("C")</div>
+                            <div class="total-amount">@categoria.MontoTotal.ToString("C")</div>
                         </div>
                     }
                 }
@@ -205,7 +205,7 @@
                     {
                         <div class="gasto-item">
                             <div class="gasto-descripcion">@gasto.IdCategoriaNavigation?.Descripcion - @gasto.Nombre</div>
-                            <div class="gasto-monto">@gasto.MontoTotal?.ToString("C")</div>
+                            <div class="gasto-monto">@gasto.MontoTotal.ToString("C")</div>
                         </div>
                     }
                 }

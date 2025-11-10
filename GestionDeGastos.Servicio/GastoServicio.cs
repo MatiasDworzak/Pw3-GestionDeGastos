@@ -31,7 +31,6 @@ namespace GestionDeGastos.Servicio
        
         public async Task AgregarGastoAsync(Gasto gasto)
         {
-            // TODO: pasar validaciones para una clase ValidacionGasto para llamarla en cada metodo.
 
             // que el usuario del gasto exista en la base de datos 
             if (await _usuarioRepositorio.GetByIdAsync(gasto.IdUsuario) == null)
