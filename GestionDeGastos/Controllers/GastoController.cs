@@ -19,15 +19,16 @@ namespace GestionDeGastos.Controllers
         private readonly IGastoServicio _gastoServicio;
         private readonly IBlobAzureServicio _blobServicio;
         private readonly IDocumentIntelligenceServicio _documentIntelligenceServicio;
+        private readonly IPresupuestoServicio _presupuestoServicio;
 
-        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence)
+        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence, IPresupuestoServicio presupuestoServicio)
         {
             _categoriaServicio = categoriaServicio;
             _metodoDePagoServicio = metodoDePagoServicio;
             _gastoServicio = gastoServicio;
             _blobServicio = servicioBlob;
             _documentIntelligenceServicio = documentIntelligence;
-
+            _presupuestoServicio = presupuestoServicio;
         }
 
         [HttpGet]
@@ -75,6 +76,9 @@ namespace GestionDeGastos.Controllers
                         gastoEntidad.IdTicketNavigation.RutaImagenBlob = await _blobServicio.SubirBlobAsync(gastoVMRecibido.TicketFoto, "tickets");
 
                     await _gastoServicio.AgregarGastoAsync(gastoEntidad);
+
+                    Presupuesto presupuestoAfectado = await _presupuestoServicio.ObtenerPresupuestoAfectadoPorGasto(gastoEntidad);
+                    await _presupuestoServicio.CalcularMontoActualGastado(ObtenerUsuarioLogueado(), presupuestoAfectado);
 
                     TempData["Exito"] = "Se ha agregado el gasto con exito!";
 
@@ -134,7 +138,8 @@ namespace GestionDeGastos.Controllers
                 _gastoServicio.DeterminarSiElGastoEsDeUnUsuarioPorId(gastoAEliminar, ObtenerUsuarioLogueado());
                 await _gastoServicio.EliminarGastoAsync(gastoAEliminar);
 
-                // impactar en el presupuesto
+                Presupuesto presupuestoAfectado = await _presupuestoServicio.ObtenerPresupuestoAfectadoPorGasto(gastoAEliminar);
+                await _presupuestoServicio.CalcularMontoActualGastado(ObtenerUsuarioLogueado(), presupuestoAfectado);
 
                 TempData["Exito"] = $"Se elimino el gasto {gastoAEliminar.Nombre} con exito!";
             }
