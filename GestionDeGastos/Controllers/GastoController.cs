@@ -1,4 +1,5 @@
 ﻿using GestionDeGastos.AccesoADatos.Entidades;
+using GestionDeGastos.Models;
 using GestionDeGastos.Models.GastoModels;
 
 using GestionDeGastos.Servicio;
@@ -18,15 +19,16 @@ namespace GestionDeGastos.Controllers
         private readonly IGastoServicio _gastoServicio;
         private readonly IBlobAzureServicio _blobServicio;
         private readonly IDocumentIntelligenceServicio _documentIntelligenceServicio;
+        private readonly IPresupuestoServicio _presupuestoServicio;
 
-        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence)
+        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence, IPresupuestoServicio presupuestoServicio)
         {
             _categoriaServicio = categoriaServicio;
             _metodoDePagoServicio = metodoDePagoServicio;
             _gastoServicio = gastoServicio;
             _blobServicio = servicioBlob;
             _documentIntelligenceServicio = documentIntelligence;
-
+            _presupuestoServicio = presupuestoServicio;
         }
 
         [HttpGet]
@@ -61,8 +63,8 @@ namespace GestionDeGastos.Controllers
                     MontoTotal = gastoVMRecibido.MontoTotal.Value,
                     // inserto mediante id porque ya existen en la BD
                     IdUsuario = ObtenerUsuarioLogueado(),
-                    IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, // fijarse si pasarlo a viewmodel
-                    IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, // fijarse si pasarlo a viewmodel
+                    IdMetodoPago = gastoVMRecibido.MetodoDePagoSeleccionado.Value, 
+                    IdCategoria = gastoVMRecibido.CategoriaSeleccionada.Value, 
                     IdTicketNavigation = mapeoDeEntidadTicket(gastoVMRecibido)
                 };
 
@@ -75,7 +77,10 @@ namespace GestionDeGastos.Controllers
 
                     await _gastoServicio.AgregarGastoAsync(gastoEntidad);
 
-                    TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
+                    Presupuesto presupuestoAfectado = await _presupuestoServicio.ObtenerPresupuestoAfectadoPorGasto(gastoEntidad);
+                    await _presupuestoServicio.CalcularMontoActualGastado(ObtenerUsuarioLogueado(), presupuestoAfectado);
+
+                    TempData["Exito"] = "Se ha agregado el gasto con exito!";
 
                     return RedirectToAction("Home", "Home");
                 }
@@ -116,6 +121,33 @@ namespace GestionDeGastos.Controllers
             {
                 return StatusCode(500, new { message = "Ocurrió un error en el servidor al analizar la imagen." });
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            if (id == null || id == 0)
+            {
+                TempData["Error"] = "Para eliminar debe enviar un id";
+                return RedirectToAction("Home", "Home");
+            }
+
+            try
+            {
+                Gasto gastoAEliminar = await _gastoServicio.ObtenerGastoAsync(id);
+                _gastoServicio.DeterminarSiElGastoEsDeUnUsuarioPorId(gastoAEliminar, ObtenerUsuarioLogueado());
+                await _gastoServicio.EliminarGastoAsync(gastoAEliminar);
+
+                Presupuesto presupuestoAfectado = await _presupuestoServicio.ObtenerPresupuestoAfectadoPorGasto(gastoAEliminar);
+                await _presupuestoServicio.CalcularMontoActualGastado(ObtenerUsuarioLogueado(), presupuestoAfectado);
+
+                TempData["Exito"] = $"Se elimino el gasto {gastoAEliminar.Nombre} con exito!";
+            }
+            catch (Exception ex) {
+                TempData["Error"] = ex.Message;
+            }
+
+            return RedirectToAction("Home", "Home");
         }
 
         // Metodos Helpers
@@ -182,19 +214,24 @@ namespace GestionDeGastos.Controllers
         {
             // TODO: Analizar si despues hacer view models de Categoria y Metodo de pago por si se agregan colores e iconos, recordar usar for en el front para mostrarlos
             var categoriasEntidad = await _categoriaServicio.ObtenerTodasLasCategoriasDelUsuarioAsync(ObtenerUsuarioLogueado()); // valor hardcodeado, se tiene que sacar de la session 
-            gastoVM.Categorias = categoriasEntidad.Select(c => new SelectListItem
+            gastoVM.Categorias = categoriasEntidad.Select(c => new CategoriaViewModel
             {
-                Text = c.Descripcion,
-                Value = c.IdCategoria.ToString()
+                Id = c.IdCategoria,
+                Nombre = c.Descripcion,
+                Color = c.Color,
+                Icono = c.Icono
             }
-            ).OrderBy(c => c.Text).ToList();
+            ).OrderBy(c => c.Nombre).ToList();
 
             var metodosDePagoEntidad = await _metodoDePagoServicio.ObtenerTodosLosMetodosDePagoAsync();
-            gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new SelectListItem
+            gastoVM.MetodosDePago = metodosDePagoEntidad.Select(m => new MetodoDePagoViewModel
             {
-                Text = m.Descripcion,
-                Value = m.IdMetodoPago.ToString()
-            }).OrderBy(m => m.Text).ToList();
+                Id = m.IdMetodoPago,
+                Nombre = m.Descripcion,
+                Color = m.Color,
+                Icono = m.Icono
+            }
+            ).OrderBy(m => m.Nombre).ToList();
         }
 
         private Ticket mapeoDeEntidadTicket(AgregarGastoViewModel gastoVM)

@@ -50,7 +50,12 @@ namespace GestionDeGastos.Controllers
             var usuarioViewModel = new UsuarioViewModel { IdUsuario = usuarioEntidad.IdUsuario, Nombre = usuarioEntidad.Nombre, Email = usuarioEntidad.Email };
 
             var lista = await _homeService.ObtenerUltimosCincoGastosPorIdDeUsuario(idUsuario.Value);
-            var gastoModel = new GastoViewModel { Porcentaje = await _presupuestoService.ObtenerPresupuestoConPorcentaje(idUsuario.Value, presupuesto), ListaUltimosTresGastos = lista };
+            var gastoModel = new GastoViewModel
+            {
+                Porcentaje = await _presupuestoService.ObtenerPresupuestoConPorcentaje(idUsuario.Value, presupuesto),
+                ListaUltimosTresGastos = lista,
+                LimitePresupuesto = presupuesto.MontoLimite.Value
+            };
 
             ViewBag.UsuarioHeader = usuarioViewModel;
             return View(gastoModel);
@@ -98,6 +103,21 @@ namespace GestionDeGastos.Controllers
             // Obtenemos el top 3
             var top3 = categoriasConTotales.Take(3).ToList();
 
+
+
+            var listaDeGastos = query
+                .Select(g => new
+                {
+                    IdGasto = g.IdGasto,
+                    Nombre = g.Nombre,
+                    Fecha = g.Fecha,
+                    MontoTotal = g.MontoTotal
+
+
+                }).OrderByDescending(g => g.Fecha)
+                .ToList();
+
+
             // Ahora devolvemos los gastos individuales con su categoría y color
             var gastosDetallados = query
       .GroupBy(g => new
@@ -129,6 +149,7 @@ namespace GestionDeGastos.Controllers
           Color = g.Key.Color,
           Gastos = g.Select(x => new
           {
+              x.IdGasto,
               x.Nombre,
               x.MontoTotal,
               Fecha = x.Fecha
@@ -138,8 +159,13 @@ namespace GestionDeGastos.Controllers
       .OrderByDescending(g => g.TotalCategoria)
       .ToList();
 
-            return Json(new { gastosDetallados, top3 });
+            return Json(new { gastosDetallados, top3, listaDeGastos });
         }
+
+
+
+
+
 
     }
 >>>>>>> main

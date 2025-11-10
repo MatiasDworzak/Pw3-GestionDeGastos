@@ -4,7 +4,7 @@ google.charts.setOnLoadCallback(drawChartInit);
 // 🔹 Diccionario global para mantener colores consistentes
 const colorPorCategoria = {};
 
-// 🔹 Función para generar colores (más lindos)
+// 🔹 Paleta de colores
 const paletaColores = [
     "#6BAED6", "#FD8D3C", "#74C476", "#9E9AC8", "#FFA07A",
     "#FDD0A2", "#A1D99B", "#C6DBEF", "#E377C2", "#BCBD22"
@@ -36,6 +36,7 @@ desdeInput.addEventListener("change", () => {
         filtroMesInput.value = "";
     }
 });
+
 hastaInput.addEventListener("change", () => {
     if (hastaInput.value) {
         filtroMesInput.value = "";
@@ -44,9 +45,14 @@ hastaInput.addEventListener("change", () => {
 
 // --- 🔹 FUNCIÓN PRINCIPAL ---
 async function drawChartInit() {
+
     const fechaActual = new Date();
-    const mesActual = fechaActual.getMonth() + 1;
-    const anioActual = fechaActual.getFullYear();
+
+    const params = new URLSearchParams(window.location.search);
+
+    const mesActual = params.get("mes") || fechaActual.getMonth() + 1;
+    const anioActual = params.get("anio") || fechaActual.getFullYear();
+
 
     const primerDia = new Date(anioActual, mesActual - 1, 1);
     const ultimoDia = new Date(anioActual, mesActual, 0);
@@ -59,9 +65,14 @@ async function drawChartInit() {
     const response = await fetch(`/Home/Filtrar?${query.toString()}`);
     const result = await response.json();
 
-    drawPieChart(result.gastosDetallados); mostrarTopCategorias(result.top3);
+    console.log("📦 Datos recibidos:", result);
+
+    drawPieChart(result.gastosDetallados);
+    mostrarTopCategorias(result.top3);
+    mostrarListaDeGastos(result.listaDeGastos || result.listaDeGastos); // tolerante a minúscula o mayúscula
 }
 
+// --- 🔹 Dibuja gráfico tipo dona ---
 function drawPieChart(gastos) {
     if (!gastos || gastos.length === 0) {
         document.getElementById('chart_div').innerHTML = '<p class="text-muted">No hay gastos para mostrar.</p>';
@@ -92,6 +103,8 @@ function drawPieChart(gastos) {
 
     document.getElementById("topCategorias").classList.remove("d-none");
 }
+
+// --- 🔹 Top categorías ---
 function mostrarTopCategorias(top3) {
     const contenedor = document.getElementById("topCategoriasContenido");
 
@@ -101,16 +114,50 @@ function mostrarTopCategorias(top3) {
     }
 
     contenedor.innerHTML = top3.map(cat => `
-            <div class="text-center mx-2">
-                <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-1 shadow-sm"
-                     style="width:60px;height:60px;background:${cat.color};">
-                    <i class="${cat.icono}" style="color:white; font-size:1.6rem;"></i>
-                </div>
-                <small>${cat.categoria} ($${cat.total.toFixed(2)})</small>
-            </div>
-        `).join('');
+    <div class="text-center mx-2">
+        <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-1 shadow-sm"
+             style="width:60px;height:60px;background:${cat.color};">
+            <span class="material-icons" style="color:white; font-size:1.8rem;">
+                ${cat.icono}
+            </span>
+        </div>
+        <small>${cat.categoria} (${cat.total.toFixed(2)})</small>
+    </div>
+`).join('');
 }
 
+// --- 🔹 Mostrar lista de gastos ---
+function mostrarListaDeGastos(listaDeGastos) {
+    const contenedorVerGastos = document.getElementById("gastos-list");
+
+    if (!listaDeGastos || listaDeGastos.length === 0) {
+        contenedorVerGastos.innerHTML = '<div class="text-center text-muted py-4">No hay gastos registrados</div>';
+        return;
+    }
+    console.log(listaDeGastos);
+
+    contenedorVerGastos.innerHTML = listaDeGastos.map(g => `
+        <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+            <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}" 
+               class="d-flex justify-content-between align-items-center w-100"
+               style="text-decoration:none; color:inherit;">
+                <div class="d-flex align-items-center">
+                    <span class="material-icons"
+                          style="color:${g.color || '#6a5acd'}; font-size:1.8rem; margin-right:10px;">
+                        ${g.icono || 'shopping_cart'}
+                    </span>
+                    <div>
+                        <div class="fw-semibold" style="font-size:1.1rem;">${g.nombre}</div>
+                        <small class="text-muted">${new Date(g.fecha).toLocaleDateString()}</small>
+                    </div>
+                </div>
+                <span class="text-secondary fw-bold" style="font-size:1.1rem;">
+                    $${g.montoTotal.toFixed(2)}
+                </span>
+            </a>
+        </div>
+    `).join('');
+}
 
 // --- 🔹 Submit del filtro ---
 document.getElementById("filtroFechasForm").addEventListener("submit", async (e) => {
@@ -119,10 +166,7 @@ document.getElementById("filtroFechasForm").addEventListener("submit", async (e)
     const mes = filtroMesInput.value;
     const desde = desdeInput.value;
     const hasta = hastaInput.value;
-    // if (hasta.value = ""){
-    //    const fechaActualDia = new Date()
-    //     hasta.value = fechaActualDia.getDate()
-    // }
+
     const query = new URLSearchParams();
 
     if (desde && hasta) {
@@ -137,6 +181,7 @@ document.getElementById("filtroFechasForm").addEventListener("submit", async (e)
 
     drawPieChart(result.gastosDetallados);
     mostrarTopCategorias(result.top3);
+    mostrarListaDeGastos(result.listaDeGastos || result.listaDeGastos);
 
     if (desde && hasta) {
         document.getElementById("rango-fechas").textContent = `${desde} al ${hasta}`;
@@ -150,6 +195,7 @@ document.getElementById("filtroFechasForm").addEventListener("submit", async (e)
     }
 });
 
+// --- 🔹 Redibuja al cambiar tamaño ---
 window.addEventListener("resize", () => {
     if (typeof drawChartInit === "function") {
         drawChartInit();
