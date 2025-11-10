@@ -3,7 +3,7 @@
 @await Html.PartialAsync("_Header")
 
 @section Css {
-    <link rel="stylesheet" href="~/css/custom-styles.css">
+    <link rel="stylesheet" href="~/css/home.css" />
 }
 
 @if (TempData["Exito"] != null)
@@ -16,49 +16,50 @@
     <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<div class="container-fluid p-4" style="background: #e3e9ff; min-height: 100vh;">
+<div class="container-fluid home-container">
     <div class="row justify-content-center">
-        <!-- COLUMNA IZQUIERDA: Gráfico -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
-            <div class="text-center mb-3">
-                <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
-                <p id="rango-fechas" class="text-muted">dd/mm/aaaa - dd/mm/aaaa</p>
 
-                <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3 flex-wrap">
-                    <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
-                    <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
-                    <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
-                    <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
-                </form>
+        <!-- COLUMNA IZQUIERDA (Gráfico) -->
+        <div class="col-md-5 chart-section">
+            <div class="chart-header">
+                <p class="chart-title">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                <p id="rango-fechas" class="chart-date-range">dd/mm/aaaa - dd/mm/aaaa</p>
+            </div>
 
-                <!-- Contenedor de gráfico -->
-                <div class="position-relative text-center bg-white rounded-3 p-3 shadow-sm">
-                    <div id="chart_div" style="width: 100%; height: 300px;"></div>
-                </div>
+            <form id="filtroFechasForm" class="filter-form">
+                <input type="month" id="filtroMes" name="mes" class="filter-input form-control">
+                <input type="date" id="desde" name="desde" class="filter-input form-control">
+                <input type="date" id="hasta" name="hasta" class="filter-input form-control">
+                <button type="submit" class="filter-btn">Filtrar</button>
+            </form>
 
-                <!-- Contenedor para el top 3 -->
-                <div id="topCategorias" class="mt-3 text-center d-none">
-                    <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
-                    <div id="topCategoriasContenido" class="d-flex justify-content-around flex-wrap"></div>
-                </div>
+            <!-- Contenedor de gráfico -->
+            <div class="chart-container">
+                <div id="chart_div"></div>
+            </div>
+
+            <!-- Contenedor para el top 3 -->
+            <div id="topCategorias" class="top-categories d-none">
+                <p class="top-categories-title">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                <div id="topCategoriasContenido" class="top-categories-content"></div>
             </div>
         </div>
 
-        <!-- COLUMNA DERECHA: Presupuesto y Gastos Recientes -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #a7c9f5;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0 d-flex align-items-center">
+        <!-- COLUMNA DERECHA (Presupuesto, Acciones rápidas, etc) -->
+        <div class="col-md-5 budget-section ms-md-3 mt-3 mt-md-0">
+            <div class="budget-header">
+                <h6 class="budget-title">
                     Presupuesto Actual
                     @if (Model.LimitePresupuesto == 0)
                     {
-                        <span class="bi bi-exclamation-triangle-fill text-warning ms-2"
+                        <span class="bi bi-exclamation-triangle-fill text-warning"
                               data-bs-toggle="tooltip"
                               data-bs-placement="top"
                               title="Tu presupuesto está en $0. Agregá un monto para empezar a planificar.">
                         </span>
                     }
                 </h6>
-                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none">Ver Presupuestos</a>
+                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="budget-link">Ver Presupuestos</a>
             </div>
 
             @{
@@ -70,61 +71,57 @@
                 };
             }
 
-            <div class="progress mb-4" style="height: 25px;">
-                <div class="progress-bar @progressColor" role="progressbar"
-                     style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
-                    <span class="fw-semibold">@Model.Porcentaje.ToString("0.##")%</span>
-                </div>
-            </div>
-            <h6 class="fw-bold mb-3">Acciones Rápidas</h6>
-            <div class="row mb-4">
-                <div class="col-12 mb-2">
-                    <a asp-action="Agregar" asp-controller="Gasto" class="btn w-100 text-white shadow-sm" style="background: #6a5acd; padding: 12px;">
-                        <i class="bi bi-plus-circle me-2"></i>Agregar Gasto
-                    </a>
+            <div class="progress-container">
+                <div class="progress">
+                    <div class="progress-bar @progressColor" role="progressbar"
+                         style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
+                        @Model.Porcentaje.ToString("0.##")%
+                    </div>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0">Gastos Recientes</h6>
-                <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="text-decoration-none">Ver todos</a>
+            <div class="quick-actions">
+                <h6 class="quick-actions-title">Acciones Rápidas</h6>
+                <div class="quick-actions-grid">
+                    <a asp-action="Agregar" asp-controller="Gasto" class="quick-action-btn">+ Agregar Gasto</a>
+                </div>
             </div>
-            <div class="list-group">
-                @foreach (var gasto in Model.ListaUltimosTresGastos)
-                {
-                    <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 mb-2 shadow-sm">
+
+            <div class="recent-expenses">
+                <div class="recent-expenses-header">
+                    <h6 class="recent-expenses-title">Gastos Recientes</h6>
+                    <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="recent-expenses-link">Ver todos mis gastos</a>
+                </div>
+                <div class="expense-list">
+                    @foreach (var gasto in Model.ListaUltimosTresGastos)
+                    {
                         <a asp-controller="GastoEspecifico"
                            asp-action="GastoEspecifico"
                            asp-route-id="@gasto.IdGasto"
-                           class="d-flex justify-content-between align-items-center w-100"
-                           style="text-decoration:none; color:inherit;">
-
-                            <div class="d-flex align-items-center">
-                                <span class="material-icons"
-                                      style="color:@gasto.IdCategoriaNavigation.Color; font-size:1.8rem; margin-right:10px;">
+                           class="expense-item">
+                            <div class="expense-item-content">
+                                <span class="material-icons expense-icon"
+                                      style="color:@gasto.IdCategoriaNavigation.Color;">
                                     @gasto.IdCategoriaNavigation.Icono
                                 </span>
-
-                                <div>
-                                    <div class="fw-semibold" style="font-size:1.1rem;">@gasto.Nombre</div>
-                                    <small class="text-muted">@gasto.Fecha.ToString("dd/MM/yyyy")</small>
+                                <div class="expense-details">
+                                    <div class="expense-name">@gasto.Nombre</div>
+                                    <div class="expense-date">@gasto.Fecha</div>
                                 </div>
                             </div>
-
-                            <span class="text-secondary fw-bold" style="font-size:1.1rem;">
+                            <span class="expense-amount">
                                 @gasto.MontoTotal.ToString("C2")
                             </span>
                         </a>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-
         </div>
     </div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
-@section Scripts{
+@section Scripts {
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));

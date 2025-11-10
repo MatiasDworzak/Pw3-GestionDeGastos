@@ -1,5 +1,3 @@
-
-using GestionDeGastos;
 using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
@@ -22,6 +20,10 @@ builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+//Registra el servicio de la sesion
+builder.Services.AddScoped<IUsuarioSession, UsuarioSession>();
 
 //servicios
 builder.Services.AddScoped<IHomeService, HomeServicio>();

@@ -3,8 +3,15 @@
     ViewData["Title"] = "Registro";
 }
 
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+</style>
 
-<div class="container-fluid vh-100">
+<div class="container-fluid vh-100" style="margin: 0; padding: 0; overflow: hidden;">
 
     <!--Columna izquierda de imagen-->
     <div class="row h-100">
@@ -55,12 +62,12 @@
                         <span asp-validation-for="ConfirmarContrasenia" class="text-danger d-block mt-1 small"></span>
                     </div>
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #3498db; border: none;">
+                        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #F7B733; border: none; color: #2C3E50; font-weight: 600;">
                             Registrate
                         </button>
                     </div>
                     <div class="text-center">
-                        <p class="text-secondary">¿Ya tienes una cuenta? <a asp-action="Login" class="text-decoration-none fw-semibold" style="color: #3498db;">Inicia Sesión</a></p>
+                        <p class="text-secondary">¿Ya tienes una cuenta? <a asp-action="Login" class="text-decoration-none fw-semibold" style="color: #4ABDAC;">Inicia Sesión</a></p>
                     </div>
                 </form>
             </div>
@@ -70,12 +77,12 @@
 
 <style>
     .form-control:focus {
-        border-color: #3498db;
-        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        border-color: #4ABDAC;
+        box-shadow: 0 0 0 0.2rem rgba(74, 189, 172, 0.25);
     }
 
     .btn-primary:hover {
-        background-color: #2980b9 !important;
+        background-color: #F5A623 !important;
         transform: translateY(-1px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }

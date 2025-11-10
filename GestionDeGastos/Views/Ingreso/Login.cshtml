@@ -3,7 +3,15 @@
     ViewData["Title"] = "Iniciar Sesión";
 }
 
-<div class="container-fluid vh-100">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+</style>
+
+<div class="container-fluid vh-100" style="margin: 0; padding: 0; overflow: hidden;">
     <div class="row h-100">
         <!-- Columna izquierda - Imagen -->
         <div class="col-md-6 d-none d-md-block p-0"
@@ -47,12 +55,12 @@
                         <span asp-validation-for="Contrasenia" class="text-danger d-block mt-1"></span>
                     </div>
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #3498db; border: none;">
+                        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #F7B733; border: none; color: #2C3E50; font-weight: 600;">
                             Ingresar
                         </button>
                     </div>
                     <div class="text-center">
-                        <p class="text-secondary">¿No tienes cuenta? <a asp-action="Register" class="text-decoration-none fw-semibold" style="color: #3498db;">Regístrate</a></p>
+                        <p class="text-secondary">¿No tienes cuenta? <a asp-action="Register" class="text-decoration-none fw-semibold" style="color: #4ABDAC;">Regístrate</a></p>
                     </div>
                 </form>
             </div>
@@ -62,12 +70,12 @@
 
 <style>
     .form-control:focus {
-        border-color: #3498db;
-        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        border-color: #4ABDAC;
+        box-shadow: 0 0 0 0.2rem rgba(74, 189, 172, 0.25);
     }
 
     .btn-primary:hover {
-        background-color: #2980b9 !important;
+        background-color: #F5A623 !important;
         transform: translateY(-1px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
