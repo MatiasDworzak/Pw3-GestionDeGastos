@@ -1,0 +1,465 @@
+﻿/* ============================================
+   PALETA DE COLORES PRINCIPAL
+   ============================================ */
+:root {
+    --fresh: #4ABDAC;
+    --vermillion: #FC4A1A;
+    --sunshine: #F7B733;
+    --clean: #DFDCE3;
+    --dark-text: #2C3E50;
+    --medium-text: #5A6C7D;
+    --light-text: #8B9DC3;
+    --white: #FFFFFF;
+    --light-bg: var(--clean);
+    --border-color: #C4C4C4;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+.home-container {
+    background: var(--white);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+/* ============================================
+   TARJETAS PRINCIPALES
+   ============================================ */
+.home-card {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .home-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+/* ============================================
+   SECCIÓN DE GRÁFICO
+   ============================================ */
+.chart-section {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(74, 189, 172, 0.1);
+}
+
+.chart-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.chart-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--fresh);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.chart-date-range {
+    color: var(--medium-text);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   FORMULARIO DE FILTROS
+   ============================================ */
+.filter-form {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-input {
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background: var(--white);
+    color: var(--dark-text);
+    width: 150px;
+}
+
+    .filter-input:focus {
+        outline: none;
+        border-color: var(--fresh);
+        box-shadow: 0 0 0 3px rgba(74, 189, 172, 0.2);
+    }
+
+.filter-btn {
+    background: linear-gradient(135deg, var(--fresh) 0%, #3DA89A 100%);
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.5rem;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+    .filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        background: linear-gradient(135deg, #3DA89A 0%, var(--fresh) 100%);
+    }
+
+    .filter-btn:active {
+        transform: translateY(0);
+    }
+
+/* ============================================
+   CONTENEDOR DE GRÁFICO
+   ============================================ */
+.chart-container {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+#chart_div {
+    width: 100%;
+    height: 300px;
+}
+
+/* ============================================
+   TOP CATEGORÍAS
+   ============================================ */
+.top-categories {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.top-categories-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
+}
+
+.top-categories-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* ============================================
+   SECCIÓN DE PRESUPUESTO
+   ============================================ */
+.budget-section {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(74, 189, 172, 0.1);
+}
+
+.budget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.budget-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--fresh);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.budget-link {
+    color: var(--fresh);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+    .budget-link:hover {
+        color: #3DA89A;
+        text-decoration: underline;
+    }
+
+/* ============================================
+   BARRA DE PROGRESO
+   ============================================ */
+.progress-container {
+    margin-bottom: 2rem;
+}
+
+.progress {
+    height: 28px;
+    border-radius: 6px;
+    background: var(--light-bg);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.progress-bar {
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.6s ease;
+}
+
+    .progress-bar.bg-success {
+        background: linear-gradient(135deg, var(--fresh) 0%, #3DA89A 100%) !important;
+    }
+
+    .progress-bar.bg-warning {
+        background: linear-gradient(135deg, var(--sunshine) 0%, #FFC947 100%) !important;
+    }
+
+    .progress-bar.bg-danger {
+        background: linear-gradient(135deg, var(--vermillion) 0%, #FF6B4A 100%) !important;
+    }
+
+/* ============================================
+   ACCIONES RÁPIDAS
+   ============================================ */
+.quick-actions {
+    margin-bottom: 2rem;
+}
+
+.quick-actions-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--fresh);
+    margin-bottom: 1rem;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.quick-action-btn {
+    background: linear-gradient(135deg, var(--fresh) 0%, #3DA89A 100%);
+    border: none;
+    border-radius: 6px;
+    padding: 1rem;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+}
+
+    .quick-action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        color: var(--white);
+        background: linear-gradient(135deg, #3DA89A 0%, var(--fresh) 100%);
+    }
+
+    .quick-action-btn:active {
+        transform: translateY(-1px);
+    }
+
+/* ============================================
+   GASTOS RECIENTES
+   ============================================ */
+.recent-expenses {
+    margin-top: 2rem;
+}
+
+.recent-expenses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.recent-expenses-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--fresh);
+    margin: 0;
+}
+
+.recent-expenses-link {
+    color: var(--fresh);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+    .recent-expenses-link:hover {
+        color: #3DA89A;
+        text-decoration: underline;
+    }
+
+/* ============================================
+   LISTA DE GASTOS
+   ============================================ */
+.expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.expense-item {
+    background: rgba(74, 189, 172, 0.05);
+    border: 2px solid rgba(74, 189, 172, 0.2);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+    .expense-item:hover {
+        background: rgba(74, 189, 172, 0.1);
+        border-color: var(--fresh);
+        transform: translateX(4px);
+        box-shadow: var(--shadow-sm);
+        color: inherit;
+        text-decoration: none;
+    }
+
+.expense-item-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.expense-icon {
+    font-size: 1.8rem;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expense-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.expense-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--dark-text);
+    margin-bottom: 0.25rem;
+}
+
+.expense-date {
+    color: var(--medium-text);
+    font-size: 0.85rem;
+}
+
+.expense-amount {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--dark-text);
+}
+
+/* ============================================
+   ALERTAS
+   ============================================ */
+.alert {
+    border-radius: 6px;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(74, 189, 172, 0.1) 0%, rgba(61, 168, 154, 0.1) 100%);
+    color: var(--fresh);
+    border-left: 4px solid var(--fresh);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(252, 74, 26, 0.1) 0%, rgba(255, 107, 74, 0.1) 100%);
+    color: var(--vermillion);
+    border-left: 4px solid var(--vermillion);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .home-card,
+    .chart-section,
+    .budget-section {
+        padding: 1.5rem;
+        border-radius: 6px;
+    }
+
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-input {
+        width: 100%;
+    }
+
+    .quick-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .expense-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .expense-amount {
+        align-self: flex-end;
+    }
+}
+
+/* ============================================
+   UTILIDADES
+   ============================================ */
+.text-muted {
+    color: var(--medium-text) !important;
+}
+
+.shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}

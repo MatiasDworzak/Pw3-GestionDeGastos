@@ -85,6 +85,7 @@ function obtenerUltimoItem() {
 function limpiarArchivoTicket() {
     document.getElementById("formFile").value = "";
     document.getElementById("preview-ticket").src = "";
+    document.getElementById("preview-ticket-modal").src = "";
     document.getElementById("columna-items").classList.replace("col-9", "col-12");
 }
 
@@ -99,6 +100,8 @@ radioSinTicket.addEventListener('change', e => {
     if (e.target.checked) {
         limpiarListaDeItems();
         limpiarArchivoTicket();
+        document.getElementById("MontoTotal").readOnly = false; 
+
     }
 });
 
@@ -191,7 +194,10 @@ btnEscanear.addEventListener('click', async (e) => {
 
         // agrego imagen
         const preview = document.getElementById("preview-ticket");
-        preview.src = URL.createObjectURL(file);
+        const previewModal = document.getElementById("preview-ticket-modal");
+        let url = URL.createObjectURL(file);
+        preview.src = url;
+        previewModal.src = url;
         preview.classList.remove("d-none");
 
         // ajusto columnas
@@ -208,8 +214,6 @@ btnEscanear.addEventListener('click', async (e) => {
 
         // Poblar los items
         limpiarListaDeItems();
-
-        console.log(data);
 
         data.itemsEscaneados.forEach((item, index) => {
             if (index > 0) {

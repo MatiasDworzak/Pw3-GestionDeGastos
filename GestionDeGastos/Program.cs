@@ -1,13 +1,11 @@
-
-using GestionDeGastos;
+﻿using Azure.Identity;
 using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
-using GestionDeGastos.Servicio.Seguridad;
 using GestionDeGastos.Servicio.GastoEspecifico;
-
+using GestionDeGastos.Servicio.Seguridad;
 using Microsoft.EntityFrameworkCore;
-using Azure.Identity;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +15,15 @@ builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential()
 
 
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionLocal")));
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
+
+//Registra el servicio de la sesion
+builder.Services.AddScoped<IUsuarioSession, UsuarioSession>();
 
 //servicios
 builder.Services.AddScoped<IHomeService, HomeServicio>();
@@ -66,6 +68,14 @@ builder.Services.AddHttpClient("Functions", client =>
 });
 
 var app = builder.Build();
+
+// --- 🌐 Configuración de cultura (aquí va tu código) ---
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+cultureInfo.NumberFormat.NumberGroupSeparator = ",";
+
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

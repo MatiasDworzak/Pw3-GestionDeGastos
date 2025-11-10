@@ -57,14 +57,6 @@ namespace GestionDeGastos.Servicio
             if (string.IsNullOrEmpty(doc?.DocumentType) || !doc.DocumentType.Contains("receipt", StringComparison.OrdinalIgnoreCase))
                 return ticket;
 
-            // Total analizar si hace falta
-            //if (doc.Fields.TryGetValue("Total", out DocumentField totalField))
-            //{
-            //    var moneda = totalField.ValueCurrency;
-            //    if (moneda != null)
-            //        ticket.MontoTotal = (decimal)moneda.Amount;
-            //}
-
             // Fecha
             var fecha = doc.Fields.TryGetValue("TransactionDate", out var dateField)
                         ? dateField.ValueDate
@@ -94,7 +86,7 @@ namespace GestionDeGastos.Servicio
             else if (diferencia < 0)
             {
                 // Si la diferencia es negativa, la consideramos como Descuento
-                ticket.Descuento = diferencia;// considerar el Abs
+                ticket.Descuento = diferencia;
             }
 
             // Items
