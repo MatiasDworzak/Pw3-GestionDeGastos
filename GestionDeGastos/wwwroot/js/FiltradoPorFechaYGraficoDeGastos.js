@@ -45,9 +45,14 @@ hastaInput.addEventListener("change", () => {
 
 // --- 🔹 FUNCIÓN PRINCIPAL ---
 async function drawChartInit() {
+
     const fechaActual = new Date();
-    const mesActual = fechaActual.getMonth() + 1;
-    const anioActual = fechaActual.getFullYear();
+
+    const params = new URLSearchParams(window.location.search);
+
+    const mesActual = params.get("mes") || fechaActual.getMonth() + 1;
+    const anioActual = params.get("anio") || fechaActual.getFullYear();
+
 
     const primerDia = new Date(anioActual, mesActual - 1, 1);
     const ultimoDia = new Date(anioActual, mesActual, 0);
