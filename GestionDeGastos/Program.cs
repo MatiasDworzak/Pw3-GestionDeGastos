@@ -1,11 +1,11 @@
+﻿using Azure.Identity;
 using GestionDeGastos.AccesoADatos.Entidades;
 using GestionDeGastos.Repositorio;
 using GestionDeGastos.Servicio;
-using GestionDeGastos.Servicio.Seguridad;
 using GestionDeGastos.Servicio.GastoEspecifico;
-
+using GestionDeGastos.Servicio.Seguridad;
 using Microsoft.EntityFrameworkCore;
-using Azure.Identity;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +68,14 @@ builder.Services.AddHttpClient("Functions", client =>
 });
 
 var app = builder.Build();
+
+// --- 🌐 Configuración de cultura (aquí va tu código) ---
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+cultureInfo.NumberFormat.NumberGroupSeparator = ",";
+
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
