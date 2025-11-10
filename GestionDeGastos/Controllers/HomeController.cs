@@ -37,7 +37,12 @@ namespace GestionDeGastos.Controllers
             var usuarioViewModel = new UsuarioViewModel { IdUsuario = usuarioEntidad.IdUsuario, Nombre = usuarioEntidad.Nombre, Email = usuarioEntidad.Email };
 
             var lista = await _homeService.ObtenerUltimosCincoGastosPorIdDeUsuario(idUsuario.Value);
-            var gastoModel = new GastoViewModel { Porcentaje = await _presupuestoService.ObtenerPresupuestoConPorcentaje(idUsuario.Value, presupuesto), ListaUltimosTresGastos = lista };
+            var gastoModel = new GastoViewModel
+            {
+                Porcentaje = await _presupuestoService.ObtenerPresupuestoConPorcentaje(idUsuario.Value, presupuesto),
+                ListaUltimosTresGastos = lista,
+                LimitePresupuesto = presupuesto.MontoLimite.Value
+            };
 
             ViewBag.UsuarioHeader = usuarioViewModel;
             return View(gastoModel);
