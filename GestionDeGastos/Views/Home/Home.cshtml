@@ -16,19 +16,19 @@
     <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<div class="container-fluid p-4" style="background: #e3e9ff; min-height: 100vh;">
+<div class="container-fluid p-4" style="background: #DFDCE3; min-height: 100vh;">
     <div class="row justify-content-center">
         <!-- COLUMNA IZQUIERDA: Gráfico -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #a7c9f5;">
+        <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #4ABDAC;">
             <div class="text-center mb-3">
-                <p class="fw-bold mb-0">TIEMPO ANALIZADO EN GRÁFICO:</p>
-                <p id="rango-fechas" class="text-muted">dd/mm/aaaa - dd/mm/aaaa</p>
+                <p class="fw-bold mb-0 text-white">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                <p id="rango-fechas" class="text-white opacity-75">dd/mm/aaaa - dd/mm/aaaa</p>
 
                 <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3 flex-wrap">
                     <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
                     <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
                     <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
-                    <button type="submit" class="btn btn-sm btn-danger">Filtrar</button>
+                    <button type="submit" class="btn btn-sm text-white fw-semibold" style="background: #FC4A1A;">Filtrar</button>
                 </form>
 
                 <!-- Contenedor de gráfico -->
@@ -38,16 +38,16 @@
 
                 <!-- Contenedor para el top 3 -->
                 <div id="topCategorias" class="mt-3 text-center d-none">
-                    <p class="fw-semibold mb-2">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                    <p class="fw-semibold mb-2 text-white">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
                     <div id="topCategoriasContenido" class="d-flex justify-content-around flex-wrap"></div>
                 </div>
             </div>
         </div>
 
         <!-- COLUMNA DERECHA: Presupuesto y Gastos Recientes -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #a7c9f5;">
+        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #4ABDAC;">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0 d-flex align-items-center">
+                <h6 class="fw-bold mb-0 d-flex align-items-center text-white">
                     Presupuesto Actual
                     @if (Model.LimitePresupuesto == 0)
                     {
@@ -58,36 +58,36 @@
                         </span>
                     }
                 </h6>
-                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none">Ver Presupuestos</a>
+                <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-white text-decoration-none">Ver Presupuestos</a>
             </div>
 
             @{
                 string progressColor = Model.Porcentaje switch
                 {
-                    var porcentaje when porcentaje < 50 => "bg-success",
-                    var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
-                    _ => "bg-danger",
+                    var porcentaje when porcentaje < 50 => "#4ABDAC",
+                    var porcentaje when porcentaje >= 50 && porcentaje < 80 => "#F7B733",
+                    _ => "#FC4A1A",
                 };
             }
 
-            <div class="progress mb-4" style="height: 25px;">
-                <div class="progress-bar @progressColor" role="progressbar"
-                     style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
+            <div class="progress mb-4" style="height: 25px; background: rgba(255,255,255,0.3);">
+                <div class="progress-bar" role="progressbar"
+                     style="width:@Model.Porcentaje.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%; background: @progressColor;">
                     <span class="fw-semibold">@Model.Porcentaje.ToString("0.##")%</span>
                 </div>
             </div>
-            <h6 class="fw-bold mb-3">Acciones Rápidas</h6>
+            <h6 class="fw-bold mb-3 text-white">Acciones Rápidas</h6>
             <div class="row mb-4">
                 <div class="col-12 mb-2">
-                    <a asp-action="Agregar" asp-controller="Gasto" class="btn w-100 text-white shadow-sm" style="background: #6a5acd; padding: 12px;">
+                    <a asp-action="Agregar" asp-controller="Gasto" class="btn w-100 text-dark shadow-sm fw-semibold" style="background: #F7B733; padding: 12px;">
                         <i class="bi bi-plus-circle me-2"></i>Agregar Gasto
                     </a>
                 </div>
             </div>
 
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0">Gastos Recientes</h6>
-                <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="text-decoration-none">Ver todos</a>
+                <h6 class="fw-bold mb-0 text-white">Gastos Recientes</h6>
+                <a asp-controller="VerTodosLosGastos" asp-action="VerTodosLosGastos" class="text-white text-decoration-none">Ver todos</a>
             </div>
             <div class="list-group">
                 @foreach (var gasto in Model.ListaUltimosTresGastos)
