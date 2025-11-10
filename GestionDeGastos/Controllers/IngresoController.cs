@@ -75,7 +75,7 @@ namespace GestionDeGastos.Controllers
             HttpContext.Session.SetString("UsuarioNombre", usuarioValidado.Nombre);
             HttpContext.Session.SetString("UsuarioEmail", usuarioValidado.Email);
 
-            TempData["LoginExito"] = "Sesion iniciada con éxito";
+            TempData["Exito"] = "Sesion iniciada con éxito";
             return RedirectToAction("Home", "Home");
         }
         [HttpPost]

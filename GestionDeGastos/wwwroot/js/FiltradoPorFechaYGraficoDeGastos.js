@@ -45,9 +45,14 @@ hastaInput.addEventListener("change", () => {
 
 // --- 🔹 FUNCIÓN PRINCIPAL ---
 async function drawChartInit() {
+
     const fechaActual = new Date();
-    const mesActual = fechaActual.getMonth() + 1;
-    const anioActual = fechaActual.getFullYear();
+
+    const params = new URLSearchParams(window.location.search);
+
+    const mesActual = params.get("mes") || fechaActual.getMonth() + 1;
+    const anioActual = params.get("anio") || fechaActual.getFullYear();
+
 
     const primerDia = new Date(anioActual, mesActual - 1, 1);
     const ultimoDia = new Date(anioActual, mesActual, 0);
@@ -129,13 +134,14 @@ function mostrarListaDeGastos(listaDeGastos) {
         contenedorVerGastos.innerHTML = '<div class="no-data">No hay gastos registrados</div>';
         return;
     }
+    console.log(listaDeGastos);
 
     contenedorVerGastos.innerHTML = listaDeGastos.map(g => `
-        <div class="gasto-item">
+        <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}" class="gasto-item text-decoration-none">
             <div class="gasto-descripcion">${g.nombre}</div>
             <div class="gasto-monto">$${g.montoTotal.toFixed(2)}</div>
             <div class="gasto-fecha">${new Date(g.fecha).toLocaleDateString()}</div>
-        </div>
+        </a>
     `).join('');
 }
 

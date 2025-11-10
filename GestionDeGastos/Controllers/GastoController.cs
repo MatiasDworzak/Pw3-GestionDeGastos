@@ -19,15 +19,16 @@ namespace GestionDeGastos.Controllers
         private readonly IGastoServicio _gastoServicio;
         private readonly IBlobAzureServicio _blobServicio;
         private readonly IDocumentIntelligenceServicio _documentIntelligenceServicio;
+        private readonly IPresupuestoServicio _presupuestoServicio;
 
-        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence)
+        public GastoController(ICategoriaServicio categoriaServicio, IMetodoDePagoServicio metodoDePagoServicio, IGastoServicio gastoServicio, IBlobAzureServicio servicioBlob, IDocumentIntelligenceServicio documentIntelligence, IPresupuestoServicio presupuestoServicio)
         {
             _categoriaServicio = categoriaServicio;
             _metodoDePagoServicio = metodoDePagoServicio;
             _gastoServicio = gastoServicio;
             _blobServicio = servicioBlob;
             _documentIntelligenceServicio = documentIntelligence;
-
+            _presupuestoServicio = presupuestoServicio;
         }
 
         [HttpGet]
@@ -76,7 +77,10 @@ namespace GestionDeGastos.Controllers
 
                     await _gastoServicio.AgregarGastoAsync(gastoEntidad);
 
-                    TempData["GastoExitoso"] = "Se ha agregado el gasto con exito!";
+                    Presupuesto presupuestoAfectado = await _presupuestoServicio.ObtenerPresupuestoAfectadoPorGasto(gastoEntidad);
+                    await _presupuestoServicio.CalcularMontoActualGastado(ObtenerUsuarioLogueado(), presupuestoAfectado);
+
+                    TempData["Exito"] = "Se ha agregado el gasto con exito!";
 
                     return RedirectToAction("Home", "Home");
                 }
@@ -117,6 +121,33 @@ namespace GestionDeGastos.Controllers
             {
                 return StatusCode(500, new { message = "Ocurrió un error en el servidor al analizar la imagen." });
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            if (id == null || id == 0)
+            {
+                TempData["Error"] = "Para eliminar debe enviar un id";
+                return RedirectToAction("Home", "Home");
+            }
+
+            try
+            {
+                Gasto gastoAEliminar = await _gastoServicio.ObtenerGastoAsync(id);
+                _gastoServicio.DeterminarSiElGastoEsDeUnUsuarioPorId(gastoAEliminar, ObtenerUsuarioLogueado());
+                await _gastoServicio.EliminarGastoAsync(gastoAEliminar);
+
+                Presupuesto presupuestoAfectado = await _presupuestoServicio.ObtenerPresupuestoAfectadoPorGasto(gastoAEliminar);
+                await _presupuestoServicio.CalcularMontoActualGastado(ObtenerUsuarioLogueado(), presupuestoAfectado);
+
+                TempData["Exito"] = $"Se elimino el gasto {gastoAEliminar.Nombre} con exito!";
+            }
+            catch (Exception ex) {
+                TempData["Error"] = ex.Message;
+            }
+
+            return RedirectToAction("Home", "Home");
         }
 
         // Metodos Helpers
