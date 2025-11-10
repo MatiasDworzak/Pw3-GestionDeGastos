@@ -26,20 +26,25 @@ namespace GestionDeGastos.Controllers
             var metodoDePagoObtenido = await _gastoEspecificoServicio.ObtenerMetodoDePagoDeUnGasto(gastoObtenido);
             var ticketObtenido = await _gastoEspecificoServicio.ObtenerTicketDeUnGasto(gastoObtenido);
             var itemsObtenidos = await _gastoEspecificoServicio.ObtenerItemsDeUnGasto(gastoObtenido);
-            
+
             var model = new GastoEspecificoViewModel
             {
+                IdGasto = gastoObtenido.IdGasto,
                 Nombre = gastoObtenido.Nombre,
                 Monto = gastoObtenido.MontoTotal,
                 Categoria = new CategoriaGastoEspecificoViewModel
                 {
                     IdCategoria = categoriaObtenida.IdCategoria,
-                    NombreCategoria = categoriaObtenida.Descripcion
+                    NombreCategoria = categoriaObtenida.Descripcion,
+                    Color = categoriaObtenida.Color,
+                    Icono = categoriaObtenida.Icono
                 },
                 MetodoDePago = new MetodoDePagoGastoEspecificoViewModel
                 {
                     IdMetodoDePago = metodoDePagoObtenido.IdMetodoPago,
-                    NombreMetodoDePago = metodoDePagoObtenido.Descripcion
+                    NombreMetodoDePago = metodoDePagoObtenido.Descripcion,
+                    Color = metodoDePagoObtenido.Color,
+                    Icono = metodoDePagoObtenido.Icono
                 },
                 Fecha = gastoObtenido.Fecha,
                 Ticket = new TicketGastoEspecificoViewModel

@@ -13,6 +13,9 @@ namespace GestionDeGastos.Servicio
     {
         Task AgregarGastoAsync(Gasto gasto);
         Task ActualizarGastoAsync(Gasto gasto);
+        Task<Gasto> ObtenerGastoAsync(int id);
+        Boolean DeterminarSiElGastoEsDeUnUsuarioPorId(Gasto gastoAEliminar, int v);
+        Task EliminarGastoAsync(Gasto gastoAEliminar);
     }
     public class GastoServicio : IGastoServicio
     {
@@ -55,6 +58,25 @@ namespace GestionDeGastos.Servicio
         public async Task ActualizarGastoAsync(Gasto gasto)
         {
             await _gastoRepositorio.ActualizarGastoAsync(gasto);
+        }
+
+        public async Task<Gasto> ObtenerGastoAsync(int id)
+        {
+            return await _gastoRepositorio.ObtenerGastoPorId(id);
+        }
+
+        public Boolean DeterminarSiElGastoEsDeUnUsuarioPorId(Gasto gastoAEliminar, int idUsuario)
+        {
+            bool elGastoEsDelUsuario = gastoAEliminar.IdUsuario == idUsuario;
+
+            if (!elGastoEsDelUsuario) throw new Exception("Solo puedes borrar gastos propios");
+
+            return elGastoEsDelUsuario;
+        }
+
+        public async Task EliminarGastoAsync(Gasto gastoAEliminar)
+        {
+            await _gastoRepositorio.EliminarGastoAsync(gastoAEliminar);
         }
     }
 }

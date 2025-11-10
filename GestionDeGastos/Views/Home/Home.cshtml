@@ -2,7 +2,15 @@
 @model GastoViewModel
 @await Html.PartialAsync("_Header")
 
-<div class="alert alert-success">@TempData["LoginExito"]</div>
+@if (TempData["Exito"] != null)
+{
+    <div class="alert alert-success">@TempData["Exito"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
 
 <div class="container-fluid p-4" style="background: #e3e9ff; min-height: 100vh;">
     <div class="row justify-content-center">

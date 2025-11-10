@@ -20,11 +20,24 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold text-secondary small">Categoría</label>
-                    <div class="p-2 bg-white border rounded">@Model.Categoria.NombreCategoria</div>
+                    <div class="p-2 bg-white border rounded d-flex align-items-center">
+                        <span class="material-icons"
+                              style="color:@Model.Categoria.Color; margin-right:10px;">
+                            @Model.Categoria.Icono
+                        </span>
+                        @Model.Categoria.NombreCategoria
+                        </div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold text-secondary small">Método de pago</label>
-                    <div class="p-2 bg-white border rounded">@Model.MetodoDePago.NombreMetodoDePago</div>
+
+                    <div class="p-2 bg-white border rounded d-flex align-items-center">
+                        <span class="material-icons"
+                              style="color:@Model.MetodoDePago.Color; font-size:1.8rem; margin-right:10px;">
+                            @Model.MetodoDePago.Icono
+                        </span>
+                        @Model.MetodoDePago.NombreMetodoDePago
+                        </div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label fw-bold text-secondary small">Fecha</label>
@@ -94,6 +107,7 @@
             Este gasto no contiene ticket
         </div>
     }
+    <a class="btn btn-danger" asp-controller="Gasto" asp-action="Eliminar" asp-route-id="@Model.IdGasto">Eliminar Gasto</a>
 </div>
 
 <!-- Modal con imagen ampliada -->
