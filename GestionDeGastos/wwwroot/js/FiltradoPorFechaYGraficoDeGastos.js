@@ -109,14 +109,16 @@ function mostrarTopCategorias(top3) {
     }
 
     contenedor.innerHTML = top3.map(cat => `
-        <div class="text-center mx-2">
-            <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-1 shadow-sm"
-                 style="width:60px;height:60px;background:${cat.color};">
-                <i class="${cat.icono}" style="color:white; font-size:1.6rem;"></i>
-            </div>
-            <small>${cat.categoria} ($${cat.total.toFixed(2)})</small>
+    <div class="text-center mx-2">
+        <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-1 shadow-sm"
+             style="width:60px;height:60px;background:${cat.color};">
+            <span class="material-icons" style="color:white; font-size:1.8rem;">
+                ${cat.icono}
+            </span>
         </div>
-    `).join('');
+        <small>${cat.categoria} ($${cat.total.toFixed(2)})</small>
+    </div>
+`).join('');
 }
 
 // --- 🔹 Mostrar lista de gastos ---

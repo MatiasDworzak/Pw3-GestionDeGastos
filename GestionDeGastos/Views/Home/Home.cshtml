@@ -35,7 +35,19 @@
         <!-- COLUMNA DERECHA (Presupuesto, Acciones rápidas, etc) -->
         <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #a7c9f5;">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0">Presupuesto Actual</h6>
+              
+                    <h6 class="fw-bold mb-0 d-flex align-items-center">Presupuesto Actual
+                    @if (Model.LimitePresupuesto == 0)
+                    {
+                        <span class="bi bi-exclamation-triangle-fill text-warning ms-2"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Tu presupuesto está en $0. Agregá un monto para empezar a planificar.">
+                        </span>
+
+                    }
+                    </h6>
+                
                 <a asp-controller="Presupuesto" asp-action="PresupuestoActual" class="text-decoration-none text-end">Ver Presupuestos</a>
             </div>
 
@@ -114,6 +126,10 @@
     </div>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="~/js/FiltradoPorFechaYGraficoDeGastos.js">
-  
-</script>
+<script type="text/javascript" src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+    </script>
+}
