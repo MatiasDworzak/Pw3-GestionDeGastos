@@ -153,7 +153,10 @@
                     }
                  </div>
                 <div id="columna-imagen" class="col-3">
-                    <img id="preview-ticket" class="mt-2 img-thumbnail d-none" style="max-width: 300px;">
+                    <img id="preview-ticket" class="mt-2 img-thumbnail d-none"
+                         style="cursor: pointer; max-width: 300px;"
+                         data-bs-toggle="modal"
+                         data-bs-target="#modalImagen">
                  </div>
             </div>
             <div class="mt-2 d-flex justify-content-start">
@@ -173,6 +176,16 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="button" id="btn-modal-sin-ticket" class="btn btn-primary">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal con imagen ampliada -->
+            <div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="modalImagenLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content bg-transparent border-0 shadow-none">
+                        <div class="modal-body text-center p-0">
+                            <img id="preview-ticket-modal" class="img-fluid rounded" style="max-height: 90vh; object-fit: contain;" />
                         </div>
                     </div>
                 </div>
