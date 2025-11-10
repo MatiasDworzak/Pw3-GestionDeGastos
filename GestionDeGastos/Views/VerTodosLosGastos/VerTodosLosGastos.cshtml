@@ -1,220 +1,84 @@
 ﻿@model GestionDeGastos.Models.GastoModels.GastoPorCategoriaViewModel
 @await Html.PartialAsync("_Header")
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Todos Los Gastos</title>
-    <style>
-        /* --- estilos previos --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<link rel="stylesheet" href="~/css/ver-todos-los-gastos.css" />
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            height: calc(100vh - 40px);
-        }
-
-        .left-section {
-            background: rgba(173, 216, 230, 0.4);
-            border-radius: 15px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chart-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: rgba(173, 216, 230, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        #chart_div {
-            flex: 1;
-            min-height: 300px;
-        }
-
-        .right-section {
-            background: #ff6b6b;
-            border-radius: 15px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-        }
-
-            .right-section h2 {
-                color: white;
-                text-align: center;
-                margin-bottom: 20px;
-                font-size: 22px;
-                font-weight: 700;
-            }
-
-        .gastos-list {
-            flex: 1;
-            overflow-y: auto;
-            margin-bottom: 20px;
-        }
-
-        .gasto-item {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .gasto-descripcion, .gasto-monto {
-            background: rgba(135, 206, 235, 0.7);
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .gasto-monto {
-            background: rgba(70, 130, 180, 0.8);
-            text-align: right;
-            color: white;
-            font-weight: 600;
-        }
-
-        .ver-mas-btn {
-            width: 100%;
-            padding: 12px;
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-            .ver-mas-btn:hover {
-                background: white;
-                color: #ff6b6b;
-            }
-
-        .no-data {
-            text-align: center;
-            color: white;
-            padding: 40px;
-            font-size: 16px;
-        }
-
-        @@media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="main-container">
-        <!-- Sección Izquierda -->
-        <div class="left-section">
-            <div class="time-filter">
-                <h3>TIEMPO ANALIZADO EN GRÁFICO:</h3>
-                <p>
-                    @(Model.FechaInicio.HasValue && Model.FechaFin.HasValue
-                                        ? $"{Model.FechaInicio.Value:dd/MM/yyyy} - {Model.FechaFin.Value:dd/MM/yyyy}"
-                                        : "Todo el tiempo")
-                </p>
-            </div>
-
-            <div class="chart-wrapper">
-                <div id="chart_div"></div>
-            </div>
-
-            <!-- Filtro por mes -->
-            <div class="filter-buttons">
-                <form method="get" asp-action="FiltrarPorMes">
-                    <select name="mes">
-                        @for (int i = 1; i <= 12; i++)
-                        {
-                            // Hola luketo
-                            <option value="@i" selected="@(Model.MesSeleccionado == i ? "selected" : null)">@i</option>
-                        }
-                    </select>
-                    <select name="año">
-                        @for (int y = DateTime.Now.Year; y >= DateTime.Now.Year - 5; y--)
-                        {
-                            <option value="@y" selected="@(Model.AñoSeleccionado == y ? "selected" : null)">@y</option>
-                        }
-                    </select>
-                    <button type="submit" class="filter-btn">Filtrar por Mes</button>
-                </form>
-            </div>
-
-            <!-- Filtro por rango de fechas -->
-            <div class="time-range-section">
-                <form method="get" asp-action="FiltrarPorFechas">
-                    <div class="time-range-title">Filtrar por Tiempo</div>
-                    <div class="date-inputs">
-                        <input type="date" name="inicio" value="@(Model.FechaInicio?.ToString("yyyy-MM-dd") ?? "")" />
-                        <input type="date" name="fin" value="@(Model.FechaFin?.ToString("yyyy-MM-dd") ?? "")" />
-                    </div>
-                    <button type="submit" class="date-btn">Aplicar Fechas</button>
-                </form>
-            </div>
-
-            <!-- Totales por Categoría -->
-            <div class="totals-section">
-                @if (Model.TotalesPorCategoria != null && Model.TotalesPorCategoria.Any())
-                {
-                    @foreach (var categoria in Model.TotalesPorCategoria)
-                    {
-                        <div class="total-item">
-                            <div class="total-label">Gasto Total @categoria.IdCategoriaNavigation?.Descripcion</div>
-                            <div class="total-amount">@categoria.MontoTotal?.ToString("C")</div>
-                        </div>
-                    }
-                }
-            </div>
+<div class="page-container">
+        <!-- Header -->
+        <div class="page-header">
+            <h1>📊 Análisis de Gastos</h1>
+            <p class="subtitle">Visualiza y analiza todos tus gastos por categoría</p>
         </div>
 
-        <!-- Sección Derecha -->
-        <div class="right-section">
-            <h2>TUS GASTOS</h2>
-            <div class="gastos-list">
-                @if (Model.UltimosGastos != null && Model.UltimosGastos.Any())
+        <!-- Contenido Principal -->
+        <div class="main-content">
+            <!-- Sección Izquierda - Gráfico -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h2>Distribución por Categoría</h2>
+                    <p class="date-range">
+                        @(Model.FechaInicio.HasValue && Model.FechaFin.HasValue
+                            ? $"{Model.FechaInicio.Value:dd/MM/yyyy} - {Model.FechaFin.Value:dd/MM/yyyy}"
+                            : "Todo el tiempo")
+                    </p>
+                </div>
+                
+                <!-- Filtro arriba del gráfico -->
+                <form id="filtroFechasForm" class="filters-form" method="get" asp-action="FiltrarPorFechas">
+                    <input type="month" id="filtroMes" name="mes" placeholder="Mes" />
+                    <input type="date" id="desde" name="inicio" placeholder="Desde" value="@(Model.FechaInicio?.ToString("yyyy-MM-dd") ?? "")" />
+                    <input type="date" id="hasta" name="fin" placeholder="Hasta" value="@(Model.FechaFin?.ToString("yyyy-MM-dd") ?? "")" />
+                    <button type="submit">🔍 Filtrar</button>
+                </form>
+                
+                <div id="chart_div"></div>
+
+                <!-- Totales por Categoría -->
+                @if (Model.TotalesPorCategoria != null && Model.TotalesPorCategoria.Any())
                 {
-                    @foreach (var gasto in Model.UltimosGastos)
-                    {
-                        <div class="gasto-item">
-                            <div class="gasto-descripcion">@gasto.IdCategoriaNavigation?.Descripcion - @gasto.Nombre</div>
-                            <div class="gasto-monto">@gasto.MontoTotal?.ToString("C")</div>
-                        </div>
-                    }
-                }
-                else
-                {
-                    <div class="no-data">No hay gastos registrados</div>
+                    <div class="totals-section">
+                        <h4>💰 Totales por Categoría</h4>
+                        @foreach (var categoria in Model.TotalesPorCategoria)
+                        {
+                            <div class="total-item">
+                                <span class="total-label">@categoria.IdCategoriaNavigation?.Descripcion</span>
+                                <span class="total-amount">@categoria.MontoTotal?.ToString("C")</span>
+                            </div>
+                        }
+                    </div>
                 }
             </div>
-            <button class="ver-mas-btn">VER MAS</button>
+
+            <!-- Sección Derecha - Lista de Gastos -->
+            <div class="gastos-card">
+                <div class="gastos-card-header">
+                    <h2>📋 Tus Gastos</h2>
+                    <p class="subtitle">Lista de gastos recientes</p>
+                </div>
+                <div class="gastos-list">
+                    @if (Model.UltimosGastos != null && Model.UltimosGastos.Any())
+                    {
+                        @foreach (var gasto in Model.UltimosGastos)
+                        {
+                            <div class="gasto-item">
+                                <div class="gasto-info">
+                                    <div class="gasto-categoria">@gasto.IdCategoriaNavigation?.Descripcion</div>
+                                    <div class="gasto-nombre">@gasto.Nombre</div>
+                                </div>
+                                <div class="gasto-monto">@gasto.MontoTotal?.ToString("C")</div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="no-data">
+                            <div class="no-data-icon">📭</div>
+                            <div class="no-data-text">No hay gastos registrados</div>
+                        </div>
+                    }
+                </div>
+                <button class="ver-mas-btn">Ver Más Gastos</button>
+            </div>
         </div>
     </div>
 
@@ -230,8 +94,8 @@
         ------------------------------------------------------------ */
         const colorPorCategoria = {};
         const paletaColores = [
-            "#6BAED6", "#FD8D3C", "#74C476", "#9E9AC8", "#FFA07A",
-            "#FDD0A2", "#A1D99B", "#C6DBEF", "#E377C2", "#BCBD22"
+            "#4ABDAC", "#FC4A1A", "#F78733", "#6bcdbd", "#9dddd2",
+            "#FD8D3C", "#74C476", "#9E9AC8", "#E377C2", "#BCBD22"
         ];
         let indiceColor = 0;
 
@@ -244,7 +108,7 @@
         }
 
         /* ------------------------------------------------------------
-           ELEMENTOS DE FILTRO (aseguramos que existan)
+           ELEMENTOS DE FILTRO
         ------------------------------------------------------------ */
         const filtroMesInput = document.getElementById("filtroMes");
         const desdeInput = document.getElementById("desde");
@@ -253,19 +117,43 @@
         if (filtroMesInput) {
             filtroMesInput.addEventListener("change", () => {
                 if (filtroMesInput.value) {
-                    desdeInput.value = "";
-                    hastaInput.value = "";
+                    if (desdeInput) desdeInput.value = "";
+                    if (hastaInput) hastaInput.value = "";
                 }
             });
         }
         if (desdeInput) {
             desdeInput.addEventListener("change", () => {
-                filtroMesInput.value = "";
+                if (filtroMesInput) filtroMesInput.value = "";
             });
         }
         if (hastaInput) {
             hastaInput.addEventListener("change", () => {
-                filtroMesInput.value = "";
+                if (filtroMesInput) filtroMesInput.value = "";
+            });
+        }
+
+        /* ------------------------------------------------------------
+           SUBMIT DE FORMULARIO DE FILTRO
+        ------------------------------------------------------------ */
+        const filtroForm = document.getElementById("filtroFechasForm");
+
+        if (filtroForm) {
+            filtroForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const mes = filtroMesInput ? filtroMesInput.value : "";
+                const desde = desdeInput ? desdeInput.value : "";
+                const hasta = hastaInput ? hastaInput.value : "";
+
+                if (desde && hasta) {
+                    // Filtrar por rango de fechas
+                    window.location.href = `/VerTodosLosGastos/FiltrarPorFechas?inicio=${desde}&fin=${hasta}`;
+                } else if (mes) {
+                    // Filtrar por mes
+                    const [anio, mesNum] = mes.split("-");
+                    window.location.href = `/VerTodosLosGastos/FiltrarPorMes?mes=${mesNum}&año=${anio}`;
+                }
             });
         }
 
@@ -296,7 +184,7 @@
             const contenedor = document.getElementById("chart_div");
 
             if (!gastos || gastos.length === 0) {
-                contenedor.innerHTML = '<p class="text-muted">No hay gastos para mostrar.</p>';
+                contenedor.innerHTML = '<div style="text-align: center; padding: 40px; color: #6c6a75;"><div style="font-size: 48px; margin-bottom: 10px; opacity: 0.5;">📊</div><div>No hay gastos para mostrar</div></div>';
                 return;
             }
 
@@ -312,11 +200,31 @@
 
             const options = {
                 pieHole: 0.5,
-                chartArea: { width: '90%', height: '90%' },
+                chartArea: { width: '85%', height: '85%', left: '5%', top: '5%' },
                 backgroundColor: 'transparent',
-                legend: { position: 'right', textStyle: { color: '#333' } },
-                pieSliceText: 'label',
-                colors: colores
+                legend: { 
+                    position: 'right', 
+                    textStyle: { 
+                        color: '#363531', 
+                        fontSize: 13,
+                        fontName: 'Segoe UI'
+                    },
+                    alignment: 'center'
+                },
+                pieSliceText: 'percentage',
+                pieSliceTextStyle: {
+                    color: 'white',
+                    fontSize: 13,
+                    fontName: 'Segoe UI',
+                    bold: true
+                },
+                colors: colores,
+                tooltip: {
+                    textStyle: {
+                        fontSize: 13,
+                        fontName: 'Segoe UI'
+                    }
+                }
             };
 
             const chart = new google.visualization.PieChart(contenedor);
@@ -332,54 +240,25 @@
             if (!contenedor) return;
 
             if (!top3 || top3.length === 0) {
-                contenedor.innerHTML = '<small class="text-muted">No hay categorías para mostrar.</small>';
+                contenedor.innerHTML = '<div style="text-align: center; color: #6c6a75; width: 100%;">No hay categorías para mostrar.</div>';
                 return;
             }
 
             contenedor.innerHTML = top3.map(cat => {
                 const color = obtenerColorCategoria(cat.categoria);
                 return `
-                    <div class="text-center">
-                        <div class="rounded-circle mx-auto mb-1"
-                            style="width:40px;height:40px;background:${color};"></div>
-                        <small>${cat.categoria} ($${cat.total.toFixed(2)})</small>
+                    <div class="top-categoria-item">
+                        <div class="top-categoria-circle" style="background: ${color};"></div>
+                        <div class="top-categoria-label">${cat.categoria}<br>$${cat.total.toFixed(2)}</div>
                     </div>
                 `;
             }).join('');
         }
 
-        /* ------------------------------------------------------------
-           SUBMIT DE FORMULARIO DE FILTRO
-        ------------------------------------------------------------ */
-        const filtroForm = document.getElementById("filtroFechasForm");
-
-        if (filtroForm) {
-            filtroForm.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                const mes = filtroMesInput.value;
-                const desde = desdeInput.value;
-                const hasta = hastaInput.value;
-
-                const query = new URLSearchParams();
-
-                if (desde && hasta) {
-                    query.set("desde", desde);
-                    query.set("hasta", hasta);
-                } else if (mes) {
-                    query.set("mes", mes);
-                }
-
-                const response = await fetch(`/Home/Filtrar?${query.toString()}`);
-                const result = await response.json();
-
-                drawPieChart(result.gastosDetallados);
-                mostrarTopCategorias(result.top3);
-            });
-        }
-
         /* Redibujo responsivo */
-        window.addEventListener('resize', drawChartInit);
+        window.addEventListener('resize', () => {
+            if (typeof drawChartInit === 'function') {
+                drawChartInit();
+            }
+        });
     </script>
-</body>
-</html>

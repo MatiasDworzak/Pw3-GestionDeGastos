@@ -1,75 +1,71 @@
-﻿@{
-
-}
-@model GastoEspecificoViewModel
+﻿@model GastoEspecificoViewModel
 @await Html.PartialAsync("_Header")
 
-<div class="container my-4 p-4 bg-light rounded shadow-sm">
+<link rel="stylesheet" href="~/css/gasto-especifico.css" />
 
-    <!-- Datos del gasto -->
-    <div class="row g-3 align-items-center border-bottom pb-3 mb-3">
-        <div class="col-md-8">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold text-secondary small">Nombre del gasto</label>
-                    <div class="p-2 bg-white border rounded">@Model.Nombre</div>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-bold text-secondary small">Monto</label>
-                    <div class="p-2 bg-white border rounded">@Model.Monto.ToString("C")</div>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold text-secondary small">Categoría</label>
-                    <div class="p-2 bg-white border rounded">@Model.Categoria.NombreCategoria</div>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold text-secondary small">Método de pago</label>
-                    <div class="p-2 bg-white border rounded">@Model.MetodoDePago.NombreMetodoDePago</div>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold text-secondary small">Fecha</label>
-                    <div class="p-2 bg-white border rounded">@Model.Fecha.ToShortDateString()</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Imagen -->
-        <div class="col-md-4 text-center">
-            @if (Model.Ticket != null && Model.Ticket.IdTicket != 0 && Model.Ticket.URLFoto != "")
-            {
-                <img src="https://gestiondegastostickets.blob.core.windows.net/tickets/@Model.Ticket.URLFoto" alt="@Model.Ticket.URLFoto" class="img-fluid rounded border w-50 h-50"
-                     style="cursor: pointer;"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalImagen" />
-            }
-            else
-            {
-                <div class="p-4 bg-white border rounded text-muted">
-                    <small>Este gasto no contiene una imagen</small>
-                </div>
-            }
-        </div>
+<div class="page-container">
+    <div class="page-header">
+        <h1>📄 Detalle del Gasto</h1>
+        <p class="subtitle">Información completa del gasto seleccionado</p>
     </div>
 
-    <!-- Ticket e Items -->
-    @if (Model.Ticket != null && Model.Ticket.IdTicket != 0)
-    {
-        <div class="mb-3">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Ticket asociado:</span>
-                <span class="text-secondary">#@Model.Ticket.IdTicket</span>
-            </div>
+    <div class="detail-card">
+        <div class="detail-section">
+            <h3>📋 Información General</h3>
+            <div class="detail-content-wrapper">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Nombre del Gasto</span>
+                        <div class="detail-value">@Model.Nombre</div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Monto</span>
+                        <div class="detail-value monto">@Model.Monto.ToString("C")</div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Categoría</span>
+                        <div class="detail-value">@Model.Categoria.NombreCategoria</div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Método de Pago</span>
+                        <div class="detail-value">@Model.MetodoDePago.NombreMetodoDePago</div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Fecha</span>
+                        <div class="detail-value">@Model.Fecha.ToShortDateString()</div>
+                    </div>
+                </div>
 
-            @if (Model.Items != null)
-            {
-                <div class="table-responsive">
-                    <table class="table table-sm table-hover align-middle mb-0">
-                        <thead class="table-secondary">
+                @if (Model.Ticket != null && Model.Ticket.IdTicket != 0 && Model.Ticket.URLFoto != "")
+                {
+                    <div class="image-section">
+                        <img src="https://gestiondegastostickets.blob.core.windows.net/tickets/@Model.Ticket.URLFoto" 
+                             alt="@Model.Ticket.URLFoto" 
+                             class="image-preview"
+                             data-bs-toggle="modal"
+                             data-bs-target="#modalImagen" />
+                    </div>
+                }
+            </div>
+        </div>
+
+        @if (Model.Ticket != null && Model.Ticket.IdTicket != 0)
+        {
+            <div class="ticket-section">
+                <div class="ticket-header">
+                    <h4>🧾 Ticket Asociado</h4>
+                    <span class="ticket-id">#@Model.Ticket.IdTicket</span>
+                </div>
+
+                @if (Model.Items != null && Model.Items.Any())
+                {
+                    <table class="items-table">
+                        <thead>
                             <tr>
-                                <th scope="col">Cant.</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Precio Unit.</th>
-                                <th scope="col">Precio Total</th>
+                                <th>Cantidad</th>
+                                <th>Descripción</th>
+                                <th>Precio Unitario</th>
+                                <th>Precio Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,34 +75,35 @@
                                     <td>@item.Cantidad</td>
                                     <td>@item.Descripcion</td>
                                     <td>@item.PrecioUnitario.ToString("C")</td>
-                                    <td>@item.PrecioTotal.ToString("C")</td>
+                                    <td><strong>@item.PrecioTotal.ToString("C")</strong></td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="ticket-section">
+                <div class="no-ticket">
+                    <div class="no-ticket-icon">🧾</div>
+                    <div>Este gasto no contiene ticket</div>
                 </div>
-            }
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-light border text-center text-muted" role="alert">
-            Este gasto no contiene ticket
-        </div>
-    }
+            </div>
+        }
+    </div>
 </div>
 
 <!-- Modal con imagen ampliada -->
 <div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="modalImagenLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-transparent border-0 shadow-none">
-            <div class="modal-body text-center p-0">
-                <img src="https://gestiondegastostickets.blob.core.windows.net/tickets/@Model.Ticket.URLFoto" class="img-fluid rounded" alt="@Model.Ticket.URLFoto" style="max-height: 90vh; object-fit: contain;" />
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="https://gestiondegastostickets.blob.core.windows.net/tickets/@Model.Ticket.URLFoto" 
+                     class="img-fluid" 
+                     alt="@Model.Ticket.URLFoto" />
             </div>
         </div>
     </div>
 </div>
-
-@*
-    Espacio para footer
-*@

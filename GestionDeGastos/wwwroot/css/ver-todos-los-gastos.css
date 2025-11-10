@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #DFDCE3 0%, #f5f4f6 100%);
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header de la página */
+.page-header {
+    background: white;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.page-header h1 {
+    color: #4ABDAC;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.page-header .subtitle {
+    color: #6c6a75;
+    font-size: 14px;
+}
+
+/* Layout principal */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Card del gráfico */
+.chart-card {
+    background: white;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.chart-card-header {
+    margin-bottom: 12px;
+}
+
+.chart-card-header h2 {
+    color: #363531;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.chart-card-header .date-range {
+    color: #6c6a75;
+    font-size: 14px;
+}
+
+#chart_div {
+    min-height: 350px;
+    margin-bottom: 15px;
+}
+
+/* Totales por categoría */
+.totals-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #DFDCE3;
+}
+
+.totals-section h4 {
+    color: #363531;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f5f4f6;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    transition: all 0.2s ease;
+}
+
+.total-item:hover {
+    background: #e8e6ea;
+    transform: translateX(3px);
+}
+
+.total-label {
+    color: #515053;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.total-amount {
+    color: #4ABDAC;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Card de gastos */
+.gastos-card {
+    background: white;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.gastos-card-header {
+    margin-bottom: 15px;
+}
+
+.gastos-card-header h2 {
+    color: #363531;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.gastos-card-header .subtitle {
+    color: #6c6a75;
+    font-size: 14px;
+}
+
+.gastos-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    padding-right: 10px;
+}
+
+.gastos-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.gastos-list::-webkit-scrollbar-track {
+    background: #f5f4f6;
+    border-radius: 10px;
+}
+
+.gastos-list::-webkit-scrollbar-thumb {
+    background: #4ABDAC;
+    border-radius: 10px;
+}
+
+.gastos-list::-webkit-scrollbar-thumb:hover {
+    background: #3a9d8f;
+}
+
+.gasto-item {
+    background: #f5f4f6;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-left: 3px solid #4ABDAC;
+}
+
+.gasto-item:hover {
+    background: #e8e6ea;
+    transform: translateX(3px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.gasto-info {
+    flex: 1;
+}
+
+.gasto-categoria {
+    color: #4ABDAC;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+}
+
+.gasto-nombre {
+    color: #363531;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.gasto-monto {
+    color: #FC4A1A;
+    font-size: 17px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c6a75;
+}
+
+.no-data-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.no-data-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ver-mas-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4ABDAC 0%, #3a9d8f 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    box-shadow: 0 2px 6px rgba(74, 189, 172, 0.3);
+}
+
+.ver-mas-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 189, 172, 0.4);
+}
+
+.ver-mas-btn:active {
+    transform: translateY(0);
+}
+
+/* Filtros dentro del chart-card */
+.filters-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.filters-form input {
+    padding: 10px 14px;
+    border: 2px solid #DFDCE3;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #363531;
+    background: white;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.filters-form input:focus {
+    outline: none;
+    border-color: #4ABDAC;
+    box-shadow: 0 0 0 3px rgba(74, 189, 172, 0.1);
+}
+
+.filters-form button {
+    background: linear-gradient(135deg, #4ABDAC 0%, #3a9d8f 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(74, 189, 172, 0.3);
+}
+
+.filters-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 189, 172, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .chart-card,
+    .gastos-card,
+    .filters-panel {
+        padding: 20px;
+    }
+}
+

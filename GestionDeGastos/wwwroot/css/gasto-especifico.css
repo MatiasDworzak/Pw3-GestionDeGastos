@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #DFDCE3 0%, #f5f4f6 100%);
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header {
+    background: white;
+    border-radius: 8px;
+    padding: 15px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.page-header h1 {
+    color: #4ABDAC;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.page-header .subtitle {
+    color: #6c6a75;
+    font-size: 14px;
+}
+
+.detail-card {
+    background: white;
+    border-radius: 8px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 18px;
+}
+
+.detail-section {
+    margin-bottom: 20px;
+}
+
+.detail-section h3 {
+    color: #363531;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #DFDCE3;
+}
+
+.detail-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.detail-label {
+    color: #515053;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.detail-value {
+    color: #363531;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 15px;
+    background: #f5f4f6;
+    border-radius: 6px;
+    border-left: 3px solid #4ABDAC;
+}
+
+.detail-value.monto {
+    color: #FC4A1A;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.image-section {
+    text-align: center;
+    position: sticky;
+    top: 20px;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 500px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-preview:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.no-image {
+    padding: 60px 20px;
+    background: #f5f4f6;
+    border-radius: 12px;
+    color: #6c6a75;
+    border: 2px dashed #DFDCE3;
+}
+
+.ticket-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #DFDCE3;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ticket-header h4 {
+    color: #363531;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.ticket-id {
+    color: #4ABDAC;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.items-table thead {
+    background: #f5f4f6;
+}
+
+.items-table th {
+    padding: 18px;
+    text-align: left;
+    color: #515053;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #DFDCE3;
+}
+
+.items-table td {
+    padding: 18px;
+    color: #363531;
+    font-size: 16px;
+    border-bottom: 1px solid #f5f4f6;
+}
+
+.items-table tbody tr:hover {
+    background: #f5f4f6;
+}
+
+.items-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.no-ticket {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f5f4f6;
+    border-radius: 12px;
+    color: #6c6a75;
+    border: 2px dashed #DFDCE3;
+}
+
+.no-ticket-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: transparent;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-body img {
+    border-radius: 12px;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .detail-card {
+        padding: 20px;
+    }
+
+    .detail-content-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .image-section {
+        position: static;
+        margin-top: 20px;
+    }
+
+    .items-table {
+        font-size: 12px;
+    }
+
+    .items-table th,
+    .items-table td {
+        padding: 10px;
+    }
+}
+

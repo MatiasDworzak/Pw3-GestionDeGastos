@@ -4,78 +4,105 @@
 }
 @await Html.PartialAsync("_Header")
 
-<div>
-    <div class="d-flex justify-content-center mb-4">
-        <h1>Presupuesto mensual</h1>
+<link rel="stylesheet" href="~/css/presupuesto-actual.css" />
+
+<div class="page-container">
+    <div class="page-header">
+        <h1>💰 Presupuesto Mensual</h1>
+        <p class="subtitle">Gestiona y controla tu presupuesto</p>
     </div>
 
-    <div class="d-flex justify-content-around">
-        <p>Monto total: @($"{Model.UltimoPresupuesto.MontoLimite:C}")</p>
-        <p>Monto gastado: @($"{Model.UltimoPresupuesto.MontoActualGastado:C}")</p>
-    </div>
-
-    @{
-        string progressColor = Model.PorcentajeGastado switch
-        {
-            var porcentaje when porcentaje < 50 => "bg-success",
-            var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
-            _ => "bg-danger",
-        };
-    }
-
-    <div class="progress mb-4">
-        <div class="progress-bar @progressColor" role="progressbar"
-             style="width:@Model.PorcentajeGastado.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
-            @Model.PorcentajeGastado.ToString("0.##")%
+    <div class="presupuesto-card">
+        <div class="presupuesto-header">
+            <div class="presupuesto-item">
+                <div class="presupuesto-label">Monto Total</div>
+                <div class="presupuesto-value total">@($"{Model.UltimoPresupuesto.MontoLimite:C}")</div>
+            </div>
+            <div class="presupuesto-item">
+                <div class="presupuesto-label">Monto Gastado</div>
+                <div class="presupuesto-value gastado">@($"{Model.UltimoPresupuesto.MontoActualGastado:C}")</div>
+            </div>
         </div>
-    </div>
 
-    <div class="d-flex justify-content-center mb-5">
-        <a class="btn btn-secondary" asp-action="EditarPresupuesto" data-bs-toggle="modal" data-bs-target="#modalEditarMontoTotal">Editar monto total</a>
-    </div>
+        @{
+            string progressColor = Model.PorcentajeGastado switch
+            {
+                var porcentaje when porcentaje < 50 => "bg-success",
+                var porcentaje when porcentaje >= 50 && porcentaje < 80 => "bg-warning",
+                _ => "bg-danger",
+            };
+        }
 
-    <div class="modal fade" id="modalEditarMontoTotal" tabindex="-1" aria-labelledby="modalEditarMontoTotal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalEditarMontoTotal">Nuevo presupuesto</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="PresupuestoActual" method="post">
-                        <div class="d-flex flex-column gap-2">
-                            <label>Ingrese el monto total para el nuevo presupuesto:</label>
-                            <input placeholder="Ejemplo: 1.000.000" name="NuevoMonto"></input>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-secondary mt-2 ">Confirmar presupuesto</button>
-                        </div>
-                    </form>
+        <div class="progress-section">
+            <div class="progress">
+                <div class="progress-bar @progressColor" role="progressbar"
+                     style="width: @Model.PorcentajeGastado.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%;">
+                    @Model.PorcentajeGastado.ToString("0.##")%
                 </div>
             </div>
         </div>
-    </div>
 
-    <table class="table mt-4">
-        <thead>
-            <h3>Historial de presupuestos</h3>
-            <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Monto establecido</th>
-                <th scope="col">Monto gastado</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var presupuesto in Model.ListaPresupuestos)
-            {
-                <tr>
-                    <td>@presupuesto.Mes / @presupuesto.Anio</td>
-                    <td>@($"{presupuesto.MontoLimite:C}")</td>
-                    <td>@($"{presupuesto.MontoActualGastado:C}")</td>
-                    <td><a class="btn btn-dark" asp-controller="VerTodosLosGastos" asp-action="MostrarGastosPresupuesto" asp-route-mes="@presupuesto.Mes" asp-route-anio="@presupuesto.Anio">Ver gasto</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        <div class="btn-editar">
+            <a class="btn-editar-presupuesto" asp-action="EditarPresupuesto" data-bs-toggle="modal" data-bs-target="#modalEditarMontoTotal">
+                ✏️ Editar Monto Total
+            </a>
+        </div>
+
+        <div class="historial-section">
+            <h3>📊 Historial de Presupuestos</h3>
+            <table class="historial-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Monto Establecido</th>
+                        <th>Monto Gastado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var presupuesto in Model.ListaPresupuestos)
+                    {
+                        <tr>
+                            <td>@presupuesto.Mes / @presupuesto.Anio</td>
+                            <td>@($"{presupuesto.MontoLimite:C}")</td>
+                            <td>@($"{presupuesto.MontoActualGastado:C}")</td>
+                            <td>
+                                <a class="btn-ver-gasto" 
+                                   asp-controller="VerTodosLosGastos" 
+                                   asp-action="MostrarGastosPresupuesto" 
+                                   asp-route-mes="@presupuesto.Mes" 
+                                   asp-route-anio="@presupuesto.Anio">
+                                    Ver Gastos
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Presupuesto -->
+<div class="modal fade" id="modalEditarMontoTotal" tabindex="-1" aria-labelledby="modalEditarMontoTotal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalEditarMontoTotal">💰 Nuevo Presupuesto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="PresupuestoActual" method="post">
+                    <div class="form-group">
+                        <label>Ingrese el monto total para el nuevo presupuesto:</label>
+                        <input type="text" placeholder="Ejemplo: 1000000" name="NuevoMonto" required />
+                    </div>
+                    <div class="modal-footer" style="border-top: none; padding-top: 0;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn-editar-presupuesto" style="margin: 0;">✅ Confirmar Presupuesto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
