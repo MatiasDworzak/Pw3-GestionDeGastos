@@ -53,7 +53,6 @@ async function drawChartInit() {
     const mesActual = params.get("mes") || fechaActual.getMonth() + 1;
     const anioActual = params.get("anio") || fechaActual.getFullYear();
 
-
     const primerDia = new Date(anioActual, mesActual - 1, 1);
     const ultimoDia = new Date(anioActual, mesActual, 0);
     const nombreMes = primerDia.toLocaleString("es-ES", { month: "long" });
@@ -89,12 +88,22 @@ function drawPieChart(gastos) {
 
     const data = google.visualization.arrayToDataTable(dataArray);
 
+    const formatter = new google.visualization.NumberFormat({
+        prefix: '$',
+        decimalSymbol: ',',
+        groupingSymbol: '.',
+        fractionDigits: 2
+    });
+
+    formatter.format(data, 1);
+
     const options = {
         pieHole: 0.55,
         backgroundColor: 'transparent',
         chartArea: { width: '100%', height: '90%' },
         legend: { position: 'right', textStyle: { color: '#333', fontSize: 12 } },
         pieSliceText: 'value',
+        pieSliceTextStyle: { fontSize: 9 },
         colors: colores
     };
 
@@ -121,7 +130,8 @@ function mostrarTopCategorias(top3) {
                 ${cat.icono}
             </span>
         </div>
-        <small>${cat.categoria} (${cat.total.toFixed(2)})</small>
+        
+        <small>${cat.categoria} (${cat.total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })})</small>
     </div>
 `).join('');
 }
@@ -136,26 +146,32 @@ function mostrarListaDeGastos(listaDeGastos) {
     }
     console.log(listaDeGastos);
 
+    // Formatear monto como moneda
+    const formatearMonto = (monto) => {
+        return new Intl.NumberFormat('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+            minimumFractionDigits: 2
+        }).format(monto);
+    };
+
     contenedorVerGastos.innerHTML = listaDeGastos.map(g => `
-        <div class="list-group-item d-flex justify-content-between align-items-center py-3">
-            <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}" 
-               class="d-flex justify-content-between align-items-center w-100"
-               style="text-decoration:none; color:inherit;">
-                <div class="d-flex align-items-center">
-                    <span class="material-icons"
-                          style="color:${g.color}; font-size:1.8rem; margin-right:10px;">
-                        ${g.icono}
-                    </span>
-                    <div>
-                        <div class="fw-semibold" style="font-size:1.1rem;">${g.nombre}</div>
-                        <small class="text-muted">${new Date(g.fecha).toLocaleDateString()}</small>
-                    </div>
-                </div>
-                <span class="text-secondary fw-bold" style="font-size:1.1rem;">
-                    $${g.montoTotal.toFixed(2)}
+        <a href="/GastoEspecifico/GastoEspecifico/${g.idGasto}"
+           class="expense-item">
+            <div class="expense-item-content">
+                <span class="material-icons expense-icon"
+                      style="color:${g.color};">
+                    ${g.icono}
                 </span>
-            </a>
-        </div>
+                <div class="expense-details">
+                    <div class="expense-name">${g.nombre}</div>
+                    <div class="expense-date">${new Date(g.fecha + "T00:00:00").toLocaleDateString('es-AR')}</div>
+                </div>
+            </div>
+            <span class="expense-amount">
+                ${formatearMonto(g.montoTotal)}
+            </span>
+        </a>
     `).join('');
 }
 

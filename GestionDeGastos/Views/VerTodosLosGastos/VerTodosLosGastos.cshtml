@@ -2,52 +2,55 @@
 @await Html.PartialAsync("_Header")
 
 @section Css {
-    <link rel="stylesheet" href="~/css/custom-styles.css">
+    <link rel="stylesheet" href="~/css/home.css" />
 }
 
-<div class="container-fluid p-4" style="background: #DFDCE3; min-height: 100vh;">
+<div class="container-fluid home-container">
     <div class="row justify-content-center">
-        <!-- Sección Izquierda: Gráfico -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm" style="background: #4ABDAC;">
-            <div class="text-center mb-3">
-                <p class="fw-bold mb-0 text-white">TIEMPO ANALIZADO EN GRÁFICO:</p>
-                <p id="rango-fechas" class="text-white opacity-75">dd/mm/aaaa - dd/mm/aaaa</p>
 
-                <form id="filtroFechasForm" class="d-flex justify-content-center gap-2 mb-3 flex-wrap">
-                    <input type="month" id="filtroMes" name="mes" class="form-control form-control-sm" style="width: 150px;">
-                    <input type="date" id="desde" name="desde" class="form-control form-control-sm" style="width: 150px;">
-                    <input type="date" id="hasta" name="hasta" class="form-control form-control-sm" style="width: 150px;">
-                    <button type="submit" class="btn btn-sm text-white fw-semibold" style="background: #FC4A1A;">Filtrar</button>
-                </form>
+        <!-- COLUMNA IZQUIERDA (Gráfico) -->
+        <div class="col-md-5 chart-section">
+            <div class="chart-header">
+                <p class="chart-title">TIEMPO ANALIZADO EN GRÁFICO:</p>
+                <p id="rango-fechas" class="chart-date-range">dd/mm/aaaa - dd/mm/aaaa</p>
+            </div>
 
-                <!-- Contenedor de gráfico -->
-                <div class="position-relative text-center bg-white rounded-3 p-3 shadow-sm">
-                    <div id="chart_div" style="width: 100%; height: 300px;"></div>
-                </div>
+            <form id="filtroFechasForm" class="filter-form">
+                <input type="month" id="filtroMes" name="mes" class="filter-input form-control">
+                <input type="date" id="desde" name="desde" class="filter-input form-control">
+                <input type="date" id="hasta" name="hasta" class="filter-input form-control">
+                <button type="submit" class="filter-btn">Filtrar</button>
+            </form>
 
-                <!-- Contenedor para el top 3 -->
-                <div id="topCategorias" class="mt-3 text-center d-none">
-                    <p class="fw-semibold mb-2 text-white">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
-                    <div id="topCategoriasContenido" class="d-flex justify-content-around flex-wrap"></div>
-                </div>
+            <!-- Contenedor de gráfico -->
+            <div class="chart-container">
+                <div id="chart_div"></div>
+            </div>
+
+            <!-- Contenedor para el top 3 -->
+            <div id="topCategorias" class="top-categories d-none">
+                <p class="top-categories-title">TOP CATEGORÍAS CON MAYOR GASTO EN EL PERIODO</p>
+                <div id="topCategoriasContenido" class="top-categories-content"></div>
             </div>
         </div>
 
-        <!-- Sección Derecha: Lista de Gastos -->
-        <div class="col-md-5 p-4 rounded-3 shadow-sm ms-3" style="background: #4ABDAC;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0 text-white">Todos tus Gastos</h6>
+        <!-- COLUMNA DERECHA (Lista de Gastos) -->
+        <div class="col-md-5 budget-section ms-md-3 mt-3 mt-md-0">
+            <div class="recent-expenses-header">
+                <h6 class="recent-expenses-title">Todos tus Gastos</h6>
             </div>
             
-            <div id="gastos-list" class="list-group" style="max-height: 650px; overflow-y: auto; overflow-x: hidden;">
+            <div id="gastos-list" class="expense-list">
                 <div class="text-center text-muted py-4">Cargando gastos...</div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Google Charts -->
-@section Scripts{
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="~/js/FiltradoPorFechaYGraficoDeGastos.js"></script>
+@section Scripts {
+    <script>
+        // Scripts adicionales si son necesarios
+    </script>
 }
