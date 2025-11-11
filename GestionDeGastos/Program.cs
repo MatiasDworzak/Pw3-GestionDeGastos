@@ -15,7 +15,7 @@ builder.Configuration.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential()
 
 
 builder.Services.AddDbContext<GestionDeGastosBdContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionLocal")));
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
 
 // Add services to the container.
@@ -69,7 +69,6 @@ builder.Services.AddHttpClient("Functions", client =>
 
 var app = builder.Build();
 
-// --- 🌐 Configuración de cultura (aquí va tu código) ---
 var cultureInfo = new CultureInfo("en-US");
 cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
 cultureInfo.NumberFormat.NumberGroupSeparator = ",";
