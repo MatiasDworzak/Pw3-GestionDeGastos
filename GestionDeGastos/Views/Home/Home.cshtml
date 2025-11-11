@@ -1,4 +1,5 @@
 ﻿@using GestionDeGastos.Models.GastoModels
+@using System.Globalization
 @model GastoViewModel
 @await Html.PartialAsync("_Header")
 
@@ -106,11 +107,11 @@
                                 </span>
                                 <div class="expense-details">
                                     <div class="expense-name">@gasto.Nombre</div>
-                                    <div class="expense-date">@gasto.Fecha</div>
+                                    <div class="expense-date">@gasto.Fecha.ToString("dd/MM/yyyy")</div>
                                 </div>
                             </div>
                             <span class="expense-amount">
-                                @gasto.MontoTotal.ToString("C2")
+                                @gasto.MontoTotal.ToString("C2", new CultureInfo("es-AR"))
                             </span>
                         </a>
                     }
